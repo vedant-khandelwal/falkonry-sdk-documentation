@@ -2009,7 +2009,7 @@ inputResponse = falkonry.add_facts(assessmentId, 'csv', options, data)
 ```
 
 
-#### Add facts data (csv format) with tags Assessment of multi entity datastream
+## Add facts data (csv format) with tags Assessment of multi entity datastream
 
 ```csharp
     using falkonry_csharp_client;
@@ -2109,8 +2109,10 @@ Adding more facts (ground truths) helps improve model accuracy and hence the use
 ## Add facts data (json format) from a stream to Assessment of multi entity datastream
 
 Sample JSONFile:
+```
 {"time" : "2011-03-26T12:00:00.000Z", "car" : "HI3821", "end" : "2012-06-01T00:00:00.000Z", "Health" : "Normal"}
 {"time" : "2014-02-10T23:00:00.000Z", "car" : "HI3821", "end" : "2014-03-20T12:00:00.000Z", "Health" : "Spalling"}
+```
 
 
 > To add facts in json format from an input stream, use this code:
@@ -2202,7 +2204,7 @@ If facts are created from another application, they are often exported in json f
 Adding more facts (ground truths) helps improve model accuracy and hence the usefulness of an assessment.
 </aside>
 
-## Add facts data (csv format) from a stream to  Assessment of multi entity datastream
+## Add facts data (csv format) from a stream to Assessment of multi entity datastream
 
 > To add facts in csv format from an input stream, use this code:
 
@@ -2296,7 +2298,7 @@ Use this to inject csv format facts into an assessment.
 
 <aside class="notice">
 Adding more facts (ground truths) helps improve model accuracy and hence the usefulness of an assessment.
-</aside>aside>
+</aside>
 
 
 # Live Monitoring
@@ -2350,7 +2352,7 @@ Every assessment has an "active" model associated with it.
 
 <aside class="notice">
 Live monitoring can be turned "on" from the Falkonry Professional UI but you can do the same from any of these development kits.
-</aside>aside>
+</aside>
 
 ## Stop live monitoring of datastream
 
@@ -2393,7 +2395,7 @@ response = falkonry.off_datastream(datastreamId)
 
 <aside class="notice">
 Live monitoring can be turned "on" from the Falkonry Professional UI but you can do the same from any of these development kits.
-</aside>aside>
+</aside>
 
 
 ## Add live input data (json) to datastream
