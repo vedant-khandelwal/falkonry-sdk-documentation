@@ -1875,33 +1875,53 @@ If you would like to request more assessments, reach out to your Falkonry Admin.
 
 <p>Facts can be added from inspection logs, failure reports, user/ expert observations, event frames within a historian, etc </p>
 
-<h2 id="add-facts-data-json-to-assessment">Add facts data (json) to Assessment</h2>
+<h2 id="add-facts-data-json-format-to-assessment-of-single-entity-datastream">Add facts data (json format) to Assessment of single entity datastream</h2>
 
 <blockquote>
 <p>To add more facts to your assessment, use this code:</p>
 </blockquote>
-<pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">falkonry_csharp_client</span><span class="p">;</span>
-<span class="k">using</span> <span class="nn">falkonry_csharp_client.helper.models</span><span class="p">;</span>
+<pre class="highlight csharp tab-csharp"><code>    <span class="k">using</span> <span class="nn">falkonry_csharp_client</span><span class="p">;</span>
+    <span class="k">using</span> <span class="nn">falkonry_csharp_client.helper.models</span><span class="p">;</span>
 
-<span class="kt">string</span> <span class="n">token</span> <span class="p">=</span> <span class="s">"Add your token here"</span><span class="p">;</span>   
-<span class="n">SortedDictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;</span> <span class="n">options</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SortedDictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;();</span>
-<span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Falkonry</span><span class="p">(</span><span class="s">"http://localhost:8080"</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
-<span class="n">String</span> <span class="n">data</span> <span class="p">=</span> <span class="s">"{\"time\" : \"2011-03-26T12:00:00Z\", \"entities\" : \"entity1\", \"end\" : \"2012-06-01T00:00:00Z\", \"Health\" : \"Normal\"}"</span><span class="p">;</span>
-<span class="kt">string</span> <span class="n">response</span> <span class="p">=</span> <span class="n">falkonry</span><span class="p">.</span><span class="nf">addFacts</span><span class="p">(</span><span class="err">'</span><span class="n">assessment</span><span class="p">-</span><span class="n">id</span><span class="err">'</span><span class="p">,</span><span class="n">data</span><span class="p">,</span> <span class="n">options</span><span class="p">);</span>
+    <span class="n">SortedDictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;</span> <span class="n">options</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SortedDictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;();</span>
+    <span class="n">options</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"startTimeIdentifier"</span><span class="p">,</span> <span class="s">"time"</span><span class="p">);</span>
+    <span class="n">options</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"endTimeIdentifier"</span><span class="p">,</span> <span class="s">"end"</span><span class="p">);</span>
+    <span class="n">options</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"timeFormat"</span><span class="p">,</span> <span class="s">"iso_8601"</span><span class="p">);</span>
+    <span class="n">options</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"timeZone"</span><span class="p">,</span> <span class="s">"GMT"</span><span class="p">);</span>
+    <span class="n">options</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"valueIdentifier"</span><span class="p">,</span> <span class="s">"Health"</span><span class="p">);</span>
+
+    <span class="kt">string</span> <span class="n">token</span> <span class="p">=</span> <span class="s">"Add your token here"</span><span class="p">;</span>   
+    <span class="n">SortedDictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;</span> <span class="n">options</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SortedDictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;();</span>
+    <span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Falkonry</span><span class="p">(</span><span class="s">"http://localhost:8080"</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
+    <span class="n">String</span> <span class="n">data</span> <span class="p">=</span> <span class="s">"{\"time\" : \"2011-03-26T12:00:00Z\", \"end\" : \"2012-06-01T00:00:00Z\", \"Health\" : \"Normal\"}"</span><span class="p">;</span>
+    <span class="kt">string</span> <span class="n">response</span> <span class="p">=</span> <span class="n">falkonry</span><span class="p">.</span><span class="nf">addFacts</span><span class="p">(</span><span class="err">'</span><span class="n">assessment</span><span class="p">-</span><span class="n">id</span><span class="err">'</span><span class="p">,</span><span class="n">data</span><span class="p">,</span> <span class="n">options</span><span class="p">);</span>
 </code></pre><pre class="highlight java tab-java"><code>  <span class="kn">import</span> <span class="nn">com.falkonry.client.Falkonry</span><span class="o">;</span>
 
   <span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Falkonry</span><span class="o">(</span><span class="s">"https://sandbox.falkonry.ai"</span><span class="o">,</span> <span class="s">"auth-token"</span><span class="o">);</span>
-
-  <span class="n">String</span> <span class="n">data</span> <span class="o">=</span> <span class="s">"{\"time\" : \"2011-03-26T12:00:00Z\", \"entities\" : \"entity1\", \"end\" : \"2012-06-01T00:00:00Z\", \"Health\" : \"Normal\"}"</span><span class="o">;</span>
+  <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">options</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;();</span>
+  <span class="n">options</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"startTimeIdentifier"</span><span class="o">,</span> <span class="s">"time"</span><span class="o">);</span>
+  <span class="n">options</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"endTimeIdentifier"</span><span class="o">,</span> <span class="s">"end"</span><span class="o">);</span>
+  <span class="n">options</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"timeFormat"</span><span class="o">,</span> <span class="s">"iso_8601"</span><span class="o">);</span>
+  <span class="n">options</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"timeZone"</span><span class="o">,</span> <span class="s">"GMT"</span><span class="o">);</span>
+  <span class="n">options</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"valueIdentifier"</span><span class="o">,</span> <span class="s">"Health"</span><span class="o">);</span> 
+  <span class="n">String</span> <span class="n">data</span> <span class="o">=</span> <span class="s">"{\"time\" : \"2011-03-26T12:00:00.000Z\", \"end\" : \"2012-06-01T00:00:00.000Z\", \"Health\" : \"Normal\"}"</span><span class="o">;</span>
   <span class="n">String</span> <span class="n">response</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="na">addfacts</span><span class="o">(</span><span class="n">assessment</span><span class="o">.</span><span class="na">getId</span><span class="o">(),</span><span class="n">data</span><span class="o">,</span> <span class="n">options</span><span class="o">);</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">from</span> <span class="nn">falkonryclient</span> <span class="kn">import</span> <span class="n">client</span> <span class="k">as</span> <span class="n">Falkonry</span>
 <span class="kn">from</span> <span class="nn">falkonryclient</span> <span class="kn">import</span> <span class="n">schemas</span> <span class="k">as</span> <span class="n">Schemas</span>
 
 <span class="c">#instantiate Falkonry</span>
-<span class="n">falkonry</span>      <span class="o">=</span> <span class="n">Falkonry</span><span class="p">(</span><span class="s">'https://sandbox.falkonry.ai'</span><span class="p">,</span> <span class="s">'auth-token'</span><span class="p">)</span>
-<span class="n">assessmentId</span> <span class="o">=</span> <span class="s">'id of the datastream'</span>
-<span class="n">data</span>          <span class="o">=</span> <span class="s">'{"time" : "2011-03-26T12:00:00Z", "car" : "HI3821", "end" : "2012-06-01T00:00:00Z", "Health" : "Normal"}'</span>
-<span class="n">inputResponse</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="n">add_verification</span><span class="p">(</span><span class="n">assessmentId</span><span class="p">,</span> <span class="s">'json'</span><span class="p">,</span> <span class="p">{},</span> <span class="n">data</span><span class="p">)</span>
+<span class="n">falkonry</span>      <span class="o">=</span> <span class="n">Falkonry</span><span class="p">(</span><span class="s">'http://localhost:8080'</span><span class="p">,</span> <span class="s">'auth-token'</span><span class="p">)</span>
+<span class="n">assessmentId</span> <span class="o">=</span> <span class="s">'id of the assessment'</span>
+<span class="n">data</span>          <span class="o">=</span> <span class="s">'{"time" : "2011-03-26T12:00:00.000Z", "end" : "2012-06-01T00:00:00.000Z", "Health" : "Normal"}'</span>
+
+<span class="n">options</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s">'startTimeIdentifier'</span><span class="p">:</span> <span class="s">"time"</span><span class="p">,</span>
+        <span class="s">'endTimeIdentifier'</span><span class="p">:</span> <span class="s">"end"</span><span class="p">,</span>
+        <span class="s">'timeFormat'</span><span class="p">:</span> <span class="s">"iso_8601"</span><span class="p">,</span>
+        <span class="s">'timeZone'</span><span class="p">:</span> <span class="n">time</span><span class="o">.</span><span class="n">get_zone</span><span class="p">(),</span>
+        <span class="s">'valueIdentifier'</span><span class="p">:</span> <span class="s">"Health"</span>
+    <span class="p">}</span>
+<span class="n">inputResponse</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="n">add_facts</span><span class="p">(</span><span class="n">assessmentId</span><span class="p">,</span> <span class="s">'json'</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
 </code></pre><pre class="highlight shell tab-shell"><code>
 </code></pre>
 <blockquote>
@@ -1923,36 +1943,160 @@ If you would like to request more assessments, reach out to your Falkonry Admin.
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<h2 id="add-facts-data-csv-to-assessment">Add facts data (csv) to Assessment</h2>
+<h2 id="add-facts-data-json-format-with-addition-tag-to-assessment-of-multi-entity-datastream">Add facts data (json format) with addition tag to Assessment of multi entity datastream</h2>
+<pre class="highlight csharp tab-csharp"><code>    <span class="k">using</span> <span class="nn">falkonry_csharp_client</span><span class="p">;</span>
+    <span class="k">using</span> <span class="nn">falkonry_csharp_client.helper.models</span><span class="p">;</span>
 
-<blockquote>
-<p>To add facts from a csv file, use this code:</p>
-</blockquote>
-<pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">falkonry_csharp_client</span><span class="p">;</span>
-<span class="k">using</span> <span class="nn">falkonry_csharp_client.helper.models</span><span class="p">;</span>
+    <span class="n">SortedDictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;</span> <span class="n">options</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SortedDictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;();</span>
+    <span class="n">options</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"startTimeIdentifier"</span><span class="p">,</span> <span class="s">"time"</span><span class="p">);</span>
+    <span class="n">options</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"endTimeIdentifier"</span><span class="p">,</span> <span class="s">"end"</span><span class="p">);</span>
+    <span class="n">options</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"timeFormat"</span><span class="p">,</span> <span class="s">"iso_8601"</span><span class="p">);</span>
+    <span class="n">options</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"timeZone"</span><span class="p">,</span> <span class="s">"GMT"</span><span class="p">);</span>
+    <span class="n">options</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"entityIdentifier"</span><span class="p">,</span> <span class="s">"entities"</span><span class="p">);</span>
+    <span class="n">options</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"valueIdentifier"</span><span class="p">,</span> <span class="s">"Health"</span><span class="p">);</span>
+    <span class="n">options</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"additionalTag"</span><span class="p">,</span> <span class="s">"testTag"</span><span class="p">);</span>
 
-<span class="kt">string</span> <span class="n">token</span> <span class="p">=</span> <span class="s">"Add your token here"</span><span class="p">;</span>   
-<span class="n">SortedDictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;</span> <span class="n">options</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SortedDictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;();</span>
-<span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Falkonry</span><span class="p">(</span><span class="s">"http://localhost:8080"</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
-<span class="kt">string</span> <span class="n">data</span> <span class="p">=</span> <span class="s">"time,end,car,Health\n2011-03-31T00:00:00Z,2011-04-01T00:00:00Z,IL9753,Normal\n2011-03-31T00:00:00Z,2011-04-01T00:00:00Z,HI3821,Normal"</span><span class="p">;</span>
-<span class="kt">string</span> <span class="n">response</span> <span class="p">=</span> <span class="n">falkonry</span><span class="p">.</span><span class="nf">addFacts</span><span class="p">(</span><span class="err">'</span><span class="n">assessment</span><span class="p">-</span><span class="n">id</span><span class="err">'</span><span class="p">,</span><span class="n">data</span><span class="p">,</span> <span class="n">options</span><span class="p">);</span>
+    <span class="kt">string</span> <span class="n">token</span> <span class="p">=</span> <span class="s">"Add your token here"</span><span class="p">;</span>   
+    <span class="n">SortedDictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;</span> <span class="n">options</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SortedDictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;();</span>
+    <span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Falkonry</span><span class="p">(</span><span class="s">"http://localhost:8080"</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
+    <span class="n">String</span> <span class="n">data</span> <span class="p">=</span> <span class="s">"{\"time\" : \"2011-03-26T12:00:00Z\", \"entities\" : \"entity1\", \"end\" : \"2012-06-01T00:00:00Z\", \"Health\" : \"Normal\"}"</span><span class="p">;</span>
+    <span class="kt">string</span> <span class="n">response</span> <span class="p">=</span> <span class="n">falkonry</span><span class="p">.</span><span class="nf">addFacts</span><span class="p">(</span><span class="err">'</span><span class="n">assessment</span><span class="p">-</span><span class="n">id</span><span class="err">'</span><span class="p">,</span><span class="n">data</span><span class="p">,</span> <span class="n">options</span><span class="p">);</span>
 </code></pre><pre class="highlight java tab-java"><code>  <span class="kn">import</span> <span class="nn">com.falkonry.client.Falkonry</span><span class="o">;</span>
 
   <span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Falkonry</span><span class="o">(</span><span class="s">"https://sandbox.falkonry.ai"</span><span class="o">,</span> <span class="s">"auth-token"</span><span class="o">);</span>
+  <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">options</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;();</span>
+  <span class="n">options</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"startTimeIdentifier"</span><span class="o">,</span> <span class="s">"time"</span><span class="o">);</span>
+  <span class="n">options</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"endTimeIdentifier"</span><span class="o">,</span> <span class="s">"end"</span><span class="o">);</span>
+  <span class="n">options</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"timeFormat"</span><span class="o">,</span> <span class="s">"iso_8601"</span><span class="o">);</span>
+  <span class="n">options</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"timeZone"</span><span class="o">,</span> <span class="s">"GMT"</span><span class="o">);</span>
+  <span class="n">options</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"valueIdentifier"</span><span class="o">,</span> <span class="s">"Health"</span><span class="o">);</span> 
+  <span class="n">options</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"entityIdentifier"</span><span class="o">,</span> <span class="s">"entities"</span><span class="o">);</span>
+  <span class="n">options</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"additionalTag"</span><span class="o">,</span> <span class="s">"testTag"</span><span class="o">);</span>
 
-  <span class="n">String</span> <span class="n">data</span> <span class="o">=</span> <span class="s">"time,end,car,Health\n2011-03-31T00:00:00Z,2011-04-01T00:00:00Z,IL9753,Normal\n2011-03-31T00:00:00Z,2011-04-01T00:00:00Z,HI3821,Normal"</span><span class="o">;</span>
+  <span class="n">String</span> <span class="n">data</span> <span class="o">=</span> <span class="s">"{\"time\" : \"2011-03-26T12:00:00.000Z\", \"entities\" : \"entity1\", \"end\" : \"2012-06-01T00:00:00.000Z\", \"Health\" : \"Normal\"}"</span><span class="o">;</span>
+  <span class="n">String</span> <span class="n">response</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="na">addfacts</span><span class="o">(</span><span class="n">assessment</span><span class="o">.</span><span class="na">getId</span><span class="o">(),</span><span class="n">data</span><span class="o">,</span> <span class="n">options</span><span class="o">);</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">from</span> <span class="nn">falkonryclient</span> <span class="kn">import</span> <span class="n">client</span> <span class="k">as</span> <span class="n">Falkonry</span>
+<span class="kn">from</span> <span class="nn">falkonryclient</span> <span class="kn">import</span> <span class="n">schemas</span> <span class="k">as</span> <span class="n">Schemas</span>
+
+<span class="c">#instantiate Falkonry</span>
+<span class="n">falkonry</span>      <span class="o">=</span> <span class="n">Falkonry</span><span class="p">(</span><span class="s">'http://localhost:8080'</span><span class="p">,</span> <span class="s">'auth-token'</span><span class="p">)</span>
+<span class="n">assessmentId</span> <span class="o">=</span> <span class="s">'id of the assessment'</span>
+<span class="n">data</span>          <span class="o">=</span> <span class="s">'{"time" : "2011-03-26T12:00:00.000Z", "end" : "2012-06-01T00:00:00.000Z", "entities": "entity1", "Health" : "Normal"}'</span>
+
+<span class="n">options</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s">'startTimeIdentifier'</span><span class="p">:</span> <span class="s">"time"</span><span class="p">,</span>
+        <span class="s">'endTimeIdentifier'</span><span class="p">:</span> <span class="s">"end"</span><span class="p">,</span>
+        <span class="s">'timeFormat'</span><span class="p">:</span> <span class="s">"iso_8601"</span><span class="p">,</span>
+        <span class="s">'timeZone'</span><span class="p">:</span> <span class="n">time</span><span class="o">.</span><span class="n">get_zone</span><span class="p">(),</span>
+        <span class="s">'valueIdentifier'</span><span class="p">:</span> <span class="s">"Health"</span><span class="p">,</span>
+        <span class="s">'entityIdentifier'</span><span class="p">:</span> <span class="s">'entities'</span><span class="p">,</span>
+        <span class="s">'additionalTag'</span><span class="p">:</span> <span class="s">'testTag'</span>
+    <span class="p">}</span>
+<span class="n">inputResponse</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="n">add_facts</span><span class="p">(</span><span class="n">assessmentId</span><span class="p">,</span> <span class="s">'json'</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+</code></pre>
+<h2 id="add-facts-data-csv-format-to-assessment-of-single-entity-datastream">Add facts data (csv format) to Assessment of single entity datastream</h2>
+<pre class="highlight csharp tab-csharp"><code>    <span class="k">using</span> <span class="nn">falkonry_csharp_client</span><span class="p">;</span>
+    <span class="k">using</span> <span class="nn">falkonry_csharp_client.helper.models</span><span class="p">;</span>
+
+    <span class="n">SortedDictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;</span> <span class="n">options</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SortedDictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;();</span>
+    <span class="n">options</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"startTimeIdentifier"</span><span class="p">,</span> <span class="s">"time"</span><span class="p">);</span>
+    <span class="n">options</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"endTimeIdentifier"</span><span class="p">,</span> <span class="s">"end"</span><span class="p">);</span>
+    <span class="n">options</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"timeFormat"</span><span class="p">,</span> <span class="s">"iso_8601"</span><span class="p">);</span>
+    <span class="n">options</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"timeZone"</span><span class="p">,</span> <span class="s">"GMT"</span><span class="p">);</span>
+    <span class="n">options</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"valueIdentifier"</span><span class="p">,</span> <span class="s">"Health"</span><span class="p">);</span>
+
+    <span class="kt">string</span> <span class="n">token</span> <span class="p">=</span> <span class="s">"Add your token here"</span><span class="p">;</span>   
+    <span class="n">SortedDictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;</span> <span class="n">options</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SortedDictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;();</span>
+    <span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Falkonry</span><span class="p">(</span><span class="s">"http://localhost:8080"</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
+    <span class="kt">string</span> <span class="n">data</span> <span class="p">=</span> <span class="s">"time,end,Health\n2011-03-31T00:00:00Z,2011-04-01T00:00:00Z,Normal\n2011-03-31T00:00:00Z,2011-04-01T00:00:00Z,Normal"</span><span class="p">;</span>
+    <span class="kt">string</span> <span class="n">response</span> <span class="p">=</span> <span class="n">falkonry</span><span class="p">.</span><span class="nf">addFacts</span><span class="p">(</span><span class="err">'</span><span class="n">assessment</span><span class="p">-</span><span class="n">id</span><span class="err">'</span><span class="p">,</span><span class="n">data</span><span class="p">,</span> <span class="n">options</span><span class="p">);</span>
+
+</code></pre><pre class="highlight java tab-java"><code>  <span class="kn">import</span> <span class="nn">com.falkonry.client.Falkonry</span><span class="o">;</span>
+
+  <span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Falkonry</span><span class="o">(</span><span class="s">"http://localhost:8080"</span><span class="o">,</span> <span class="s">"auth-token"</span><span class="o">);</span>
+  <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">options</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;();</span>
+  <span class="n">options</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"startTimeIdentifier"</span><span class="o">,</span> <span class="s">"time"</span><span class="o">);</span>
+  <span class="n">options</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"endTimeIdentifier"</span><span class="o">,</span> <span class="s">"end"</span><span class="o">);</span>
+  <span class="n">options</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"timeFormat"</span><span class="o">,</span> <span class="s">"iso_8601"</span><span class="o">);</span>
+  <span class="n">options</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"timeZone"</span><span class="o">,</span> <span class="s">"GMT"</span><span class="o">);</span>
+  <span class="n">options</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"valueIdentifier"</span><span class="o">,</span> <span class="s">"Health"</span><span class="o">);</span>
+  <span class="n">String</span> <span class="n">data</span> <span class="o">=</span> <span class="s">"time,end,Health\n2011-03-31T00:00:00.000Z,2011-04-01T00:00:00.000Z,Normal\n2011-03-31T00:00:00.000Z,2011-04-01T00:00:00.000Z,Normal"</span><span class="o">;</span>
   <span class="n">String</span> <span class="n">response</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="na">addFacts</span><span class="o">(</span><span class="n">assessment</span><span class="o">.</span><span class="na">getId</span><span class="o">(),</span><span class="n">data</span><span class="o">,</span> <span class="n">options</span><span class="o">);</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">from</span> <span class="nn">falkonryclient</span> <span class="kn">import</span> <span class="n">client</span> <span class="k">as</span> <span class="n">Falkonry</span>
 <span class="kn">from</span> <span class="nn">falkonryclient</span> <span class="kn">import</span> <span class="n">schemas</span> <span class="k">as</span> <span class="n">Schemas</span>
 
 <span class="c">#instantiate Falkonry</span>
-<span class="n">falkonry</span>      <span class="o">=</span> <span class="n">Falkonry</span><span class="p">(</span><span class="s">'https://sandbox.falkonry.ai'</span><span class="p">,</span> <span class="s">'auth-token'</span><span class="p">)</span>
-<span class="n">assessmentId</span> <span class="o">=</span> <span class="s">'id of the datastream'</span>
-<span class="n">data</span>          <span class="o">=</span> <span class="s">'time,car,end,Health'</span> <span class="o">+</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span>
-                 <span class="o">+</span> <span class="s">'2011-03-26T12:00:00Z,HI3821,2012-06-01T00:00:00Z,Normal'</span> <span class="o">+</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span>
-                 <span class="o">+</span> <span class="s">'2014-02-10T23:00:00Z,HI3821,2014-03-20T12:00:00Z,Spalling'</span><span class="p">;</span>
+<span class="n">falkonry</span>      <span class="o">=</span> <span class="n">Falkonry</span><span class="p">(</span><span class="s">'http://localhost:8080'</span><span class="p">,</span> <span class="s">'auth-token'</span><span class="p">)</span>
+<span class="n">assessmentId</span> <span class="o">=</span> <span class="s">'id of the assessment'</span>
+<span class="n">data</span>          <span class="o">=</span> <span class="s">'time,end,Health'</span> <span class="o">+</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span>
+                 <span class="o">+</span> <span class="s">'2011-03-26T12:00:00.000Z,2012-06-01T00:00:00.000Z,Normal'</span> <span class="o">+</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span>
+                 <span class="o">+</span> <span class="s">'2014-02-10T23:00:00.000Z,2014-03-20T12:00:00.000Z,Spalling'</span><span class="p">;</span>
 
-<span class="n">inputResponse</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="n">add_facts</span><span class="p">(</span><span class="n">assessmentId</span><span class="p">,</span> <span class="s">'csv'</span><span class="p">,</span> <span class="p">{},</span> <span class="n">data</span><span class="p">)</span>
+<span class="n">options</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s">'startTimeIdentifier'</span><span class="p">:</span> <span class="s">"time"</span><span class="p">,</span>
+        <span class="s">'endTimeIdentifier'</span><span class="p">:</span> <span class="s">"end"</span><span class="p">,</span>
+        <span class="s">'timeFormat'</span><span class="p">:</span> <span class="s">"iso_8601"</span><span class="p">,</span>
+        <span class="s">'timeZone'</span><span class="p">:</span> <span class="n">time</span><span class="o">.</span><span class="n">get_zone</span><span class="p">(),</span>
+        <span class="s">'valueIdentifier'</span><span class="p">:</span> <span class="s">"Health"</span>
+    <span class="p">}</span>
+
+<span class="n">inputResponse</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="n">add_facts</span><span class="p">(</span><span class="n">assessmentId</span><span class="p">,</span> <span class="s">'csv'</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+</code></pre><pre class="highlight shell tab-shell"><code>
+</code></pre>
+<h2 id="add-facts-data-csv-format-with-tags-assessment-of-multi-entity-datastream">Add facts data (csv format) with tags Assessment of multi entity datastream</h2>
+<pre class="highlight csharp tab-csharp"><code>    <span class="k">using</span> <span class="nn">falkonry_csharp_client</span><span class="p">;</span>
+    <span class="k">using</span> <span class="nn">falkonry_csharp_client.helper.models</span><span class="p">;</span>
+
+    <span class="n">SortedDictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;</span> <span class="n">options</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SortedDictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;();</span>
+    <span class="n">options</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"startTimeIdentifier"</span><span class="p">,</span> <span class="s">"time"</span><span class="p">);</span>
+    <span class="n">options</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"endTimeIdentifier"</span><span class="p">,</span> <span class="s">"end"</span><span class="p">);</span>
+    <span class="n">options</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"timeFormat"</span><span class="p">,</span> <span class="s">"iso_8601"</span><span class="p">);</span>
+    <span class="n">options</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"timeZone"</span><span class="p">,</span> <span class="s">"GMT"</span><span class="p">);</span>
+    <span class="n">options</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"entityIdentifier"</span><span class="p">,</span> <span class="s">"car"</span><span class="p">);</span>
+    <span class="n">options</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"valueIdentifier"</span><span class="p">,</span> <span class="s">"Health"</span><span class="p">);</span>
+    <span class="n">options</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"tagIdentifier"</span><span class="p">,</span> <span class="s">"Tag"</span><span class="p">);</span>
+
+    <span class="kt">string</span> <span class="n">token</span> <span class="p">=</span> <span class="s">"Add your token here"</span><span class="p">;</span>   
+    <span class="n">SortedDictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;</span> <span class="n">options</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SortedDictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;();</span>
+    <span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Falkonry</span><span class="p">(</span><span class="s">"http://localhost:8080"</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
+    <span class="kt">string</span> <span class="n">data</span> <span class="p">=</span> <span class="s">"time,end,car,Health,Tag\n2011-03-31T00:00:00Z,2011-04-01T00:00:00Z,IL9753,Normal\n2011-03-31T00:00:00Z,2011-04-01T00:00:00Z,HI3821,Normal,testTag1"</span><span class="p">;</span>
+    <span class="kt">string</span> <span class="n">response</span> <span class="p">=</span> <span class="n">falkonry</span><span class="p">.</span><span class="nf">addFacts</span><span class="p">(</span><span class="err">'</span><span class="n">assessment</span><span class="p">-</span><span class="n">id</span><span class="err">'</span><span class="p">,</span><span class="n">data</span><span class="p">,</span> <span class="n">options</span><span class="p">);</span>
+
+</code></pre><pre class="highlight java tab-java"><code>  <span class="kn">import</span> <span class="nn">com.falkonry.client.Falkonry</span><span class="o">;</span>
+
+  <span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Falkonry</span><span class="o">(</span><span class="s">"http://localhost:8080"</span><span class="o">,</span> <span class="s">"auth-token"</span><span class="o">);</span>
+  <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">options</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;();</span>
+  <span class="n">options</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"startTimeIdentifier"</span><span class="o">,</span> <span class="s">"time"</span><span class="o">);</span>
+  <span class="n">options</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"endTimeIdentifier"</span><span class="o">,</span> <span class="s">"end"</span><span class="o">);</span>
+  <span class="n">options</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"timeFormat"</span><span class="o">,</span> <span class="s">"iso_8601"</span><span class="o">);</span>
+  <span class="n">options</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"timeZone"</span><span class="o">,</span> <span class="s">"GMT"</span><span class="o">);</span>
+  <span class="n">options</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"entityIdentifier"</span><span class="o">,</span> <span class="s">"car"</span><span class="o">);</span>
+  <span class="n">options</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"valueIdentifier"</span><span class="o">,</span> <span class="s">"Health"</span><span class="o">);</span>
+  <span class="n">options</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"tagIdentifier"</span><span class="o">,</span> <span class="s">"Tag"</span><span class="o">);</span>
+
+  <span class="n">String</span> <span class="n">data</span> <span class="o">=</span> <span class="s">"time,end,car,Health,Tag\n2011-03-31T00:00:00.000Z,2011-04-01T00:00:00.000Z,IL9753,Normal,testTag1\n2011-03-31T00:00:00.000Z,2011-04-01T00:00:00.000Z,HI3821,Normal,testTag2"</span><span class="o">;</span>
+  <span class="n">String</span> <span class="n">response</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="na">addFacts</span><span class="o">(</span><span class="n">assessment</span><span class="o">.</span><span class="na">getId</span><span class="o">(),</span><span class="n">data</span><span class="o">,</span> <span class="n">options</span><span class="o">);</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">from</span> <span class="nn">falkonryclient</span> <span class="kn">import</span> <span class="n">client</span> <span class="k">as</span> <span class="n">Falkonry</span>
+<span class="kn">from</span> <span class="nn">falkonryclient</span> <span class="kn">import</span> <span class="n">schemas</span> <span class="k">as</span> <span class="n">Schemas</span>
+
+<span class="c">#instantiate Falkonry</span>
+<span class="n">falkonry</span>      <span class="o">=</span> <span class="n">Falkonry</span><span class="p">(</span><span class="s">'http://localhost:8080'</span><span class="p">,</span> <span class="s">'auth-token'</span><span class="p">)</span>
+<span class="n">assessmentId</span> <span class="o">=</span> <span class="s">'id of the assessment'</span>
+<span class="n">data</span>          <span class="o">=</span> <span class="s">'time,car,end,Health,Tag'</span> <span class="o">+</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span>
+                 <span class="o">+</span> <span class="s">'2011-03-26T12:00:00.000Z,HI3821,2012-06-01T00:00:00.000Z,Normal,testTag1'</span> <span class="o">+</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span>
+                 <span class="o">+</span> <span class="s">'2014-02-10T23:00:00.000Z,HI3821,2014-03-20T12:00:00.000Z,Spalling,testTag2'</span><span class="p">;</span>
+
+<span class="n">options</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s">'startTimeIdentifier'</span><span class="p">:</span> <span class="s">"time"</span><span class="p">,</span>
+        <span class="s">'endTimeIdentifier'</span><span class="p">:</span> <span class="s">"end"</span><span class="p">,</span>
+        <span class="s">'timeFormat'</span><span class="p">:</span> <span class="s">"iso_8601"</span><span class="p">,</span>
+        <span class="s">'timeZone'</span><span class="p">:</span> <span class="n">time</span><span class="o">.</span><span class="n">get_zone</span><span class="p">(),</span>
+        <span class="s">'entityIdentifier'</span><span class="p">:</span> <span class="s">"car"</span><span class="p">,</span>
+        <span class="s">'valueIdentifier'</span><span class="p">:</span> <span class="s">"Health"</span><span class="p">,</span>
+        <span class="s">'tagIdentifier'</span><span class="p">:</span> <span class="s">'Tag'</span>
+    <span class="p">}</span>
+
+<span class="n">inputResponse</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="n">add_facts</span><span class="p">(</span><span class="n">assessmentId</span><span class="p">,</span> <span class="s">'csv'</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
 </code></pre><pre class="highlight shell tab-shell"><code>
 </code></pre>
 <blockquote>
@@ -1980,316 +2124,314 @@ If you would like to request more assessments, reach out to your Falkonry Admin.
 
 <aside class="notice">
 Adding more facts (ground truths) helps improve model accuracy and hence the usefulness of an assessment.
-</aside>aside>
+</aside>
 
-## Add facts data (json) from a stream to Assessment
+<h2 id="add-facts-data-json-format-from-a-stream-to-assessment-of-multi-entity-datastream">Add facts data (json format) from a stream to Assessment of multi entity datastream</h2>
 
-> To add facts in json format from an input stream, use this code:
+<p>Sample JSONFile:
+<code class="prettyprint">
+{&quot;time&quot; : &quot;2011-03-26T12:00:00.000Z&quot;, &quot;car&quot; : &quot;HI3821&quot;, &quot;end&quot; : &quot;2012-06-01T00:00:00.000Z&quot;, &quot;Health&quot; : &quot;Normal&quot;}
+{&quot;time&quot; : &quot;2014-02-10T23:00:00.000Z&quot;, &quot;car&quot; : &quot;HI3821&quot;, &quot;end&quot; : &quot;2014-03-20T12:00:00.000Z&quot;, &quot;Health&quot; : &quot;Spalling&quot;}
+</code></p>
 
-&ldquo;`csharp
-using falkonry_csharp_client;
-using falkonry_csharp_client.helper.models;
+<blockquote>
+<p>To add facts in json format from an input stream, use this code:</p>
+</blockquote>
+<pre class="highlight csharp tab-csharp"><code>    <span class="k">using</span> <span class="nn">falkonry_csharp_client</span><span class="p">;</span>
+    <span class="k">using</span> <span class="nn">falkonry_csharp_client.helper.models</span><span class="p">;</span>
 
-string token=&quot;Add your token here&rdquo;;   
-Falkonry falkonry = new Falkonry(&ldquo;http://localhost:8080&rdquo;, token);
-string path = &ldquo;Insert the path to your file here&rdquo;;
-byte[] bytes = System.IO.File.ReadAllBytes(path);
-string response = falkonry.AddFactsStream(&lsquo;assessment-id&rsquo;,bytes, options);
-&ldquo;`
+    <span class="n">SortedDictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;</span> <span class="n">options</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SortedDictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;();</span>
+    <span class="n">options</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"startTimeIdentifier"</span><span class="p">,</span> <span class="s">"time"</span><span class="p">);</span>
+    <span class="n">options</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"endTimeIdentifier"</span><span class="p">,</span> <span class="s">"end"</span><span class="p">);</span>
+    <span class="n">options</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"timeFormat"</span><span class="p">,</span> <span class="s">"iso_8601"</span><span class="p">);</span>
+    <span class="n">options</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"timeZone"</span><span class="p">,</span> <span class="s">"GMT"</span><span class="p">);</span>
+    <span class="n">options</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"entityIdentifier"</span><span class="p">,</span> <span class="s">"car"</span><span class="p">);</span>
+    <span class="n">options</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"valueIdentifier"</span><span class="p">,</span> <span class="s">"Health"</span><span class="p">);</span>
 
+    <span class="kt">string</span> <span class="n">token</span><span class="p">=</span><span class="s">"Add your token here"</span><span class="p">;</span>   
+    <span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Falkonry</span><span class="p">(</span><span class="s">"http://localhost:8080"</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
+    <span class="kt">string</span> <span class="n">path</span> <span class="p">=</span> <span class="s">"Insert the path to your file here"</span><span class="p">;</span>
+    <span class="kt">byte</span><span class="p">[]</span> <span class="n">bytes</span> <span class="p">=</span> <span class="n">System</span><span class="p">.</span><span class="n">IO</span><span class="p">.</span><span class="n">File</span><span class="p">.</span><span class="nf">ReadAllBytes</span><span class="p">(</span><span class="n">path</span><span class="p">);</span>
+    <span class="kt">string</span> <span class="n">response</span> <span class="p">=</span> <span class="n">falkonry</span><span class="p">.</span><span class="nf">AddFactsStream</span><span class="p">(</span><span class="err">'</span><span class="n">assessment</span><span class="p">-</span><span class="n">id</span><span class="err">'</span><span class="p">,</span><span class="n">bytes</span><span class="p">,</span> <span class="n">options</span><span class="p">);</span>
+</code></pre><pre class="highlight java tab-java"><code>    <span class="kn">import</span> <span class="nn">com.falkonry.client.Falkonry</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">org.apache.commons.io.FileUtils</span><span class="o">;</span>
 
-&rdquo;`java
-  import com.falkonry.client.Falkonry;
-  import org.apache.commons.io.FileUtils;
+    <span class="n">Falkonry</span> <span class="n">falkonry</span>   <span class="o">=</span> <span class="k">new</span> <span class="n">Falkonry</span><span class="o">(</span><span class="s">"http://localhost:8080"</span><span class="o">,</span> <span class="s">"auth-token"</span><span class="o">);</span>
+    <span class="n">File</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">"res/factsData.json"</span><span class="o">);</span> 
+    <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">options</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;();</span>
+    <span class="n">options</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"startTimeIdentifier"</span><span class="o">,</span> <span class="s">"time"</span><span class="o">);</span>
+    <span class="n">options</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"endTimeIdentifier"</span><span class="o">,</span> <span class="s">"end"</span><span class="o">);</span>
+    <span class="n">options</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"timeFormat"</span><span class="o">,</span> <span class="s">"iso_8601"</span><span class="o">);</span>
+    <span class="n">options</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"timeZone"</span><span class="o">,</span> <span class="s">"GMT"</span><span class="o">);</span>
+    <span class="n">options</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"entityIdentifier"</span><span class="o">,</span> <span class="s">"car"</span><span class="o">);</span>
+    <span class="n">options</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"valueIdentifier"</span><span class="o">,</span> <span class="s">"Health"</span><span class="o">);</span>       
+    <span class="n">ByteArrayInputStream</span> <span class="n">byteArrayInputStream</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ByteArrayInputStream</span><span class="o">(</span><span class="n">FileUtils</span><span class="o">.</span><span class="na">readFileToByteArray</span><span class="o">(</span><span class="n">file</span><span class="o">));</span>
+    <span class="n">String</span> <span class="n">response</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="na">addFactsStream</span><span class="o">(</span><span class="n">assessment</span><span class="o">.</span><span class="na">getId</span><span class="o">(),</span><span class="n">byteArrayInputStream</span><span class="o">,</span> <span class="n">options</span><span class="o">)</span>
+</code></pre><pre class="highlight python tab-python"><code>    <span class="kn">import</span> <span class="nn">os</span><span class="p">,</span> <span class="n">sys</span>
+    <span class="kn">from</span> <span class="nn">falkonryclient</span> <span class="kn">import</span> <span class="n">client</span> <span class="k">as</span> <span class="n">Falkonry</span>
+    <span class="kn">from</span> <span class="nn">falkonryclient</span> <span class="kn">import</span> <span class="n">schemas</span> <span class="k">as</span> <span class="n">Schemas</span>
 
-  Falkonry falkonry   = new Falkonry(&ldquo;https://sandbox.falkonry.ai&rdquo;, &ldquo;auth-token&rdquo;);
-  File file = new File(&ldquo;res/factsData.json&rdquo;);      
-  ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(FileUtils.readFileToByteArray(file));
-  String response = falkonry.addFactsStream(assessment.getId(),byteArrayInputStream, options);
-&ldquo;`
+    <span class="n">falkonry</span> <span class="o">=</span> <span class="n">Falkonry</span><span class="p">(</span><span class="s">'http://localhost:8080'</span><span class="p">,</span> <span class="s">'auth-token'</span><span class="p">)</span>
+    <span class="n">assessmentId</span> <span class="o">=</span> <span class="s">'id of the assessment'</span>
+    <span class="n">stream</span>   <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="s">'./factsData.json'</span><span class="p">)</span>
 
-&rdquo;`python
-import os, sys
-from falkonryclient import client as Falkonry
-from falkonryclient import schemas as Schemas
+    <span class="n">options</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s">'startTimeIdentifier'</span><span class="p">:</span> <span class="s">"time"</span><span class="p">,</span>
+            <span class="s">'endTimeIdentifier'</span><span class="p">:</span> <span class="s">"end"</span><span class="p">,</span>
+            <span class="s">'timeFormat'</span><span class="p">:</span> <span class="s">"iso_8601"</span><span class="p">,</span>
+            <span class="s">'timeZone'</span><span class="p">:</span> <span class="n">time</span><span class="o">.</span><span class="n">get_zone</span><span class="p">(),</span>
+            <span class="s">'entityIdentifier'</span><span class="p">:</span> <span class="s">"car"</span><span class="p">,</span>
+            <span class="s">'valueIdentifier'</span><span class="p">:</span> <span class="s">"Health"</span>
+        <span class="p">}</span>
 
-falkonry = Falkonry(&lsquo;https://sandbox.falkonry.ai&rsquo;, &lsquo;auth-token&rsquo;)
-assessmentId = &lsquo;id of the datastream&rsquo;
-stream   = io.open(&lsquo;./data.json&rsquo;)
-
-response = falkonry.add_facts_stream(assessmentId, &lsquo;json&rsquo;, {}, stream)
-&ldquo;`
-
-&rdquo;`shell
-
-&ldquo;`
-> The above command returns JSON structured like this:
-
-&rdquo;`json
-{
-  &ldquo;schema&rdquo;: [
-    {
-      &ldquo;id&rdquo;: &ldquo;string&rdquo;,
-      &ldquo;name&rdquo;: &ldquo;string&rdquo;,
-      &ldquo;valueType&rdquo;: &ldquo;string&rdquo;,
-      &ldquo;dimensionList&rdquo;: [
-        &ldquo;string&rdquo;
-      ],
-      &ldquo;tags&rdquo;: [
-        &ldquo;string&rdquo;
-      ]
-    }
-  ]
-}
-&ldquo;`
-
-If facts are created from another application, they are often exported in json format.
-
-<aside class="notice">
-Adding more facts (ground truths) helps improve model accuracy and hence the usefulness of an assessment.
-</aside>aside>
-
-## Add facts data (csv) from a stream to Assessment
-
-> To add facts in csv format from an input stream, use this code:
-
-&rdquo;`csharp
-using falkonry_csharp_client;
-using falkonry_csharp_client.helper.models;
-
-string token=&ldquo;Add your token here&rdquo;;   
-Falkonry falkonry = new Falkonry(&ldquo;http://localhost:8080&rdquo;, token);
-string path = &ldquo;Insert the path to your file here&rdquo;;
-byte[] bytes = System.IO.File.ReadAllBytes(path);
-string response = falkonry.AddFactsStream(&lsquo;assessment-id&rsquo;,bytes, options);
-&ldquo;`
-
-
-&rdquo;`java
-  import com.falkonry.client.Falkonry;
-  import org.apache.commons.io.FileUtils;
-
-  Falkonry falkonry   = new Falkonry(&ldquo;https://sandbox.falkonry.ai&rdquo;, &ldquo;auth-token&rdquo;);
-  File file = new File(&ldquo;res/factsData.csv&rdquo;);      
-  ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(FileUtils.readFileToByteArray(file));
-  String response = falkonry.addFactsStream(assessment.getId(),byteArrayInputStream, options);
-&ldquo;`
-
-&rdquo;`python
-import os, sys
-from falkonryclient import client as Falkonry
-from falkonryclient import schemas as Schemas
-
-falkonry = Falkonry(&lsquo;https://sandbox.falkonry.ai&rsquo;, &lsquo;auth-token&rsquo;)
-assessmentId = &lsquo;id of the datastream&rsquo;
-stream   = io.open(&lsquo;./data.csv&rsquo;)
-
-response = falkonry.add_facts_stream(assessmentId, &lsquo;csv&rsquo;, {}, stream)
-&ldquo;`
-
-&rdquo;`shell
-
-&ldquo;`
-
-> The above command returns JSON structured like this:
-
-&rdquo;`json
-{
-  &ldquo;schema&rdquo;: [
-    {
-      &ldquo;id&rdquo;: &ldquo;string&rdquo;,
-      &ldquo;name&rdquo;: &ldquo;string&rdquo;,
-      &ldquo;valueType&rdquo;: &ldquo;string&rdquo;,
-      &ldquo;dimensionList&rdquo;: [
-        &ldquo;string&rdquo;
-      ],
-      &ldquo;tags&rdquo;: [
-        &ldquo;string&rdquo;
-      ]
-    }
-  ]
-}
-&ldquo;`
-
-Often, facts and machine/ asset state are captured in spreadsheets. 
-
-Use this to inject csv format facts into an assessment.
+    <span class="n">response</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="n">add_facts_stream</span><span class="p">(</span><span class="n">assessmentId</span><span class="p">,</span> <span class="s">'json'</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="n">stream</span><span class="p">)</span>
+</code></pre><pre class="highlight shell tab-shell"><code>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"schema"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"valueType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"dimensionList"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"string"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"string"</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>If facts are created from another application, they are often exported in json format.</p>
 
 <aside class="notice">
 Adding more facts (ground truths) helps improve model accuracy and hence the usefulness of an assessment.
-</aside>aside>
+</aside>
 
+<h2 id="add-facts-data-csv-format-from-a-stream-to-assessment-of-multi-entity-datastream">Add facts data (csv format) from a stream to Assessment of multi entity datastream</h2>
 
-# Live Monitoring
+<blockquote>
+<p>To add facts in csv format from an input stream, use this code:</p>
+</blockquote>
+<pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">falkonry_csharp_client</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">falkonry_csharp_client.helper.models</span><span class="p">;</span>
 
-After a model revision has been trained, a user may want to switch to live monitoring to evaluate patterns in real-time.
+<span class="n">SortedDictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;</span> <span class="n">options</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SortedDictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;();</span>
+<span class="n">options</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"startTimeIdentifier"</span><span class="p">,</span> <span class="s">"time"</span><span class="p">);</span>
+<span class="n">options</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"endTimeIdentifier"</span><span class="p">,</span> <span class="s">"end"</span><span class="p">);</span>
+<span class="n">options</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"timeFormat"</span><span class="p">,</span> <span class="s">"iso_8601"</span><span class="p">);</span>
+<span class="n">options</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"timeZone"</span><span class="p">,</span> <span class="s">"GMT"</span><span class="p">);</span>
+<span class="n">options</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"entityIdentifier"</span><span class="p">,</span> <span class="s">"car"</span><span class="p">);</span>
+<span class="n">options</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"valueIdentifier"</span><span class="p">,</span> <span class="s">"Health"</span><span class="p">);</span>
 
-Any model revision can be selected to be the basis of live monitoring. Falkonry will assign conditions to multi-variate patterns based on the signals that were used to create the model revision.
+<span class="kt">string</span> <span class="n">token</span><span class="p">=</span><span class="s">"Add your token here"</span><span class="p">;</span>   
+<span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Falkonry</span><span class="p">(</span><span class="s">"http://localhost:8080"</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
+<span class="kt">string</span> <span class="n">path</span> <span class="p">=</span> <span class="s">"Insert the path to your file here"</span><span class="p">;</span>
+<span class="kt">byte</span><span class="p">[]</span> <span class="n">bytes</span> <span class="p">=</span> <span class="n">System</span><span class="p">.</span><span class="n">IO</span><span class="p">.</span><span class="n">File</span><span class="p">.</span><span class="nf">ReadAllBytes</span><span class="p">(</span><span class="n">path</span><span class="p">);</span>
+<span class="kt">string</span> <span class="n">response</span> <span class="p">=</span> <span class="n">falkonry</span><span class="p">.</span><span class="nf">AddFactsStream</span><span class="p">(</span><span class="err">'</span><span class="n">assessment</span><span class="p">-</span><span class="n">id</span><span class="err">'</span><span class="p">,</span><span class="n">bytes</span><span class="p">,</span> <span class="n">options</span><span class="p">);</span>
+</code></pre><pre class="highlight java tab-java"><code>  <span class="kn">import</span> <span class="nn">com.falkonry.client.Falkonry</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">org.apache.commons.io.FileUtils</span><span class="o">;</span>
 
+  <span class="n">Falkonry</span> <span class="n">falkonry</span>   <span class="o">=</span> <span class="k">new</span> <span class="n">Falkonry</span><span class="o">(</span><span class="s">"http://localhost:8080"</span><span class="o">,</span> <span class="s">"auth-token"</span><span class="o">);</span>
+  <span class="n">File</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">"res/factsData.csv"</span><span class="o">);</span> 
+  <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">options</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;();</span>
+  <span class="n">options</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"startTimeIdentifier"</span><span class="o">,</span> <span class="s">"time"</span><span class="o">);</span>
+  <span class="n">options</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"endTimeIdentifier"</span><span class="o">,</span> <span class="s">"end"</span><span class="o">);</span>
+  <span class="n">options</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"timeFormat"</span><span class="o">,</span> <span class="s">"iso_8601"</span><span class="o">);</span>
+  <span class="n">options</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"timeZone"</span><span class="o">,</span> <span class="s">"GMT"</span><span class="o">);</span>
+  <span class="n">options</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"entityIdentifier"</span><span class="o">,</span> <span class="s">"entity"</span><span class="o">);</span>
+  <span class="n">options</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"valueIdentifier"</span><span class="o">,</span> <span class="s">"Health"</span><span class="o">);</span>     
+  <span class="n">ByteArrayInputStream</span> <span class="n">byteArrayInputStream</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ByteArrayInputStream</span><span class="o">(</span><span class="n">FileUtils</span><span class="o">.</span><span class="na">readFileToByteArray</span><span class="o">(</span><span class="n">file</span><span class="o">));</span>
+  <span class="n">String</span> <span class="n">response</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="na">addFactsStream</span><span class="o">(</span><span class="n">assessment</span><span class="o">.</span><span class="na">getId</span><span class="o">(),</span><span class="n">byteArrayInputStream</span><span class="o">,</span> <span class="n">options</span><span class="o">);</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">os</span><span class="p">,</span> <span class="n">sys</span>
+<span class="kn">from</span> <span class="nn">falkonryclient</span> <span class="kn">import</span> <span class="n">client</span> <span class="k">as</span> <span class="n">Falkonry</span>
+<span class="kn">from</span> <span class="nn">falkonryclient</span> <span class="kn">import</span> <span class="n">schemas</span> <span class="k">as</span> <span class="n">Schemas</span>
+<span class="kn">from</span> <span class="nn">falkonryclient</span> <span class="kn">import</span> <span class="n">schemas</span> <span class="k">as</span> <span class="n">Schemas</span>
 
-## Start live monitoring of datastream
+<span class="n">falkonry</span> <span class="o">=</span> <span class="n">Falkonry</span><span class="p">(</span><span class="s">'http://localhost:8080'</span><span class="p">,</span> <span class="s">'auth-token'</span><span class="p">)</span>
+<span class="n">assessmentId</span> <span class="o">=</span> <span class="s">'id of the assessment'</span>
+<span class="n">stream</span>   <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="s">'./factsData.csv'</span><span class="p">)</span>
 
-> To turn live monitoring on for a datastream, use this code:
+<span class="n">options</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s">'startTimeIdentifier'</span><span class="p">:</span> <span class="s">"time"</span><span class="p">,</span>
+        <span class="s">'endTimeIdentifier'</span><span class="p">:</span> <span class="s">"end"</span><span class="p">,</span>
+        <span class="s">'timeFormat'</span><span class="p">:</span> <span class="s">"iso_8601"</span><span class="p">,</span>
+        <span class="s">'timeZone'</span><span class="p">:</span> <span class="n">time</span><span class="o">.</span><span class="n">get_zone</span><span class="p">(),</span>
+        <span class="s">'entityIdentifier'</span><span class="p">:</span> <span class="s">"car"</span><span class="p">,</span>
+        <span class="s">'valueIdentifier'</span><span class="p">:</span> <span class="s">"Health"</span>
+    <span class="p">}</span>
 
-&rdquo;`csharp
-using falkonry_csharp_client;
-using falkonry_csharp_client.helper.models;
+<span class="n">response</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="n">add_facts_stream</span><span class="p">(</span><span class="n">assessmentId</span><span class="p">,</span> <span class="s">'csv'</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="n">stream</span><span class="p">)</span>
 
-string token=&ldquo;Add your token here&rdquo;;   
-Falkonry falkonry = new Falkonry(&ldquo;http://localhost:8080&rdquo;, token);
-  string datastream_id = &ldquo;Your datastream id&rdquo;;
-  falkonry.onDatastream(datastream_id);
-&ldquo;`
+</code></pre><pre class="highlight shell tab-shell"><code>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"schema"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"valueType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"dimensionList"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"string"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"string"</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Often, facts and machine/ asset state are captured in spreadsheets. </p>
 
-&rdquo;`java
-  import com.falkonry.client.Falkonry;
+<p>Use this to inject csv format facts into an assessment.</p>
 
-  Falkonry falkonry   = new Falkonry(&ldquo;https://sandbox.falkonry.ai&rdquo;, &ldquo;auth-token&rdquo;);
-  String datastreamId = &ldquo;hk7cgt56r3yln0&rdquo;;
-  List<Assessment> liveAssessments = falkonry.onDatastream(datastreamId);
-&ldquo;`
+<aside class="notice">
+Adding more facts (ground truths) helps improve model accuracy and hence the usefulness of an assessment.
+</aside>
 
-&rdquo;`python
-import os, sys
-from falkonryclient import client as Falkonry
-from falkonryclient import schemas as Schemas
+<h1 id="live-monitoring">Live Monitoring</h1>
 
-falkonry  = Falkonry(&lsquo;https://sandbox.falkonry.ai&rsquo;, &lsquo;auth-token&rsquo;)
-datastreamId = &lsquo;id of the datastream&rsquo;
+<p>After a model revision has been trained, a user may want to switch to live monitoring to evaluate patterns in real-time.</p>
 
-# Starts live monitoring of datastream. For live monitoring datastream must have atleast one assessment with active model. 
-response = falkonry.on_datastream(datastreamId)
-&ldquo;`
+<p>Any model revision can be selected to be the basis of live monitoring. Falkonry will assign conditions to multi-variate patterns based on the signals that were used to create the model revision.</p>
 
-&rdquo;`shell
+<h2 id="start-live-monitoring-of-datastream">Start live monitoring of datastream</h2>
 
-&ldquo;`
+<blockquote>
+<p>To turn live monitoring on for a datastream, use this code:</p>
+</blockquote>
+<pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">falkonry_csharp_client</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">falkonry_csharp_client.helper.models</span><span class="p">;</span>
 
-Live monitoring is associated with the entire datastream. At this point each assessment assciated with the datastream goes into live monitoring.
+<span class="kt">string</span> <span class="n">token</span><span class="p">=</span><span class="s">"Add your token here"</span><span class="p">;</span>   
+<span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Falkonry</span><span class="p">(</span><span class="s">"http://localhost:8080"</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
+  <span class="kt">string</span> <span class="n">datastream_id</span> <span class="p">=</span> <span class="s">"Your datastream id"</span><span class="p">;</span>
+  <span class="n">falkonry</span><span class="p">.</span><span class="nf">onDatastream</span><span class="p">(</span><span class="n">datastream_id</span><span class="p">);</span>
+</code></pre><pre class="highlight java tab-java"><code>  <span class="kn">import</span> <span class="nn">com.falkonry.client.Falkonry</span><span class="o">;</span>
 
-Every assessment has an &quot;active&rdquo; model associated with it.
+  <span class="n">Falkonry</span> <span class="n">falkonry</span>   <span class="o">=</span> <span class="k">new</span> <span class="n">Falkonry</span><span class="o">(</span><span class="s">"https://sandbox.falkonry.ai"</span><span class="o">,</span> <span class="s">"auth-token"</span><span class="o">);</span>
+  <span class="n">String</span> <span class="n">datastreamId</span> <span class="o">=</span> <span class="s">"hk7cgt56r3yln0"</span><span class="o">;</span>
+  <span class="n">List</span><span class="o">&lt;</span><span class="n">Assessment</span><span class="o">&gt;</span> <span class="n">liveAssessments</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="na">onDatastream</span><span class="o">(</span><span class="n">datastreamId</span><span class="o">);</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">os</span><span class="p">,</span> <span class="n">sys</span>
+<span class="kn">from</span> <span class="nn">falkonryclient</span> <span class="kn">import</span> <span class="n">client</span> <span class="k">as</span> <span class="n">Falkonry</span>
+<span class="kn">from</span> <span class="nn">falkonryclient</span> <span class="kn">import</span> <span class="n">schemas</span> <span class="k">as</span> <span class="n">Schemas</span>
+
+<span class="n">falkonry</span>  <span class="o">=</span> <span class="n">Falkonry</span><span class="p">(</span><span class="s">'https://sandbox.falkonry.ai'</span><span class="p">,</span> <span class="s">'auth-token'</span><span class="p">)</span>
+<span class="n">datastreamId</span> <span class="o">=</span> <span class="s">'id of the datastream'</span>
+
+<span class="c"># Starts live monitoring of datastream. For live monitoring datastream must have atleast one assessment with active model. </span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="n">on_datastream</span><span class="p">(</span><span class="n">datastreamId</span><span class="p">)</span>
+</code></pre><pre class="highlight shell tab-shell"><code>
+</code></pre>
+<p>Live monitoring is associated with the entire datastream. At this point each assessment assciated with the datastream goes into live monitoring.</p>
+
+<p>Every assessment has an &ldquo;active&rdquo; model associated with it.</p>
 
 <aside class="notice">
 Live monitoring can be turned &ldquo;on&rdquo; from the Falkonry Professional UI but you can do the same from any of these development kits.
-</aside>aside>
+</aside>
 
-## Stop live monitoring of datastream
+<h2 id="stop-live-monitoring-of-datastream">Stop live monitoring of datastream</h2>
 
-> To turn live monitoring off for a datastream, use this code:
+<blockquote>
+<p>To turn live monitoring off for a datastream, use this code:</p>
+</blockquote>
+<pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">falkonry_csharp_client</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">falkonry_csharp_client.helper.models</span><span class="p">;</span>
 
-&ldquo;`csharp
-using falkonry_csharp_client;
-using falkonry_csharp_client.helper.models;
+<span class="kt">string</span> <span class="n">token</span><span class="p">=</span><span class="s">"Add your token here"</span><span class="p">;</span>   
+<span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Falkonry</span><span class="p">(</span><span class="s">"http://localhost:8080"</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
+  <span class="kt">string</span> <span class="n">datastream_id</span> <span class="p">=</span> <span class="s">"Your datastream id"</span><span class="p">;</span>
+  <span class="n">falkonry</span><span class="p">.</span><span class="nf">offDatastream</span><span class="p">(</span><span class="n">datastream_id</span><span class="p">);</span>
+</code></pre><pre class="highlight java tab-java"><code>  <span class="kn">import</span> <span class="nn">com.falkonry.client.Falkonry</span><span class="o">;</span>
 
-string token=&quot;Add your token here&rdquo;;   
-Falkonry falkonry = new Falkonry(&ldquo;http://localhost:8080&rdquo;, token);
-  string datastream_id = &ldquo;Your datastream id&rdquo;;
-  falkonry.offDatastream(datastream_id);
-&ldquo;`
+  <span class="n">Falkonry</span> <span class="n">falkonry</span>   <span class="o">=</span> <span class="k">new</span> <span class="n">Falkonry</span><span class="o">(</span><span class="s">"https://sandbox.falkonry.ai"</span><span class="o">,</span> <span class="s">"auth-token"</span><span class="o">);</span>
+  <span class="n">String</span> <span class="n">datastreamId</span> <span class="o">=</span> <span class="s">"hk7cgt56r3yln0"</span><span class="o">;</span>
+  <span class="n">List</span><span class="o">&lt;</span><span class="n">Assessment</span><span class="o">&gt;</span> <span class="n">assessments</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="na">offDatastream</span><span class="o">(</span><span class="n">datastreamId</span><span class="o">);</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">os</span><span class="p">,</span> <span class="n">sys</span>
+<span class="kn">from</span> <span class="nn">falkonryclient</span> <span class="kn">import</span> <span class="n">client</span> <span class="k">as</span> <span class="n">Falkonry</span>
+<span class="kn">from</span> <span class="nn">falkonryclient</span> <span class="kn">import</span> <span class="n">schemas</span> <span class="k">as</span> <span class="n">Schemas</span>
 
+<span class="n">falkonry</span>  <span class="o">=</span> <span class="n">Falkonry</span><span class="p">(</span><span class="s">'https://sandbox.falkonry.ai'</span><span class="p">,</span> <span class="s">'auth-token'</span><span class="p">)</span>
+<span class="n">datastreamId</span> <span class="o">=</span> <span class="s">'id of the datastream'</span>
 
-&rdquo;`java
-  import com.falkonry.client.Falkonry;
-
-  Falkonry falkonry   = new Falkonry(&ldquo;https://sandbox.falkonry.ai&rdquo;, &ldquo;auth-token&rdquo;);
-  String datastreamId = &ldquo;hk7cgt56r3yln0&rdquo;;
-  List<Assessment> assessments = falkonry.offDatastream(datastreamId);
-&ldquo;`
-
-&rdquo;`python
-import os, sys
-from falkonryclient import client as Falkonry
-from falkonryclient import schemas as Schemas
-
-falkonry  = Falkonry(&lsquo;https://sandbox.falkonry.ai&rsquo;, &lsquo;auth-token&rsquo;)
-datastreamId = &lsquo;id of the datastream&rsquo;
-
-# Stops live monitoring of datastream.
-response = falkonry.off_datastream(datastreamId)
-&ldquo;`
-
-&rdquo;`shell
-
-&ldquo;`
-
+<span class="c"># Stops live monitoring of datastream.</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="n">off_datastream</span><span class="p">(</span><span class="n">datastreamId</span><span class="p">)</span>
+</code></pre><pre class="highlight shell tab-shell"><code>
+</code></pre>
 <aside class="notice">
-Live monitoring can be turned &quot;on&rdquo; from the Falkonry Professional UI but you can do the same from any of these development kits.
-</aside>aside>
+Live monitoring can be turned &ldquo;on&rdquo; from the Falkonry Professional UI but you can do the same from any of these development kits.
+</aside>
 
+<h2 id="add-live-input-data-json-to-datastream">Add live input data (json) to datastream</h2>
 
-## Add live input data (json) to datastream
+<blockquote>
+<p>To inject live input data in json format into the datastream, use this code:</p>
+</blockquote>
+<pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">falkonry_csharp_client</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">falkonry_csharp_client.helper.models</span><span class="p">;</span>
 
-> To inject live input data in json format into the datastream, use this code:
+<span class="kt">string</span> <span class="n">token</span><span class="p">=</span><span class="s">"Add your token here"</span><span class="p">;</span>   
+<span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Falkonry</span><span class="p">(</span><span class="s">"http://localhost:8080"</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
 
+<span class="kt">string</span> <span class="n">data</span> <span class="p">=</span> <span class="s">"{\"time\" :\"2016-03-01 01:01:01\", \"current\" : 12.4, \"vibration\" : 3.4, \"state\" : \"On\"}"</span><span class="p">;</span>
 
-&ldquo;`csharp
-using falkonry_csharp_client;
-using falkonry_csharp_client.helper.models;
+<span class="n">SortedDictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;</span> <span class="n">options</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SortedDictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;();</span>
+  <span class="n">options</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"timeIdentifier"</span><span class="p">,</span> <span class="s">"time"</span><span class="p">);</span>
+  <span class="n">options</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"timeFormat"</span><span class="p">,</span> <span class="s">"iso_8601"</span><span class="p">);</span>
+  <span class="n">options</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"fileFormat"</span><span class="p">,</span> <span class="s">"json"</span><span class="p">);</span>
+  <span class="n">options</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"streaming"</span><span class="p">,</span> <span class="s">"true"</span><span class="p">);</span>
+  <span class="n">options</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"hasMoreData"</span><span class="p">,</span> <span class="s">"false"</span><span class="p">);</span>
+  <span class="n">InputStatus</span> <span class="n">inputstatus</span> <span class="p">=</span> <span class="n">falkonry</span><span class="p">.</span><span class="nf">addInput</span><span class="p">(</span><span class="err">'</span><span class="n">datastream</span><span class="p">-</span><span class="n">id</span><span class="err">'</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">options</span><span class="p">);</span>
+</code></pre><pre class="highlight java tab-java"><code><span class="kn">import</span> <span class="nn">com.falkonry.client.Falkonry</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.falkonry.helper.models.Datasource</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.falkonry.helper.models.Datastream</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.falkonry.helper.models.Field</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.falkonry.helper.models.TimeObject</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.falkonry.helper.models.Signal</span><span class="o">;</span>
 
-string token=&quot;Add your token here&rdquo;;   
-Falkonry falkonry = new Falkonry(&ldquo;http://localhost:8080&rdquo;, token);
+  <span class="c1">//instantiate Falkonry</span>
+  <span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Falkonry</span><span class="o">(</span><span class="s">"https://sandbox.falkonry.ai"</span><span class="o">,</span> <span class="s">"auth-token"</span><span class="o">);</span>
+  <span class="c1">//Add data to datastream</span>
+  <span class="n">String</span> <span class="n">data</span> <span class="o">=</span> <span class="s">"{\"time\" : \"2016-03-01 01:01:01\", \"tag\" : \"signal1\", \"value\" : 3.4}"</span> <span class="o">+</span> <span class="s">"\n"</span>
+      <span class="o">+</span> <span class="s">"{\"time\" : \"2016-03-01 01:01:02\", \"tag\" : \"signal2\", \"value\" : 9.3}"</span><span class="o">;</span>
 
-string data = &ldquo;{"time" :"2016-03-01 01:01:01", "current" : 12.4, "vibration" : 3.4, "state" : "On"}&rdquo;;
+  <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">options</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;();</span>
+    <span class="n">options</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"timeIdentifier"</span><span class="o">,</span> <span class="s">"time"</span><span class="o">);</span>
+    <span class="n">options</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"timeFormat"</span><span class="o">,</span> <span class="s">"iso_8601"</span><span class="o">);</span>
+    <span class="n">options</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"fileFormat"</span><span class="o">,</span> <span class="s">"csv"</span><span class="o">);</span>
+    <span class="n">options</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"streaming"</span><span class="o">,</span> <span class="s">"true"</span><span class="o">);</span>
+    <span class="n">options</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"hasMoreData"</span><span class="o">,</span> <span class="s">"false"</span><span class="o">);</span>
+    <span class="n">falkonry</span><span class="o">.</span><span class="na">addInput</span><span class="o">(</span><span class="err">'</span><span class="n">datastream</span><span class="o">-</span><span class="n">Id</span><span class="err">'</span><span class="o">,</span> <span class="n">data</span><span class="o">,</span> <span class="n">options</span><span class="o">);</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">from</span> <span class="nn">falkonryclient</span> <span class="kn">import</span> <span class="n">client</span> <span class="k">as</span> <span class="n">Falkonry</span>
+<span class="kn">from</span> <span class="nn">falkonryclient</span> <span class="kn">import</span> <span class="n">schemas</span> <span class="k">as</span> <span class="n">Schemas</span>
 
-SortedDictionary<string, string> options = new SortedDictionary<string, string>();
-  options.Add(&ldquo;timeIdentifier&rdquo;, &ldquo;time&rdquo;);
-  options.Add(&ldquo;timeFormat&rdquo;, &ldquo;iso_8601&rdquo;);
-  options.Add(&ldquo;fileFormat&rdquo;, &ldquo;json&rdquo;);
-  options.Add(&ldquo;streaming&rdquo;, &ldquo;true&rdquo;);
-  options.Add(&ldquo;hasMoreData&rdquo;, &ldquo;false&rdquo;);
-  InputStatus inputstatus = falkonry.addInput(&lsquo;datastream-id&rsquo;, data, options);
-&ldquo;`
+<span class="c">#instantiate Falkonry</span>
+<span class="n">falkonry</span>   <span class="o">=</span> <span class="n">Falkonry</span><span class="p">(</span><span class="s">'https://sandbox.falkonry.ai'</span><span class="p">,</span> <span class="s">'auth-token'</span><span class="p">)</span>
 
+<span class="n">datastreamId</span> <span class="o">=</span> <span class="s">'id of the datastream'</span>
 
-&rdquo;`java
-import com.falkonry.client.Falkonry;
-import com.falkonry.helper.models.Datasource;
-import com.falkonry.helper.models.Datastream;
-import com.falkonry.helper.models.Field;
-import com.falkonry.helper.models.TimeObject;
-import com.falkonry.helper.models.Signal;
+<span class="c">#add data to Datastream</span>
+<span class="n">String</span> <span class="n">data</span> <span class="o">=</span> <span class="s">"{</span><span class="se">\"</span><span class="s">time</span><span class="se">\"</span><span class="s"> : </span><span class="se">\"</span><span class="s">2016-03-01 01:01:01</span><span class="se">\"</span><span class="s">, </span><span class="se">\"</span><span class="s">tag</span><span class="se">\"</span><span class="s"> : </span><span class="se">\"</span><span class="s">signal1_thing1</span><span class="se">\"</span><span class="s">, </span><span class="se">\"</span><span class="s">value</span><span class="se">\"</span><span class="s"> : 3.4}"</span> <span class="o">+</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span>
+        <span class="o">+</span> <span class="s">"{</span><span class="se">\"</span><span class="s">time</span><span class="se">\"</span><span class="s"> : </span><span class="se">\"</span><span class="s">2016-03-01 01:01:01</span><span class="se">\"</span><span class="s">, </span><span class="se">\"</span><span class="s">tag</span><span class="se">\"</span><span class="s"> : </span><span class="se">\"</span><span class="s">signal2_thing1</span><span class="se">\"</span><span class="s">, </span><span class="se">\"</span><span class="s">value</span><span class="se">\"</span><span class="s"> : 1.4}"</span> <span class="o">+</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span>
+        <span class="o">+</span> <span class="s">"{</span><span class="se">\"</span><span class="s">time</span><span class="se">\"</span><span class="s"> : </span><span class="se">\"</span><span class="s">2016-03-01 01:01:02</span><span class="se">\"</span><span class="s">, </span><span class="se">\"</span><span class="s">tag</span><span class="se">\"</span><span class="s"> : </span><span class="se">\"</span><span class="s">signal1_thing1</span><span class="se">\"</span><span class="s">, </span><span class="se">\"</span><span class="s">value</span><span class="se">\"</span><span class="s"> : 9.3}"</span> <span class="o">+</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span>
+        <span class="o">+</span> <span class="s">"{</span><span class="se">\"</span><span class="s">time</span><span class="se">\"</span><span class="s"> : </span><span class="se">\"</span><span class="s">2016-03-01 01:01:02</span><span class="se">\"</span><span class="s">, </span><span class="se">\"</span><span class="s">tag</span><span class="se">\"</span><span class="s"> : </span><span class="se">\"</span><span class="s">signal2_thing2</span><span class="se">\"</span><span class="s">, </span><span class="se">\"</span><span class="s">value</span><span class="se">\"</span><span class="s"> : 4.3}"</span><span class="p">;</span>
 
-  //instantiate Falkonry
-  Falkonry falkonry = new Falkonry(&ldquo;https://sandbox.falkonry.ai&rdquo;, &ldquo;auth-token&rdquo;);
-  //Add data to datastream
-  String data = &ldquo;{"time" : "2016-03-01 01:01:01", "tag" : "signal1", "value" : 3.4}&rdquo; + &ldquo;\n&rdquo;
-      + &ldquo;{"time" : "2016-03-01 01:01:02", "tag" : "signal2", "value" : 9.3}&rdquo;;
-
-  Map<String, String> options = new HashMap<String, String>();
-    options.put(&ldquo;timeIdentifier&rdquo;, &ldquo;time&rdquo;);
-    options.put(&ldquo;timeFormat&rdquo;, &ldquo;iso_8601&rdquo;);
-    options.put(&ldquo;fileFormat&rdquo;, &ldquo;csv&rdquo;);
-    options.put(&ldquo;streaming&rdquo;, &ldquo;true&rdquo;);
-    options.put(&ldquo;hasMoreData&rdquo;, &ldquo;false&rdquo;);
-    falkonry.addInput(&lsquo;datastream-Id&rsquo;, data, options);
-&ldquo;`
-
-&rdquo;`python
-from falkonryclient import client as Falkonry
-from falkonryclient import schemas as Schemas
-
-#instantiate Falkonry
-falkonry   = Falkonry(&lsquo;https://sandbox.falkonry.ai&rsquo;, &lsquo;auth-token&rsquo;)
-
-datastreamId = &lsquo;id of the datastream&rsquo;
-
-#add data to Datastream
-String data = &ldquo;{"time" : "2016-03-01 01:01:01", "tag" : "signal1_thing1", "value" : 3.4}&rdquo; + &ldquo;\n&rdquo;
-        + &ldquo;{"time" : "2016-03-01 01:01:01", "tag" : "signal2_thing1", "value" : 1.4}&rdquo; + &ldquo;\n&rdquo;
-        + &ldquo;{"time" : "2016-03-01 01:01:02", "tag" : "signal1_thing1", "value" : 9.3}&rdquo; + &ldquo;\n&rdquo;
-        + &ldquo;{"time" : "2016-03-01 01:01:02", "tag" : "signal2_thing2", "value" : 4.3}&rdquo;;
-        
-options = {&lsquo;streaming&rsquo;: True}   
-inputResponse = falkonry.add_input_data(datastreamId, &lsquo;json&rsquo;, options, data)
-&ldquo;`
-
-&rdquo;`shell
-
-&ldquo;`
-When in live monitoring, the assessment is being computed based on live data that is streaming in, but based on the model that was built using historical data.
+<span class="n">options</span> <span class="o">=</span> <span class="p">{</span><span class="s">'streaming'</span><span class="p">:</span> <span class="bp">True</span><span class="p">}</span>   
+<span class="n">inputResponse</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="n">add_input_data</span><span class="p">(</span><span class="n">datastreamId</span><span class="p">,</span> <span class="s">'json'</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+</code></pre><pre class="highlight shell tab-shell"><code>
+</code></pre>
+<p>When in live monitoring, the assessment is being computed based on live data that is streaming in, but based on the model that was built using historical data.</p>
 
 <aside class="warning">
-When working from within the Falkonry Professional UI, make sure &quot;Accepting Data&rdquo; in turned on before starting &ldquo;Live Monitoring&rdquo;
+When working from within the Falkonry Professional UI, make sure &ldquo;Accepting Data&rdquo; in turned on before starting &ldquo;Live Monitoring&rdquo;
 </aside>
 
 <h2 id="add-live-data-csv-to-datastream">Add live data (csv) to datastream</h2>

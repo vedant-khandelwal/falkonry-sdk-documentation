@@ -1806,19 +1806,26 @@ Facts are associated with assessments.
 
 Facts can be added from inspection logs, failure reports, user/ expert observations, event frames within a historian, etc 
 
-## Add facts data (json) to Assessment
+## Add facts data (json format) to Assessment of single entity datastream
 
 > To add more facts to your assessment, use this code:
 
 ```csharp
-using falkonry_csharp_client;
-using falkonry_csharp_client.helper.models;
+    using falkonry_csharp_client;
+    using falkonry_csharp_client.helper.models;
 
-string token = "Add your token here";   
-SortedDictionary<string, string> options = new SortedDictionary<string, string>();
-Falkonry falkonry = new Falkonry("http://localhost:8080", token);
-String data = "{\"time\" : \"2011-03-26T12:00:00Z\", \"entities\" : \"entity1\", \"end\" : \"2012-06-01T00:00:00Z\", \"Health\" : \"Normal\"}";
-string response = falkonry.addFacts('assessment-id',data, options);
+    SortedDictionary<string, string> options = new SortedDictionary<string, string>();
+    options.Add("startTimeIdentifier", "time");
+    options.Add("endTimeIdentifier", "end");
+    options.Add("timeFormat", "iso_8601");
+    options.Add("timeZone", "GMT");
+    options.Add("valueIdentifier", "Health");
+
+    string token = "Add your token here";   
+    SortedDictionary<string, string> options = new SortedDictionary<string, string>();
+    Falkonry falkonry = new Falkonry("http://localhost:8080", token);
+    String data = "{\"time\" : \"2011-03-26T12:00:00Z\", \"end\" : \"2012-06-01T00:00:00Z\", \"Health\" : \"Normal\"}";
+    string response = falkonry.addFacts('assessment-id',data, options);
 ```
 
 
@@ -1826,8 +1833,13 @@ string response = falkonry.addFacts('assessment-id',data, options);
   import com.falkonry.client.Falkonry;
 
   Falkonry falkonry = new Falkonry("https://sandbox.falkonry.ai", "auth-token");
-
-  String data = "{\"time\" : \"2011-03-26T12:00:00Z\", \"entities\" : \"entity1\", \"end\" : \"2012-06-01T00:00:00Z\", \"Health\" : \"Normal\"}";
+  Map<String, String> options = new HashMap<String, String>();
+  options.put("startTimeIdentifier", "time");
+  options.put("endTimeIdentifier", "end");
+  options.put("timeFormat", "iso_8601");
+  options.put("timeZone", "GMT");
+  options.put("valueIdentifier", "Health"); 
+  String data = "{\"time\" : \"2011-03-26T12:00:00.000Z\", \"end\" : \"2012-06-01T00:00:00.000Z\", \"Health\" : \"Normal\"}";
   String response = falkonry.addfacts(assessment.getId(),data, options);
 ```
 
@@ -1836,10 +1848,18 @@ from falkonryclient import client as Falkonry
 from falkonryclient import schemas as Schemas
 
 #instantiate Falkonry
-falkonry      = Falkonry('https://sandbox.falkonry.ai', 'auth-token')
-assessmentId = 'id of the datastream'
-data          = '{"time" : "2011-03-26T12:00:00Z", "car" : "HI3821", "end" : "2012-06-01T00:00:00Z", "Health" : "Normal"}'
-inputResponse = falkonry.add_verification(assessmentId, 'json', {}, data)
+falkonry      = Falkonry('http://localhost:8080', 'auth-token')
+assessmentId = 'id of the assessment'
+data          = '{"time" : "2011-03-26T12:00:00.000Z", "end" : "2012-06-01T00:00:00.000Z", "Health" : "Normal"}'
+
+options = {
+        'startTimeIdentifier': "time",
+        'endTimeIdentifier': "end",
+        'timeFormat': "iso_8601",
+        'timeZone': time.get_zone(),
+        'valueIdentifier': "Health"
+    }
+inputResponse = falkonry.add_facts(assessmentId, 'json', options, data)
 ```
 
 ```shell
@@ -1865,27 +1885,100 @@ inputResponse = falkonry.add_verification(assessmentId, 'json', {}, data)
 }
 ```
 
-## Add facts data (csv) to Assessment
 
-> To add facts from a csv file, use this code:
+## Add facts data (json format) with addition tag to Assessment of multi entity datastream
 
 ```csharp
-using falkonry_csharp_client;
-using falkonry_csharp_client.helper.models;
+    using falkonry_csharp_client;
+    using falkonry_csharp_client.helper.models;
 
-string token = "Add your token here";   
-SortedDictionary<string, string> options = new SortedDictionary<string, string>();
-Falkonry falkonry = new Falkonry("http://localhost:8080", token);
-string data = "time,end,car,Health\n2011-03-31T00:00:00Z,2011-04-01T00:00:00Z,IL9753,Normal\n2011-03-31T00:00:00Z,2011-04-01T00:00:00Z,HI3821,Normal";
-string response = falkonry.addFacts('assessment-id',data, options);
+    SortedDictionary<string, string> options = new SortedDictionary<string, string>();
+    options.Add("startTimeIdentifier", "time");
+    options.Add("endTimeIdentifier", "end");
+    options.Add("timeFormat", "iso_8601");
+    options.Add("timeZone", "GMT");
+    options.Add("entityIdentifier", "entities");
+    options.Add("valueIdentifier", "Health");
+    options.Add("additionalTag", "testTag");
+
+    string token = "Add your token here";   
+    SortedDictionary<string, string> options = new SortedDictionary<string, string>();
+    Falkonry falkonry = new Falkonry("http://localhost:8080", token);
+    String data = "{\"time\" : \"2011-03-26T12:00:00Z\", \"entities\" : \"entity1\", \"end\" : \"2012-06-01T00:00:00Z\", \"Health\" : \"Normal\"}";
+    string response = falkonry.addFacts('assessment-id',data, options);
 ```
 
 ```java
   import com.falkonry.client.Falkonry;
 
   Falkonry falkonry = new Falkonry("https://sandbox.falkonry.ai", "auth-token");
+  Map<String, String> options = new HashMap<String, String>();
+  options.put("startTimeIdentifier", "time");
+  options.put("endTimeIdentifier", "end");
+  options.put("timeFormat", "iso_8601");
+  options.put("timeZone", "GMT");
+  options.put("valueIdentifier", "Health"); 
+  options.put("entityIdentifier", "entities");
+  options.put("additionalTag", "testTag");
 
-  String data = "time,end,car,Health\n2011-03-31T00:00:00Z,2011-04-01T00:00:00Z,IL9753,Normal\n2011-03-31T00:00:00Z,2011-04-01T00:00:00Z,HI3821,Normal";
+  String data = "{\"time\" : \"2011-03-26T12:00:00.000Z\", \"entities\" : \"entity1\", \"end\" : \"2012-06-01T00:00:00.000Z\", \"Health\" : \"Normal\"}";
+  String response = falkonry.addfacts(assessment.getId(),data, options);
+```
+
+```python
+from falkonryclient import client as Falkonry
+from falkonryclient import schemas as Schemas
+
+#instantiate Falkonry
+falkonry      = Falkonry('http://localhost:8080', 'auth-token')
+assessmentId = 'id of the assessment'
+data          = '{"time" : "2011-03-26T12:00:00.000Z", "end" : "2012-06-01T00:00:00.000Z", "entities": "entity1", "Health" : "Normal"}'
+
+options = {
+        'startTimeIdentifier': "time",
+        'endTimeIdentifier': "end",
+        'timeFormat': "iso_8601",
+        'timeZone': time.get_zone(),
+        'valueIdentifier': "Health",
+        'entityIdentifier': 'entities',
+        'additionalTag': 'testTag'
+    }
+inputResponse = falkonry.add_facts(assessmentId, 'json', options, data)
+```
+
+
+## Add facts data (csv format) to Assessment of single entity datastream
+
+```csharp
+    using falkonry_csharp_client;
+    using falkonry_csharp_client.helper.models;
+
+    SortedDictionary<string, string> options = new SortedDictionary<string, string>();
+    options.Add("startTimeIdentifier", "time");
+    options.Add("endTimeIdentifier", "end");
+    options.Add("timeFormat", "iso_8601");
+    options.Add("timeZone", "GMT");
+    options.Add("valueIdentifier", "Health");
+
+    string token = "Add your token here";   
+    SortedDictionary<string, string> options = new SortedDictionary<string, string>();
+    Falkonry falkonry = new Falkonry("http://localhost:8080", token);
+    string data = "time,end,Health\n2011-03-31T00:00:00Z,2011-04-01T00:00:00Z,Normal\n2011-03-31T00:00:00Z,2011-04-01T00:00:00Z,Normal";
+    string response = falkonry.addFacts('assessment-id',data, options);
+
+```
+
+```java
+  import com.falkonry.client.Falkonry;
+
+  Falkonry falkonry = new Falkonry("http://localhost:8080", "auth-token");
+  Map<String, String> options = new HashMap<String, String>();
+  options.put("startTimeIdentifier", "time");
+  options.put("endTimeIdentifier", "end");
+  options.put("timeFormat", "iso_8601");
+  options.put("timeZone", "GMT");
+  options.put("valueIdentifier", "Health");
+  String data = "time,end,Health\n2011-03-31T00:00:00.000Z,2011-04-01T00:00:00.000Z,Normal\n2011-03-31T00:00:00.000Z,2011-04-01T00:00:00.000Z,Normal";
   String response = falkonry.addFacts(assessment.getId(),data, options);
 ```
 
@@ -1894,18 +1987,97 @@ from falkonryclient import client as Falkonry
 from falkonryclient import schemas as Schemas
 
 #instantiate Falkonry
-falkonry      = Falkonry('https://sandbox.falkonry.ai', 'auth-token')
-assessmentId = 'id of the datastream'
-data          = 'time,car,end,Health' + "\n"
-                 + '2011-03-26T12:00:00Z,HI3821,2012-06-01T00:00:00Z,Normal' + "\n"
-                 + '2014-02-10T23:00:00Z,HI3821,2014-03-20T12:00:00Z,Spalling';
+falkonry      = Falkonry('http://localhost:8080', 'auth-token')
+assessmentId = 'id of the assessment'
+data          = 'time,end,Health' + "\n"
+                 + '2011-03-26T12:00:00.000Z,2012-06-01T00:00:00.000Z,Normal' + "\n"
+                 + '2014-02-10T23:00:00.000Z,2014-03-20T12:00:00.000Z,Spalling';
 
-inputResponse = falkonry.add_facts(assessmentId, 'csv', {}, data)
+options = {
+        'startTimeIdentifier': "time",
+        'endTimeIdentifier': "end",
+        'timeFormat': "iso_8601",
+        'timeZone': time.get_zone(),
+        'valueIdentifier': "Health"
+    }
+
+inputResponse = falkonry.add_facts(assessmentId, 'csv', options, data)
 ```
 
 ```shell
 
 ```
+
+
+## Add facts data (csv format) with tags Assessment of multi entity datastream
+
+```csharp
+    using falkonry_csharp_client;
+    using falkonry_csharp_client.helper.models;
+
+    SortedDictionary<string, string> options = new SortedDictionary<string, string>();
+    options.Add("startTimeIdentifier", "time");
+    options.Add("endTimeIdentifier", "end");
+    options.Add("timeFormat", "iso_8601");
+    options.Add("timeZone", "GMT");
+    options.Add("entityIdentifier", "car");
+    options.Add("valueIdentifier", "Health");
+    options.Add("tagIdentifier", "Tag");
+
+    string token = "Add your token here";   
+    SortedDictionary<string, string> options = new SortedDictionary<string, string>();
+    Falkonry falkonry = new Falkonry("http://localhost:8080", token);
+    string data = "time,end,car,Health,Tag\n2011-03-31T00:00:00Z,2011-04-01T00:00:00Z,IL9753,Normal\n2011-03-31T00:00:00Z,2011-04-01T00:00:00Z,HI3821,Normal,testTag1";
+    string response = falkonry.addFacts('assessment-id',data, options);
+
+```
+
+```java
+  import com.falkonry.client.Falkonry;
+
+  Falkonry falkonry = new Falkonry("http://localhost:8080", "auth-token");
+  Map<String, String> options = new HashMap<String, String>();
+  options.put("startTimeIdentifier", "time");
+  options.put("endTimeIdentifier", "end");
+  options.put("timeFormat", "iso_8601");
+  options.put("timeZone", "GMT");
+  options.put("entityIdentifier", "car");
+  options.put("valueIdentifier", "Health");
+  options.put("tagIdentifier", "Tag");
+
+  String data = "time,end,car,Health,Tag\n2011-03-31T00:00:00.000Z,2011-04-01T00:00:00.000Z,IL9753,Normal,testTag1\n2011-03-31T00:00:00.000Z,2011-04-01T00:00:00.000Z,HI3821,Normal,testTag2";
+  String response = falkonry.addFacts(assessment.getId(),data, options);
+```
+
+```python
+from falkonryclient import client as Falkonry
+from falkonryclient import schemas as Schemas
+
+#instantiate Falkonry
+falkonry      = Falkonry('http://localhost:8080', 'auth-token')
+assessmentId = 'id of the assessment'
+data          = 'time,car,end,Health,Tag' + "\n"
+                 + '2011-03-26T12:00:00.000Z,HI3821,2012-06-01T00:00:00.000Z,Normal,testTag1' + "\n"
+                 + '2014-02-10T23:00:00.000Z,HI3821,2014-03-20T12:00:00.000Z,Spalling,testTag2';
+
+options = {
+        'startTimeIdentifier': "time",
+        'endTimeIdentifier': "end",
+        'timeFormat': "iso_8601",
+        'timeZone': time.get_zone(),
+        'entityIdentifier': "car",
+        'valueIdentifier': "Health",
+        'tagIdentifier': 'Tag'
+    }
+
+inputResponse = falkonry.add_facts(assessmentId, 'csv', options, data)
+```
+
+```shell
+
+```
+
+
 > The above command returns JSON structured like this:
 
 ```json
@@ -1932,44 +2104,75 @@ Use this to inject csv format facts into an assessment.
 
 <aside class="notice">
 Adding more facts (ground truths) helps improve model accuracy and hence the usefulness of an assessment.
-</aside>aside>
+</aside>
 
-## Add facts data (json) from a stream to Assessment
+## Add facts data (json format) from a stream to Assessment of multi entity datastream
+
+Sample JSONFile:
+```
+{"time" : "2011-03-26T12:00:00.000Z", "car" : "HI3821", "end" : "2012-06-01T00:00:00.000Z", "Health" : "Normal"}
+{"time" : "2014-02-10T23:00:00.000Z", "car" : "HI3821", "end" : "2014-03-20T12:00:00.000Z", "Health" : "Spalling"}
+```
+
 
 > To add facts in json format from an input stream, use this code:
 
 ```csharp
-using falkonry_csharp_client;
-using falkonry_csharp_client.helper.models;
+    using falkonry_csharp_client;
+    using falkonry_csharp_client.helper.models;
 
-string token="Add your token here";   
-Falkonry falkonry = new Falkonry("http://localhost:8080", token);
-string path = "Insert the path to your file here";
-byte[] bytes = System.IO.File.ReadAllBytes(path);
-string response = falkonry.AddFactsStream('assessment-id',bytes, options);
+    SortedDictionary<string, string> options = new SortedDictionary<string, string>();
+    options.Add("startTimeIdentifier", "time");
+    options.Add("endTimeIdentifier", "end");
+    options.Add("timeFormat", "iso_8601");
+    options.Add("timeZone", "GMT");
+    options.Add("entityIdentifier", "car");
+    options.Add("valueIdentifier", "Health");
+
+    string token="Add your token here";   
+    Falkonry falkonry = new Falkonry("http://localhost:8080", token);
+    string path = "Insert the path to your file here";
+    byte[] bytes = System.IO.File.ReadAllBytes(path);
+    string response = falkonry.AddFactsStream('assessment-id',bytes, options);
 ```
 
 
 ```java
-  import com.falkonry.client.Falkonry;
-  import org.apache.commons.io.FileUtils;
+    import com.falkonry.client.Falkonry;
+    import org.apache.commons.io.FileUtils;
 
-  Falkonry falkonry   = new Falkonry("https://sandbox.falkonry.ai", "auth-token");
-  File file = new File("res/factsData.json");      
-  ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(FileUtils.readFileToByteArray(file));
-  String response = falkonry.addFactsStream(assessment.getId(),byteArrayInputStream, options);
+    Falkonry falkonry   = new Falkonry("http://localhost:8080", "auth-token");
+    File file = new File("res/factsData.json"); 
+    Map<String, String> options = new HashMap<String, String>();
+    options.put("startTimeIdentifier", "time");
+    options.put("endTimeIdentifier", "end");
+    options.put("timeFormat", "iso_8601");
+    options.put("timeZone", "GMT");
+    options.put("entityIdentifier", "car");
+    options.put("valueIdentifier", "Health");       
+    ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(FileUtils.readFileToByteArray(file));
+    String response = falkonry.addFactsStream(assessment.getId(),byteArrayInputStream, options)
 ```
 
 ```python
-import os, sys
-from falkonryclient import client as Falkonry
-from falkonryclient import schemas as Schemas
+    import os, sys
+    from falkonryclient import client as Falkonry
+    from falkonryclient import schemas as Schemas
 
-falkonry = Falkonry('https://sandbox.falkonry.ai', 'auth-token')
-assessmentId = 'id of the datastream'
-stream   = io.open('./data.json')
+    falkonry = Falkonry('http://localhost:8080', 'auth-token')
+    assessmentId = 'id of the assessment'
+    stream   = io.open('./factsData.json')
 
-response = falkonry.add_facts_stream(assessmentId, 'json', {}, stream)
+    options = {
+            'startTimeIdentifier': "time",
+            'endTimeIdentifier': "end",
+            'timeFormat': "iso_8601",
+            'timeZone': time.get_zone(),
+            'entityIdentifier': "car",
+            'valueIdentifier': "Health"
+        }
+
+    response = falkonry.add_facts_stream(assessmentId, 'json', options, stream)
 ```
 
 ```shell
@@ -1999,15 +2202,23 @@ If facts are created from another application, they are often exported in json f
 
 <aside class="notice">
 Adding more facts (ground truths) helps improve model accuracy and hence the usefulness of an assessment.
-</aside>aside>
+</aside>
 
-## Add facts data (csv) from a stream to Assessment
+## Add facts data (csv format) from a stream to Assessment of multi entity datastream
 
 > To add facts in csv format from an input stream, use this code:
 
 ```csharp
 using falkonry_csharp_client;
 using falkonry_csharp_client.helper.models;
+
+SortedDictionary<string, string> options = new SortedDictionary<string, string>();
+options.Add("startTimeIdentifier", "time");
+options.Add("endTimeIdentifier", "end");
+options.Add("timeFormat", "iso_8601");
+options.Add("timeZone", "GMT");
+options.Add("entityIdentifier", "car");
+options.Add("valueIdentifier", "Health");
 
 string token="Add your token here";   
 Falkonry falkonry = new Falkonry("http://localhost:8080", token);
@@ -2021,8 +2232,15 @@ string response = falkonry.AddFactsStream('assessment-id',bytes, options);
   import com.falkonry.client.Falkonry;
   import org.apache.commons.io.FileUtils;
 
-  Falkonry falkonry   = new Falkonry("https://sandbox.falkonry.ai", "auth-token");
-  File file = new File("res/factsData.csv");      
+  Falkonry falkonry   = new Falkonry("http://localhost:8080", "auth-token");
+  File file = new File("res/factsData.csv"); 
+  Map<String, String> options = new HashMap<String, String>();
+  options.put("startTimeIdentifier", "time");
+  options.put("endTimeIdentifier", "end");
+  options.put("timeFormat", "iso_8601");
+  options.put("timeZone", "GMT");
+  options.put("entityIdentifier", "entity");
+  options.put("valueIdentifier", "Health");     
   ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(FileUtils.readFileToByteArray(file));
   String response = falkonry.addFactsStream(assessment.getId(),byteArrayInputStream, options);
 ```
@@ -2031,12 +2249,23 @@ string response = falkonry.AddFactsStream('assessment-id',bytes, options);
 import os, sys
 from falkonryclient import client as Falkonry
 from falkonryclient import schemas as Schemas
+from falkonryclient import schemas as Schemas
 
-falkonry = Falkonry('https://sandbox.falkonry.ai', 'auth-token')
-assessmentId = 'id of the datastream'
-stream   = io.open('./data.csv')
+falkonry = Falkonry('http://localhost:8080', 'auth-token')
+assessmentId = 'id of the assessment'
+stream   = io.open('./factsData.csv')
 
-response = falkonry.add_facts_stream(assessmentId, 'csv', {}, stream)
+options = {
+        'startTimeIdentifier': "time",
+        'endTimeIdentifier': "end",
+        'timeFormat': "iso_8601",
+        'timeZone': time.get_zone(),
+        'entityIdentifier': "car",
+        'valueIdentifier': "Health"
+    }
+
+response = falkonry.add_facts_stream(assessmentId, 'csv', options, stream)
+
 ```
 
 ```shell
@@ -2069,7 +2298,7 @@ Use this to inject csv format facts into an assessment.
 
 <aside class="notice">
 Adding more facts (ground truths) helps improve model accuracy and hence the usefulness of an assessment.
-</aside>aside>
+</aside>
 
 
 # Live Monitoring
@@ -2123,7 +2352,7 @@ Every assessment has an "active" model associated with it.
 
 <aside class="notice">
 Live monitoring can be turned "on" from the Falkonry Professional UI but you can do the same from any of these development kits.
-</aside>aside>
+</aside>
 
 ## Stop live monitoring of datastream
 
@@ -2166,7 +2395,7 @@ response = falkonry.off_datastream(datastreamId)
 
 <aside class="notice">
 Live monitoring can be turned "on" from the Falkonry Professional UI but you can do the same from any of these development kits.
-</aside>aside>
+</aside>
 
 
 ## Add live input data (json) to datastream
