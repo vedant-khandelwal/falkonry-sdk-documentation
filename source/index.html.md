@@ -2713,25 +2713,28 @@ using falkonry_csharp_client.helper.models;
 
 string token="Add your token here";   
 Falkonry falkonry = new Falkonry("http://localhost:8080", token);
-
+	
 string assessment_id ="assessment ID here";
-System.IO.Stream streamrecieved = falkonry.getOutput(assessment_id, null, null);
-//The folder path below by default is debug in bin.
-string folder_path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-//Alternatively, you can also specify the path of the folder in thr folder_path variable
-//The outflow will get saved in an outflow.txt file there
-string path = folder_path + "/outflow.txt";
 
-System.IO.StreamReader streamreader = new System.IO.StreamReader(streamrecieved);
-System.IO.StreamWriter streamwriter = new System.IO.StreamWriter(path);
-  string line;
-    using (streamwriter)
-    {
-        while ((line = streamreader.ReadLine()) != null)
-        {
-            streamwriter.WriteLine(line);
-        }
-    }
+//On successfull live streaming output EventSource_Message will be triggered
+private void EventSource_Message(object sender, EventSource.ServerSentEventArgs e)
+  {
+      try { var falkonryEvent = JsonConvert.DeserializeObject<FalkonryEvent>(e.Data); }
+      catch(System.Exception exception) 
+      { //log error in case of error parsing the output event }
+          
+  }
+
+//On any error while getting live streaming output, EventSource_Error will be triggered
+  private void EventSource_Error(object sender, EventSource.ServerSentErrorEventArgs e)
+  { // Error handling }
+
+EventSource eventSource = falkonry.GetOutput(assessment,null,null);
+eventSource.Message += EventSource_Message;
+  eventSource.Error += EventSource_Error;
+
+// NOTE: To stop listening to output
+eventSource.Dispose();
 ```
 
 

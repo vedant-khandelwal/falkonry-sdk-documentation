@@ -2641,23 +2641,26 @@ When working from within the Falkonry Professional UI, make sure &ldquo;Acceptin
 <span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Falkonry</span><span class="p">(</span><span class="s">"http://localhost:8080"</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
 
 <span class="kt">string</span> <span class="n">assessment_id</span> <span class="p">=</span><span class="s">"assessment ID here"</span><span class="p">;</span>
-<span class="n">System</span><span class="p">.</span><span class="n">IO</span><span class="p">.</span><span class="n">Stream</span> <span class="n">streamrecieved</span> <span class="p">=</span> <span class="n">falkonry</span><span class="p">.</span><span class="nf">getOutput</span><span class="p">(</span><span class="n">assessment_id</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="k">null</span><span class="p">);</span>
-<span class="c1">//The folder path below by default is debug in bin.</span>
-<span class="kt">string</span> <span class="n">folder_path</span> <span class="p">=</span> <span class="n">System</span><span class="p">.</span><span class="n">IO</span><span class="p">.</span><span class="n">Path</span><span class="p">.</span><span class="nf">GetDirectoryName</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="n">Reflection</span><span class="p">.</span><span class="n">Assembly</span><span class="p">.</span><span class="nf">GetExecutingAssembly</span><span class="p">().</span><span class="n">Location</span><span class="p">);</span>
-<span class="c1">//Alternatively, you can also specify the path of the folder in thr folder_path variable</span>
-<span class="c1">//The outflow will get saved in an outflow.txt file there</span>
-<span class="kt">string</span> <span class="n">path</span> <span class="p">=</span> <span class="n">folder_path</span> <span class="p">+</span> <span class="s">"/outflow.txt"</span><span class="p">;</span>
 
-<span class="n">System</span><span class="p">.</span><span class="n">IO</span><span class="p">.</span><span class="n">StreamReader</span> <span class="n">streamreader</span> <span class="p">=</span> <span class="k">new</span> <span class="n">System</span><span class="p">.</span><span class="n">IO</span><span class="p">.</span><span class="nf">StreamReader</span><span class="p">(</span><span class="n">streamrecieved</span><span class="p">);</span>
-<span class="n">System</span><span class="p">.</span><span class="n">IO</span><span class="p">.</span><span class="n">StreamWriter</span> <span class="n">streamwriter</span> <span class="p">=</span> <span class="k">new</span> <span class="n">System</span><span class="p">.</span><span class="n">IO</span><span class="p">.</span><span class="nf">StreamWriter</span><span class="p">(</span><span class="n">path</span><span class="p">);</span>
-  <span class="kt">string</span> <span class="n">line</span><span class="p">;</span>
-    <span class="k">using</span> <span class="p">(</span><span class="n">streamwriter</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="k">while</span> <span class="p">((</span><span class="n">line</span> <span class="p">=</span> <span class="n">streamreader</span><span class="p">.</span><span class="nf">ReadLine</span><span class="p">())</span> <span class="p">!=</span> <span class="k">null</span><span class="p">)</span>
-        <span class="p">{</span>
-            <span class="n">streamwriter</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="n">line</span><span class="p">);</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+<span class="c1">//On successfull live streaming output EventSource_Message will be triggered</span>
+<span class="k">private</span> <span class="k">void</span> <span class="nf">EventSource_Message</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">EventSource</span><span class="p">.</span><span class="n">ServerSentEventArgs</span> <span class="n">e</span><span class="p">)</span>
+  <span class="p">{</span>
+      <span class="k">try</span> <span class="p">{</span> <span class="kt">var</span> <span class="n">falkonryEvent</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="n">DeserializeObject</span><span class="p">&lt;</span><span class="n">FalkonryEvent</span><span class="p">&gt;(</span><span class="n">e</span><span class="p">.</span><span class="n">Data</span><span class="p">);</span> <span class="p">}</span>
+      <span class="k">catch</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="n">Exception</span> <span class="n">exception</span><span class="p">)</span> 
+      <span class="p">{</span> <span class="c1">//log error in case of error parsing the output event }</span>
+
+  <span class="p">}</span>
+
+<span class="c1">//On any error while getting live streaming output, EventSource_Error will be triggered</span>
+  <span class="k">private</span> <span class="k">void</span> <span class="nf">EventSource_Error</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">EventSource</span><span class="p">.</span><span class="n">ServerSentErrorEventArgs</span> <span class="n">e</span><span class="p">)</span>
+  <span class="p">{</span> <span class="c1">// Error handling }</span>
+
+<span class="n">EventSource</span> <span class="n">eventSource</span> <span class="p">=</span> <span class="n">falkonry</span><span class="p">.</span><span class="nf">GetOutput</span><span class="p">(</span><span class="n">assessment</span><span class="p">,</span><span class="k">null</span><span class="p">,</span><span class="k">null</span><span class="p">);</span>
+<span class="n">eventSource</span><span class="p">.</span><span class="n">Message</span> <span class="p">+=</span> <span class="n">EventSource_Message</span><span class="p">;</span>
+  <span class="n">eventSource</span><span class="p">.</span><span class="n">Error</span> <span class="p">+=</span> <span class="n">EventSource_Error</span><span class="p">;</span>
+
+<span class="c1">// NOTE: To stop listening to output</span>
+<span class="n">eventSource</span><span class="p">.</span><span class="nf">Dispose</span><span class="p">();</span>
 </code></pre><pre class="highlight java tab-java"><code><span class="kn">import</span> <span class="nn">com.falkonry.client.Falkonry</span><span class="o">;</span>
 
   <span class="n">Falkonry</span> <span class="n">falkonry</span>   <span class="o">=</span> <span class="k">new</span> <span class="n">Falkonry</span><span class="o">(</span><span class="s">"https://sandbox.falkonry.ai"</span><span class="o">,</span> <span class="s">"auth-token"</span><span class="o">);</span>
