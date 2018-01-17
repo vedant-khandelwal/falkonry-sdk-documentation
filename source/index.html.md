@@ -1299,13 +1299,6 @@ Usage:
 ```
 
 ```python
-Data :
-
-    {"time": 1467729675010,"batchId": "batch_1","signal": "signal1","value": 9.95}
-    {"time": 1467729675020,"batchId": "batch_1","signal": "signal1","value": 4.45}
-    {"time": 1467729675030,"batchId": "batch_2","signal": "signal1","value": 1.45}
-    {"time": 1467729675040,"batchId": "batch_2","signal": "signal1","value": 8.45}
-    {"time": 1467729675050,"batchId": "batch_2","signal": "signal1","value": 2.45}
 Usage :
 
 from falkonryclient import client as Falkonry
@@ -1337,16 +1330,21 @@ inputResponse = falkonry.add_input_data(datastreamId, 'json', options, data)
 ```
 
 ```shell
-
+Usage:
+falkonry>> datastream_add_historical_data --path=/Users/user/InputNarrowBatchSingleEntity.json --timeIdentifier="time" --timeFormat="Unix Time Milliseconds" --timeZone="GMT" --signalIdentifier="signal" --batchIdentifier="batchId" --valueIdentifier="value"
+Default datastream set : wlybjb4tq776n9 Name : Narrow Single Entity Batch Test DS
+{u'status': u'PENDING', u'datastream': u'wlybjb4tq776n9', u'__$createTime': 1516013313895, u'__$id': u'kpgly6d2tg9v27b6', u'user': u'e6q8ienqs9celz', u'action': u'ADD_DATA_DATASTREAM', u'__$tenant': u'iqn80x6e2ku9id', u'dataSource': u'y8ibr9co7hqkkd'}
+falkonry>>
 ```
 
 > Input data could be of the following format:
 
 ```json
-  {"time" :"2016-03-01 01:01:01", "tag" : "signal1_thing1", "value" : 3.4}
-  {"time" :"2016-03-01 01:01:01", "tag" : "signal2_thing1", "value" : 1.4}
-  {"time" :"2016-03-01 01:01:02", "tag" : "signal1_thing2", "value" : 9.3}
-  {"time" :"2016-03-01 01:01:02", "tag" : "signal2_thing2", "value" : 4.3}
+{"time": 1467729675010,"batchId": "batch_1","signal": "signal1","value": 9.95}
+{"time": 1467729675020,"batchId": "batch_1","signal": "signal1","value": 4.45}
+{"time": 1467729675030,"batchId": "batch_2","signal": "signal1","value": 1.45}
+{"time": 1467729675040,"batchId": "batch_2","signal": "signal1","value": 8.45}
+{"time": 1467729675050,"batchId": "batch_2","signal": "signal1","value": 2.45}
 ```
 
 json data from a historian or time series data store can be imported into a Falkonry datastream
@@ -1366,11 +1364,34 @@ json data from a historian or time series data store can be imported into a Falk
 ```
 
 ```shell
+Sample data:
 
+time,batchId,unit,signal,value
+1467729675010,batch_1,unit1,signal1,9.95
+1467729675020,batch_1,unit1,signal1,4.45
+1467729675030,batch_2,unit1,signal1,1.45
+1467729675040,batch_2,unit1,signal1,8.45
+1467729675050,batch_2,unit1,signal1,2.45
+1467729675010,batch_1,unit1,signal2,19.95
+1467729675020,batch_1,unit1,signal2,14.45
+1467729675030,batch_2,unit1,signal2,10.45
+1467729675040,batch_2,unit1,signal2,18.45
+1467729675050,batch_2,unit1,signal2,12.45
+1467729675010,batch_1,unit1,signal3,39.95
+1467729675020,batch_1,unit1,signal3,34.45
+1467729675030,batch_2,unit1,signal3,30.45
+1467729675040,batch_2,unit1,signal3,38.45
+1467729675050,batch_2,unit1,signal3,32.45
+
+Usage:
+falkonry>> datastream_add_historical_data --path=/Users/user/InputNarrowBatchMultiEntity.csv --timeIdentifier="time" --timeFormat="Unix Time Milliseconds" --timeZone="GMT" --entityIdentifier="unit" --signalIdentifier="signal" --batchIdentifier="batchId" --valueIdentifier="value"
+Default datastream set : hn6cq2lpcwg49c Name : Narrow Multiple Entity Batch Test DS
+{u'status': u'PENDING', u'datastream': u'hn6cq2lpcwg49c', u'__$createTime': 1516013971506, u'__$id': u'4hqpj9hw2vmcjqwh', u'user': u'e6q8ienqs9celz', u'action': u'ADD_DATA_DATASTREAM', u'__$tenant': u'iqn80x6e2ku9id', u'dataSource': u'Rp8euhiyg3ctt4'}
+falkonry>> 
 ```
 > The data could be of the following format
 
-```json
+```csv
 
 ```
 
@@ -1391,12 +1412,19 @@ json data from a historian or time series data store can be imported into a Falk
 ```
 
 ```shell
-
+falkonry>> datastream_add_historical_data --path=/Users/user/InputWideBatchSingleEntity.json --timeIdentifier="time" --timeFormat="Unix Time Milliseconds" --timeZone="GMT" --batchIdentifier="batchId"
+Default datastream set : cm492hm4j74wrn Name : Wide Single Entity Batch Test DS
+{u'status': u'PENDING', u'datastream': u'cm492hm4j74wrn', u'__$createTime': 1516015544894, u'__$id': u'wmgllwgjwwjtp7w4', u'user': u'e6q8ienqs9celz', u'action': u'ADD_DATA_DATASTREAM', u'__$tenant': u'iqn80x6e2ku9id', u'dataSource': u'Teqm2nwjpbhbs3'}
+falkonry>> 
 ```
 > The data could be of the following format
 
 ```json
-
+{"time": 1467729675010,"batchId": "batch_1","signal1": 9.95,"signal2": 19.95,"signal3": 39.95}
+{"time": 1467729675020,"batchId": "batch_1","signal1": 4.45,"signal2": 14.45,"signal3": 34.45}
+{"time": 1467729675030,"batchId": "batch_2","signal1": 1.45,"signal2": 10.45,"signal3": 30.45}
+{"time": 1467729675040,"batchId": "batch_2","signal1": 8.45,"signal2": 18.45,"signal3": 38.45}
+{"time": 1467729675050,"batchId": "batch_2","signal1": 2.45,"signal2": 12.45,"signal3": 32.45}
 ```
 
 > To add historical wide input data to multi entity batch Datastream, use the following code:
@@ -1414,12 +1442,20 @@ json data from a historian or time series data store can be imported into a Falk
 ```
 
 ```shell
-
+falkonry>> datastream_add_historical_data --path=/Users/user/InputWideBatchMultiEntity.csv --timeIdentifier="time" --timeFormat="Unix Time Milliseconds" --timeZone="GMT" --entityIdentifier="unit" --batchIdentifier="batchId"
+Default datastream set : 7wgwm68b9p24n4 Name : Wide Multiple Entity Batch Test DS
+{u'status': u'PENDING', u'datastream': u'7wgwm68b9p24n4', u'__$createTime': 1516016064677, u'__$id': u'mlc2pt7y87jhwlw2', u'user': u'e6q8ienqs9celz', u'action': u'ADD_DATA_DATASTREAM', u'__$tenant': u'iqn80x6e2ku9id', u'dataSource': u'Lita7m408qq9j9'}
+falkonry>>
 ```
 > The data could be of the following format
 
-```json
-
+```csv
+time,batchId,unit,signal1,signal2,signal3
+1467729675010,batch_1,unit1,9.95,19.95,39.95
+1467729675020,batch_1,unit1,4.45,14.45,34.45
+1467729675030,batch_2,unit1,1.45,10.45,30.45
+1467729675040,batch_2,unit1,8.45,18.45,38.45
+1467729675050,batch_2,unit1,2.45,12.45,32.45
 ```
 
 ## Add input data to sliding datastream
@@ -2125,7 +2161,7 @@ Fetching input data
 falkonry>> datastream_get_data --format=application/json
 Default datastream set : 1scyeeoxbdh7if Name : New Standalone
 Input Data : 
-==================================================================================================================
+============================================================================
 {"time":1294078560000,"tag":"Device1:device","value":"Device1"}
 {"time":1294091820000,"tag":"Device1:device","value":"Device1"}
 {"time":1294099380000,"tag":"Device1:device","value":"Device1"}
@@ -2137,7 +2173,7 @@ Input Data :
 {"time":1294099380000,"tag":"Device3:device","value":"Device3"}
 {"time":1294078560000,"tag":"Device1:device","value":"Device1"}
 {"time":1294091820000,"tag":"Device1:device","value":"Device1"}
-==================================================================================================================
+============================================================================
 falkonry>>
 Writing input Data to file
 falkonry>> datastream_get_data --format=application/json --path=input.json
@@ -2508,12 +2544,12 @@ Usage :
 falkonry>> assessment_get_list 
 Default datastream set : 7wgwm68b9p24n4 Name : Wide Multiple Entity Batch Test DS
 Fetching assessment list of datastream : 7wgwm68b9p24n4...
-==================================================================================================================
+======================================================================================================
  Assessment Name                               Id                   Created By           Live Status         
-==================================================================================================================
+======================================================================================================
  New Test Assessment                           rrk2jl9ylvcthy       e6q8ienqs9celz       OFF                 
  Wide Multiple Entity Batch Test DS            27cqvmcpq8tqqg       e6q8ienqs9celz       OFF                 
-==================================================================================================================
+======================================================================================================
 falkonry>> 
 ```
 > The above command returns JSON structured like this:
@@ -2580,7 +2616,7 @@ assessmentResponse = fclient.get_assessment(assessmentId)
 Usage :
 
 falkonry>> assessment_get_by_id --id=27cqvmcpq8tqqg
-==================================================================================================================
+======================================================
 Id : 27cqvmcpq8tqqg
 Name : Wide Multiple Entity Batch Test DS
 Created By : e6q8ienqs9celz
@@ -2590,7 +2626,7 @@ Datastream : 7wgwm68b9p24n4
 Live : OFF
 Rate : PT0S
 Condition List : N/A
-==================================================================================================================
+======================================================
 falkonry>> 
 ```
 
@@ -2897,7 +2933,7 @@ Sample JSONFile / Facts Data:
 
 Usage:
 
-falkonry>> assessment_add_facts --path=/home/vedant/FalkonryWorkspace/falkonry-cli/Updated_samples/NarrowFacts.json --startTimeIdentifier=time --endTimeIdentifier=end --timeFormat=millis --timeZone=GMT --valueIdentifier=value
+falkonry>> assessment_add_facts --path=/Users/user/NarrowFacts.json --startTimeIdentifier=time --endTimeIdentifier=end --timeFormat=millis --timeZone=GMT --valueIdentifier=value
 Default assessment set : hv987ptckdc6n7 Name : New Test Assessment
 {u'status': u'PENDING', u'datastream': u'cr77vk6mkwqwqq', u'__$createTime': 1516022010240, u'__$id': u'lcq4pp9jcvwgcgmp', u'action': u'ADD_FACT_DATA', u'__$tenant': u'iqn80x6e2ku9id', u'assessment': u'hv987ptckdc6n7'}
 falkonry>> 
@@ -2992,7 +3028,7 @@ Sample JSONFile / Facts Data:
 {"time":1456774261715,"end":1456774261767,"value":"label2"}
 
 Usage:
-falkonry>> assessment_add_facts --path=/home/vedant/FalkonryWorkspace/falkonry-cli/Updated_samples/MoreFacts.json --startTimeIdentifier=time --endTimeIdentifier=end --timeFormat=millis --timeZone=GMT --valueIdentifier=value --additionalTag=testTag
+falkonry>> assessment_add_facts --path=/Users/user/MoreFacts.json --startTimeIdentifier=time --endTimeIdentifier=end --timeFormat=millis --timeZone=GMT --valueIdentifier=value --additionalTag=testTag
 Default assessment set : hv987ptckdc6n7 Name : New Test Assessment
 {u'status': u'PENDING', u'datastream': u'cr77vk6mkwqwqq', u'__$createTime': 1516087411723, u'__$id': u'4l8bgmd6rv2qj77j', u'action': u'ADD_FACT_DATA', u'__$tenant': u'iqn80x6e2ku9id', u'assessment': u'hv987ptckdc6n7'}
 falkonry>>
@@ -3068,7 +3104,7 @@ time,end,value
 
 Usage:
 
-falkonry>> assessment_add_facts --path=/home/vedant/FalkonryWorkspace/falkonry-cli/Updated_samples/NarrowFacts.csv --startTimeIdentifier=time --endTimeIdentifier=end --timeFormat=millis --timeZone=GMT --valueIdentifier=value
+falkonry>> assessment_add_facts --path=/Users/user/NarrowFacts.csv --startTimeIdentifier=time --endTimeIdentifier=end --timeFormat=millis --timeZone=GMT --valueIdentifier=value
 Default assessment set : bqn8vjdb7yr9km Name : new test
 {u'status': u'PENDING', u'datastream': u'cr77vk6mkwqwqq', u'__$createTime': 1516089750789, u'__$id': u'm7b2l694wcptccmk', u'action': u'ADD_FACT_DATA', u'__$tenant': u'iqn80x6e2ku9id', u'assessment': u'bqn8vjdb7yr9km'}
 falkonry>>
@@ -3149,7 +3185,7 @@ time,end,value,tagId
 "1456774261723","1456774261754","label2","tag2"
 Usage:
 
-falkonry>> assessment_add_facts --path=/home/vedant/FalkonryWorkspace/falkonry-cli/Updated_samples/TagFacts.csv --startTimeIdentifier=time --endTimeIdentifier=end --timeFormat=millis --timeZone=GMT --valueIdentifier=value --tagIdentifier=tagId
+falkonry>> assessment_add_facts --path=/Users/user/TagFacts.csv --startTimeIdentifier=time --endTimeIdentifier=end --timeFormat=millis --timeZone=GMT --valueIdentifier=value --tagIdentifier=tagId
 Default assessment set : 4rrp97lk9gcvwc Name : test new
 {u'status': u'PENDING', u'datastream': u'cr77vk6mkwqwqq', u'__$createTime': 1516090649022, u'__$id': u'hly8b4727wm9prq8', u'action': u'ADD_FACT_DATA', u'__$tenant': u'iqn80x6e2ku9id', u'assessment': u'4rrp97lk9gcvwc'}
 falkonry>>
