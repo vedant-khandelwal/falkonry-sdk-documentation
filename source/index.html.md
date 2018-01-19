@@ -1360,7 +1360,37 @@ json data from a historian or time series data store can be imported into a Falk
 ```
 
 ```python
+from falkonryclient import client as Falkonry
+from falkonryclient import schemas as Schemas
 
+#instantiate Falkonry
+falkonry   = Falkonry('http://localhost:8080', 'auth-token')
+
+datastreamId = 'id of the datastream'
+
+#add data to Datastream
+String data = 'time,batchId,unit,signal,value\n'
+    +'1467729675010,batch_1,unit1,signal1,9.95\n'
+    +'1467729675020,batch_1,unit1,signal1,4.45\n'
+    +'1467729675030,batch_2,unit1,signal1,1.45\n'
+    +'1467729675040,batch_2,unit1,signal1,8.45\n'
+    +'1467729675050,batch_2,unit1,signal1,2.45\n'
+    +'1467729675010,batch_1,unit1,signal2,19.95\n'
+    +'1467729675020,batch_1,unit1,signal2,14.45\n'
+    +'1467729675030,batch_2,unit1,signal2,10.45\n'
+    +'1467729675040,batch_2,unit1,signal2,18.45\n'
+    +'1467729675050,batch_2,unit1,signal2,12.45\n'
+    +'1467729675010,batch_1,unit1,signal3,39.95\n'
+    +'1467729675020,batch_1,unit1,signal3,34.45\n'
+    +'1467729675030,batch_2,unit1,signal3,30.45\n'
+    +'1467729675040,batch_2,unit1,signal3,38.45\n'
+    +'1467729675050,batch_2,unit1,signal3,32.45\n'
+        
+options = {
+    'streaming': False,
+    'hasMoreData': False
+}
+inputResponse = falkonry.add_input_data(datastreamId, 'csv', options, data)
 ```
 
 ```shell
@@ -1408,7 +1438,30 @@ falkonry>>
 ```
 
 ```python
+from falkonryclient import client as Falkonry
+from falkonryclient import schemas as Schemas
 
+#instantiate Falkonry
+falkonry   = Falkonry('http://localhost:8080', 'auth-token')
+
+datastreamId = 'id of the datastream'
+
+#add data to Datastream
+String data = '{"time": 1467729675010,"batchId": "batch_1","signal1": 9.95,"signal2": 19.95,"signal3": 39.95}\n'
+    +'{"time": 1467729675020,"batchId": "batch_1","signal1": 4.45,"signal2": 14.45,"signal3": 34.45}\n'
+    +'{"time": 1467729675030,"batchId": "batch_2","signal1": 1.45,"signal2": 10.45,"signal3": 30.45}\n'
+    +'{"time": 1467729675040,"batchId": "batch_2","signal1": 8.45,"signal2": 18.45,"signal3": 38.45}\n'
+    +'{"time": 1467729675050,"batchId": "batch_2","signal1": 2.45,"signal2": 12.45,"signal3": 32.45}'
+        
+options = {
+    'streaming': False,
+    'hasMoreData': False,
+    'timeFormat': time.get_format(),
+    'timeZone': time.get_zone(),
+    'timeIdentifier': time.get_identifier(),
+    'batchIdentifier': 'batchId'
+}
+inputResponse = falkonry.add_input_data(datastreamId, 'json', options, data)
 ```
 
 ```shell
@@ -1438,7 +1491,27 @@ falkonry>>
 ```
 
 ```python
+from falkonryclient import client as Falkonry
+from falkonryclient import schemas as Schemas
 
+#instantiate Falkonry
+falkonry   = Falkonry('http://localhost:8080', 'auth-token')
+
+datastreamId = 'id of the datastream'
+
+#add data to Datastream
+String data = 'time,batchId,unit,signal1,signal2,signal3\n'+
+    '1467729675010,batch_1,unit1,9.95,19.95,39.95\n'+
+    '1467729675020,batch_1,unit1,4.45,14.45,34.45\n'+
+    '1467729675030,batch_2,unit1,1.45,10.45,30.45\n'+
+    '1467729675040,batch_2,unit1,8.45,18.45,38.45\n'+
+    '1467729675050,batch_2,unit1,2.45,12.45,32.45'
+        
+options = {
+    'streaming': False,
+    'hasMoreData': False
+}
+inputResponse = falkonry.add_input_data(datastreamId, 'csv', options, data)
 ```
 
 ```shell
@@ -1586,10 +1659,6 @@ falkonry>>
 ```
 
 ```java
-Data:
-    {"time" :"2016-03-01 01:01:01", "signal" : "current", "value" : 12.4, "car" : "car1"}
-    {"time" :"2016-03-01 01:01:01", "signal" : "vibration", "value" : 3.4, "car" : "car1"}
-Usage:
 
     import com.falkonry.client.Falkonry;
     import com.falkonry.helper.models.Datasource;
@@ -1618,16 +1687,6 @@ Usage:
 ```
 
 ```python
-Data :
-
-    {"time" :"2016-03-01 01:01:01", "signal" : "current", "value" : 12.4, "car" : "car1"}
-    {"time" :"2016-03-01 01:01:01", "signal" : "vibration", "value" : 3.4, "car" : "car1"}
-    {"time" :"2016-03-01 01:01:01", "signal" : "state", "value" : on, "car" : "car1"}
-    {"time" :"2016-03-01 01:01:01", "signal" : "current", "value" : 31.4, "car" : "car2"}
-    {"time" :"2016-03-01 01:01:01", "signal" : "vibration", "value" : 2.4, "car" : "car2"}
-    {"time" :"2016-03-01 01:01:01", "signal" : "state", "value" : off, "car" : "car2"}
-Usage :
-
 from falkonryclient import client as Falkonry
 from falkonryclient import schemas as Schemas
 
@@ -1658,13 +1717,22 @@ inputResponse = falkonry.add_input_data(datastreamId, 'json', options, data)
 ```
 
 ```shell
+falkonry>> datastream_add_historical_data --path=/Users/user/Input.json --timeIdentifier=time --entityIdentifier=car --timeFormat=iso_8601 --timeZone=GMT --signalIdentifier=signal --valueIdentifier=value
 
+Default datastream set : oii0djojxc2lxt Name : New Ds -1
+{u'status': u'PENDING', u'datastream': u'oii0djojxc2lxt', u'__$createTime': 1500538975912, u'__$id': u'q68cho8foyml3gv4', u'user': u'Tza1q4g0kw5epo', u'action': u'ADD_DATA_DATASTREAM', u'__$tenant': u'el7rvvqx2xr6v5', u'dataSource': u'Lp1nfea7z5lrtk'}
+falkonry>>
 ```
 
 > Data could be of following format:
 
 ```json
-
+{"time" :"2016-03-01 01:01:01", "signal" : "current", "value" : 12.4, "car" : "car1"}
+{"time" :"2016-03-01 01:01:01", "signal" : "vibration", "value" : 3.4, "car" : "car1"}
+{"time" :"2016-03-01 01:01:01", "signal" : "state", "value" : on, "car" : "car1"}
+{"time" :"2016-03-01 01:01:01", "signal" : "current", "value" : 31.4, "car" : "car2"}
+{"time" :"2016-03-01 01:01:01", "signal" : "vibration", "value" : 2.4, "car" : "car2"}
+{"time" :"2016-03-01 01:01:01", "signal" : "state", "value" : off, "car" : "car2"}
 ```
 
 ### Add wide input data to sliding datastream
@@ -1686,12 +1754,6 @@ using falkonry_csharp_client;
 ```
 
 ```java
-Data:
-
-  {"time" :"2016-03-01 01:01:01", "current" : 12.4, "vibration" : 3.4, "state" : "On"}
-    
-Usage:
-
     import com.falkonry.client.Falkonry;
     import com.falkonry.helper.models.Datasource;
     import com.falkonry.helper.models.Datastream;
@@ -1741,16 +1803,6 @@ Usage:
 ```
 
 ```python
-Data :
-
-    {"time" :"2016-03-01 01:01:01", "current" : 12.4, "vibration" : 3.4, "state" : "On"}
-    {"time" :"2016-03-01 01:01:02", "current" : 11.3, "vibration" : 2.2, "state" : "On"}
-    {"time" :"2016-03-01 01:01:03", "current" : 10.5, "vibration" : 3.8, "state" : "On"}
-    {"time" :"2016-03-01 01:02:03", "current" : 19.2, "vibration" : 3.8, "state" : "On"}
-    {"time" :"2016-03-01 01:02:03", "current" : 1.2, "vibration" : 0.8, "state" : "Off"}
-    {"time" :"2016-03-01 01:02:05", "current" : 0.2, "vibration" : 0.3, "state" : "Off"}
-Usage :
-
 from falkonryclient import client as Falkonry
 from falkonryclient import schemas as Schemas
 
@@ -1773,14 +1825,7 @@ inputResponse = falkonry.add_input_data(datastreamId, 'json', options, stream)
 ```
 
 ```shell
-Data :
-
-{"time":"2011-01-03T18:16:00.000Z","Signal1":9.95,"Signal2":30.6,"Signal3":41.7}
-{"time":"2011-01-04T18:16:00.000Z","Signal1":19.95,"Signal2":40.6,"Signal3":43.7}
-
-Usage :
-
-falkonry>> datastream_add_historical_data --path=/Users/user/InputNarrow.csv --timeIdentifier=time --timeFormat=iso_8601 --timeZone=GMT --signalIdentifier=signal --valueIdentifier=value
+falkonry>> datastream_add_historical_data --path=/Users/user/InputWideSingleEntity.csv --timeIdentifier=time --timeFormat=iso_8601 --timeZone=GMT --signalIdentifier=signal --valueIdentifier=value
 
 Default datastream set : oii0djojxc2lxt Name : New Ds -1
 {u'status': u'PENDING', u'datastream': u'oii0djojxc2lxt', u'__$createTime': 1500538975912, u'__$id': u'q68cho8foyml3gv4', u'user': u'Tza1q4g0kw5epo', u'action': u'ADD_DATA_DATASTREAM', u'__$tenant': u'el7rvvqx2xr6v5', u'dataSource': u'Lp1nfea7z5lrtk'}
@@ -1790,7 +1835,12 @@ falkonry>>
 > Data could be of following format
 
 ```json
-
+{"time" :"2016-03-01 01:01:01", "current" : 12.4, "vibration" : 3.4, "state" : "On"}
+{"time" :"2016-03-01 01:01:02", "current" : 11.3, "vibration" : 2.2, "state" : "On"}
+{"time" :"2016-03-01 01:01:03", "current" : 10.5, "vibration" : 3.8, "state" : "On"}
+{"time" :"2016-03-01 01:02:03", "current" : 19.2, "vibration" : 3.8, "state" : "On"}
+{"time" :"2016-03-01 01:02:03", "current" : 1.2, "vibration" : 0.8, "state" : "Off"}
+{"time" :"2016-03-01 01:02:05", "current" : 0.2, "vibration" : 0.3, "state" : "Off"}
 ```
 > To add wide input data to multi entity sliding datastream
 
@@ -1897,12 +1947,6 @@ falkonry>> datastream_add_historical_data --path=/Users/user/InputNarrow.csv --t
 Default datastream set : oii0djojxc2lxt Name : New Ds -1
 {u'status': u'PENDING', u'datastream': u'oii0djojxc2lxt', u'__$createTime': 1500538975912, u'__$id': u'q68cho8foyml3gv4', u'user': u'Tza1q4g0kw5epo', u'action': u'ADD_DATA_DATASTREAM', u'__$tenant': u'el7rvvqx2xr6v5', u'dataSource': u'Lp1nfea7z5lrtk'}
 falkonry>>
-```
-
-> Data could be of following format
-
-```json
-
 ```
 
 > Input data could be of the following format:
