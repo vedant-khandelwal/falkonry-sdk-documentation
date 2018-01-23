@@ -1659,31 +1659,30 @@ falkonry>>
 ```
 
 ```java
+  import com.falkonry.client.Falkonry;
+  import com.falkonry.helper.models.Datasource;
+  import com.falkonry.helper.models.Datastream;
+  import com.falkonry.helper.models.Field;
+  import com.falkonry.helper.models.TimeObject;
+  import com.falkonry.helper.models.Signal;
 
-    import com.falkonry.client.Falkonry;
-    import com.falkonry.helper.models.Datasource;
-    import com.falkonry.helper.models.Datastream;
-    import com.falkonry.helper.models.Field;
-    import com.falkonry.helper.models.TimeObject;
-    import com.falkonry.helper.models.Signal;
+  //instantiate Falkonry
+  Falkonry falkonry = new Falkonry("http://localhost:8080", "auth-token");
+  //Add data to datastream
+  String data = "{\"time\" :\"2016-03-01T01:01:01.000Z\",\"unit\":\"Unit1\", \"signal\" : \"current\", \"value\" : 12.5}\n" +
+        "{\"time\" :\"2016-03-01T01:01:01.000Z\",\"unit\":\"Unit2\", \"signal\" : \"vibration\", \"value\" : 3.4}";
 
-    //instantiate Falkonry
-    Falkonry falkonry = new Falkonry("http://localhost:8080", "auth-token");
-    //Add data to datastream
-    String data = "{\"time\" :\"2016-03-01T01:01:01.000Z\",\"unit\":\"Unit1\", \"signal\" : \"current\", \"value\" : 12.5}\n" +
-          "{\"time\" :\"2016-03-01T01:01:01.000Z\",\"unit\":\"Unit2\", \"signal\" : \"vibration\", \"value\" : 3.4}";
-
-    Map<String, String> options = new HashMap<String, String>();
-    options.put("timeIdentifier", "time");
-    options.put("timeFormat", "iso_8601");
-    options.put("timeZone", time.getZone());
-    options.put("signalIdentifier", "signal");
-    options.put("entityIdentifier", "unit");
-    options.put("valueIdentifier", "value");
-    options.put("fileFormat", "json");
-    options.put("streaming", "false");
-    options.put("hasMoreData", "false");
-    falkonry.addInput('datastream-Id', data, options);
+  Map<String, String> options = new HashMap<String, String>();
+  options.put("timeIdentifier", "time");
+  options.put("timeFormat", "iso_8601");
+  options.put("timeZone", time.getZone());
+  options.put("signalIdentifier", "signal");
+  options.put("entityIdentifier", "unit");
+  options.put("valueIdentifier", "value");
+  options.put("fileFormat", "json");
+  options.put("streaming", "false");
+  options.put("hasMoreData", "false");
+  falkonry.addInput('datastream-Id', data, options);
 ```
 
 ```python
