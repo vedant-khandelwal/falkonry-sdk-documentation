@@ -192,7 +192,7 @@ html, body {
     .tocify-subheader {
       .tocify-item>a {
         // Styling here for a level 2 nesting. For example -> 
-        padding-left: $nav-padding + $nav-indent * 2;
+        padding-left: $nav-padding + $nav-indent * 3;
         font-size: 12px;
       }
     }
