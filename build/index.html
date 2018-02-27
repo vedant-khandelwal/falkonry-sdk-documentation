@@ -297,8 +297,8 @@ Remember — a datastream is your basic building block!
 <blockquote>
 <p>To setup a Sliding datastream for narrow/historian style data from a single entity, use this code:</p>
 </blockquote>
-<pre class="highlight csharp tab-csharp"><code>  <span class="k">using</span> <span class="nn">falkonry_csharp_client</span><span class="p">;</span>
-  <span class="k">using</span> <span class="nn">falkonry_csharp_client.helper.models</span><span class="p">;</span>
+<pre class="highlight csharp tab-csharp"><code>  <span class="k">using</span> <span class="nn">FalkonryClient</span><span class="p">;</span>
+  <span class="k">using</span> <span class="nn">FalkonryClient.Helper.Models</span><span class="p">;</span>
 
   <span class="kt">string</span> <span class="n">token</span><span class="p">=</span><span class="s">"Add your token here"</span><span class="p">;</span>   
   <span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Falkonry</span><span class="p">(</span><span class="s">"http://jumpstart.falkonry.ai"</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
@@ -482,8 +482,8 @@ Structuring data as key-value pairs — as is done in narrow-form datasets — f
 <blockquote>
 <p>To setup a Batch datastream for narrow/historian style data from a single entity, use this code:</p>
 </blockquote>
-<pre class="highlight csharp tab-csharp"><code>  <span class="k">using</span> <span class="nn">falkonry_csharp_client</span><span class="p">;</span>
-  <span class="k">using</span> <span class="nn">falkonry_csharp_client.helper.models</span><span class="p">;</span>
+<pre class="highlight csharp tab-csharp"><code>  <span class="k">using</span> <span class="nn">FalkonryClient</span><span class="p">;</span>
+  <span class="k">using</span> <span class="nn">FalkonryClient.Helper.Models</span><span class="p">;</span>
 
   <span class="kt">string</span> <span class="n">token</span><span class="p">=</span><span class="s">"Add your token here"</span><span class="p">;</span>   
   <span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Falkonry</span><span class="p">(</span><span class="s">"http://jumpstart.falkonry.ai"</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
@@ -684,8 +684,8 @@ Structuring data as key-value pairs — as is done in narrow-form datasets — f
 <blockquote>
 <p>To setup a Sliding datastream using narrow style data for multiple entities, use this code:</p>
 </blockquote>
-<pre class="highlight csharp tab-csharp"><code>  <span class="k">using</span> <span class="nn">falkonry_csharp_client</span><span class="p">;</span>
-  <span class="k">using</span> <span class="nn">falkonry_csharp_client.helper.models</span><span class="p">;</span>
+<pre class="highlight csharp tab-csharp"><code>  <span class="k">using</span> <span class="nn">FalkonryClient</span><span class="p">;</span>
+  <span class="k">using</span> <span class="nn">FalkonryClient.Helper.Models</span><span class="p">;</span>
 
   <span class="kt">string</span> <span class="n">token</span><span class="p">=</span><span class="s">"Add your token here"</span><span class="p">;</span>   
   <span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Falkonry</span><span class="p">(</span><span class="s">"http://jumpstart.falkonry.ai"</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
@@ -858,8 +858,8 @@ Structuring data as key-value pairs — as is done in narrow-form datasets — f
 <blockquote>
 <p>To setup a Sliding datastream using wide style data for a single entity, use this code:</p>
 </blockquote>
-<pre class="highlight csharp tab-csharp"><code>  <span class="k">using</span> <span class="nn">falkonry_csharp_client</span><span class="p">;</span>
-  <span class="k">using</span> <span class="nn">falkonry_csharp_client.helper.models</span><span class="p">;</span>
+<pre class="highlight csharp tab-csharp"><code>  <span class="k">using</span> <span class="nn">FalkonryClient</span><span class="p">;</span>
+  <span class="k">using</span> <span class="nn">FalkonryClient.Helper.Models</span><span class="p">;</span>
 
   <span class="kt">string</span> <span class="n">token</span><span class="p">=</span><span class="s">"Add your token here"</span><span class="p">;</span>   
   <span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Falkonry</span><span class="p">(</span><span class="s">"http://jumpstart.falkonry.ai"</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
@@ -874,8 +874,8 @@ Structuring data as key-value pairs — as is done in narrow-form datasets — f
     <span class="kt">var</span> <span class="n">ds</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">DatastreamRequest</span><span class="p">();</span>
     <span class="kt">var</span> <span class="n">Field</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Field</span><span class="p">();</span>
     <span class="kt">var</span> <span class="n">Signal</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Signal</span><span class="p">();</span>
-    <span class="k">using</span> <span class="nn">falkonry_csharp_client</span><span class="p">;</span>
-  <span class="k">using</span> <span class="nn">falkonry_csharp_client.helper.models</span><span class="p">;</span>
+    <span class="k">using</span> <span class="nn">FalkonryClient</span><span class="p">;</span>
+  <span class="k">using</span> <span class="nn">FalkonryClient.Helper.Models</span><span class="p">;</span>
 
   <span class="kt">string</span> <span class="n">token</span><span class="p">=</span><span class="s">"Add your token here"</span><span class="p">;</span>   
   <span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Falkonry</span><span class="p">(</span><span class="s">"http://jumpstart.falkonry.ai"</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
@@ -1129,8 +1129,8 @@ If you have many value variables, it is difficult to summarize wide-form dataset
 <blockquote>
 <p>To setup a Sliding datastream using wide style data for multiple entities, use this code:</p>
 </blockquote>
-<pre class="highlight csharp tab-csharp"><code>  <span class="k">using</span> <span class="nn">falkonry_csharp_client</span><span class="p">;</span>
-  <span class="k">using</span> <span class="nn">falkonry_csharp_client.helper.models</span><span class="p">;</span>
+<pre class="highlight csharp tab-csharp"><code>  <span class="k">using</span> <span class="nn">FalkonryClient</span><span class="p">;</span>
+  <span class="k">using</span> <span class="nn">FalkonryClient.Helper.Models</span><span class="p">;</span>
 
   <span class="kt">string</span> <span class="n">token</span><span class="p">=</span><span class="s">"Add your token here"</span><span class="p">;</span>   
   <span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Falkonry</span><span class="p">(</span><span class="s">"http://jumpstart.falkonry.ai"</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
@@ -1145,8 +1145,8 @@ If you have many value variables, it is difficult to summarize wide-form dataset
     <span class="kt">var</span> <span class="n">ds</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">DatastreamRequest</span><span class="p">();</span>
     <span class="kt">var</span> <span class="n">Field</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Field</span><span class="p">();</span>
     <span class="kt">var</span> <span class="n">Signal</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Signal</span><span class="p">();</span>
-    <span class="k">using</span> <span class="nn">falkonry_csharp_client</span><span class="p">;</span>
-  <span class="k">using</span> <span class="nn">falkonry_csharp_client.helper.models</span><span class="p">;</span>
+    <span class="k">using</span> <span class="nn">FalkonryClient</span><span class="p">;</span>
+  <span class="k">using</span> <span class="nn">FalkonryClient.Helper.Models</span><span class="p">;</span>
 
   <span class="kt">string</span> <span class="n">token</span><span class="p">=</span><span class="s">"Add your token here"</span><span class="p">;</span>   
   <span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Falkonry</span><span class="p">(</span><span class="s">"http://jumpstart.falkonry.ai"</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
@@ -1390,8 +1390,8 @@ If you have many value variables, it is difficult to summarize wide-form dataset
 <blockquote>
 <p>To create datastream with microseconds precision, use the following code:</p>
 </blockquote>
-<pre class="highlight csharp tab-csharp"><code>    <span class="k">using</span> <span class="nn">falkonry_csharp_client</span><span class="p">;</span>
-    <span class="k">using</span> <span class="nn">falkonry_csharp_client.helper.models</span><span class="p">;</span>
+<pre class="highlight csharp tab-csharp"><code>    <span class="k">using</span> <span class="nn">FalkonryClient</span><span class="p">;</span>
+    <span class="k">using</span> <span class="nn">FalkonryClient.Helper.Models</span><span class="p">;</span>
 
     <span class="kt">string</span> <span class="n">token</span><span class="p">=</span><span class="s">"Add your token here"</span><span class="p">;</span>   
     <span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Falkonry</span><span class="p">(</span><span class="s">"http://jumpstart.falkonry.ai"</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
@@ -1525,8 +1525,8 @@ time,signal,value
 <blockquote>
 <p>To retrieve a list of existing datastreams, use this code:</p>
 </blockquote>
-<pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">falkonry_csharp_client</span><span class="p">;</span>
-<span class="k">using</span> <span class="nn">falkonry_csharp_client.helper.models</span><span class="p">;</span>
+<pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">FalkonryClient</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">FalkonryClient.Helper.Models</span><span class="p">;</span>
 
 <span class="kt">string</span> <span class="n">token</span><span class="p">=</span><span class="s">"Add your token here"</span><span class="p">;</span>   
 <span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Falkonry</span><span class="p">(</span><span class="s">"http://jumpstart.falkonry.ai"</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
@@ -1560,8 +1560,8 @@ falkonry&gt;&gt;
 <blockquote>
 <p>To retrieve datastream by id, use this code:</p>
 </blockquote>
-<pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">falkonry_csharp_client</span><span class="p">;</span>
-<span class="k">using</span> <span class="nn">falkonry_csharp_client.helper.models</span><span class="p">;</span>
+<pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">FalkonryClient</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">FalkonryClient.Helper.Models</span><span class="p">;</span>
 
 <span class="kt">string</span> <span class="n">token</span><span class="p">=</span><span class="s">"Add your token here"</span><span class="p">;</span>   
 <span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Falkonry</span><span class="p">(</span><span class="s">"http://jumpstart.falkonry.ai"</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
@@ -1658,8 +1658,8 @@ Falkonry needs historical time series data to build pattern recognition models.
 <blockquote>
 <p>To add historical narrow input data (json format) to single entity batch datastream, use the following code:</p>
 </blockquote>
-<pre class="highlight csharp tab-csharp"><code>    <span class="k">using</span> <span class="nn">falkonry_csharp_client</span><span class="p">;</span>
-    <span class="k">using</span> <span class="nn">falkonry_csharp_client.helper.models</span><span class="p">;</span>
+<pre class="highlight csharp tab-csharp"><code>    <span class="k">using</span> <span class="nn">FalkonryClient</span><span class="p">;</span>
+    <span class="k">using</span> <span class="nn">FalkonryClient.Helper.Models</span><span class="p">;</span>
 
     <span class="kt">string</span> <span class="n">token</span><span class="p">=</span><span class="s">"Add your token here"</span><span class="p">;</span>   
     <span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Falkonry</span><span class="p">(</span><span class="s">"http://jumpstart.falkonry.ai"</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
@@ -1752,8 +1752,8 @@ falkonry&gt;&gt;
 <blockquote>
 <p>To add historical narrow input data (csv format) to multi entity batch Datastream, use the following code:</p>
 </blockquote>
-<pre class="highlight csharp tab-csharp"><code>    <span class="k">using</span> <span class="nn">falkonry_csharp_client</span><span class="p">;</span>
-  <span class="k">using</span> <span class="nn">falkonry_csharp_client.helper.models</span><span class="p">;</span>
+<pre class="highlight csharp tab-csharp"><code>    <span class="k">using</span> <span class="nn">FalkonryClient</span><span class="p">;</span>
+  <span class="k">using</span> <span class="nn">FalkonryClient.Helper.Models</span><span class="p">;</span>
 
     <span class="kt">string</span> <span class="n">token</span><span class="p">=</span><span class="s">"Add your token here"</span><span class="p">;</span>   
     <span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Falkonry</span><span class="p">(</span><span class="s">"http://jumpstart.falkonry.ai"</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
@@ -1859,8 +1859,8 @@ Default datastream <span class="nb">set</span> : hn6cq2lpcwg49c Name : Narrow Mu
 <blockquote>
 <p>To add historical wide input data (csv format) to single entity batch datastream, use the following code:</p>
 </blockquote>
-<pre class="highlight csharp tab-csharp"><code>  <span class="k">using</span> <span class="nn">falkonry_csharp_client</span><span class="p">;</span>
-  <span class="k">using</span> <span class="nn">falkonry_csharp_client.helper.models</span><span class="p">;</span>
+<pre class="highlight csharp tab-csharp"><code>  <span class="k">using</span> <span class="nn">FalkonryClient</span><span class="p">;</span>
+  <span class="k">using</span> <span class="nn">FalkonryClient.Helper.Models</span><span class="p">;</span>
 
   <span class="kt">string</span> <span class="n">token</span><span class="p">=</span><span class="s">"Add your token here"</span><span class="p">;</span>   
   <span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Falkonry</span><span class="p">(</span><span class="s">"http://jumpstart.falkonry.ai"</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
@@ -1943,8 +1943,8 @@ Default datastream <span class="nb">set</span> : cm492hm4j74wrn Name : Wide Sing
 <blockquote>
 <p>To add historical wide input data (json format) to multi entity batch datastream, use the following code:</p>
 </blockquote>
-<pre class="highlight csharp tab-csharp"><code>        <span class="k">using</span> <span class="nn">falkonry_csharp_client</span><span class="p">;</span>
-    <span class="k">using</span> <span class="nn">falkonry_csharp_client.helper.models</span><span class="p">;</span>
+<pre class="highlight csharp tab-csharp"><code>        <span class="k">using</span> <span class="nn">FalkonryClient</span><span class="p">;</span>
+    <span class="k">using</span> <span class="nn">FalkonryClient.Helper.Models</span><span class="p">;</span>
 
     <span class="kt">string</span> <span class="n">token</span><span class="p">=</span><span class="s">"Add your token here"</span><span class="p">;</span>   
     <span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Falkonry</span><span class="p">(</span><span class="s">"http://jumpstart.falkonry.ai"</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
@@ -2047,8 +2047,8 @@ falkonry&gt;&gt;
 <blockquote>
 <p>To add historical narrow input data (csv format) to single entity sliding datastream</p>
 </blockquote>
-<pre class="highlight csharp tab-csharp"><code>    <span class="k">using</span> <span class="nn">falkonry_csharp_client</span><span class="p">;</span>
-  <span class="k">using</span> <span class="nn">falkonry_csharp_client.helper.models</span><span class="p">;</span>
+<pre class="highlight csharp tab-csharp"><code>    <span class="k">using</span> <span class="nn">FalkonryClient</span><span class="p">;</span>
+  <span class="k">using</span> <span class="nn">FalkonryClient.Helper.Models</span><span class="p">;</span>
 
     <span class="kt">string</span> <span class="n">token</span><span class="p">=</span><span class="s">"Add your token here"</span><span class="p">;</span>   
     <span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Falkonry</span><span class="p">(</span><span class="s">"http://jumpstart.falkonry.ai"</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
@@ -2140,8 +2140,8 @@ falkonry&gt;&gt;
 
 <p>To add historical narrow input data (json format) to multi entity sliding datastream</p>
 </blockquote>
-<pre class="highlight csharp tab-csharp"><code>    <span class="k">using</span> <span class="nn">falkonry_csharp_client</span><span class="p">;</span>
-    <span class="k">using</span> <span class="nn">falkonry_csharp_client.helper.models</span><span class="p">;</span>
+<pre class="highlight csharp tab-csharp"><code>    <span class="k">using</span> <span class="nn">FalkonryClient</span><span class="p">;</span>
+    <span class="k">using</span> <span class="nn">FalkonryClient.Helper.Models</span><span class="p">;</span>
 
     <span class="kt">string</span> <span class="n">token</span><span class="p">=</span><span class="s">"Add your token here"</span><span class="p">;</span>   
     <span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Falkonry</span><span class="p">(</span><span class="s">"http://jumpstart.falkonry.ai"</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
@@ -2228,8 +2228,8 @@ falkonry&gt;&gt;
 <blockquote>
 <p>To add wide data (json format) to single entity sliding datastream</p>
 </blockquote>
-<pre class="highlight csharp tab-csharp"><code>      <span class="k">using</span> <span class="nn">falkonry_csharp_client</span><span class="p">;</span>
-    <span class="k">using</span> <span class="nn">falkonry_csharp_client.helper.models</span><span class="p">;</span>
+<pre class="highlight csharp tab-csharp"><code>      <span class="k">using</span> <span class="nn">FalkonryClient</span><span class="p">;</span>
+    <span class="k">using</span> <span class="nn">FalkonryClient.Helper.Models</span><span class="p">;</span>
 
     <span class="kt">string</span> <span class="n">token</span><span class="p">=</span><span class="s">"Add your token here"</span><span class="p">;</span>   
     <span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Falkonry</span><span class="p">(</span><span class="s">"http://jumpstart.falkonry.ai"</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
@@ -2323,8 +2323,8 @@ falkonry&gt;&gt;
 <blockquote>
 <p>To add wide input data (csv format) to multi entity sliding datastream</p>
 </blockquote>
-<pre class="highlight csharp tab-csharp"><code>    <span class="k">using</span> <span class="nn">falkonry_csharp_client</span><span class="p">;</span>
-  <span class="k">using</span> <span class="nn">falkonry_csharp_client.helper.models</span><span class="p">;</span>
+<pre class="highlight csharp tab-csharp"><code>    <span class="k">using</span> <span class="nn">FalkonryClient</span><span class="p">;</span>
+  <span class="k">using</span> <span class="nn">FalkonryClient.Helper.Models</span><span class="p">;</span>
 
   <span class="kt">string</span> <span class="n">token</span><span class="p">=</span><span class="s">"Add your token here"</span><span class="p">;</span>   
   <span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Falkonry</span><span class="p">(</span><span class="s">"http://jumpstart.falkonry.ai"</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
@@ -2435,8 +2435,8 @@ Falkonry needs historical time series data to build pattern recognition models.
 <blockquote>
 <p>To add historical input data in json format from a stream, use this code: </p>
 </blockquote>
-<pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">falkonry_csharp_client</span><span class="p">;</span>
-<span class="k">using</span> <span class="nn">falkonry_csharp_client.helper.models</span><span class="p">;</span>
+<pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">FalkonryClient</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">FalkonryClient.Helper.Models</span><span class="p">;</span>
 
 <span class="kt">string</span> <span class="n">token</span><span class="p">=</span><span class="s">"Add your token here"</span><span class="p">;</span>   
 <span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Falkonry</span><span class="p">(</span><span class="s">"http://jumpstart.falkonry.ai"</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
@@ -2508,8 +2508,8 @@ Falkonry needs historical time series data to build pattern recognition models.
 <blockquote>
 <p>To add historical input data in csv format from a stream to a datastream, use this code: </p>
 </blockquote>
-<pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">falkonry_csharp_client</span><span class="p">;</span>
-<span class="k">using</span> <span class="nn">falkonry_csharp_client.helper.models</span><span class="p">;</span>
+<pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">FalkonryClient</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">FalkonryClient.Helper.Models</span><span class="p">;</span>
 
 <span class="kt">string</span> <span class="n">token</span><span class="p">=</span><span class="s">"Add your token here"</span><span class="p">;</span>   
 <span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Falkonry</span><span class="p">(</span><span class="s">"http://jumpstart.falkonry.ai"</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
@@ -2583,8 +2583,8 @@ Falkonry needs historical time series data to build pattern recognition models.
 <blockquote>
 <p>To extract data from a datastream, use this code:</p>
 </blockquote>
-<pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">falkonry_csharp_client</span><span class="p">;</span>
-<span class="k">using</span> <span class="nn">falkonry_csharp_client.helper.models</span><span class="p">;</span>
+<pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">FalkonryClient</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">FalkonryClient.Helper.Models</span><span class="p">;</span>
 
 <span class="kt">string</span> <span class="n">token</span><span class="p">=</span><span class="s">"Add your token here"</span><span class="p">;</span>   
 <span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Falkonry</span><span class="p">(</span><span class="s">"http://jumpstart.falkonry.ai"</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
@@ -2660,8 +2660,8 @@ Input data is written to the file : input.json
 <blockquote>
 <p>To delete a datastream using its id, use this code:</p>
 </blockquote>
-<pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">falkonry_csharp_client</span><span class="p">;</span>
-<span class="k">using</span> <span class="nn">falkonry_csharp_client.helper.models</span><span class="p">;</span>
+<pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">FalkonryClient</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">FalkonryClient.Helper.Models</span><span class="p">;</span>
 
 <span class="kt">string</span> <span class="n">token</span><span class="p">=</span><span class="s">"Add your token here"</span><span class="p">;</span>   
 <span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Falkonry</span><span class="p">(</span><span class="s">"http://jumpstart.falkonry.ai"</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
@@ -2693,8 +2693,8 @@ Sometimes good things come to an end as well :(!
 <blockquote>
 <p>To add EntityMeta to a datastream, use this code:</p>
 </blockquote>
-<pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">falkonry_csharp_client</span><span class="p">;</span>
-<span class="k">using</span> <span class="nn">falkonry_csharp_client.helper.models</span><span class="p">;</span>
+<pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">FalkonryClient</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">FalkonryClient.Helper.Models</span><span class="p">;</span>
 
 <span class="kt">string</span> <span class="n">token</span><span class="p">=</span><span class="s">"Add your token here"</span><span class="p">;</span>   
 <span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Falkonry</span><span class="p">(</span><span class="s">"http://jumpstart.falkonry.ai"</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
@@ -2756,8 +2756,8 @@ falkonry&gt;&gt;
 <blockquote>
 <p>To retrieve EntityMeta from a datastream, use this code:</p>
 </blockquote>
-<pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">falkonry_csharp_client</span><span class="p">;</span>
-<span class="k">using</span> <span class="nn">falkonry_csharp_client.helper.models</span><span class="p">;</span>
+<pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">FalkonryClient</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">FalkonryClient.Helper.Models</span><span class="p">;</span>
 
 <span class="kt">string</span> <span class="n">token</span><span class="p">=</span><span class="s">"Add your token here"</span><span class="p">;</span>   
 <span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Falkonry</span><span class="p">(</span><span class="s">"http://jumpstart.falkonry.ai"</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
@@ -2801,8 +2801,8 @@ Assessments can be re-introduced into a data store as attributes to subsequently
 <blockquote>
 <p>To create an assessment, use this code:</p>
 </blockquote>
-<pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">falkonry_csharp_client</span><span class="p">;</span>
-<span class="k">using</span> <span class="nn">falkonry_csharp_client.helper.models</span><span class="p">;</span>
+<pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">FalkonryClient</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">FalkonryClient.Helper.Models</span><span class="p">;</span>
 
 <span class="kt">string</span> <span class="n">token</span><span class="p">=</span><span class="s">"Add your token here"</span><span class="p">;</span>   
 <span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Falkonry</span><span class="p">(</span><span class="s">"http://jumpstart.falkonry.ai"</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
@@ -2932,8 +2932,8 @@ If you would like to request more assessments, reach out to your Falkonry Admin.
 <blockquote>
 <p>To retrieve all assessments, use this code:</p>
 </blockquote>
-<pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">falkonry_csharp_client</span><span class="p">;</span>
-<span class="k">using</span> <span class="nn">falkonry_csharp_client.helper.models</span><span class="p">;</span>
+<pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">FalkonryClient</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">FalkonryClient.Helper.Models</span><span class="p">;</span>
 
 <span class="kt">string</span> <span class="n">token</span><span class="p">=</span><span class="s">"Add your token here"</span><span class="p">;</span>   
 <span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Falkonry</span><span class="p">(</span><span class="s">"http://jumpstart.falkonry.ai"</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
@@ -2995,8 +2995,8 @@ Fetching assessment list of datastream : 7wgwm68b9p24n4...
 <blockquote>
 <p>To retrieve a particular assessment by id, use this code:</p>
 </blockquote>
-<pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">falkonry_csharp_client</span><span class="p">;</span>
-<span class="k">using</span> <span class="nn">falkonry_csharp_client.helper.models</span><span class="p">;</span>
+<pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">FalkonryClient</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">FalkonryClient.Helper.Models</span><span class="p">;</span>
 
 <span class="kt">string</span> <span class="n">token</span><span class="p">=</span><span class="s">"Add your token here"</span><span class="p">;</span>   
 <span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Falkonry</span><span class="p">(</span><span class="s">"http://jumpstart.falkonry.ai"</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
@@ -3057,8 +3057,8 @@ Condition List : N/A
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
 <h2 id="delete-assessment">Delete Assessment</h2>
-<pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">falkonry_csharp_client</span><span class="p">;</span>
-<span class="k">using</span> <span class="nn">falkonry_csharp_client.helper.models</span><span class="p">;</span>
+<pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">FalkonryClient</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">FalkonryClient.Helper.Models</span><span class="p">;</span>
 
 <span class="kt">string</span> <span class="n">token</span><span class="p">=</span><span class="s">"Add your token here"</span><span class="p">;</span>   
 <span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Falkonry</span><span class="p">(</span><span class="s">"http://jumpstart.falkonry.ai"</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
@@ -3087,8 +3087,8 @@ falkonry&gt;&gt;
 <blockquote>
 <p>To retrieve historical output generated by an assessment from the historian, use this code: </p>
 </blockquote>
-<pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">falkonry_csharp_client</span><span class="p">;</span>
-<span class="k">using</span> <span class="nn">falkonry_csharp_client.helper.models</span><span class="p">;</span>
+<pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">FalkonryClient</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">FalkonryClient.Helper.Models</span><span class="p">;</span>
 
 <span class="kt">string</span> <span class="n">token</span><span class="p">=</span><span class="s">"Add your token here"</span><span class="p">;</span>   
 <span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Falkonry</span><span class="p">(</span><span class="s">"http://jumpstart.falkonry.ai"</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
@@ -3248,8 +3248,8 @@ falkonry&gt;&gt;
 <blockquote>
 <p>To add more facts to your assessment, use this code:</p>
 </blockquote>
-<pre class="highlight csharp tab-csharp"><code>    <span class="k">using</span> <span class="nn">falkonry_csharp_client</span><span class="p">;</span>
-    <span class="k">using</span> <span class="nn">falkonry_csharp_client.helper.models</span><span class="p">;</span>
+<pre class="highlight csharp tab-csharp"><code>    <span class="k">using</span> <span class="nn">FalkonryClient</span><span class="p">;</span>
+    <span class="k">using</span> <span class="nn">FalkonryClient.Helper.Models</span><span class="p">;</span>
 
     <span class="n">SortedDictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;</span> <span class="n">options</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SortedDictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;();</span>
     <span class="n">options</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"startTimeIdentifier"</span><span class="p">,</span> <span class="s">"time"</span><span class="p">);</span>
@@ -3324,8 +3324,8 @@ Default assessment <span class="nb">set</span> : hv987ptckdc6n7 Name : New Test 
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h2 id="add-facts-data-json-format-with-addition-tag-to-assessment-of-multi-entity-datastream">Add facts data (json format) with addition tag to Assessment of multi entity datastream</h2>
-<pre class="highlight csharp tab-csharp"><code>    <span class="k">using</span> <span class="nn">falkonry_csharp_client</span><span class="p">;</span>
-    <span class="k">using</span> <span class="nn">falkonry_csharp_client.helper.models</span><span class="p">;</span>
+<pre class="highlight csharp tab-csharp"><code>    <span class="k">using</span> <span class="nn">FalkonryClient</span><span class="p">;</span>
+    <span class="k">using</span> <span class="nn">FalkonryClient.Helper.Models</span><span class="p">;</span>
 
     <span class="n">SortedDictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;</span> <span class="n">options</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SortedDictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;();</span>
     <span class="n">options</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"startTimeIdentifier"</span><span class="p">,</span> <span class="s">"time"</span><span class="p">);</span>
@@ -3387,8 +3387,8 @@ falkonry&gt;&gt;
 
 </code></pre>
 <h2 id="add-facts-data-csv-format-to-assessment-of-single-entity-datastream">Add facts data (csv format) to Assessment of single entity datastream</h2>
-<pre class="highlight csharp tab-csharp"><code>    <span class="k">using</span> <span class="nn">falkonry_csharp_client</span><span class="p">;</span>
-    <span class="k">using</span> <span class="nn">falkonry_csharp_client.helper.models</span><span class="p">;</span>
+<pre class="highlight csharp tab-csharp"><code>    <span class="k">using</span> <span class="nn">FalkonryClient</span><span class="p">;</span>
+    <span class="k">using</span> <span class="nn">FalkonryClient.Helper.Models</span><span class="p">;</span>
 
     <span class="n">SortedDictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;</span> <span class="n">options</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SortedDictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;();</span>
     <span class="n">options</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"startTimeIdentifier"</span><span class="p">,</span> <span class="s">"time"</span><span class="p">);</span>
@@ -3449,8 +3449,8 @@ Default assessment <span class="nb">set</span> : bqn8vjdb7yr9km Name : new <span
 falkonry&gt;&gt;
 </code></pre>
 <h2 id="add-facts-data-csv-format-with-tags-assessment-of-multi-entity-datastream">Add facts data (csv format) with tags Assessment of multi entity datastream</h2>
-<pre class="highlight csharp tab-csharp"><code>    <span class="k">using</span> <span class="nn">falkonry_csharp_client</span><span class="p">;</span>
-    <span class="k">using</span> <span class="nn">falkonry_csharp_client.helper.models</span><span class="p">;</span>
+<pre class="highlight csharp tab-csharp"><code>    <span class="k">using</span> <span class="nn">FalkonryClient</span><span class="p">;</span>
+    <span class="k">using</span> <span class="nn">FalkonryClient.Helper.Models</span><span class="p">;</span>
 
     <span class="n">SortedDictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;</span> <span class="n">options</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SortedDictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;();</span>
     <span class="n">options</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"startTimeIdentifier"</span><span class="p">,</span> <span class="s">"time"</span><span class="p">);</span>
@@ -3554,8 +3554,8 @@ Adding more facts (ground truths) helps improve model accuracy and hence the use
 <blockquote>
 <p>To add facts in json format from an input stream, use this code:</p>
 </blockquote>
-<pre class="highlight csharp tab-csharp"><code>    <span class="k">using</span> <span class="nn">falkonry_csharp_client</span><span class="p">;</span>
-    <span class="k">using</span> <span class="nn">falkonry_csharp_client.helper.models</span><span class="p">;</span>
+<pre class="highlight csharp tab-csharp"><code>    <span class="k">using</span> <span class="nn">FalkonryClient</span><span class="p">;</span>
+    <span class="k">using</span> <span class="nn">FalkonryClient.Helper.Models</span><span class="p">;</span>
 
     <span class="n">SortedDictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;</span> <span class="n">options</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SortedDictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;();</span>
     <span class="n">options</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"startTimeIdentifier"</span><span class="p">,</span> <span class="s">"time"</span><span class="p">);</span>
@@ -3634,8 +3634,8 @@ Adding more facts (ground truths) helps improve model accuracy and hence the use
 <blockquote>
 <p>To add facts in csv format from an input stream, use this code:</p>
 </blockquote>
-<pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">falkonry_csharp_client</span><span class="p">;</span>
-<span class="k">using</span> <span class="nn">falkonry_csharp_client.helper.models</span><span class="p">;</span>
+<pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">FalkonryClient</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">FalkonryClient.Helper.Models</span><span class="p">;</span>
 
 <span class="n">SortedDictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;</span> <span class="n">options</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SortedDictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;();</span>
 <span class="n">options</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"startTimeIdentifier"</span><span class="p">,</span> <span class="s">"time"</span><span class="p">);</span>
@@ -3724,8 +3724,8 @@ Adding more facts (ground truths) helps improve model accuracy and hence the use
 <blockquote>
 <p>To turn live monitoring on for a datastream, use this code:</p>
 </blockquote>
-<pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">falkonry_csharp_client</span><span class="p">;</span>
-<span class="k">using</span> <span class="nn">falkonry_csharp_client.helper.models</span><span class="p">;</span>
+<pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">FalkonryClient</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">FalkonryClient.Helper.Models</span><span class="p">;</span>
 
 <span class="kt">string</span> <span class="n">token</span><span class="p">=</span><span class="s">"Add your token here"</span><span class="p">;</span>   
 <span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Falkonry</span><span class="p">(</span><span class="s">"http://jumpstart.falkonry.ai"</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
@@ -3764,8 +3764,8 @@ Live monitoring can be turned &ldquo;on&rdquo; from the Falkonry Professional UI
 <blockquote>
 <p>To turn live monitoring off for a datastream, use this code:</p>
 </blockquote>
-<pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">falkonry_csharp_client</span><span class="p">;</span>
-<span class="k">using</span> <span class="nn">falkonry_csharp_client.helper.models</span><span class="p">;</span>
+<pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">FalkonryClient</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">FalkonryClient.Helper.Models</span><span class="p">;</span>
 
 <span class="kt">string</span> <span class="n">token</span><span class="p">=</span><span class="s">"Add your token here"</span><span class="p">;</span>   
 <span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Falkonry</span><span class="p">(</span><span class="s">"http://jumpstart.falkonry.ai"</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
@@ -3800,8 +3800,8 @@ Live monitoring can be turned &ldquo;on&rdquo; from the Falkonry Professional UI
 <blockquote>
 <p>To inject live input data in json format into the datastream, use this code:</p>
 </blockquote>
-<pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">falkonry_csharp_client</span><span class="p">;</span>
-<span class="k">using</span> <span class="nn">falkonry_csharp_client.helper.models</span><span class="p">;</span>
+<pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">FalkonryClient</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">FalkonryClient.Helper.Models</span><span class="p">;</span>
 
 <span class="kt">string</span> <span class="n">token</span><span class="p">=</span><span class="s">"Add your token here"</span><span class="p">;</span>   
 <span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Falkonry</span><span class="p">(</span><span class="s">"http://jumpstart.falkonry.ai"</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
@@ -3878,8 +3878,8 @@ When working from within the Falkonry Professional UI, make sure &ldquo;Acceptin
 <blockquote>
 <p>To inject live input data in csv format into the datastream, use this code:</p>
 </blockquote>
-<pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">falkonry_csharp_client</span><span class="p">;</span>
-<span class="k">using</span> <span class="nn">falkonry_csharp_client.helper.models</span><span class="p">;</span>
+<pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">FalkonryClient</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">FalkonryClient.Helper.Models</span><span class="p">;</span>
 
 <span class="kt">string</span> <span class="n">token</span><span class="p">=</span><span class="s">"Add your token here"</span><span class="p">;</span>   
 <span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Falkonry</span><span class="p">(</span><span class="s">"http://jumpstart.falkonry.ai"</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
@@ -3958,8 +3958,8 @@ When working from within the Falkonry Professional UI, make sure &ldquo;Acceptin
 <blockquote>
 <p>To inject live input stream data in json format into the datastream, use this code:</p>
 </blockquote>
-<pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">falkonry_csharp_client</span><span class="p">;</span>
-<span class="k">using</span> <span class="nn">falkonry_csharp_client.helper.models</span><span class="p">;</span>
+<pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">FalkonryClient</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">FalkonryClient.Helper.Models</span><span class="p">;</span>
 
 <span class="kt">string</span> <span class="n">token</span><span class="p">=</span><span class="s">"Add your token here"</span><span class="p">;</span>   
 <span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Falkonry</span><span class="p">(</span><span class="s">"http://jumpstart.falkonry.ai"</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
@@ -4023,8 +4023,8 @@ When working from within the Falkonry Professional UI, make sure &ldquo;Acceptin
 <blockquote>
 <p>To inject live input stream data in csv format into the datastream, use this code:</p>
 </blockquote>
-<pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">falkonry_csharp_client</span><span class="p">;</span>
-<span class="k">using</span> <span class="nn">falkonry_csharp_client.helper.models</span><span class="p">;</span>
+<pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">FalkonryClient</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">FalkonryClient.Helper.Models</span><span class="p">;</span>
 
 <span class="kt">string</span> <span class="n">token</span><span class="p">=</span><span class="s">"Add your token here"</span><span class="p">;</span>   
 <span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Falkonry</span><span class="p">(</span><span class="s">"http://jumpstart.falkonry.ai"</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
@@ -4088,8 +4088,8 @@ When working from within the Falkonry Professional UI, make sure &ldquo;Acceptin
 <blockquote>
 <p>To retrieve live streaming assessment output, use this code:</p>
 </blockquote>
-<pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">falkonry_csharp_client</span><span class="p">;</span>
-<span class="k">using</span> <span class="nn">falkonry_csharp_client.helper.models</span><span class="p">;</span>
+<pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">FalkonryClient</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">FalkonryClient.Helper.Models</span><span class="p">;</span>
 
   <span class="kt">string</span> <span class="n">token</span><span class="p">=</span><span class="s">"Add your token here"</span><span class="p">;</span>   
   <span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Falkonry</span><span class="p">(</span><span class="s">"http://jumpstart.falkonry.ai"</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
