@@ -95,8 +95,8 @@ Remember — a datastream is your basic building block!
 > To setup a Sliding datastream for narrow/historian style data from a single entity, use this code:
 
 ```csharp
-  using falkonry_csharp_client;
-  using falkonry_csharp_client.helper.models;
+  using FalkonryClient;
+  using FalkonryClient.Helper.Models;
   
   string token="Add your token here";   
   Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
@@ -262,8 +262,8 @@ Structuring data as key-value pairs — as is done in narrow-form datasets — f
 > To setup a Batch datastream for narrow/historian style data from a single entity, use this code:
 
 ```csharp
-  using falkonry_csharp_client;
-  using falkonry_csharp_client.helper.models;
+  using FalkonryClient;
+  using FalkonryClient.Helper.Models;
   
   string token="Add your token here";   
   Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
@@ -446,8 +446,8 @@ Structuring data as key-value pairs — as is done in narrow-form datasets — f
 > To setup a Sliding datastream using narrow style data for multiple entities, use this code:
 
 ```csharp
-  using falkonry_csharp_client;
-  using falkonry_csharp_client.helper.models;
+  using FalkonryClient;
+  using FalkonryClient.Helper.Models;
   
   string token="Add your token here";   
   Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
@@ -603,8 +603,8 @@ Structuring data as key-value pairs — as is done in narrow-form datasets — f
 > To setup a Sliding datastream using wide style data for a single entity, use this code:
 
 ```csharp
-  using falkonry_csharp_client;
-  using falkonry_csharp_client.helper.models;
+  using FalkonryClient;
+  using FalkonryClient.Helper.Models;
   
   string token="Add your token here";   
   Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
@@ -619,8 +619,8 @@ Structuring data as key-value pairs — as is done in narrow-form datasets — f
 	var ds = new DatastreamRequest();
 	var Field = new Field();
 	var Signal = new Signal();
-	using falkonry_csharp_client;
-  using falkonry_csharp_client.helper.models;
+	using FalkonryClient;
+  using FalkonryClient.Helper.Models;
   
   string token="Add your token here";   
   Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
@@ -870,8 +870,8 @@ If you have many value variables, it is difficult to summarize wide-form dataset
 > To setup a Sliding datastream using wide style data for multiple entities, use this code:
 
 ```csharp
-  using falkonry_csharp_client;
-  using falkonry_csharp_client.helper.models;
+  using FalkonryClient;
+  using FalkonryClient.Helper.Models;
   
   string token="Add your token here";   
   Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
@@ -886,8 +886,8 @@ If you have many value variables, it is difficult to summarize wide-form dataset
 	var ds = new DatastreamRequest();
 	var Field = new Field();
 	var Signal = new Signal();
-	using falkonry_csharp_client;
-  using falkonry_csharp_client.helper.models;
+	using FalkonryClient;
+  using FalkonryClient.Helper.Models;
   
   string token="Add your token here";   
   Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
@@ -1124,8 +1124,8 @@ If you have many value variables, it is difficult to summarize wide-form dataset
 > To create datastream with microseconds precision, use the following code:
 
 ```csharp
-    using falkonry_csharp_client;
-    using falkonry_csharp_client.helper.models;
+    using FalkonryClient;
+    using FalkonryClient.Helper.Models;
     
     string token="Add your token here";   
     Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
@@ -1272,8 +1272,8 @@ This is used to store your data in different date time format. If input data pre
 > To retrieve a list of existing datastreams, use this code:
 
 ```csharp
-using falkonry_csharp_client;
-using falkonry_csharp_client.helper.models;
+using FalkonryClient;
+using FalkonryClient.Helper.Models;
 
 string token="Add your token here";   
 Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
@@ -1319,8 +1319,8 @@ falkonry>>
 
 
 ```csharp
-using falkonry_csharp_client;
-using falkonry_csharp_client.helper.models;
+using FalkonryClient;
+using FalkonryClient.Helper.Models;
 
 string token="Add your token here";   
 Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
@@ -1428,8 +1428,8 @@ Falkonry needs historical time series data to build pattern recognition models.
 > To add historical narrow input data (json format) to single entity batch datastream, use the following code:
 
 ```csharp
-    using falkonry_csharp_client;
-    using falkonry_csharp_client.helper.models;
+    using FalkonryClient;
+    using FalkonryClient.Helper.Models;
 
     string token="Add your token here";   
     Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
@@ -1533,8 +1533,8 @@ json data from a historian or time series data store can be imported into a Falk
 > To add historical narrow input data (csv format) to multi entity batch Datastream, use the following code:
 
 ```csharp
-	using falkonry_csharp_client;
-  using falkonry_csharp_client.helper.models;
+	using FalkonryClient;
+  using FalkonryClient.Helper.Models;
 
     string token="Add your token here";   
     Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
@@ -1650,8 +1650,8 @@ falkonry>>
 > To add historical wide input data (csv format) to single entity batch datastream, use the following code:
 
 ```csharp
-  using falkonry_csharp_client;
-  using falkonry_csharp_client.helper.models;
+  using FalkonryClient;
+  using FalkonryClient.Helper.Models;
 
   string token="Add your token here";   
   Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
@@ -1744,8 +1744,8 @@ falkonry>>
 > To add historical wide input data (json format) to multi entity batch datastream, use the following code:
 
 ```csharp
-		using falkonry_csharp_client;
-    using falkonry_csharp_client.helper.models;
+		using FalkonryClient;
+    using FalkonryClient.Helper.Models;
 
     string token="Add your token here";   
     Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
@@ -1858,8 +1858,8 @@ time,batchId,unit,signal1,signal2,signal3
 > To add historical narrow input data (csv format) to single entity sliding datastream
 
 ```csharp
-	using falkonry_csharp_client;
-  using falkonry_csharp_client.helper.models;
+	using FalkonryClient;
+  using FalkonryClient.Helper.Models;
 
     string token="Add your token here";   
     Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
@@ -1960,8 +1960,8 @@ falkonry>>
 > To add historical narrow input data (json format) to multi entity sliding datastream
 
 ```csharp
-    using falkonry_csharp_client;
-    using falkonry_csharp_client.helper.models;
+    using FalkonryClient;
+    using FalkonryClient.Helper.Models;
 
     string token="Add your token here";   
     Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
@@ -2059,8 +2059,8 @@ falkonry>>
 > To add wide data (json format) to single entity sliding datastream
 
 ```csharp
-	  using falkonry_csharp_client;
-    using falkonry_csharp_client.helper.models;
+	  using FalkonryClient;
+    using FalkonryClient.Helper.Models;
 
     string token="Add your token here";   
     Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
@@ -2165,8 +2165,8 @@ falkonry>>
 > To add wide input data (csv format) to multi entity sliding datastream
 
 ```csharp
-	using falkonry_csharp_client;
-  using falkonry_csharp_client.helper.models;
+	using FalkonryClient;
+  using FalkonryClient.Helper.Models;
 
   string token="Add your token here";   
   Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
@@ -2289,8 +2289,8 @@ Falkonry needs historical time series data to build pattern recognition models.
 > To add historical input data in json format from a stream, use this code: 
 
 ```csharp
-using falkonry_csharp_client;
-using falkonry_csharp_client.helper.models;
+using FalkonryClient;
+using FalkonryClient.Helper.Models;
 
 string token="Add your token here";   
 Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
@@ -2375,8 +2375,8 @@ Falkonry needs historical time series data to build pattern recognition models.
 > To add historical input data in csv format from a stream to a datastream, use this code: 
 
 ```csharp
-using falkonry_csharp_client;
-using falkonry_csharp_client.helper.models;
+using FalkonryClient;
+using FalkonryClient.Helper.Models;
 
 string token="Add your token here";   
 Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
@@ -2464,8 +2464,8 @@ It may help to extract all the data from an existing datastream for debug, editi
 > To extract data from a datastream, use this code:
 
 ```csharp
-using falkonry_csharp_client;
-using falkonry_csharp_client.helper.models;
+using FalkonryClient;
+using FalkonryClient.Helper.Models;
 
 string token="Add your token here";   
 Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
@@ -2551,8 +2551,8 @@ falkonry>>
 > To delete a datastream using its id, use this code:
 
 ```csharp
-using falkonry_csharp_client;
-using falkonry_csharp_client.helper.models;
+using FalkonryClient;
+using FalkonryClient.Helper.Models;
 
 string token="Add your token here";   
 Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
@@ -2596,8 +2596,8 @@ Sometimes good things come to an end as well :(!
 > To add EntityMeta to a datastream, use this code:
 
 ```csharp
-using falkonry_csharp_client;
-using falkonry_csharp_client.helper.models;
+using FalkonryClient;
+using FalkonryClient.Helper.Models;
 
 string token="Add your token here";   
 Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
@@ -2672,8 +2672,8 @@ EntityMeta or metadata associated with assets/ elements can be injected into an 
 > To retrieve EntityMeta from a datastream, use this code:
 
 ```csharp
-using falkonry_csharp_client;
-using falkonry_csharp_client.helper.models;
+using FalkonryClient;
+using FalkonryClient.Helper.Models;
 
 string token="Add your token here";   
 Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
@@ -2730,8 +2730,8 @@ Assessments can be re-introduced into a data store as attributes to subsequently
 > To create an assessment, use this code:
 
 ```csharp
-using falkonry_csharp_client;
-using falkonry_csharp_client.helper.models;
+using FalkonryClient;
+using FalkonryClient.Helper.Models;
 
 string token="Add your token here";   
 Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
@@ -2874,8 +2874,8 @@ If you would like to request more assessments, reach out to your Falkonry Admin.
 > To retrieve all assessments, use this code:
 
 ```csharp
-using falkonry_csharp_client;
-using falkonry_csharp_client.helper.models;
+using FalkonryClient;
+using FalkonryClient.Helper.Models;
 
 string token="Add your token here";   
 Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
@@ -2948,8 +2948,8 @@ falkonry>>
 > To retrieve a particular assessment by id, use this code:
 
 ```csharp
-using falkonry_csharp_client;
-using falkonry_csharp_client.helper.models;
+using FalkonryClient;
+using FalkonryClient.Helper.Models;
 
 string token="Add your token here";   
 Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
@@ -3024,8 +3024,8 @@ falkonry>>
 ## Delete Assessment
 
 ```csharp
-using falkonry_csharp_client;
-using falkonry_csharp_client.helper.models;
+using FalkonryClient;
+using FalkonryClient.Helper.Models;
 
 string token="Add your token here";   
 Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
@@ -3065,8 +3065,8 @@ falkonry>>
 > To retrieve historical output generated by an assessment from the historian, use this code: 
 
 ```csharp
-using falkonry_csharp_client;
-using falkonry_csharp_client.helper.models;
+using FalkonryClient;
+using FalkonryClient.Helper.Models;
 
 string token="Add your token here";   
 Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
@@ -3237,8 +3237,8 @@ Facts can be added from inspection logs, failure reports, user/ expert observati
 > To add more facts to your assessment, use this code:
 
 ```csharp
-    using falkonry_csharp_client;
-    using falkonry_csharp_client.helper.models;
+    using FalkonryClient;
+    using FalkonryClient.Helper.Models;
 
     SortedDictionary<string, string> options = new SortedDictionary<string, string>();
     options.Add("startTimeIdentifier", "time");
@@ -3327,8 +3327,8 @@ falkonry>>
 ## Add facts data (json format) with addition tag to Assessment of multi entity datastream
 
 ```csharp
-    using falkonry_csharp_client;
-    using falkonry_csharp_client.helper.models;
+    using FalkonryClient;
+    using FalkonryClient.Helper.Models;
 
     SortedDictionary<string, string> options = new SortedDictionary<string, string>();
     options.Add("startTimeIdentifier", "time");
@@ -3403,8 +3403,8 @@ falkonry>>
 ## Add facts data (csv format) to Assessment of single entity datastream
 
 ```csharp
-    using falkonry_csharp_client;
-    using falkonry_csharp_client.helper.models;
+    using FalkonryClient;
+    using FalkonryClient.Helper.Models;
 
     SortedDictionary<string, string> options = new SortedDictionary<string, string>();
     options.Add("startTimeIdentifier", "time");
@@ -3478,8 +3478,8 @@ falkonry>>
 ## Add facts data (csv format) with tags Assessment of multi entity datastream
 
 ```csharp
-    using falkonry_csharp_client;
-    using falkonry_csharp_client.helper.models;
+    using FalkonryClient;
+    using FalkonryClient.Helper.Models;
 
     SortedDictionary<string, string> options = new SortedDictionary<string, string>();
     options.Add("startTimeIdentifier", "time");
@@ -3596,8 +3596,8 @@ Sample JSONFile:
 > To add facts in json format from an input stream, use this code:
 
 ```csharp
-    using falkonry_csharp_client;
-    using falkonry_csharp_client.helper.models;
+    using FalkonryClient;
+    using FalkonryClient.Helper.Models;
 
     SortedDictionary<string, string> options = new SortedDictionary<string, string>();
     options.Add("startTimeIdentifier", "time");
@@ -3687,8 +3687,8 @@ Adding more facts (ground truths) helps improve model accuracy and hence the use
 > To add facts in csv format from an input stream, use this code:
 
 ```csharp
-using falkonry_csharp_client;
-using falkonry_csharp_client.helper.models;
+using FalkonryClient;
+using FalkonryClient.Helper.Models;
 
 SortedDictionary<string, string> options = new SortedDictionary<string, string>();
 options.Add("startTimeIdentifier", "time");
@@ -3791,8 +3791,8 @@ Any model revision can be selected to be the basis of live monitoring. Falkonry 
 > To turn live monitoring on for a datastream, use this code:
 
 ```csharp
-using falkonry_csharp_client;
-using falkonry_csharp_client.helper.models;
+using FalkonryClient;
+using FalkonryClient.Helper.Models;
 
 string token="Add your token here";   
 Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
@@ -3841,8 +3841,8 @@ Live monitoring can be turned "on" from the Falkonry Professional UI but you can
 > To turn live monitoring off for a datastream, use this code:
 
 ```csharp
-using falkonry_csharp_client;
-using falkonry_csharp_client.helper.models;
+using FalkonryClient;
+using FalkonryClient.Helper.Models;
 
 string token="Add your token here";   
 Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
@@ -3890,8 +3890,8 @@ Live monitoring can be turned "on" from the Falkonry Professional UI but you can
 
 
 ```csharp
-using falkonry_csharp_client;
-using falkonry_csharp_client.helper.models;
+using FalkonryClient;
+using FalkonryClient.Helper.Models;
 
 string token="Add your token here";   
 Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
@@ -3978,8 +3978,8 @@ When working from within the Falkonry Professional UI, make sure "Accepting Data
 > To inject live input data in csv format into the datastream, use this code:
 
 ```csharp
-using falkonry_csharp_client;
-using falkonry_csharp_client.helper.models;
+using FalkonryClient;
+using FalkonryClient.Helper.Models;
 
 string token="Add your token here";   
 Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
@@ -4070,8 +4070,8 @@ When working from within the Falkonry Professional UI, make sure "Accepting Data
 > To inject live input stream data in json format into the datastream, use this code:
 
 ```csharp
-using falkonry_csharp_client;
-using falkonry_csharp_client.helper.models;
+using FalkonryClient;
+using FalkonryClient.Helper.Models;
 
 string token="Add your token here";   
 Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
@@ -4147,8 +4147,8 @@ When working from within the Falkonry Professional UI, make sure "Accepting Data
 > To inject live input stream data in csv format into the datastream, use this code:
 
 ```csharp
-using falkonry_csharp_client;
-using falkonry_csharp_client.helper.models;
+using FalkonryClient;
+using FalkonryClient.Helper.Models;
 
 string token="Add your token here";   
 Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
@@ -4223,8 +4223,8 @@ When working from within the Falkonry Professional UI, make sure "Accepting Data
 > To retrieve live streaming assessment output, use this code:
 
 ```csharp
-using falkonry_csharp_client;
-using falkonry_csharp_client.helper.models;
+using FalkonryClient;
+using FalkonryClient.Helper.Models;
 
   string token="Add your token here";   
   Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
