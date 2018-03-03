@@ -112,8 +112,7 @@ Remember — a datastream is your basic building block!
 	var Field = new Field();
 	var Signal = new Signal();
 	Signal.ValueIdentifier = "value";
-	Signal.TagIdentifier = "tag";
-	Signal.IsSignalPrefix = true;
+	Signal.SignalIdentifier = "tag";
 	Field.Signal = Signal;
 	Field.Time = time;
 	ds.Field = Field;
@@ -173,18 +172,16 @@ datastream.set_name('Motor Health' + str(random.random()))  # set name of the Da
 time.set_zone("GMT")                                        # set timezone of the datastream
 time.set_identifier("time")                                 # set time identifier of the datastream
 time.set_format("iso_8601")                                 # set time format of the datastream
-field.set_time(time)            
-signal.set_delimiter(None)                                  # set delimiter to None 
-signal.set_tagIdentifier("tag")                             # set tag identifier
+field.set_time(time)
+signal.set_signalIdentifier("tag")                          # set signal identifier
 signal.set_valueIdentifier("value")                         # set value identifier
-signal.set_isSignalPrefix(False)                            # as this is single entity, set signal prefix flag to false
 field.set_signal(signal)                                    # set signal in field
 datasource.set_type("STANDALONE")                           # set datastource type in datastream
 datastream.set_datasource(datasource)
 datastream.set_field(field)
-        
+
 #create Datastream
-createdDatastream = fclient.create_datastream(datastream)
+createdDatastream = falkonry.create_datastream(datastream)
 ```
 
 ```shell
@@ -236,14 +233,14 @@ Here, we create a datastream and set it up with narrow style data for a single e
 
 **Sample format for narrow/historian style**
 
-Person  | Variable | Value
-------- |----------| -------
-Bob     | Age      | 32
-Bob     | Weight   |128
-Alice   | Age      | 24
-Alice   | Weight   | 86
-Steve   | Age      | 64
-Steve   | Weight   | 95
+ Time    | Signal   | Value
+-------  |----------| -------
+ T1      | signal1  | 32
+ T2      | signal2  |128
+ T3      | signal3  | 24
+ T4      | signal4  | 86
+ T5      | signal5  | 64
+ T6      | signal6  | 95
 
 <aside class="warning">
 Structuring data as key-value pairs — as is done in narrow-form datasets — facilitates conceptual clarity. 
@@ -278,8 +275,9 @@ Structuring data as key-value pairs — as is done in narrow-form datasets — f
 	var ds = new DatastreamRequest();
 	var Field = new Field();
 	var Signal = new Signal();
+	Signal.SignalIdentifier = "signal"
 	Signal.ValueIdentifier = "value";
-	Field.BatchIdentifier = "Batch";
+	Field.BatchIdentifier = "batch";
 	Field.Signal = Signal;
 	Field.Time = time;
 	ds.Field = Field;
@@ -388,8 +386,6 @@ Sample JSONFile:
   "signal": {
     "tagIdentifier": "tag",
     "valueIdentifier": "value",
-    "delimiter": null,
-    "isSignalPrefix": false
     }
     "batchIdentifier": "batchId" // set batch identifier here.
   }
@@ -420,14 +416,14 @@ Here, we create a datastream and set it up with narrow style data for a single e
 
 **Sample format for narrow/historian style**
 
-Person  | Variable | Value
-------- |----------| -------
-Bob     | Age      | 32
-Bob     | Weight   |128
-Alice   | Age      | 24
-Alice   | Weight   | 86
-Steve   | Age      | 64
-Steve   | Weight   | 95
+Time  | Signal   | Signal   | Value
+------|----------|----------| -------
+T1    | batch1   | signal1  | 32
+T2    | batch1   | signal2  | 128
+T3    | batch1   | signal3  | 24
+T4    | batch2   | signal4  | 86
+T5    | batch2   | signal5  | 64
+T6    | batch2   | signal6  | 95
 
 <aside class="warning">
 Structuring data as key-value pairs — as is done in narrow-form datasets — facilitates conceptual clarity. 
@@ -463,9 +459,7 @@ Structuring data as key-value pairs — as is done in narrow-form datasets — f
 	var Field = new Field();
 	var Signal = new Signal();
 	Signal.ValueIdentifier = "value";
-	Signal.TagIdentifier = "tag";
-	Signal.IsSignalPrefix = true;
-	Signal.Delimiter = "_";
+	Signal.SignalIdentifier = "tag";
 	Field.Signal = Signal;
 	Field.Time = time;
 	ds.Field = Field;
@@ -528,10 +522,8 @@ time.set_zone("GMT")                                        # set timezone of th
 time.set_identifier("time")                                 # set time identifier of the datastream
 time.set_format("iso_8601")                                 # set time format of the datastream
 field.set_time(time)            
-signal.set_delimiter("_")                                   # set delimiter
-signal.set_tagIdentifier("tag")                             # set tag identifier
+signal.set_signalIdentifier("tag")                             # set tag identifier
 signal.set_valueIdentifier("value")                         # set value identifier
-signal.set_isSignalPrefix(True)                             # set signal prefix flag
 field.set_signal(signal)                                    # set signal in field
 datasource.set_type("STANDALONE")                           # set datastource type in datastream
 datastream.set_datasource(datasource)
@@ -568,16 +560,6 @@ Datastream successfully created : anbsivd1h7h1sd
 falkonry>>
 ```
 
-> Input data could be of the following format:
-
-```json
-
-  {"time" :"2016-03-01 01:01:01", "tag" : "signal1_entity1", "value" : 3.4}
-  {"time" :"2016-03-01 01:01:01", "tag" : "signal2_entity1", "value" : 1.4}
-  {"time" :"2016-03-01 01:01:02", "tag" : "signal1_entity2", "value" : 9.3}
-  {"time" :"2016-03-01 01:01:02", "tag" : "signal2_entity2", "value" : 4.3}
-```
-
 Wide and narrow (sometimes un-stacked and stacked) are terms used to describe two different presentations for tabular data.
 Here, we create a datastream and set it up with narrow style data for multiple entities or elements.
 
@@ -596,6 +578,17 @@ Steve   | Weight   | 95
 <aside class="warning">
 Structuring data as key-value pairs — as is done in narrow-form datasets — facilitates conceptual clarity. 
 </aside>
+
+> Input data could be of the following format:
+
+```json
+
+  {"time" :"2016-03-01 01:01:01", "tag" : "signal1_entity1", "value" : 3.4}
+  {"time" :"2016-03-01 01:01:01", "tag" : "signal2_entity1", "value" : 1.4}
+  {"time" :"2016-03-01 01:01:02", "tag" : "signal1_entity2", "value" : 9.3}
+  {"time" :"2016-03-01 01:01:02", "tag" : "signal2_entity2", "value" : 4.3}
+
+```
 
 
 ## Setup Sliding datastream for wide style data from a single entity
@@ -840,28 +833,28 @@ Datastream successfully created : anb109d1h7h1po
 falkonry>>
 ```
 
-> Input data could be of the following format:
-
-```json
-{"time":1467729675422, "entities": "entity1", "signal1":41.11, "signal2":82.34, "signal3":74.63, "signal4":4.8}
-{"time":1467729668919, "entities": "entity2", "signal1":78.11, "signal2":2.33, "signal3":4.6, "signal4":9.8}
-```
-
 Wide and narrow (sometimes un-stacked and stacked) are terms used to describe two different presentations for tabular data.
 Here, we create a datastream and set it up with wide style data for a single entity or element.
 
 **Sample format for wide style**
 
 Person  | Age | Weight
-------- |----| -------
-Bob | 32 | 128
-Alice | 24 | 86
-Steve | 64 | 95
+------- |---- | -------
+Bob     | 32  | 128
+Alice   | 24  | 86
+Steve   | 64  | 95
 
 
 <aside class="warning">
 If you have many value variables, it is difficult to summarize wide-form datasets at a glance
 </aside>
+
+> Input data could be of the following format:
+
+```json
+{"time":1467729675422, "entities": "entity1", "signal1":41.11, "signal2":82.34, "signal3":74.63, "signal4":4.8}
+{"time":1467729668919, "entities": "entity2", "signal1":78.11, "signal2":2.33, "signal3":4.6, "signal4":9.8}
+```
 
 
 ## Setup Sliding datastream for wide style data from multiple entities
@@ -1099,24 +1092,25 @@ falkonry>> datastream_create --path=/Users/user/WideMultipleEntity.json
 Datastream successfully created : anb109d1h7h1po
 falkonry>>
 ```
+
+**Sample format for wide style**
+
+Person  | Age | Weight
+------- |---- | -------
+Bob     | 32  | 128
+Alice   | 24  | 86
+Steve   | 64  | 95
+
+<aside class="warning">
+If you have many value variables, it is difficult to summarize wide-form datasets at a glance
+</aside>
+
 > Input data could be of the following format:
 
 ```json
   {"time":1467729675422, "entities": "entity1", "signal1":41.11, "signal2":82.34, "signal3":74.63, "signal4":4.8}
   {"time":1467729668919, "entities": "entity2", "signal1":78.11, "signal2":2.33, "signal3":4.6, "signal4":9.8}
 ```
-
-**Sample format for wide style**
-
-Person  | Age | Weight
-------- |----| -------
-Bob | 32 | 128
-Alice | 24 | 86
-Steve | 64 | 95
-
-<aside class="warning">
-If you have many value variables, it is difficult to summarize wide-form datasets at a glance
-</aside>
 
 
 ## Create Datastream with microseconds precision
@@ -1398,9 +1392,7 @@ falkonry>>
     "entityIdentifier": "string",
     "entityName": "string",
     "signal": {
-      "tagIdentifier": "string",
-      "delimiter": "string",
-      "isSignalPrefix": true,
+      "signalIdentifier": "string",
       "valueIdentifier": "string"
     },
     "time": {
@@ -1514,7 +1506,7 @@ inputResponse = falkonry.add_input_data(datastreamId, 'json', options, data)
 Usage:
 falkonry>> datastream_add_historical_data --path=/Users/user/InputNarrowBatchSingleEntity.json --timeIdentifier="time" --timeFormat="Unix Time Milliseconds" --timeZone="GMT" --signalIdentifier="signal" --batchIdentifier="batchId" --valueIdentifier="value"
 Default datastream set : wlybjb4tq776n9 Name : Narrow Single Entity Batch Test DS
-{u'status': u'PENDING', u'datastream': u'wlybjb4tq776n9', u'__$createTime': 1516013313895, u'__$id': u'kpgly6d2tg9v27b6', u'user': u'e6q8ienqs9celz', u'action': u'ADD_DATA_DATASTREAM', u'__$tenant': u'iqn80x6e2ku9id', u'dataSource': u'y8ibr9co7hqkkd'}
+{'status': 'PENDING', 'datastream': 'wlybjb4tq776n9', '__$createTime': 1516013313895, '__$id': 'kpgly6d2tg9v27b6', 'user': 'e6q8ienqs9celz', 'action': 'ADD_DATA_DATASTREAM', '__$tenant': 'iqn80x6e2ku9id', 'dataSource': 'y8ibr9co7hqkkd'}
 falkonry>>
 ```
 
@@ -1549,8 +1541,8 @@ json data from a historian or time series data store can be imported into a Falk
     options.Add("timeFormat", "YYYY-MM-DD HH:mm:ss");
     options.Add("signalIdentifier", "signal");
     options.Add("valueIdentifier", "value");
-	  options.Add("entityIdentifier", "Unit");
-	  options.Add("batchIdentifier", "Batch");
+	options.Add("entityIdentifier", "Unit");
+	options.Add("batchIdentifier", "Batch");
                 
     var inputstatus = _falkonry.AddInput(datastream.Id, data, options);
                
@@ -1636,7 +1628,7 @@ time,batchId,unit,signal,value
 Usage:
 falkonry>> datastream_add_historical_data --path=/Users/user/InputNarrowBatchMultiEntity.csv --timeIdentifier="time" --timeFormat="Unix Time Milliseconds" --timeZone="GMT" --entityIdentifier="unit" --signalIdentifier="signal" --batchIdentifier="batchId" --valueIdentifier="value"
 Default datastream set : hn6cq2lpcwg49c Name : Narrow Multiple Entity Batch Test DS
-{u'status': u'PENDING', u'datastream': u'hn6cq2lpcwg49c', u'__$createTime': 1516013971506, u'__$id': u'4hqpj9hw2vmcjqwh', u'user': u'e6q8ienqs9celz', u'action': u'ADD_DATA_DATASTREAM', u'__$tenant': u'iqn80x6e2ku9id', u'dataSource': u'Rp8euhiyg3ctt4'}
+{'status': 'PENDING', 'datastream': 'hn6cq2lpcwg49c', '__$createTime': 1516013971506, '__$id': '4hqpj9hw2vmcjqwh', 'user': 'e6q8ienqs9celz', 'action': 'ADD_DATA_DATASTREAM', '__$tenant': 'iqn80x6e2ku9id', 'dataSource': 'Rp8euhiyg3ctt4'}
 falkonry>> 
 ```
 > The data could be of the following format
@@ -1728,7 +1720,7 @@ inputResponse = falkonry.add_input_data(datastreamId, 'json', options, data)
 ```shell
 falkonry>> datastream_add_historical_data --path=/Users/user/InputWideBatchSingleEntity.json --timeIdentifier="time" --timeFormat="Unix Time Milliseconds" --timeZone="GMT" --batchIdentifier="batchId"
 Default datastream set : cm492hm4j74wrn Name : Wide Single Entity Batch Test DS
-{u'status': u'PENDING', u'datastream': u'cm492hm4j74wrn', u'__$createTime': 1516015544894, u'__$id': u'wmgllwgjwwjtp7w4', u'user': u'e6q8ienqs9celz', u'action': u'ADD_DATA_DATASTREAM', u'__$tenant': u'iqn80x6e2ku9id', u'dataSource': u'Teqm2nwjpbhbs3'}
+{'status': 'PENDING', 'datastream': 'cm492hm4j74wrn', '__$createTime': 1516015544894, '__$id': 'wmgllwgjwwjtp7w4', 'user': 'e6q8ienqs9celz', 'action': 'ADD_DATA_DATASTREAM', '__$tenant': 'iqn80x6e2ku9id', 'dataSource': 'Teqm2nwjpbhbs3'}
 falkonry>> 
 ```
 > The data could be of the following format
@@ -1837,7 +1829,7 @@ inputResponse = falkonry.add_input_data(datastreamId, 'csv', options, data)
 ```shell
 falkonry>> datastream_add_historical_data --path=/Users/user/InputWideBatchMultiEntity.csv --timeIdentifier="time" --timeFormat="Unix Time Milliseconds" --timeZone="GMT" --entityIdentifier="unit" --batchIdentifier="batchId"
 Default datastream set : 7wgwm68b9p24n4 Name : Wide Multiple Entity Batch Test DS
-{u'status': u'PENDING', u'datastream': u'7wgwm68b9p24n4', u'__$createTime': 1516016064677, u'__$id': u'mlc2pt7y87jhwlw2', u'user': u'e6q8ienqs9celz', u'action': u'ADD_DATA_DATASTREAM', u'__$tenant': u'iqn80x6e2ku9id', u'dataSource': u'Lita7m408qq9j9'}
+{'status': 'PENDING', 'datastream': '7wgwm68b9p24n4', '__$createTime': 1516016064677, '__$id': 'mlc2pt7y87jhwlw2', 'user': 'e6q8ienqs9celz', 'action': 'ADD_DATA_DATASTREAM', '__$tenant': 'iqn80x6e2ku9id', 'dataSource': 'Lita7m408qq9j9'}
 falkonry>>
 ```
 > The data could be of the following format
@@ -1858,8 +1850,8 @@ time,batchId,unit,signal1,signal2,signal3
 > To add historical narrow input data (csv format) to single entity sliding datastream
 
 ```csharp
-	using FalkonryClient;
-  using FalkonryClient.Helper.Models;
+    using FalkonryClient;
+    using FalkonryClient.Helper.Models;
 
     string token="Add your token here";   
     Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
@@ -1944,7 +1936,7 @@ Usage :
 falkonry>> datastream_add_historical_data --path=/Users/user/InputNarrow.csv --timeIdentifier=time --timeFormat=iso_8601 --timeZone=GMT --signalIdentifier=signal --valueIdentifier=value
 
 Default datastream set : oii0djojxc2lxt Name : New Ds -1
-{u'status': u'PENDING', u'datastream': u'oii0djojxc2lxt', u'__$createTime': 1500538975912, u'__$id': u'q68cho8foyml3gv4', u'user': u'Tza1q4g0kw5epo', u'action': u'ADD_DATA_DATASTREAM', u'__$tenant': u'el7rvvqx2xr6v5', u'dataSource': u'Lp1nfea7z5lrtk'}
+{'status': 'PENDING', 'datastream': 'oii0djojxc2lxt', '__$createTime': 1500538975912, '__$id': 'q68cho8foyml3gv4', 'user': 'Tza1q4g0kw5epo', 'action': 'ADD_DATA_DATASTREAM', '__$tenant': 'el7rvvqx2xr6v5', 'dataSource': 'Lp1nfea7z5lrtk'}
 falkonry>>
 ```
 > Data could be of following format:
@@ -2039,7 +2031,7 @@ inputResponse = falkonry.add_input_data(datastreamId, 'json', options, data)
 falkonry>> datastream_add_historical_data --path=/Users/user/Input.json --timeIdentifier=time --entityIdentifier=car --timeFormat=iso_8601 --timeZone=GMT --signalIdentifier=signal --valueIdentifier=value
 
 Default datastream set : oii0djojxc2lxt Name : New Ds -1
-{u'status': u'PENDING', u'datastream': u'oii0djojxc2lxt', u'__$createTime': 1500538975912, u'__$id': u'q68cho8foyml3gv4', u'user': u'Tza1q4g0kw5epo', u'action': u'ADD_DATA_DATASTREAM', u'__$tenant': u'el7rvvqx2xr6v5', u'dataSource': u'Lp1nfea7z5lrtk'}
+{'status': 'PENDING', 'datastream': 'oii0djojxc2lxt', '__$createTime': 1500538975912, '__$id': 'q68cho8foyml3gv4', 'user': 'Tza1q4g0kw5epo', 'action': 'ADD_DATA_DATASTREAM', '__$tenant': 'el7rvvqx2xr6v5', 'dataSource': 'Lp1nfea7z5lrtk'}
 falkonry>>
 ```
 
@@ -2147,7 +2139,7 @@ inputResponse = falkonry.add_input_data(datastreamId, 'json', options, stream)
 falkonry>> datastream_add_historical_data --path=/Users/user/InputWideSingleEntity.csv --timeIdentifier=time --timeFormat=iso_8601 --timeZone=GMT --signalIdentifier=signal --valueIdentifier=value
 
 Default datastream set : oii0djojxc2lxt Name : New Ds -1
-{u'status': u'PENDING', u'datastream': u'oii0djojxc2lxt', u'__$createTime': 1500538975912, u'__$id': u'q68cho8foyml3gv4', u'user': u'Tza1q4g0kw5epo', u'action': u'ADD_DATA_DATASTREAM', u'__$tenant': u'el7rvvqx2xr6v5', u'dataSource': u'Lp1nfea7z5lrtk'}
+{'status': 'PENDING', 'datastream': 'oii0djojxc2lxt', '__$createTime': 1500538975912, '__$id': 'q68cho8foyml3gv4', 'user': 'Tza1q4g0kw5epo', 'action': 'ADD_DATA_DATASTREAM', '__$tenant': 'el7rvvqx2xr6v5', 'dataSource': 'Lp1nfea7z5lrtk'}
 falkonry>>
 ```
 
@@ -2515,7 +2507,31 @@ Datastream datastream = falkonry.createDatastream(ds);
 ```
 
 ```python
+import os, sys
+from pprint import pprint
+from falkonryclient import client as Falkonry
+from falkonryclient import schemas as Schemas
 
+falkonry  = Falkonry('http://jumpstart.falkonry.ai', 'auth-token')
+
+#Id of the datastream of which the data is to be extracted
+datastreamId = 'id of the datastream'
+
+#setting the format(CSV or JSON) of the data
+options = {'format':"text/csv"} #For Json format use {'format':"application/json"}
+
+datastream_data = fclient.get_datastream_data(datastreamId, options)
+
+#printing datastream's data 
+pprint(datastream_data.text)
+
+#Exporting the data to an external file
+file_name = 'input.json' #Name of the file with path
+with open(file_name, 'w') as file:
+    file.write(str(datastream_data))
+
+#We can use the exported file to add Data to other datastream or to create a new one with the same data    
+    
 ```
 
 ```shell
@@ -2538,6 +2554,7 @@ Input Data :
 {"time":1294078560000,"tag":"Device1:device","value":"Device1"}
 {"time":1294091820000,"tag":"Device1:device","value":"Device1"}
 ============================================================================
+
 falkonry>>
 Writing input Data to file
 falkonry>> datastream_get_data --format=application/json --path=input.json
@@ -3785,6 +3802,49 @@ After a model revision has been trained, a user may want to switch to live monit
 
 Any model revision can be selected to be the basis of live monitoring. Falkonry will assign conditions to multi-variate patterns based on the signals that were used to create the model revision.
 
+## Check live monitoring Status of datastream
+
+> To check whether live monitoring is on for a datastream, use this code:
+
+```csharp
+using FalkonryClient;
+using FalkonryClient.Helper.Models;
+
+string token="Add your token here";   
+Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
+  string datastream_id = "Your datastream id";
+  Datastream ds = falkonry.GetDatastream("datastream_id");
+  var status = ds.Live; //live status will be "ON" or "OFF".
+;
+```
+
+```java
+  import com.falkonry.client.Falkonry;
+
+  Falkonry falkonry   = new Falkonry("https://jumpstart.falkonry.ai", "auth-token");
+  String datastreamId = "hk7cgt56r3yln0";
+  Datastream datastream = falkonry.getDatastream(datastreamId);
+  String status = datastream.Live; //live status will be "ON" or "OFF".
+```
+
+```python
+import os, sys
+from falkonryclient import client as Falkonry
+from falkonryclient import schemas as Schemas
+
+falkonry  = Falkonry('https://jumpstart.falkonry.ai', 'auth-token')
+datastreamId = 'id of the datastream'
+datastream = falkonry.get_datastream(datastreamId)
+status = datastream.get_live()//live status will be "ON" or "OFF".
+```
+
+```shell
+falkonry>> datastream_get_live_status
+Default datastream set: 5kzugwm1natt0l Name: Robo Arm Test 1
+Fetching Live monitoring status for datastream : 5kzugwm1natt0l
+Live Monitoring : ON //live status will be "ON" or "OFF". 
+falkonry>>
+```
 
 ## Start live monitoring of datastream
 
