@@ -3815,7 +3815,7 @@ Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
   string datastream_id = "Your datastream id";
   Datastream ds = falkonry.GetDatastream("datastream_id");
   var status = ds.Live; //live status will be "ON" or "OFF".
-;
+
 ```
 
 ```java
