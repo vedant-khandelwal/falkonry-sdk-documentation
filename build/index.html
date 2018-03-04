@@ -477,6 +477,7 @@ Structuring data as key-value pairs — as is done in narrow-form datasets — f
   <span class="n">Signal</span><span class="p">.</span><span class="n">SignalIdentifier</span> <span class="p">=</span> <span class="s">"signal"</span><span class="p">;</span>
     <span class="n">Field</span><span class="p">.</span><span class="n">Signal</span> <span class="p">=</span> <span class="n">Signal</span><span class="p">;</span>
     <span class="n">Field</span><span class="p">.</span><span class="n">Time</span> <span class="p">=</span> <span class="n">time</span><span class="p">;</span>
+  <span class="n">Field</span><span class="p">.</span><span class="n">BatchIdentifier</span> <span class="p">=</span> <span class="s">"batch"</span><span class="p">;</span>
     <span class="n">ds</span><span class="p">.</span><span class="n">Field</span> <span class="p">=</span> <span class="n">Field</span><span class="p">;</span>
     <span class="n">ds</span><span class="p">.</span><span class="n">DataSource</span> <span class="p">=</span> <span class="n">datasource</span><span class="p">;</span>
     <span class="kt">var</span> <span class="n">rnd</span> <span class="p">=</span> <span class="k">new</span> <span class="n">System</span><span class="p">.</span><span class="nf">Random</span><span class="p">();</span>
@@ -524,25 +525,8 @@ Structuring data as key-value pairs — as is done in narrow-form datasets — f
 <span class="n">field</span> <span class="o">=</span> <span class="n">Schemas</span><span class="o">.</span><span class="n">Field</span><span class="p">()</span>
 <span class="n">time</span> <span class="o">=</span> <span class="n">Schemas</span><span class="o">.</span><span class="n">Time</span><span class="p">()</span>
 <span class="n">signal</span> <span class="o">=</span> <span class="n">Schemas</span><span class="o">.</span><span class="n">Signal</span><span class="p">()</span>
-<span class="n">input1</span> <span class="o">=</span> <span class="n">Schemas</span><span class="o">.</span><span class="n">Input</span><span class="p">()</span>
-<span class="n">input2</span> <span class="o">=</span> <span class="n">Schemas</span><span class="o">.</span><span class="n">Input</span><span class="p">()</span>
-<span class="n">input3</span> <span class="o">=</span> <span class="n">Schemas</span><span class="o">.</span><span class="n">Input</span><span class="p">()</span>
 
 <span class="n">datastream</span><span class="o">.</span><span class="n">set_name</span><span class="p">(</span><span class="s">'Motor Health'</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()))</span>  <span class="c"># set name of the Datastream</span>
-
-<span class="n">input1</span><span class="o">.</span><span class="n">set_name</span><span class="p">(</span><span class="s">"Signal1"</span><span class="p">)</span>                                  <span class="c"># set name of input signal</span>
-<span class="n">input1</span><span class="o">.</span><span class="n">set_value_type</span><span class="p">(</span><span class="s">"Numeric"</span><span class="p">)</span>                            <span class="c"># set value type of input signal (Numeric for number, Categorical for string type)</span>
-<span class="n">input1</span><span class="o">.</span><span class="n">set_event_type</span><span class="p">(</span><span class="s">"Samples"</span><span class="p">)</span>                            <span class="c"># set event type of input signal</span>
-<span class="n">input2</span><span class="o">.</span><span class="n">set_name</span><span class="p">(</span><span class="s">"Signal2"</span><span class="p">)</span>                                  <span class="c"># set name of input signal</span>
-<span class="n">input2</span><span class="o">.</span><span class="n">set_value_type</span><span class="p">(</span><span class="s">"Numeric"</span><span class="p">)</span>                            <span class="c"># set value type of input signal (Numeric for number, Categorical for string type)</span>
-<span class="n">input2</span><span class="o">.</span><span class="n">set_event_type</span><span class="p">(</span><span class="s">"Samples"</span><span class="p">)</span>                            <span class="c"># set event type of input signal</span>
-<span class="n">input3</span><span class="o">.</span><span class="n">set_name</span><span class="p">(</span><span class="s">"Signal3"</span><span class="p">)</span>                                  <span class="c"># set name of input signal</span>
-<span class="n">input3</span><span class="o">.</span><span class="n">set_value_type</span><span class="p">(</span><span class="s">"Numeric"</span><span class="p">)</span>                            <span class="c"># set value type of input signal (Numeric for number, Categorical for string type)</span>
-<span class="n">input3</span><span class="o">.</span><span class="n">set_event_type</span><span class="p">(</span><span class="s">"Samples"</span><span class="p">)</span>                            <span class="c"># set event type of input signal</span>
-<span class="n">inputs</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">input1</span><span class="p">)</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">input2</span><span class="p">)</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">input3</span><span class="p">)</span>
 
 <span class="n">time</span><span class="o">.</span><span class="n">set_zone</span><span class="p">(</span><span class="s">"GMT"</span><span class="p">)</span>                                        <span class="c"># set timezone of the datastream</span>
 <span class="n">time</span><span class="o">.</span><span class="n">set_identifier</span><span class="p">(</span><span class="s">"time"</span><span class="p">)</span>                                 <span class="c"># set time identifier of the datastream</span>
@@ -555,7 +539,6 @@ Structuring data as key-value pairs — as is done in narrow-form datasets — f
 <span class="n">datasource</span><span class="o">.</span><span class="n">set_type</span><span class="p">(</span><span class="s">"STANDALONE"</span><span class="p">)</span>                           <span class="c"># set datastource type in datastream</span>
 <span class="n">datastream</span><span class="o">.</span><span class="n">set_datasource</span><span class="p">(</span><span class="n">datasource</span><span class="p">)</span>
 <span class="n">datastream</span><span class="o">.</span><span class="n">set_field</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
-<span class="n">datastream</span><span class="o">.</span><span class="n">set_inputs</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
 
 <span class="c">#create Datastream</span>
 <span class="n">createdDatastream</span> <span class="o">=</span> <span class="n">fclient</span><span class="o">.</span><span class="n">create_datastream</span><span class="p">(</span><span class="n">datastream</span><span class="p">)</span>
@@ -573,10 +556,10 @@ Sample JSONFile:
       <span class="s2">"identifier"</span>: <span class="s2">"time"</span>,
       <span class="s2">"format"</span>: <span class="s2">"YYYY-MM-DD HH:mm:ss"</span>
     <span class="o">}</span>,
-  <span class="s2">"signal"</span>: <span class="o">{</span>
-    <span class="s2">"signalIdentifier"</span>: <span class="s2">"signal"</span>,
-    <span class="s2">"valueIdentifier"</span>: <span class="s2">"value"</span>
-    <span class="o">}</span>
+    <span class="s2">"signal"</span>: <span class="o">{</span>
+      <span class="s2">"signalIdentifier"</span>: <span class="s2">"signal"</span>,
+      <span class="s2">"valueIdentifier"</span>: <span class="s2">"value"</span>
+    <span class="o">}</span>,
     <span class="s2">"batchIdentifier"</span>: <span class="s2">"batchId"</span> // <span class="nb">set </span>batch identifier here.
   <span class="o">}</span>
 <span class="o">}</span>
@@ -610,17 +593,20 @@ Here, we create a datastream and set it up with narrow style data for a single e
 <th>time</th>
 <th>signal</th>
 <th>value</th>
+<th>batch</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>2016-03-01 01:01:01</td>
 <td>signal1</td>
 <td>3.4</td>
+<td>batch1</td>
 </tr>
 <tr>
 <td>2016-03-01 01:01:02</td>
 <td>signal2</td>
 <td>9.3</td>
+<td>batch1</td>
 </tr>
 </tbody></table>
 
@@ -639,67 +625,65 @@ Structuring data as key-value pairs — as is done in narrow-form datasets — f
 <blockquote>
 <p>To setup a Sliding datastream using narrow style data for multiple entities, use this code:</p>
 </blockquote>
-<pre class="highlight csharp tab-csharp"><code>  <span class="k">using</span> <span class="nn">FalkonryClient</span><span class="p">;</span>
-  <span class="k">using</span> <span class="nn">FalkonryClient.Helper.Models</span><span class="p">;</span>
+<pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">FalkonryClient</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">FalkonryClient.Helper.Models</span><span class="p">;</span>
 
-  <span class="kt">string</span> <span class="n">token</span><span class="p">=</span><span class="s">"api-token"</span><span class="p">;</span>   
-  <span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Falkonry</span><span class="p">(</span><span class="s">"http://example.falkonry.ai"</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
+<span class="kt">string</span> <span class="n">token</span><span class="p">=</span><span class="s">"api-token"</span><span class="p">;</span>   
+<span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Falkonry</span><span class="p">(</span><span class="s">"http://example.falkonry.ai"</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
 
-    <span class="kt">var</span> <span class="n">time</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Time</span><span class="p">();</span>
-    <span class="n">time</span><span class="p">.</span><span class="n">Zone</span> <span class="p">=</span> <span class="s">"GMT"</span><span class="p">;</span>
-    <span class="n">time</span><span class="p">.</span><span class="n">Identifier</span> <span class="p">=</span> <span class="s">"time"</span><span class="p">;</span>
-    <span class="n">time</span><span class="p">.</span><span class="n">Format</span> <span class="p">=</span> <span class="s">"iso_8601"</span><span class="p">;</span>
+<span class="kt">var</span> <span class="n">time</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Time</span><span class="p">();</span>
+<span class="n">time</span><span class="p">.</span><span class="n">Zone</span> <span class="p">=</span> <span class="s">"GMT"</span><span class="p">;</span>
+<span class="n">time</span><span class="p">.</span><span class="n">Identifier</span> <span class="p">=</span> <span class="s">"time"</span><span class="p">;</span>
+<span class="n">time</span><span class="p">.</span><span class="n">Format</span> <span class="p">=</span> <span class="s">"iso_8601"</span><span class="p">;</span>
 
-    <span class="kt">var</span> <span class="n">datasource</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Datasource</span><span class="p">();</span>
-    <span class="n">datasource</span><span class="p">.</span><span class="n">Type</span> <span class="p">=</span> <span class="s">"PI"</span><span class="p">;</span>
-    <span class="kt">var</span> <span class="n">ds</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">DatastreamRequest</span><span class="p">();</span>
-    <span class="kt">var</span> <span class="n">Field</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Field</span><span class="p">();</span>
-    <span class="kt">var</span> <span class="n">Signal</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Signal</span><span class="p">();</span>
-    <span class="n">Signal</span><span class="p">.</span><span class="n">ValueIdentifier</span> <span class="p">=</span> <span class="s">"value"</span><span class="p">;</span>
-    <span class="n">Signal</span><span class="p">.</span><span class="n">SignalIdentifier</span> <span class="p">=</span> <span class="s">"signal"</span><span class="p">;</span>
-    <span class="n">Field</span><span class="p">.</span><span class="n">Signal</span> <span class="p">=</span> <span class="n">Signal</span><span class="p">;</span>
-    <span class="n">Field</span><span class="p">.</span><span class="n">Time</span> <span class="p">=</span> <span class="n">time</span><span class="p">;</span>
-  <span class="n">Field</span><span class="p">.</span><span class="n">BatchIdentifier</span> <span class="p">=</span> <span class="s">"batchId"</span><span class="p">;</span>
-  <span class="n">Field</span><span class="p">.</span><span class="n">EntityIdentifier</span> <span class="p">=</span> <span class="s">"entity"</span><span class="p">;</span>
-    <span class="n">ds</span><span class="p">.</span><span class="n">Field</span> <span class="p">=</span> <span class="n">Field</span><span class="p">;</span>
-    <span class="n">ds</span><span class="p">.</span><span class="n">DataSource</span> <span class="p">=</span> <span class="n">datasource</span><span class="p">;</span>
-    <span class="kt">var</span> <span class="n">rnd</span> <span class="p">=</span> <span class="k">new</span> <span class="n">System</span><span class="p">.</span><span class="nf">Random</span><span class="p">();</span>
-    <span class="kt">var</span> <span class="n">randomNumber</span> <span class="p">=</span> <span class="n">System</span><span class="p">.</span><span class="n">Convert</span><span class="p">.</span><span class="nf">ToString</span><span class="p">(</span><span class="n">rnd</span><span class="p">.</span><span class="nf">Next</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">10000</span><span class="p">));</span>
-    <span class="n">ds</span><span class="p">.</span><span class="n">Name</span> <span class="p">=</span> <span class="s">"TestDS"</span> <span class="p">+</span> <span class="n">randomNumber</span><span class="p">;</span>
-    <span class="n">ds</span><span class="p">.</span><span class="n">Field</span><span class="p">.</span><span class="n">Time</span> <span class="p">=</span> <span class="n">time</span><span class="p">;</span>
-    <span class="n">ds</span><span class="p">.</span><span class="n">DataSource</span> <span class="p">=</span> <span class="n">datasource</span><span class="p">;</span>
-    <span class="kt">var</span> <span class="n">datastream</span> <span class="p">=</span> <span class="n">_falkonry</span><span class="p">.</span><span class="nf">CreateDatastream</span><span class="p">(</span><span class="n">ds</span><span class="p">);</span>
-</code></pre><pre class="highlight java tab-java"><code>  <span class="kn">import</span> <span class="nn">com.falkonry.client.Falkonry</span><span class="o">;</span>
-  <span class="kn">import</span> <span class="nn">com.falkonry.helper.models.Datasource</span><span class="o">;</span>
-  <span class="kn">import</span> <span class="nn">com.falkonry.helper.models.Datastream</span><span class="o">;</span>
-  <span class="kn">import</span> <span class="nn">com.falkonry.helper.models.Field</span><span class="o">;</span>
-  <span class="kn">import</span> <span class="nn">com.falkonry.helper.models.TimeObject</span><span class="o">;</span>
-  <span class="kn">import</span> <span class="nn">com.falkonry.helper.models.Signal</span><span class="o">;</span>
+<span class="kt">var</span> <span class="n">datasource</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Datasource</span><span class="p">();</span>
+<span class="n">datasource</span><span class="p">.</span><span class="n">Type</span> <span class="p">=</span> <span class="s">"PI"</span><span class="p">;</span>
+<span class="kt">var</span> <span class="n">ds</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">DatastreamRequest</span><span class="p">();</span>
+<span class="kt">var</span> <span class="n">Field</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Field</span><span class="p">();</span>
+<span class="kt">var</span> <span class="n">Signal</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Signal</span><span class="p">();</span>
+<span class="n">Signal</span><span class="p">.</span><span class="n">ValueIdentifier</span> <span class="p">=</span> <span class="s">"value"</span><span class="p">;</span>
+<span class="n">Signal</span><span class="p">.</span><span class="n">SignalIdentifier</span> <span class="p">=</span> <span class="s">"signal"</span><span class="p">;</span>
+<span class="n">Field</span><span class="p">.</span><span class="n">Signal</span> <span class="p">=</span> <span class="n">Signal</span><span class="p">;</span>
+<span class="n">Field</span><span class="p">.</span><span class="n">Time</span> <span class="p">=</span> <span class="n">time</span><span class="p">;</span>
+<span class="n">Field</span><span class="p">.</span><span class="n">EntityIdentifier</span> <span class="p">=</span> <span class="s">"entity"</span><span class="p">;</span>
+<span class="n">ds</span><span class="p">.</span><span class="n">Field</span> <span class="p">=</span> <span class="n">Field</span><span class="p">;</span>
+<span class="n">ds</span><span class="p">.</span><span class="n">DataSource</span> <span class="p">=</span> <span class="n">datasource</span><span class="p">;</span>
+<span class="kt">var</span> <span class="n">rnd</span> <span class="p">=</span> <span class="k">new</span> <span class="n">System</span><span class="p">.</span><span class="nf">Random</span><span class="p">();</span>
+<span class="kt">var</span> <span class="n">randomNumber</span> <span class="p">=</span> <span class="n">System</span><span class="p">.</span><span class="n">Convert</span><span class="p">.</span><span class="nf">ToString</span><span class="p">(</span><span class="n">rnd</span><span class="p">.</span><span class="nf">Next</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">10000</span><span class="p">));</span>
+<span class="n">ds</span><span class="p">.</span><span class="n">Name</span> <span class="p">=</span> <span class="s">"TestDS"</span> <span class="p">+</span> <span class="n">randomNumber</span><span class="p">;</span>
+<span class="n">ds</span><span class="p">.</span><span class="n">Field</span><span class="p">.</span><span class="n">Time</span> <span class="p">=</span> <span class="n">time</span><span class="p">;</span>
+<span class="n">ds</span><span class="p">.</span><span class="n">DataSource</span> <span class="p">=</span> <span class="n">datasource</span><span class="p">;</span>
+<span class="kt">var</span> <span class="n">datastream</span> <span class="p">=</span> <span class="n">_falkonry</span><span class="p">.</span><span class="nf">CreateDatastream</span><span class="p">(</span><span class="n">ds</span><span class="p">);</span>
+</code></pre><pre class="highlight java tab-java"><code><span class="kn">import</span> <span class="nn">com.falkonry.client.Falkonry</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.falkonry.helper.models.Datasource</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.falkonry.helper.models.Datastream</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.falkonry.helper.models.Field</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.falkonry.helper.models.TimeObject</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.falkonry.helper.models.Signal</span><span class="o">;</span>
 
-  <span class="c1">//instantiate Falkonry</span>
-  <span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Falkonry</span><span class="o">(</span><span class="s">"http://example.falkonry.ai"</span><span class="o">,</span> <span class="s">"auth-token"</span><span class="o">);</span>
+<span class="c1">//instantiate Falkonry</span>
+<span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Falkonry</span><span class="o">(</span><span class="s">"http://example.falkonry.ai"</span><span class="o">,</span> <span class="s">"auth-token"</span><span class="o">);</span>
 
-  <span class="n">Datastream</span> <span class="n">ds</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Datastream</span><span class="o">();</span>
-    <span class="n">ds</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">"Test-DS-"</span> <span class="o">+</span> <span class="n">Math</span><span class="o">.</span><span class="na">random</span><span class="o">());</span>
-    <span class="n">TimeObject</span> <span class="n">time</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TimeObject</span><span class="o">();</span>
-    <span class="n">time</span><span class="o">.</span><span class="na">setIdentifier</span><span class="o">(</span><span class="s">"time"</span><span class="o">);</span>
-    <span class="n">time</span><span class="o">.</span><span class="na">setFormat</span><span class="o">(</span><span class="s">"iso_8601"</span><span class="o">);</span>
-    <span class="n">time</span><span class="o">.</span><span class="na">setZone</span><span class="o">(</span><span class="s">"GMT"</span><span class="o">);</span>
-    <span class="n">Signal</span> <span class="n">signal</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Signal</span><span class="o">();</span>
+<span class="n">Datastream</span> <span class="n">ds</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Datastream</span><span class="o">();</span>
+<span class="n">ds</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">"Test-DS-"</span> <span class="o">+</span> <span class="n">Math</span><span class="o">.</span><span class="na">random</span><span class="o">());</span>
+<span class="n">TimeObject</span> <span class="n">time</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TimeObject</span><span class="o">();</span>
+<span class="n">time</span><span class="o">.</span><span class="na">setIdentifier</span><span class="o">(</span><span class="s">"time"</span><span class="o">);</span>
+<span class="n">time</span><span class="o">.</span><span class="na">setFormat</span><span class="o">(</span><span class="s">"iso_8601"</span><span class="o">);</span>
+<span class="n">time</span><span class="o">.</span><span class="na">setZone</span><span class="o">(</span><span class="s">"GMT"</span><span class="o">);</span>
+<span class="n">Signal</span> <span class="n">signal</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Signal</span><span class="o">();</span>
 
-    <span class="n">signal</span><span class="o">.</span><span class="na">setValueIdentifier</span><span class="o">(</span><span class="s">"value"</span><span class="o">);</span>
-    <span class="n">signal</span><span class="o">.</span><span class="na">setSignalIdentifier</span><span class="o">(</span><span class="s">"signal"</span><span class="o">);</span>
-    <span class="n">Field</span> <span class="n">field</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Field</span><span class="o">();</span>
-    <span class="n">field</span><span class="o">.</span><span class="na">setSignal</span><span class="o">(</span><span class="n">signal</span><span class="o">);</span>
-    <span class="n">field</span><span class="o">.</span><span class="na">setBatchIdentifier</span><span class="o">(</span><span class="s">"batchId"</span><span class="o">);</span>
-  <span class="n">field</span><span class="o">.</span><span class="na">setEntityIdentifier</span><span class="o">(</span><span class="s">"entity"</span><span class="o">);</span>
-    <span class="n">field</span><span class="o">.</span><span class="na">setTime</span><span class="o">(</span><span class="n">time</span><span class="o">);</span>
-    <span class="n">ds</span><span class="o">.</span><span class="na">setField</span><span class="o">(</span><span class="n">field</span><span class="o">);</span>
-    <span class="n">Datasource</span> <span class="n">dataSource</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Datasource</span><span class="o">();</span>
-    <span class="n">dataSource</span><span class="o">.</span><span class="na">setType</span><span class="o">(</span><span class="s">"STANDALONE"</span><span class="o">);</span>
-    <span class="n">ds</span><span class="o">.</span><span class="na">setDatasource</span><span class="o">(</span><span class="n">dataSource</span><span class="o">);</span>
+<span class="n">signal</span><span class="o">.</span><span class="na">setValueIdentifier</span><span class="o">(</span><span class="s">"value"</span><span class="o">);</span>
+<span class="n">signal</span><span class="o">.</span><span class="na">setSignalIdentifier</span><span class="o">(</span><span class="s">"signal"</span><span class="o">);</span>
+<span class="n">Field</span> <span class="n">field</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Field</span><span class="o">();</span>
+<span class="n">field</span><span class="o">.</span><span class="na">setSignal</span><span class="o">(</span><span class="n">signal</span><span class="o">);</span>
+<span class="n">field</span><span class="o">.</span><span class="na">setEntityIdentifier</span><span class="o">(</span><span class="s">"entity"</span><span class="o">);</span>
+<span class="n">field</span><span class="o">.</span><span class="na">setTime</span><span class="o">(</span><span class="n">time</span><span class="o">);</span>
+<span class="n">ds</span><span class="o">.</span><span class="na">setField</span><span class="o">(</span><span class="n">field</span><span class="o">);</span>
+<span class="n">Datasource</span> <span class="n">dataSource</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Datasource</span><span class="o">();</span>
+<span class="n">dataSource</span><span class="o">.</span><span class="na">setType</span><span class="o">(</span><span class="s">"STANDALONE"</span><span class="o">);</span>
+<span class="n">ds</span><span class="o">.</span><span class="na">setDatasource</span><span class="o">(</span><span class="n">dataSource</span><span class="o">);</span>
 
-    <span class="n">Datastream</span> <span class="n">datastream</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="na">createDatastream</span><span class="o">(</span><span class="n">ds</span><span class="o">);</span>
+<span class="n">Datastream</span> <span class="n">datastream</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="na">createDatastream</span><span class="o">(</span><span class="n">ds</span><span class="o">);</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">from</span> <span class="nn">falkonryclient</span> <span class="kn">import</span> <span class="n">client</span> <span class="k">as</span> <span class="n">Falkonry</span>
 <span class="kn">from</span> <span class="nn">falkonryclient</span> <span class="kn">import</span> <span class="n">schemas</span> <span class="k">as</span> <span class="n">Schemas</span>
 
@@ -719,7 +703,6 @@ Structuring data as key-value pairs — as is done in narrow-form datasets — f
 <span class="n">signal</span><span class="o">.</span><span class="n">set_signalIdentifier</span><span class="p">(</span><span class="s">"signal"</span><span class="p">)</span>                       <span class="c"># set signal identifier</span>
 <span class="n">signal</span><span class="o">.</span><span class="n">set_valueIdentifier</span><span class="p">(</span><span class="s">"value"</span><span class="p">)</span>                         <span class="c"># set value identifier</span>
 <span class="n">field</span><span class="o">.</span><span class="n">set_signal</span><span class="p">(</span><span class="n">signal</span><span class="p">)</span>                                    <span class="c"># set signal in field</span>
-<span class="n">field</span><span class="o">.</span><span class="n">set_batchIdentifier</span><span class="p">(</span><span class="s">"batchId"</span><span class="p">)</span>                        <span class="c"># set batch identifier</span>
 <span class="n">field</span><span class="o">.</span><span class="n">set_entityIdentifier</span><span class="p">(</span><span class="s">"entity"</span><span class="p">)</span>                        <span class="c"># set entity identifier</span>
 <span class="n">datasource</span><span class="o">.</span><span class="n">set_type</span><span class="p">(</span><span class="s">"STANDALONE"</span><span class="p">)</span>                           <span class="c"># set datastource type in datastream</span>
 <span class="n">datastream</span><span class="o">.</span><span class="n">set_datasource</span><span class="p">(</span><span class="n">datasource</span><span class="p">)</span>
@@ -739,7 +722,6 @@ Structuring data as key-value pairs — as is done in narrow-form datasets — f
       <span class="s2">"identifier"</span>: <span class="s2">"time"</span>,
       <span class="s2">"format"</span>: <span class="s2">"YYYY-MM-DD HH:mm:ss"</span>
     <span class="o">}</span>,
-    <span class="s2">"batchIdentifier"</span>: <span class="s2">"batchId"</span>,
     <span class="s2">"entityIdentifier"</span>: <span class="s2">"entity"</span>,
     <span class="s2">"signal"</span>: <span class="o">{</span>
       <span class="s2">"valueIdentifier"</span>: <span class="s2">"value"</span>,
@@ -789,132 +771,132 @@ Structuring data as key-value pairs — as is done in narrow-form datasets — f
 <blockquote>
 <p>To setup a Sliding datastream using wide style data for a single entity, use this code:</p>
 </blockquote>
-<pre class="highlight csharp tab-csharp"><code>  <span class="k">using</span> <span class="nn">FalkonryClient</span><span class="p">;</span>
-  <span class="k">using</span> <span class="nn">FalkonryClient.Helper.Models</span><span class="p">;</span>
+<pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">FalkonryClient</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">FalkonryClient.Helper.Models</span><span class="p">;</span>
 
-  <span class="kt">string</span> <span class="n">token</span><span class="p">=</span><span class="s">"api-token"</span><span class="p">;</span>   
-  <span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Falkonry</span><span class="p">(</span><span class="s">"http://example.falkonry.ai"</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
+<span class="kt">string</span> <span class="n">token</span><span class="p">=</span><span class="s">"api-token"</span><span class="p">;</span>   
+<span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Falkonry</span><span class="p">(</span><span class="s">"http://example.falkonry.ai"</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
 
-    <span class="kt">var</span> <span class="n">time</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Time</span><span class="p">();</span>
-    <span class="n">time</span><span class="p">.</span><span class="n">Zone</span> <span class="p">=</span> <span class="s">"GMT"</span><span class="p">;</span>
-    <span class="n">time</span><span class="p">.</span><span class="n">Identifier</span> <span class="p">=</span> <span class="s">"time"</span><span class="p">;</span>
-    <span class="n">time</span><span class="p">.</span><span class="n">Format</span> <span class="p">=</span> <span class="s">"iso_8601"</span><span class="p">;</span>
+<span class="kt">var</span> <span class="n">time</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Time</span><span class="p">();</span>
+<span class="n">time</span><span class="p">.</span><span class="n">Zone</span> <span class="p">=</span> <span class="s">"GMT"</span><span class="p">;</span>
+<span class="n">time</span><span class="p">.</span><span class="n">Identifier</span> <span class="p">=</span> <span class="s">"time"</span><span class="p">;</span>
+<span class="n">time</span><span class="p">.</span><span class="n">Format</span> <span class="p">=</span> <span class="s">"iso_8601"</span><span class="p">;</span>
 
-    <span class="kt">var</span> <span class="n">datasource</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Datasource</span><span class="p">();</span>
-    <span class="n">datasource</span><span class="p">.</span><span class="n">Type</span> <span class="p">=</span> <span class="s">"PI"</span><span class="p">;</span>
-    <span class="kt">var</span> <span class="n">ds</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">DatastreamRequest</span><span class="p">();</span>
-    <span class="kt">var</span> <span class="n">Field</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Field</span><span class="p">();</span>
-    <span class="kt">var</span> <span class="n">Signal</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Signal</span><span class="p">();</span>
-    <span class="k">using</span> <span class="nn">FalkonryClient</span><span class="p">;</span>
-  <span class="k">using</span> <span class="nn">FalkonryClient.Helper.Models</span><span class="p">;</span>
+<span class="kt">var</span> <span class="n">datasource</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Datasource</span><span class="p">();</span>
+<span class="n">datasource</span><span class="p">.</span><span class="n">Type</span> <span class="p">=</span> <span class="s">"PI"</span><span class="p">;</span>
+<span class="kt">var</span> <span class="n">ds</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">DatastreamRequest</span><span class="p">();</span>
+<span class="kt">var</span> <span class="n">Field</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Field</span><span class="p">();</span>
+<span class="kt">var</span> <span class="n">Signal</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Signal</span><span class="p">();</span>
+<span class="k">using</span> <span class="nn">FalkonryClient</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">FalkonryClient.Helper.Models</span><span class="p">;</span>
 
-  <span class="kt">string</span> <span class="n">token</span><span class="p">=</span><span class="s">"Add your token here"</span><span class="p">;</span>   
-  <span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Falkonry</span><span class="p">(</span><span class="s">"http://example.falkonry.ai"</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
+<span class="kt">string</span> <span class="n">token</span><span class="p">=</span><span class="s">"Add your token here"</span><span class="p">;</span>   
+<span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Falkonry</span><span class="p">(</span><span class="s">"http://example.falkonry.ai"</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
 
-    <span class="kt">var</span> <span class="n">time</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Time</span><span class="p">();</span>
-    <span class="n">time</span><span class="p">.</span><span class="n">Zone</span> <span class="p">=</span> <span class="s">"GMT"</span><span class="p">;</span>
-    <span class="n">time</span><span class="p">.</span><span class="n">Identifier</span> <span class="p">=</span> <span class="s">"time"</span><span class="p">;</span>
-    <span class="n">time</span><span class="p">.</span><span class="n">Format</span> <span class="p">=</span> <span class="s">"iso_8601"</span><span class="p">;</span>
+<span class="kt">var</span> <span class="n">time</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Time</span><span class="p">();</span>
+<span class="n">time</span><span class="p">.</span><span class="n">Zone</span> <span class="p">=</span> <span class="s">"GMT"</span><span class="p">;</span>
+<span class="n">time</span><span class="p">.</span><span class="n">Identifier</span> <span class="p">=</span> <span class="s">"time"</span><span class="p">;</span>
+<span class="n">time</span><span class="p">.</span><span class="n">Format</span> <span class="p">=</span> <span class="s">"iso_8601"</span><span class="p">;</span>
 
-    <span class="kt">var</span> <span class="n">datasource</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Datasource</span><span class="p">();</span>
-    <span class="n">datasource</span><span class="p">.</span><span class="n">Type</span> <span class="p">=</span> <span class="s">"PI"</span><span class="p">;</span>
-    <span class="kt">var</span> <span class="n">ds</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">DatastreamRequest</span><span class="p">();</span>
-    <span class="c1">// Input List</span>
-  <span class="kt">var</span> <span class="n">inputList</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Input</span><span class="p">&gt;();</span>
-  <span class="kt">var</span> <span class="n">currents</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Input</span><span class="p">();</span>
-  <span class="n">currents</span><span class="p">.</span><span class="n">Name</span> <span class="p">=</span> <span class="s">"current"</span><span class="p">;</span>
-  <span class="n">currents</span><span class="p">.</span><span class="n">ValueType</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">ValueType</span><span class="p">();</span>
-  <span class="n">currents</span><span class="p">.</span><span class="n">EventType</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">EventType</span><span class="p">();</span>
-  <span class="n">currents</span><span class="p">.</span><span class="n">ValueType</span><span class="p">.</span><span class="n">Type</span> <span class="p">=</span> <span class="s">"Numeric"</span><span class="p">;</span>
-  <span class="n">currents</span><span class="p">.</span><span class="n">EventType</span><span class="p">.</span><span class="n">Type</span> <span class="p">=</span> <span class="s">"Samples"</span><span class="p">;</span>
-  <span class="n">inputList</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="n">currents</span><span class="p">);</span>
+<span class="kt">var</span> <span class="n">datasource</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Datasource</span><span class="p">();</span>
+<span class="n">datasource</span><span class="p">.</span><span class="n">Type</span> <span class="p">=</span> <span class="s">"PI"</span><span class="p">;</span>
+<span class="kt">var</span> <span class="n">ds</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">DatastreamRequest</span><span class="p">();</span>
+<span class="c1">// Input List</span>
+<span class="kt">var</span> <span class="n">inputList</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Input</span><span class="p">&gt;();</span>
+<span class="kt">var</span> <span class="n">currents</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Input</span><span class="p">();</span>
+<span class="n">currents</span><span class="p">.</span><span class="n">Name</span> <span class="p">=</span> <span class="s">"current"</span><span class="p">;</span>
+<span class="n">currents</span><span class="p">.</span><span class="n">ValueType</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">ValueType</span><span class="p">();</span>
+<span class="n">currents</span><span class="p">.</span><span class="n">EventType</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">EventType</span><span class="p">();</span>
+<span class="n">currents</span><span class="p">.</span><span class="n">ValueType</span><span class="p">.</span><span class="n">Type</span> <span class="p">=</span> <span class="s">"Numeric"</span><span class="p">;</span>
+<span class="n">currents</span><span class="p">.</span><span class="n">EventType</span><span class="p">.</span><span class="n">Type</span> <span class="p">=</span> <span class="s">"Samples"</span><span class="p">;</span>
+<span class="n">inputList</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="n">currents</span><span class="p">);</span>
 
-  <span class="kt">var</span> <span class="n">vibration</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Input</span><span class="p">();</span>
-  <span class="n">vibration</span><span class="p">.</span><span class="n">Name</span> <span class="p">=</span> <span class="s">"vibration"</span><span class="p">;</span>
-  <span class="n">vibration</span><span class="p">.</span><span class="n">ValueType</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">ValueType</span><span class="p">();</span>
-  <span class="n">vibration</span><span class="p">.</span><span class="n">EventType</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">EventType</span><span class="p">();</span>
-  <span class="n">vibration</span><span class="p">.</span><span class="n">ValueType</span><span class="p">.</span><span class="n">Type</span> <span class="p">=</span> <span class="s">"Numeric"</span><span class="p">;</span>
-  <span class="n">vibration</span><span class="p">.</span><span class="n">EventType</span><span class="p">.</span><span class="n">Type</span> <span class="p">=</span> <span class="s">"Samples"</span><span class="p">;</span>
-  <span class="n">inputList</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="n">vibration</span><span class="p">);</span>
+<span class="kt">var</span> <span class="n">vibration</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Input</span><span class="p">();</span>
+<span class="n">vibration</span><span class="p">.</span><span class="n">Name</span> <span class="p">=</span> <span class="s">"vibration"</span><span class="p">;</span>
+<span class="n">vibration</span><span class="p">.</span><span class="n">ValueType</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">ValueType</span><span class="p">();</span>
+<span class="n">vibration</span><span class="p">.</span><span class="n">EventType</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">EventType</span><span class="p">();</span>
+<span class="n">vibration</span><span class="p">.</span><span class="n">ValueType</span><span class="p">.</span><span class="n">Type</span> <span class="p">=</span> <span class="s">"Numeric"</span><span class="p">;</span>
+<span class="n">vibration</span><span class="p">.</span><span class="n">EventType</span><span class="p">.</span><span class="n">Type</span> <span class="p">=</span> <span class="s">"Samples"</span><span class="p">;</span>
+<span class="n">inputList</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="n">vibration</span><span class="p">);</span>
 
-  <span class="kt">var</span> <span class="n">state</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Input</span><span class="p">();</span>
-  <span class="n">state</span><span class="p">.</span><span class="n">Name</span> <span class="p">=</span> <span class="s">"state"</span><span class="p">;</span>
-  <span class="n">state</span><span class="p">.</span><span class="n">ValueType</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">ValueType</span><span class="p">();</span>
-  <span class="n">state</span><span class="p">.</span><span class="n">EventType</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">EventType</span><span class="p">();</span>
-  <span class="n">state</span><span class="p">.</span><span class="n">ValueType</span><span class="p">.</span><span class="n">Type</span> <span class="p">=</span> <span class="s">"Categorical"</span><span class="p">;</span>
-  <span class="n">state</span><span class="p">.</span><span class="n">EventType</span><span class="p">.</span><span class="n">Type</span> <span class="p">=</span> <span class="s">"Samples"</span><span class="p">;</span>
-  <span class="n">inputList</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="n">state</span><span class="p">);</span>
+<span class="kt">var</span> <span class="n">state</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Input</span><span class="p">();</span>
+<span class="n">state</span><span class="p">.</span><span class="n">Name</span> <span class="p">=</span> <span class="s">"state"</span><span class="p">;</span>
+<span class="n">state</span><span class="p">.</span><span class="n">ValueType</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">ValueType</span><span class="p">();</span>
+<span class="n">state</span><span class="p">.</span><span class="n">EventType</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">EventType</span><span class="p">();</span>
+<span class="n">state</span><span class="p">.</span><span class="n">ValueType</span><span class="p">.</span><span class="n">Type</span> <span class="p">=</span> <span class="s">"Categorical"</span><span class="p">;</span>
+<span class="n">state</span><span class="p">.</span><span class="n">EventType</span><span class="p">.</span><span class="n">Type</span> <span class="p">=</span> <span class="s">"Samples"</span><span class="p">;</span>
+<span class="n">inputList</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="n">state</span><span class="p">);</span>
 
-  <span class="n">ds</span><span class="p">.</span><span class="n">InputList</span> <span class="p">=</span> <span class="n">inputList</span><span class="p">;</span>
-    <span class="kt">var</span> <span class="n">Field</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Field</span><span class="p">();</span>
-    <span class="kt">var</span> <span class="n">Signal</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Signal</span><span class="p">();</span>
-    <span class="n">Field</span><span class="p">.</span><span class="n">Signal</span> <span class="p">=</span> <span class="n">Signal</span><span class="p">;</span>
-    <span class="n">Field</span><span class="p">.</span><span class="n">Time</span> <span class="p">=</span> <span class="n">time</span><span class="p">;</span>
-    <span class="n">ds</span><span class="p">.</span><span class="n">Field</span> <span class="p">=</span> <span class="n">Field</span><span class="p">;</span>
-    <span class="n">ds</span><span class="p">.</span><span class="n">DataSource</span> <span class="p">=</span> <span class="n">datasource</span><span class="p">;</span>
-    <span class="kt">var</span> <span class="n">rnd</span> <span class="p">=</span> <span class="k">new</span> <span class="n">System</span><span class="p">.</span><span class="nf">Random</span><span class="p">();</span>
-    <span class="kt">var</span> <span class="n">randomNumber</span> <span class="p">=</span> <span class="n">System</span><span class="p">.</span><span class="n">Convert</span><span class="p">.</span><span class="nf">ToString</span><span class="p">(</span><span class="n">rnd</span><span class="p">.</span><span class="nf">Next</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">10000</span><span class="p">));</span>
-    <span class="n">ds</span><span class="p">.</span><span class="n">Name</span> <span class="p">=</span> <span class="s">"TestDS"</span> <span class="p">+</span> <span class="n">randomNumber</span><span class="p">;</span>
-    <span class="n">ds</span><span class="p">.</span><span class="n">Field</span><span class="p">.</span><span class="n">Time</span> <span class="p">=</span> <span class="n">time</span><span class="p">;</span>
-    <span class="n">ds</span><span class="p">.</span><span class="n">DataSource</span> <span class="p">=</span> <span class="n">datasource</span><span class="p">;</span>
-    <span class="kt">var</span> <span class="n">datastream</span> <span class="p">=</span> <span class="n">_falkonry</span><span class="p">.</span><span class="nf">CreateDatastream</span><span class="p">(</span><span class="n">ds</span><span class="p">);</span>
-</code></pre><pre class="highlight java tab-java"><code>    <span class="kn">import</span> <span class="nn">com.falkonry.client.Falkonry</span><span class="o">;</span>
-    <span class="kn">import</span> <span class="nn">com.falkonry.helper.models.Datasource</span><span class="o">;</span>
-    <span class="kn">import</span> <span class="nn">com.falkonry.helper.models.Datastream</span><span class="o">;</span>
-    <span class="kn">import</span> <span class="nn">com.falkonry.helper.models.Field</span><span class="o">;</span>
-    <span class="kn">import</span> <span class="nn">com.falkonry.helper.models.TimeObject</span><span class="o">;</span>
-    <span class="kn">import</span> <span class="nn">com.falkonry.helper.models.Signal</span><span class="o">;</span>
+<span class="n">ds</span><span class="p">.</span><span class="n">InputList</span> <span class="p">=</span> <span class="n">inputList</span><span class="p">;</span>
+<span class="kt">var</span> <span class="n">Field</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Field</span><span class="p">();</span>
+<span class="kt">var</span> <span class="n">Signal</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Signal</span><span class="p">();</span>
+<span class="n">Field</span><span class="p">.</span><span class="n">Signal</span> <span class="p">=</span> <span class="n">Signal</span><span class="p">;</span>
+<span class="n">Field</span><span class="p">.</span><span class="n">Time</span> <span class="p">=</span> <span class="n">time</span><span class="p">;</span>
+<span class="n">ds</span><span class="p">.</span><span class="n">Field</span> <span class="p">=</span> <span class="n">Field</span><span class="p">;</span>
+<span class="n">ds</span><span class="p">.</span><span class="n">DataSource</span> <span class="p">=</span> <span class="n">datasource</span><span class="p">;</span>
+<span class="kt">var</span> <span class="n">rnd</span> <span class="p">=</span> <span class="k">new</span> <span class="n">System</span><span class="p">.</span><span class="nf">Random</span><span class="p">();</span>
+<span class="kt">var</span> <span class="n">randomNumber</span> <span class="p">=</span> <span class="n">System</span><span class="p">.</span><span class="n">Convert</span><span class="p">.</span><span class="nf">ToString</span><span class="p">(</span><span class="n">rnd</span><span class="p">.</span><span class="nf">Next</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">10000</span><span class="p">));</span>
+<span class="n">ds</span><span class="p">.</span><span class="n">Name</span> <span class="p">=</span> <span class="s">"TestDS"</span> <span class="p">+</span> <span class="n">randomNumber</span><span class="p">;</span>
+<span class="n">ds</span><span class="p">.</span><span class="n">Field</span><span class="p">.</span><span class="n">Time</span> <span class="p">=</span> <span class="n">time</span><span class="p">;</span>
+<span class="n">ds</span><span class="p">.</span><span class="n">DataSource</span> <span class="p">=</span> <span class="n">datasource</span><span class="p">;</span>
+<span class="kt">var</span> <span class="n">datastream</span> <span class="p">=</span> <span class="n">_falkonry</span><span class="p">.</span><span class="nf">CreateDatastream</span><span class="p">(</span><span class="n">ds</span><span class="p">);</span>
+</code></pre><pre class="highlight java tab-java"><code><span class="kn">import</span> <span class="nn">com.falkonry.client.Falkonry</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.falkonry.helper.models.Datasource</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.falkonry.helper.models.Datastream</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.falkonry.helper.models.Field</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.falkonry.helper.models.TimeObject</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.falkonry.helper.models.Signal</span><span class="o">;</span>
 
-    <span class="c1">//instantiate Falkonry</span>
-    <span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Falkonry</span><span class="o">(</span><span class="s">"http://example.falkonry.ai"</span><span class="o">,</span> <span class="s">"auth-token"</span><span class="o">);</span>
+<span class="c1">//instantiate Falkonry</span>
+<span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Falkonry</span><span class="o">(</span><span class="s">"http://example.falkonry.ai"</span><span class="o">,</span> <span class="s">"auth-token"</span><span class="o">);</span>
 
-    <span class="n">Datastream</span> <span class="n">ds</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Datastream</span><span class="o">();</span>
-    <span class="n">ds</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">"Test-DS-"</span> <span class="o">+</span> <span class="n">Math</span><span class="o">.</span><span class="na">random</span><span class="o">());</span>
-    <span class="n">TimeObject</span> <span class="n">time</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TimeObject</span><span class="o">();</span>
-    <span class="n">time</span><span class="o">.</span><span class="na">setIdentifier</span><span class="o">(</span><span class="s">"time"</span><span class="o">);</span>
-    <span class="n">time</span><span class="o">.</span><span class="na">setFormat</span><span class="o">(</span><span class="s">"millis"</span><span class="o">);</span>
-    <span class="n">time</span><span class="o">.</span><span class="na">setZone</span><span class="o">(</span><span class="s">"GMT"</span><span class="o">);</span>
+<span class="n">Datastream</span> <span class="n">ds</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Datastream</span><span class="o">();</span>
+<span class="n">ds</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">"Test-DS-"</span> <span class="o">+</span> <span class="n">Math</span><span class="o">.</span><span class="na">random</span><span class="o">());</span>
+<span class="n">TimeObject</span> <span class="n">time</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TimeObject</span><span class="o">();</span>
+<span class="n">time</span><span class="o">.</span><span class="na">setIdentifier</span><span class="o">(</span><span class="s">"time"</span><span class="o">);</span>
+<span class="n">time</span><span class="o">.</span><span class="na">setFormat</span><span class="o">(</span><span class="s">"millis"</span><span class="o">);</span>
+<span class="n">time</span><span class="o">.</span><span class="na">setZone</span><span class="o">(</span><span class="s">"GMT"</span><span class="o">);</span>
 
-    <span class="n">Field</span> <span class="n">field</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Field</span><span class="o">();</span>
-    <span class="n">field</span><span class="o">.</span><span class="na">setTime</span><span class="o">(</span><span class="n">time</span><span class="o">);</span>
-    <span class="n">ds</span><span class="o">.</span><span class="na">setField</span><span class="o">(</span><span class="n">field</span><span class="o">);</span>
-    <span class="n">Datasource</span> <span class="n">dataSource</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Datasource</span><span class="o">();</span>
-    <span class="n">dataSource</span><span class="o">.</span><span class="na">setType</span><span class="o">(</span><span class="s">"PI"</span><span class="o">);</span>
-    <span class="n">dataSource</span><span class="o">.</span><span class="na">sethost</span><span class="o">(</span><span class="s">"https://test.piserver.com/piwebapi"</span><span class="o">);</span>
-    <span class="n">dataSource</span><span class="o">.</span><span class="na">setElementTemplateName</span><span class="o">(</span><span class="s">"SampleElementTempalte"</span><span class="o">);</span>
-    <span class="n">ds</span><span class="o">.</span><span class="na">setDatasource</span><span class="o">(</span><span class="n">dataSource</span><span class="o">);</span>
+<span class="n">Field</span> <span class="n">field</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Field</span><span class="o">();</span>
+<span class="n">field</span><span class="o">.</span><span class="na">setTime</span><span class="o">(</span><span class="n">time</span><span class="o">);</span>
+<span class="n">ds</span><span class="o">.</span><span class="na">setField</span><span class="o">(</span><span class="n">field</span><span class="o">);</span>
+<span class="n">Datasource</span> <span class="n">dataSource</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Datasource</span><span class="o">();</span>
+<span class="n">dataSource</span><span class="o">.</span><span class="na">setType</span><span class="o">(</span><span class="s">"PI"</span><span class="o">);</span>
+<span class="n">dataSource</span><span class="o">.</span><span class="na">sethost</span><span class="o">(</span><span class="s">"https://test.piserver.com/piwebapi"</span><span class="o">);</span>
+<span class="n">dataSource</span><span class="o">.</span><span class="na">setElementTemplateName</span><span class="o">(</span><span class="s">"SampleElementTempalte"</span><span class="o">);</span>
+<span class="n">ds</span><span class="o">.</span><span class="na">setDatasource</span><span class="o">(</span><span class="n">dataSource</span><span class="o">);</span>
 
-    <span class="c1">// Input List</span>
-    <span class="n">List</span><span class="o">&lt;</span><span class="n">Input</span><span class="o">&gt;</span> <span class="n">inputList</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Input</span><span class="o">&gt;();</span>
-    <span class="n">Input</span> <span class="n">currents</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Input</span><span class="o">();</span>
-    <span class="n">ValueType</span> <span class="n">valueType</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ValueType</span><span class="o">();</span>
-    <span class="n">EventType</span> <span class="n">eventType</span> <span class="o">=</span> <span class="k">new</span> <span class="n">EventType</span><span class="o">();</span>
-    <span class="n">currents</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">"current"</span><span class="o">);</span>
-    <span class="n">valueType</span><span class="o">.</span><span class="na">setType</span><span class="o">(</span><span class="s">"Numeric"</span><span class="o">);</span>
-    <span class="n">eventType</span><span class="o">.</span><span class="na">setType</span><span class="o">(</span><span class="s">"Samples"</span><span class="o">);</span>
-    <span class="n">currents</span><span class="o">.</span><span class="na">setValueType</span><span class="o">(</span><span class="n">valueType</span><span class="o">);</span>
-    <span class="n">currents</span><span class="o">.</span><span class="na">setEventType</span><span class="o">(</span><span class="n">eventType</span><span class="o">);</span>
-    <span class="n">inputList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">currents</span><span class="o">);</span>
+<span class="c1">// Input List</span>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">Input</span><span class="o">&gt;</span> <span class="n">inputList</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Input</span><span class="o">&gt;();</span>
+<span class="n">Input</span> <span class="n">currents</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Input</span><span class="o">();</span>
+<span class="n">ValueType</span> <span class="n">valueType</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ValueType</span><span class="o">();</span>
+<span class="n">EventType</span> <span class="n">eventType</span> <span class="o">=</span> <span class="k">new</span> <span class="n">EventType</span><span class="o">();</span>
+<span class="n">currents</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">"current"</span><span class="o">);</span>
+<span class="n">valueType</span><span class="o">.</span><span class="na">setType</span><span class="o">(</span><span class="s">"Numeric"</span><span class="o">);</span>
+<span class="n">eventType</span><span class="o">.</span><span class="na">setType</span><span class="o">(</span><span class="s">"Samples"</span><span class="o">);</span>
+<span class="n">currents</span><span class="o">.</span><span class="na">setValueType</span><span class="o">(</span><span class="n">valueType</span><span class="o">);</span>
+<span class="n">currents</span><span class="o">.</span><span class="na">setEventType</span><span class="o">(</span><span class="n">eventType</span><span class="o">);</span>
+<span class="n">inputList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">currents</span><span class="o">);</span>
 
-    <span class="n">Input</span> <span class="n">vibration</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Input</span><span class="o">();</span>
-    <span class="n">vibration</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">"vibration"</span><span class="o">);</span>
-    <span class="n">valueType</span><span class="o">.</span><span class="na">setType</span><span class="o">(</span><span class="s">"Numeric"</span><span class="o">);</span>
-    <span class="n">eventType</span><span class="o">.</span><span class="na">setType</span><span class="o">(</span><span class="s">"Samples"</span><span class="o">);</span>
-    <span class="n">vibration</span><span class="o">.</span><span class="na">setValueType</span><span class="o">(</span><span class="n">valueType</span><span class="o">);</span>
-    <span class="n">vibration</span><span class="o">.</span><span class="na">setEventType</span><span class="o">(</span><span class="n">eventType</span><span class="o">);</span>
-    <span class="n">inputList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">vibration</span><span class="o">);</span>
+<span class="n">Input</span> <span class="n">vibration</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Input</span><span class="o">();</span>
+<span class="n">vibration</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">"vibration"</span><span class="o">);</span>
+<span class="n">valueType</span><span class="o">.</span><span class="na">setType</span><span class="o">(</span><span class="s">"Numeric"</span><span class="o">);</span>
+<span class="n">eventType</span><span class="o">.</span><span class="na">setType</span><span class="o">(</span><span class="s">"Samples"</span><span class="o">);</span>
+<span class="n">vibration</span><span class="o">.</span><span class="na">setValueType</span><span class="o">(</span><span class="n">valueType</span><span class="o">);</span>
+<span class="n">vibration</span><span class="o">.</span><span class="na">setEventType</span><span class="o">(</span><span class="n">eventType</span><span class="o">);</span>
+<span class="n">inputList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">vibration</span><span class="o">);</span>
 
-    <span class="n">Input</span> <span class="n">state</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Input</span><span class="o">();</span>
-    <span class="n">state</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">"state"</span><span class="o">);</span>
-    <span class="n">valueType</span><span class="o">.</span><span class="na">setType</span><span class="o">(</span><span class="s">"Categorical"</span><span class="o">);</span>
-    <span class="n">eventType</span><span class="o">.</span><span class="na">setType</span><span class="o">(</span><span class="s">"Samples"</span><span class="o">);</span>
-    <span class="n">state</span><span class="o">.</span><span class="na">setValueType</span><span class="o">(</span><span class="n">valueType</span><span class="o">);</span>
-    <span class="n">state</span><span class="o">.</span><span class="na">setEventType</span><span class="o">(</span><span class="n">eventType</span><span class="o">);</span>
-    <span class="n">inputList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">state</span><span class="o">);</span>
+<span class="n">Input</span> <span class="n">state</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Input</span><span class="o">();</span>
+<span class="n">state</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">"state"</span><span class="o">);</span>
+<span class="n">valueType</span><span class="o">.</span><span class="na">setType</span><span class="o">(</span><span class="s">"Categorical"</span><span class="o">);</span>
+<span class="n">eventType</span><span class="o">.</span><span class="na">setType</span><span class="o">(</span><span class="s">"Samples"</span><span class="o">);</span>
+<span class="n">state</span><span class="o">.</span><span class="na">setValueType</span><span class="o">(</span><span class="n">valueType</span><span class="o">);</span>
+<span class="n">state</span><span class="o">.</span><span class="na">setEventType</span><span class="o">(</span><span class="n">eventType</span><span class="o">);</span>
+<span class="n">inputList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">state</span><span class="o">);</span>
 
-    <span class="n">ds</span><span class="o">.</span><span class="na">setInputList</span><span class="o">(</span><span class="n">inputList</span><span class="o">);</span>
+<span class="n">ds</span><span class="o">.</span><span class="na">setInputList</span><span class="o">(</span><span class="n">inputList</span><span class="o">);</span>
 
-    <span class="n">Datastream</span> <span class="n">datastream</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="na">createDatastream</span><span class="o">(</span><span class="n">ds</span><span class="o">);</span>
+<span class="n">Datastream</span> <span class="n">datastream</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="na">createDatastream</span><span class="o">(</span><span class="n">ds</span><span class="o">);</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">from</span> <span class="nn">falkonryclient</span> <span class="kn">import</span> <span class="n">client</span> <span class="k">as</span> <span class="n">Falkonry</span>
 <span class="kn">from</span> <span class="nn">falkonryclient</span> <span class="kn">import</span> <span class="n">schemas</span> <span class="k">as</span> <span class="n">Schemas</span>
 

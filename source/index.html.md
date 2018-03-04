@@ -273,6 +273,7 @@ Structuring data as key-value pairs — as is done in narrow-form datasets — f
   Signal.SignalIdentifier = "signal";
 	Field.Signal = Signal;
 	Field.Time = time;
+  Field.BatchIdentifier = "batch";
 	ds.Field = Field;
 	ds.DataSource = datasource;
 	var rnd = new System.Random();
@@ -326,25 +327,8 @@ datasource = Schemas.Datasource()
 field = Schemas.Field()
 time = Schemas.Time()
 signal = Schemas.Signal()
-input1 = Schemas.Input()
-input2 = Schemas.Input()
-input3 = Schemas.Input()
 
 datastream.set_name('Motor Health' + str(random.random()))  # set name of the Datastream
-
-input1.set_name("Signal1")                                  # set name of input signal
-input1.set_value_type("Numeric")                            # set value type of input signal (Numeric for number, Categorical for string type)
-input1.set_event_type("Samples")                            # set event type of input signal
-input2.set_name("Signal2")                                  # set name of input signal
-input2.set_value_type("Numeric")                            # set value type of input signal (Numeric for number, Categorical for string type)
-input2.set_event_type("Samples")                            # set event type of input signal
-input3.set_name("Signal3")                                  # set name of input signal
-input3.set_value_type("Numeric")                            # set value type of input signal (Numeric for number, Categorical for string type)
-input3.set_event_type("Samples")                            # set event type of input signal
-inputs = []
-inputs.append(input1)
-inputs.append(input2)
-inputs.append(input3)
 
 time.set_zone("GMT")                                        # set timezone of the datastream
 time.set_identifier("time")                                 # set time identifier of the datastream
@@ -357,7 +341,6 @@ field.set_batchIdentifier("batch")                          # set batchIdentifie
 datasource.set_type("STANDALONE")                           # set datastource type in datastream
 datastream.set_datasource(datasource)
 datastream.set_field(field)
-datastream.set_inputs(inputs)
         
 #create Datastream
 createdDatastream = fclient.create_datastream(datastream)
@@ -378,10 +361,10 @@ Sample JSONFile:
       "identifier": "time",
       "format": "YYYY-MM-DD HH:mm:ss"
     },
-  "signal": {
-    "signalIdentifier": "signal",
-    "valueIdentifier": "value"
-    }
+    "signal": {
+      "signalIdentifier": "signal",
+      "valueIdentifier": "value"
+    },
     "batchIdentifier": "batchId" // set batch identifier here.
   }
 }
@@ -411,10 +394,10 @@ Here, we create a datastream and set it up with narrow style data for a single e
 
 **Sample format for narrow/historian style**
 
-time                    | signal   | value
-------------------------|----------|--------
-2016-03-01 01:01:01     | signal1  | 3.4
-2016-03-01 01:01:02     | signal2  | 9.3
+time                    | signal   | value | batch
+------------------------|----------|-------|-------
+2016-03-01 01:01:01     | signal1  | 3.4   | batch1
+2016-03-01 01:01:02     | signal2  | 9.3   | batch1
 
 <aside class="warning">
 Structuring data as key-value pairs — as is done in narrow-form datasets — facilitates conceptual clarity. 
@@ -433,70 +416,68 @@ Structuring data as key-value pairs — as is done in narrow-form datasets — f
 > To setup a Sliding datastream using narrow style data for multiple entities, use this code:
 
 ```csharp
-  using FalkonryClient;
-  using FalkonryClient.Helper.Models;
-  
-  string token="api-token";   
-  Falkonry falkonry = new Falkonry("http://example.falkonry.ai", token);
-    
-	var time = new Time();
-	time.Zone = "GMT";
-	time.Identifier = "time";
-	time.Format = "iso_8601";
+using FalkonryClient;
+using FalkonryClient.Helper.Models;
 
-	var datasource = new Datasource();
-	datasource.Type = "PI";
-	var ds = new DatastreamRequest();
-	var Field = new Field();
-	var Signal = new Signal();
-	Signal.ValueIdentifier = "value";
-	Signal.SignalIdentifier = "signal";
-	Field.Signal = Signal;
-	Field.Time = time;
-  Field.BatchIdentifier = "batchId";
-  Field.EntityIdentifier = "entity";
-	ds.Field = Field;
-	ds.DataSource = datasource;
-	var rnd = new System.Random();
-	var randomNumber = System.Convert.ToString(rnd.Next(1, 10000));
-	ds.Name = "TestDS" + randomNumber;
-	ds.Field.Time = time;
-	ds.DataSource = datasource;
-	var datastream = _falkonry.CreateDatastream(ds);
+string token="api-token";   
+Falkonry falkonry = new Falkonry("http://example.falkonry.ai", token);
+  
+var time = new Time();
+time.Zone = "GMT";
+time.Identifier = "time";
+time.Format = "iso_8601";
+
+var datasource = new Datasource();
+datasource.Type = "PI";
+var ds = new DatastreamRequest();
+var Field = new Field();
+var Signal = new Signal();
+Signal.ValueIdentifier = "value";
+Signal.SignalIdentifier = "signal";
+Field.Signal = Signal;
+Field.Time = time;
+Field.EntityIdentifier = "entity";
+ds.Field = Field;
+ds.DataSource = datasource;
+var rnd = new System.Random();
+var randomNumber = System.Convert.ToString(rnd.Next(1, 10000));
+ds.Name = "TestDS" + randomNumber;
+ds.Field.Time = time;
+ds.DataSource = datasource;
+var datastream = _falkonry.CreateDatastream(ds);
 ```
 
 ```java
-  import com.falkonry.client.Falkonry;
-  import com.falkonry.helper.models.Datasource;
-  import com.falkonry.helper.models.Datastream;
-  import com.falkonry.helper.models.Field;
-  import com.falkonry.helper.models.TimeObject;
-  import com.falkonry.helper.models.Signal;
+import com.falkonry.client.Falkonry;
+import com.falkonry.helper.models.Datasource;
+import com.falkonry.helper.models.Datastream;
+import com.falkonry.helper.models.Field;
+import com.falkonry.helper.models.TimeObject;
+import com.falkonry.helper.models.Signal;
 
-  //instantiate Falkonry
-  Falkonry falkonry = new Falkonry("http://example.falkonry.ai", "auth-token");
-  
-  Datastream ds = new Datastream();
-	ds.setName("Test-DS-" + Math.random());
-	TimeObject time = new TimeObject();
-	time.setIdentifier("time");
-	time.setFormat("iso_8601");
-	time.setZone("GMT");
-	Signal signal = new Signal();
+//instantiate Falkonry
+Falkonry falkonry = new Falkonry("http://example.falkonry.ai", "auth-token");
 
-	signal.setValueIdentifier("value");
-	signal.setSignalIdentifier("signal");
-	Field field = new Field();
-	field.setSignal(signal);
-	field.setBatchIdentifier("batchId");
-  field.setEntityIdentifier("entity");
-	field.setTime(time);
-	ds.setField(field);
-	Datasource dataSource = new Datasource();
-	dataSource.setType("STANDALONE");
-	ds.setDatasource(dataSource);
+Datastream ds = new Datastream();
+ds.setName("Test-DS-" + Math.random());
+TimeObject time = new TimeObject();
+time.setIdentifier("time");
+time.setFormat("iso_8601");
+time.setZone("GMT");
+Signal signal = new Signal();
 
-	Datastream datastream = falkonry.createDatastream(ds);
+signal.setValueIdentifier("value");
+signal.setSignalIdentifier("signal");
+Field field = new Field();
+field.setSignal(signal);
+field.setEntityIdentifier("entity");
+field.setTime(time);
+ds.setField(field);
+Datasource dataSource = new Datasource();
+dataSource.setType("STANDALONE");
+ds.setDatasource(dataSource);
+
+Datastream datastream = falkonry.createDatastream(ds);
 ```
 
 ```python
@@ -519,7 +500,6 @@ field.set_time(time)
 signal.set_signalIdentifier("signal")                       # set signal identifier
 signal.set_valueIdentifier("value")                         # set value identifier
 field.set_signal(signal)                                    # set signal in field
-field.set_batchIdentifier("batchId")                        # set batch identifier
 field.set_entityIdentifier("entity")                        # set entity identifier
 datasource.set_type("STANDALONE")                           # set datastource type in datastream
 datastream.set_datasource(datasource)
@@ -542,7 +522,6 @@ Sample JSONFile:
       "identifier": "time",
       "format": "YYYY-MM-DD HH:mm:ss"
     },
-    "batchIdentifier": "batchId",
     "entityIdentifier": "entity",
     "signal": {
       "valueIdentifier": "value",
@@ -578,135 +557,135 @@ Structuring data as key-value pairs — as is done in narrow-form datasets — f
 > To setup a Sliding datastream using wide style data for a single entity, use this code:
 
 ```csharp
-  using FalkonryClient;
-  using FalkonryClient.Helper.Models;
+using FalkonryClient;
+using FalkonryClient.Helper.Models;
+
+string token="api-token";   
+Falkonry falkonry = new Falkonry("http://example.falkonry.ai", token);
+
+var time = new Time();
+time.Zone = "GMT";
+time.Identifier = "time";
+time.Format = "iso_8601";
+
+var datasource = new Datasource();
+datasource.Type = "PI";
+var ds = new DatastreamRequest();
+var Field = new Field();
+var Signal = new Signal();
+using FalkonryClient;
+using FalkonryClient.Helper.Models;
+
+string token="Add your token here";   
+Falkonry falkonry = new Falkonry("http://example.falkonry.ai", token);
   
-  string token="api-token";   
-  Falkonry falkonry = new Falkonry("http://example.falkonry.ai", token);
-  
-	var time = new Time();
-	time.Zone = "GMT";
-	time.Identifier = "time";
-	time.Format = "iso_8601";
+var time = new Time();
+time.Zone = "GMT";
+time.Identifier = "time";
+time.Format = "iso_8601";
 
-	var datasource = new Datasource();
-	datasource.Type = "PI";
-	var ds = new DatastreamRequest();
-	var Field = new Field();
-	var Signal = new Signal();
-	using FalkonryClient;
-  using FalkonryClient.Helper.Models;
-  
-  string token="Add your token here";   
-  Falkonry falkonry = new Falkonry("http://example.falkonry.ai", token);
-    
-	var time = new Time();
-	time.Zone = "GMT";
-	time.Identifier = "time";
-	time.Format = "iso_8601";
+var datasource = new Datasource();
+datasource.Type = "PI";
+var ds = new DatastreamRequest();
+// Input List
+var inputList = new List<Input>();
+var currents = new Input();
+currents.Name = "current";
+currents.ValueType = new ValueType();
+currents.EventType = new EventType();
+currents.ValueType.Type = "Numeric";
+currents.EventType.Type = "Samples";
+inputList.Add(currents);
 
-	var datasource = new Datasource();
-	datasource.Type = "PI";
-	var ds = new DatastreamRequest();
-	// Input List
-  var inputList = new List<Input>();
-  var currents = new Input();
-  currents.Name = "current";
-  currents.ValueType = new ValueType();
-  currents.EventType = new EventType();
-  currents.ValueType.Type = "Numeric";
-  currents.EventType.Type = "Samples";
-  inputList.Add(currents);
+var vibration = new Input();
+vibration.Name = "vibration";
+vibration.ValueType = new ValueType();
+vibration.EventType = new EventType();
+vibration.ValueType.Type = "Numeric";
+vibration.EventType.Type = "Samples";
+inputList.Add(vibration);
 
-  var vibration = new Input();
-  vibration.Name = "vibration";
-  vibration.ValueType = new ValueType();
-  vibration.EventType = new EventType();
-  vibration.ValueType.Type = "Numeric";
-  vibration.EventType.Type = "Samples";
-  inputList.Add(vibration);
+var state = new Input();
+state.Name = "state";
+state.ValueType = new ValueType();
+state.EventType = new EventType();
+state.ValueType.Type = "Categorical";
+state.EventType.Type = "Samples";
+inputList.Add(state);
 
-  var state = new Input();
-  state.Name = "state";
-  state.ValueType = new ValueType();
-  state.EventType = new EventType();
-  state.ValueType.Type = "Categorical";
-  state.EventType.Type = "Samples";
-  inputList.Add(state);
-
-  ds.InputList = inputList;
-	var Field = new Field();
-	var Signal = new Signal();
-	Field.Signal = Signal;
-	Field.Time = time;
-	ds.Field = Field;
-	ds.DataSource = datasource;
-	var rnd = new System.Random();
-	var randomNumber = System.Convert.ToString(rnd.Next(1, 10000));
-	ds.Name = "TestDS" + randomNumber;
-	ds.Field.Time = time;
-	ds.DataSource = datasource;
-	var datastream = _falkonry.CreateDatastream(ds);
+ds.InputList = inputList;
+var Field = new Field();
+var Signal = new Signal();
+Field.Signal = Signal;
+Field.Time = time;
+ds.Field = Field;
+ds.DataSource = datasource;
+var rnd = new System.Random();
+var randomNumber = System.Convert.ToString(rnd.Next(1, 10000));
+ds.Name = "TestDS" + randomNumber;
+ds.Field.Time = time;
+ds.DataSource = datasource;
+var datastream = _falkonry.CreateDatastream(ds);
 ```
 
 ```java
-    import com.falkonry.client.Falkonry;
-    import com.falkonry.helper.models.Datasource;
-    import com.falkonry.helper.models.Datastream;
-    import com.falkonry.helper.models.Field;
-    import com.falkonry.helper.models.TimeObject;
-    import com.falkonry.helper.models.Signal;
+import com.falkonry.client.Falkonry;
+import com.falkonry.helper.models.Datasource;
+import com.falkonry.helper.models.Datastream;
+import com.falkonry.helper.models.Field;
+import com.falkonry.helper.models.TimeObject;
+import com.falkonry.helper.models.Signal;
 
-    //instantiate Falkonry
-    Falkonry falkonry = new Falkonry("http://example.falkonry.ai", "auth-token");
+//instantiate Falkonry
+Falkonry falkonry = new Falkonry("http://example.falkonry.ai", "auth-token");
 
-    Datastream ds = new Datastream();
-    ds.setName("Test-DS-" + Math.random());
-    TimeObject time = new TimeObject();
-    time.setIdentifier("time");
-    time.setFormat("millis");
-    time.setZone("GMT");
+Datastream ds = new Datastream();
+ds.setName("Test-DS-" + Math.random());
+TimeObject time = new TimeObject();
+time.setIdentifier("time");
+time.setFormat("millis");
+time.setZone("GMT");
 
-    Field field = new Field();
-    field.setTime(time);
-    ds.setField(field);
-    Datasource dataSource = new Datasource();
-    dataSource.setType("PI");
-    dataSource.sethost("https://test.piserver.com/piwebapi");
-    dataSource.setElementTemplateName("SampleElementTempalte");
-    ds.setDatasource(dataSource);
+Field field = new Field();
+field.setTime(time);
+ds.setField(field);
+Datasource dataSource = new Datasource();
+dataSource.setType("PI");
+dataSource.sethost("https://test.piserver.com/piwebapi");
+dataSource.setElementTemplateName("SampleElementTempalte");
+ds.setDatasource(dataSource);
 
-    // Input List
-    List<Input> inputList = new ArrayList<Input>();
-    Input currents = new Input();
-    ValueType valueType = new ValueType();
-    EventType eventType = new EventType();
-    currents.setName("current");
-    valueType.setType("Numeric");
-    eventType.setType("Samples");
-    currents.setValueType(valueType);
-    currents.setEventType(eventType);
-    inputList.add(currents);
+// Input List
+List<Input> inputList = new ArrayList<Input>();
+Input currents = new Input();
+ValueType valueType = new ValueType();
+EventType eventType = new EventType();
+currents.setName("current");
+valueType.setType("Numeric");
+eventType.setType("Samples");
+currents.setValueType(valueType);
+currents.setEventType(eventType);
+inputList.add(currents);
 
-    Input vibration = new Input();
-    vibration.setName("vibration");
-    valueType.setType("Numeric");
-    eventType.setType("Samples");
-    vibration.setValueType(valueType);
-    vibration.setEventType(eventType);
-    inputList.add(vibration);
+Input vibration = new Input();
+vibration.setName("vibration");
+valueType.setType("Numeric");
+eventType.setType("Samples");
+vibration.setValueType(valueType);
+vibration.setEventType(eventType);
+inputList.add(vibration);
 
-    Input state = new Input();
-    state.setName("state");
-    valueType.setType("Categorical");
-    eventType.setType("Samples");
-    state.setValueType(valueType);
-    state.setEventType(eventType);
-    inputList.add(state);
+Input state = new Input();
+state.setName("state");
+valueType.setType("Categorical");
+eventType.setType("Samples");
+state.setValueType(valueType);
+state.setEventType(eventType);
+inputList.add(state);
 
-    ds.setInputList(inputList);
+ds.setInputList(inputList);
 
-    Datastream datastream = falkonry.createDatastream(ds);
+Datastream datastream = falkonry.createDatastream(ds);
 ```
 
 ```python
