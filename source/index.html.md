@@ -40,7 +40,7 @@ Login:
 
 For login use host and authorization token.
 
-falkonry>> login --host=https://jumpstart.falkonry.ai --token=el7rvvqx2xr6v5-30qba1dl0pu36pi
+falkonry>> login --host=https://example.falkonry.ai --token=api-token
 logged in to falkonry
 falkonry>>
 If wrong url or token is passed appropriate error will be displayed.
@@ -50,8 +50,8 @@ Check Login details:
 For login details type "login_details"
 
 falkonry>> login_details
-Host : https://jumpstart.falkonry.ai
-Token : el7rvvqx2xr6v5-30qba1dl0pu36pi
+Host : https://example.falkonry.ai
+Token : api-token
 falkonry>>
 
 Logout:
@@ -90,16 +90,16 @@ Remember — a datastream is your basic building block!
 </aside>
 
 
-## Setup Sliding datastream for narrow/historian style data from a single entity
+## Setup Sliding datastream for narrow style data from a single entity
 
-> To setup a Sliding datastream for narrow/historian style data from a single entity, use this code:
+> To setup a Sliding datastream for narrow style data from a single entity, use this code:
 
 ```csharp
   using FalkonryClient;
   using FalkonryClient.Helper.Models;
   
-  string token="Add your token here";   
-  Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
+  string token = "api-token";   
+  Falkonry falkonry = new Falkonry("http://example.falkonry.ai", token);
     
 	var time = new Time();
 	time.Zone = "GMT";
@@ -112,7 +112,7 @@ Remember — a datastream is your basic building block!
 	var Field = new Field();
 	var Signal = new Signal();
 	Signal.ValueIdentifier = "value";
-	Signal.SignalIdentifier = "tag";
+	Signal.SignalIdentifier = "signal";
 	Field.Signal = Signal;
 	Field.Time = time;
 	ds.Field = Field;
@@ -134,26 +134,26 @@ Remember — a datastream is your basic building block!
   import com.falkonry.helper.models.Signal;
 
   //instantiate Falkonry
-  Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", "auth-token");
+  Falkonry falkonry = new Falkonry("http://example.falkonry.ai", "api-token");
   
   Datastream ds = new Datastream();
-    ds.setName("Test-DS-" + Math.random());
-    TimeObject time = new TimeObject();
-    time.setIdentifier("time");
-    time.setFormat("iso_8601");
-    time.setZone("GMT");
-    Signal signal = new Signal();
+  ds.setName("Test-DS-" + Math.random());
+  TimeObject time = new TimeObject();
+  time.setIdentifier("time");
+  time.setFormat("iso_8601");
+  time.setZone("GMT");
+  Signal signal = new Signal();
 
-    signal.setValueIdentifier("value");
-    signal.setSignalIdentifier("signal");
-    Field field = new Field();
-    field.setSignal(signal);
-    field.setTime(time);
-    ds.setField(field);
-    Datasource dataSource = new Datasource();
-    dataSource.setType("STANDALONE");
-    ds.setDatasource(dataSource);
-    Datastream datastream = falkonry.createDatastream(ds);
+  signal.setValueIdentifier("value");
+  signal.setSignalIdentifier("signal");
+  Field field = new Field();
+  field.setSignal(signal);
+  field.setTime(time);
+  ds.setField(field);
+  Datasource dataSource = new Datasource();
+  dataSource.setType("STANDALONE");
+  ds.setDatasource(dataSource);
+  Datastream datastream = falkonry.createDatastream(ds);
 ```
 
 ```python
@@ -161,7 +161,7 @@ from falkonryclient import client as Falkonry
 from falkonryclient import schemas as Schemas
 
 #instantiate Falkonry
-falkonry   = Falkonry('https://jumpstart.falkonry.ai', 'auth-token')
+falkonry   = Falkonry('https://example.falkonry.ai', 'auth-token')
 datastream = Schemas.Datastream()
 datasource = Schemas.Datasource()
 field = Schemas.Field()
@@ -172,16 +172,16 @@ datastream.set_name('Motor Health' + str(random.random()))  # set name of the Da
 time.set_zone("GMT")                                        # set timezone of the datastream
 time.set_identifier("time")                                 # set time identifier of the datastream
 time.set_format("iso_8601")                                 # set time format of the datastream
-field.set_time(time)
-signal.set_signalIdentifier("tag")                          # set signal identifier
+field.set_time(time)            
+signal.set_signalIdentifier("signal")                       # set signal identifier
 signal.set_valueIdentifier("value")                         # set value identifier
 field.set_signal(signal)                                    # set signal in field
 datasource.set_type("STANDALONE")                           # set datastource type in datastream
 datastream.set_datasource(datasource)
 datastream.set_field(field)
-
+        
 #create Datastream
-createdDatastream = falkonry.create_datastream(datastream)
+createdDatastream = fclient.create_datastream(datastream)
 ```
 
 ```shell
@@ -200,10 +200,8 @@ Sample JSONFile:
       "format": "YYYY-MM-DD HH:mm:ss"
     },
   "signal": {
-    "tagIdentifier": "tag",
-    "valueIdentifier": "value",
-    "delimiter": null,
-    "isSignalPrefix": false
+    "signalIdentifier": "signal",
+    "valueIdentifier": "value"
     }
   }
 }
@@ -224,7 +222,7 @@ Get default Datastream:
 For fetching default datastream use the following command
 
 falkonry>> datastream_default_get
-Default datastream set : oii0djojxc2lxt Name : New Ds -1
+Default datastream set : anbsivd1h7h1sd Name : New Ds -1
 falkonry>>
 ```
 
@@ -233,14 +231,10 @@ Here, we create a datastream and set it up with narrow style data for a single e
 
 **Sample format for narrow/historian style**
 
- Time    | Signal   | Value
--------  |----------| -------
- T1      | signal1  | 32
- T2      | signal2  |128
- T3      | signal3  | 24
- T4      | signal4  | 86
- T5      | signal5  | 64
- T6      | signal6  | 95
+time                    | signal   | value
+------------------------|----------|--------
+2016-03-01 01:01:01     | signal1  | 3.4
+2016-03-01 01:01:02     | signal2  | 9.3
 
 <aside class="warning">
 Structuring data as key-value pairs — as is done in narrow-form datasets — facilitates conceptual clarity. 
@@ -249,8 +243,8 @@ Structuring data as key-value pairs — as is done in narrow-form datasets — f
 > Input data could be of the following format:
 
 ```json
- {"time" :"2016-03-01 01:01:01", "tag" : "signal1", "value" : 3.4}
- {"time" :"2016-03-01 01:01:02", "tag" : "signal2", "value" : 9.3}
+ {"time" :"2016-03-01 01:01:01", "signal" : "signal1", "value" : 3.4}
+ {"time" :"2016-03-01 01:01:02", "signal" : "signal2", "value" : 9.3}
  ```
 
 
@@ -262,8 +256,8 @@ Structuring data as key-value pairs — as is done in narrow-form datasets — f
   using FalkonryClient;
   using FalkonryClient.Helper.Models;
   
-  string token="Add your token here";   
-  Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
+  string token="api-token";   
+  Falkonry falkonry = new Falkonry("http://example.falkonry.ai", token);
     
 	var time = new Time();
 	time.Zone = "GMT";
@@ -275,11 +269,11 @@ Structuring data as key-value pairs — as is done in narrow-form datasets — f
 	var ds = new DatastreamRequest();
 	var Field = new Field();
 	var Signal = new Signal();
-	Signal.SignalIdentifier = "signal"
 	Signal.ValueIdentifier = "value";
-	Field.BatchIdentifier = "batch";
+    Signal.SignalIdentifier = "signal";
 	Field.Signal = Signal;
 	Field.Time = time;
+    Field.BatchIdentifier = "batch";
 	ds.Field = Field;
 	ds.DataSource = datasource;
 	var rnd = new System.Random();
@@ -299,9 +293,9 @@ Structuring data as key-value pairs — as is done in narrow-form datasets — f
   import com.falkonry.helper.models.Signal;
 
   //instantiate Falkonry
-  Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", "auth-token");
+  Falkonry falkonry = new Falkonry("http://example.falkonry.ai", "auth-token");
   
-    Datastream ds = new Datastream();
+  Datastream ds = new Datastream();
 	ds.setName("Test-DS-" + Math.random());
 	TimeObject time = new TimeObject();
 	time.setIdentifier("time");
@@ -327,42 +321,26 @@ from falkonryclient import client as Falkonry
 from falkonryclient import schemas as Schemas
 
 #instantiate Falkonry
-falkonry   = Falkonry('http://jumpstart.falkonry.ai', 'auth-token')
+falkonry   = Falkonry("http://example.falkonry.ai", "auth-token")
 datastream = Schemas.Datastream()
 datasource = Schemas.Datasource()
 field = Schemas.Field()
 time = Schemas.Time()
 signal = Schemas.Signal()
-input1 = Schemas.Input()
-input2 = Schemas.Input()
-input3 = Schemas.Input()
 
 datastream.set_name('Motor Health' + str(random.random()))  # set name of the Datastream
-
-input1.set_name("Signal1")                                  # set name of input signal
-input1.set_value_type("Numeric")                            # set value type of input signal (Numeric for number, Categorical for string type)
-input1.set_event_type("Samples")                            # set event type of input signal
-input2.set_name("Signal2")                                  # set name of input signal
-input2.set_value_type("Numeric")                            # set value type of input signal (Numeric for number, Categorical for string type)
-input2.set_event_type("Samples")                            # set event type of input signal
-input3.set_name("Signal3")                                  # set name of input signal
-input3.set_value_type("Numeric")                            # set value type of input signal (Numeric for number, Categorical for string type)
-input3.set_event_type("Samples")                            # set event type of input signal
-inputs = []
-inputs.append(input1)
-inputs.append(input2)
-inputs.append(input3)
 
 time.set_zone("GMT")                                        # set timezone of the datastream
 time.set_identifier("time")                                 # set time identifier of the datastream
 time.set_format("iso_8601")                                 # set time format of the datastream
+signal.set_signalIdentifier("signal");                      # set signal identifier
+signal.set_valueIdentifier("value");                        # set value identifier
 field.set_time(time)
 field.set_signal(signal)                                    # set signal in field
 field.set_batchIdentifier("batch")                          # set batchIdentifier in field
 datasource.set_type("STANDALONE")                           # set datastource type in datastream
 datastream.set_datasource(datasource)
 datastream.set_field(field)
-datastream.set_inputs(inputs)
         
 #create Datastream
 createdDatastream = fclient.create_datastream(datastream)
@@ -383,10 +361,10 @@ Sample JSONFile:
       "identifier": "time",
       "format": "YYYY-MM-DD HH:mm:ss"
     },
-  "signal": {
-    "tagIdentifier": "tag",
-    "valueIdentifier": "value",
-    }
+    "signal": {
+      "signalIdentifier": "signal",
+      "valueIdentifier": "value"
+    },
     "batchIdentifier": "batchId" // set batch identifier here.
   }
 }
@@ -407,7 +385,7 @@ Get default Datastream:
 For fetching default datastream use the following command
 
 falkonry>> datastream_default_get
-Default datastream set : oii0djojxc2lxt Name : New Ds -1
+Default datastream set : anbsivd1h7h1sd Name : New Ds -1
 falkonry>>
 ```
 
@@ -416,14 +394,10 @@ Here, we create a datastream and set it up with narrow style data for a single e
 
 **Sample format for narrow/historian style**
 
-Time  | Signal   | Signal   | Value
-------|----------|----------| -------
-T1    | batch1   | signal1  | 32
-T2    | batch1   | signal2  | 128
-T3    | batch1   | signal3  | 24
-T4    | batch2   | signal4  | 86
-T5    | batch2   | signal5  | 64
-T6    | batch2   | signal6  | 95
+time                    | signal   | value | batch
+------------------------|----------|-------|-------
+2016-03-01 01:01:01     | signal1  | 3.4   | batch1
+2016-03-01 01:01:02     | signal2  | 9.3   | batch1
 
 <aside class="warning">
 Structuring data as key-value pairs — as is done in narrow-form datasets — facilitates conceptual clarity. 
@@ -432,8 +406,8 @@ Structuring data as key-value pairs — as is done in narrow-form datasets — f
 > Input data could be of the following format:
 
 ```json
- {"batchId" :"batch1", "tag" : "signal1", "value" : 3.4}
- {"batchId" :"batch2", "tag" : "signal2", "value" : 9.3}
+ {"batchId" :"batch1", "entity": "machine1", "signal" : "signal1", "value" : 3.4},
+ {"batchId" :"batch2", "entity": "machine1", "signal" : "signal2", "value" : 9.3}
  ```
 
 
@@ -442,67 +416,68 @@ Structuring data as key-value pairs — as is done in narrow-form datasets — f
 > To setup a Sliding datastream using narrow style data for multiple entities, use this code:
 
 ```csharp
-  using FalkonryClient;
-  using FalkonryClient.Helper.Models;
-  
-  string token="Add your token here";   
-  Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
-    
-	var time = new Time();
-	time.Zone = "GMT";
-	time.Identifier = "time";
-	time.Format = "iso_8601";
+using FalkonryClient;
+using FalkonryClient.Helper.Models;
 
-	var datasource = new Datasource();
-	datasource.Type = "PI";
-	var ds = new DatastreamRequest();
-	var Field = new Field();
-	var Signal = new Signal();
-	Signal.ValueIdentifier = "value";
-	Signal.SignalIdentifier = "tag";
-	Field.Signal = Signal;
-	Field.Time = time;
-	ds.Field = Field;
-	ds.DataSource = datasource;
-	var rnd = new System.Random();
-	var randomNumber = System.Convert.ToString(rnd.Next(1, 10000));
-	ds.Name = "TestDS" + randomNumber;
-	ds.Field.Time = time;
-	ds.DataSource = datasource;
-	var datastream = _falkonry.CreateDatastream(ds);
+string token="api-token";   
+Falkonry falkonry = new Falkonry("http://example.falkonry.ai", token);
+  
+var time = new Time();
+time.Zone = "GMT";
+time.Identifier = "time";
+time.Format = "iso_8601";
+
+var datasource = new Datasource();
+datasource.Type = "PI";
+var ds = new DatastreamRequest();
+var Field = new Field();
+var Signal = new Signal();
+Signal.ValueIdentifier = "value";
+Signal.SignalIdentifier = "signal";
+Field.Signal = Signal;
+Field.Time = time;
+Field.EntityIdentifier = "entity";
+ds.Field = Field;
+ds.DataSource = datasource;
+var rnd = new System.Random();
+var randomNumber = System.Convert.ToString(rnd.Next(1, 10000));
+ds.Name = "TestDS" + randomNumber;
+ds.Field.Time = time;
+ds.DataSource = datasource;
+var datastream = _falkonry.CreateDatastream(ds);
 ```
 
 ```java
-  import com.falkonry.client.Falkonry;
-  import com.falkonry.helper.models.Datasource;
-  import com.falkonry.helper.models.Datastream;
-  import com.falkonry.helper.models.Field;
-  import com.falkonry.helper.models.TimeObject;
-  import com.falkonry.helper.models.Signal;
+import com.falkonry.client.Falkonry;
+import com.falkonry.helper.models.Datasource;
+import com.falkonry.helper.models.Datastream;
+import com.falkonry.helper.models.Field;
+import com.falkonry.helper.models.TimeObject;
+import com.falkonry.helper.models.Signal;
 
-  //instantiate Falkonry
-  Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", "auth-token");
-  
-  Datastream ds = new Datastream();
-	ds.setName("Test-DS-" + Math.random());
-	TimeObject time = new TimeObject();
-	time.setIdentifier("time");
-	time.setFormat("iso_8601");
-	time.setZone("GMT");
-	Signal signal = new Signal();
+//instantiate Falkonry
+Falkonry falkonry = new Falkonry("http://example.falkonry.ai", "auth-token");
 
-	signal.setValueIdentifier("value");
-	signal.setSignalIdentifier("signal");
-	Field field = new Field();
-	field.setSignal(signal);
-	field.setEntityIdentifiers("entity");
-	field.setTime(time);
-	ds.setField(field);
-	Datasource dataSource = new Datasource();
-	dataSource.setType("STANDALONE");
-	ds.setDatasource(dataSource);
+Datastream ds = new Datastream();
+ds.setName("Test-DS-" + Math.random());
+TimeObject time = new TimeObject();
+time.setIdentifier("time");
+time.setFormat("iso_8601");
+time.setZone("GMT");
+Signal signal = new Signal();
 
-	Datastream datastream = falkonry.createDatastream(ds);
+signal.setValueIdentifier("value");
+signal.setSignalIdentifier("signal");
+Field field = new Field();
+field.setSignal(signal);
+field.setEntityIdentifier("entity");
+field.setTime(time);
+ds.setField(field);
+Datasource dataSource = new Datasource();
+dataSource.setType("STANDALONE");
+ds.setDatasource(dataSource);
+
+Datastream datastream = falkonry.createDatastream(ds);
 ```
 
 ```python
@@ -510,7 +485,7 @@ from falkonryclient import client as Falkonry
 from falkonryclient import schemas as Schemas
 
 #instantiate Falkonry
-falkonry   = Falkonry('https://jumpstart.falkonry.ai', 'auth-token')
+falkonry   = Falkonry('https://example.falkonry.ai', 'auth-token')
 datastream = Schemas.Datastream()
 datasource = Schemas.Datasource()
 field = Schemas.Field()
@@ -522,9 +497,10 @@ time.set_zone("GMT")                                        # set timezone of th
 time.set_identifier("time")                                 # set time identifier of the datastream
 time.set_format("iso_8601")                                 # set time format of the datastream
 field.set_time(time)            
-signal.set_signalIdentifier("tag")                             # set tag identifier
+signal.set_signalIdentifier("signal")                       # set signal identifier
 signal.set_valueIdentifier("value")                         # set value identifier
 field.set_signal(signal)                                    # set signal in field
+field.set_entityIdentifier("entity")                        # set entity identifier
 datasource.set_type("STANDALONE")                           # set datastource type in datastream
 datastream.set_datasource(datasource)
 datastream.set_field(field)
@@ -555,7 +531,7 @@ Sample JSONFile:
 }
 
 Usage :
-falkonry>> datastream_create --path=/Users/user/NarrowMultipleEntity.json
+falkonry>> datastream_create --path=NarrowMultipleEntity.json
 Datastream successfully created : anbsivd1h7h1sd
 falkonry>>
 ```
@@ -566,29 +542,14 @@ Here, we create a datastream and set it up with narrow style data for multiple e
 
 **Sample format for narrow/historian style**
 
-Person  | Variable | Value
-------- |----------| -------
-Bob     | Age      | 32
-Bob     | Weight   |128
-Alice   | Age      | 24
-Alice   | Weight   | 86
-Steve   | Age      | 64
-Steve   | Weight   | 95
+time                    | entity   | signal  | value
+------------------------|----------|---------|------
+2016-03-01 01:01:01     | machine1 | signal1 | 3.4   
+2016-03-01 01:01:02     | machine2 | signal1 | 9.3
 
 <aside class="warning">
 Structuring data as key-value pairs — as is done in narrow-form datasets — facilitates conceptual clarity. 
 </aside>
-
-> Input data could be of the following format:
-
-```json
-
-  {"time" :"2016-03-01 01:01:01", "tag" : "signal1_entity1", "value" : 3.4}
-  {"time" :"2016-03-01 01:01:01", "tag" : "signal2_entity1", "value" : 1.4}
-  {"time" :"2016-03-01 01:01:02", "tag" : "signal1_entity2", "value" : 9.3}
-  {"time" :"2016-03-01 01:01:02", "tag" : "signal2_entity2", "value" : 4.3}
-
-```
 
 
 ## Setup Sliding datastream for wide style data from a single entity
@@ -596,135 +557,135 @@ Structuring data as key-value pairs — as is done in narrow-form datasets — f
 > To setup a Sliding datastream using wide style data for a single entity, use this code:
 
 ```csharp
-  using FalkonryClient;
-  using FalkonryClient.Helper.Models;
+using FalkonryClient;
+using FalkonryClient.Helper.Models;
+
+string token="api-token";   
+Falkonry falkonry = new Falkonry("http://example.falkonry.ai", token);
+
+var time = new Time();
+time.Zone = "GMT";
+time.Identifier = "time";
+time.Format = "iso_8601";
+
+var datasource = new Datasource();
+datasource.Type = "PI";
+var ds = new DatastreamRequest();
+var Field = new Field();
+var Signal = new Signal();
+using FalkonryClient;
+using FalkonryClient.Helper.Models;
+
+string token="Add your token here";   
+Falkonry falkonry = new Falkonry("http://example.falkonry.ai", token);
   
-  string token="Add your token here";   
-  Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
-  
-	var time = new Time();
-	time.Zone = "GMT";
-	time.Identifier = "time";
-	time.Format = "iso_8601";
+var time = new Time();
+time.Zone = "GMT";
+time.Identifier = "time";
+time.Format = "iso_8601";
 
-	var datasource = new Datasource();
-	datasource.Type = "PI";
-	var ds = new DatastreamRequest();
-	var Field = new Field();
-	var Signal = new Signal();
-	using FalkonryClient;
-  using FalkonryClient.Helper.Models;
-  
-  string token="Add your token here";   
-  Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
-    
-	var time = new Time();
-	time.Zone = "GMT";
-	time.Identifier = "time";
-	time.Format = "iso_8601";
+var datasource = new Datasource();
+datasource.Type = "PI";
+var ds = new DatastreamRequest();
+// Input List
+var inputList = new List<Input>();
+var currents = new Input();
+currents.Name = "current";
+currents.ValueType = new ValueType();
+currents.EventType = new EventType();
+currents.ValueType.Type = "Numeric";
+currents.EventType.Type = "Samples";
+inputList.Add(currents);
 
-	var datasource = new Datasource();
-	datasource.Type = "PI";
-	var ds = new DatastreamRequest();
-	// Input List
-  var inputList = new List<Input>();
-  var currents = new Input();
-  currents.Name = "current";
-  currents.ValueType = new ValueType();
-  currents.EventType = new EventType();
-  currents.ValueType.Type = "Numeric";
-  currents.EventType.Type = "Samples";
-  inputList.Add(currents);
+var vibration = new Input();
+vibration.Name = "vibration";
+vibration.ValueType = new ValueType();
+vibration.EventType = new EventType();
+vibration.ValueType.Type = "Numeric";
+vibration.EventType.Type = "Samples";
+inputList.Add(vibration);
 
-  var vibration = new Input();
-  vibration.Name = "vibration";
-  vibration.ValueType = new ValueType();
-  vibration.EventType = new EventType();
-  vibration.ValueType.Type = "Numeric";
-  vibration.EventType.Type = "Samples";
-  inputList.Add(vibration);
+var state = new Input();
+state.Name = "state";
+state.ValueType = new ValueType();
+state.EventType = new EventType();
+state.ValueType.Type = "Categorical";
+state.EventType.Type = "Samples";
+inputList.Add(state);
 
-  var state = new Input();
-  state.Name = "state";
-  state.ValueType = new ValueType();
-  state.EventType = new EventType();
-  state.ValueType.Type = "Categorical";
-  state.EventType.Type = "Samples";
-  inputList.Add(state);
-
-  ds.InputList = inputList;
-	var Field = new Field();
-	var Signal = new Signal();
-	Field.Signal = Signal;
-	Field.Time = time;
-	ds.Field = Field;
-	ds.DataSource = datasource;
-	var rnd = new System.Random();
-	var randomNumber = System.Convert.ToString(rnd.Next(1, 10000));
-	ds.Name = "TestDS" + randomNumber;
-	ds.Field.Time = time;
-	ds.DataSource = datasource;
-	var datastream = _falkonry.CreateDatastream(ds);
+ds.InputList = inputList;
+var Field = new Field();
+var Signal = new Signal();
+Field.Signal = Signal;
+Field.Time = time;
+ds.Field = Field;
+ds.DataSource = datasource;
+var rnd = new System.Random();
+var randomNumber = System.Convert.ToString(rnd.Next(1, 10000));
+ds.Name = "TestDS" + randomNumber;
+ds.Field.Time = time;
+ds.DataSource = datasource;
+var datastream = _falkonry.CreateDatastream(ds);
 ```
 
 ```java
-    import com.falkonry.client.Falkonry;
-    import com.falkonry.helper.models.Datasource;
-    import com.falkonry.helper.models.Datastream;
-    import com.falkonry.helper.models.Field;
-    import com.falkonry.helper.models.TimeObject;
-    import com.falkonry.helper.models.Signal;
+import com.falkonry.client.Falkonry;
+import com.falkonry.helper.models.Datasource;
+import com.falkonry.helper.models.Datastream;
+import com.falkonry.helper.models.Field;
+import com.falkonry.helper.models.TimeObject;
+import com.falkonry.helper.models.Signal;
 
-    //instantiate Falkonry
-    Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", "auth-token");
+//instantiate Falkonry
+Falkonry falkonry = new Falkonry("http://example.falkonry.ai", "auth-token");
 
-    Datastream ds = new Datastream();
-    ds.setName("Test-DS-" + Math.random());
-    TimeObject time = new TimeObject();
-    time.setIdentifier("time");
-    time.setFormat("millis");
-    time.setZone("GMT");
+Datastream ds = new Datastream();
+ds.setName("Test-DS-" + Math.random());
+TimeObject time = new TimeObject();
+time.setIdentifier("time");
+time.setFormat("millis");
+time.setZone("GMT");
 
-    Field field = new Field();
-    field.setTime(time);
-    ds.setField(field);
-    Datasource dataSource = new Datasource();
-    dataSource.setType("PI");
-    dataSource.sethost("https://test.piserver.com/piwebapi");
-    dataSource.setElementTemplateName("SampleElementTempalte");
-    ds.setDatasource(dataSource);
+Field field = new Field();
+field.setTime(time);
+ds.setField(field);
+Datasource dataSource = new Datasource();
+dataSource.setType("PI");
+dataSource.sethost("https://test.piserver.com/piwebapi");
+dataSource.setElementTemplateName("SampleElementTempalte");
+ds.setDatasource(dataSource);
 
-    // Input List
-    List<Input> inputList = new ArrayList<Input>();
-    Input currents = new Input();
-    ValueType valueType = new ValueType();
-    EventType eventType = new EventType();
-    currents.setName("current");
-    valueType.setType("Numeric");
-    eventType.setType("Samples");
-    currents.setValueType(valueType);
-    currents.setEventType(eventType);
-    inputList.add(currents);
+// Input List
+List<Input> inputList = new ArrayList<Input>();
+Input currents = new Input();
+ValueType valueType = new ValueType();
+EventType eventType = new EventType();
+currents.setName("current");
+valueType.setType("Numeric");
+eventType.setType("Samples");
+currents.setValueType(valueType);
+currents.setEventType(eventType);
+inputList.add(currents);
 
-    Input vibration = new Input();
-    vibration.setName("vibration");
-    valueType.setType("Numeric");
-    eventType.setType("Samples");
-    vibration.setValueType(valueType);
-    vibration.setEventType(eventType);
-    inputList.add(vibration);
+Input vibration = new Input();
+vibration.setName("vibration");
+valueType.setType("Numeric");
+eventType.setType("Samples");
+vibration.setValueType(valueType);
+vibration.setEventType(eventType);
+inputList.add(vibration);
 
-    Input state = new Input();
-    state.setName("state");
-    valueType.setType("Categorical");
-    eventType.setType("Samples");
-    state.setValueType(valueType);
-    state.setEventType(eventType);
-    inputList.add(state);
+Input state = new Input();
+state.setName("state");
+valueType.setType("Categorical");
+eventType.setType("Samples");
+state.setValueType(valueType);
+state.setEventType(eventType);
+inputList.add(state);
 
-    ds.setInputList(inputList);
+ds.setInputList(inputList);
 
-    Datastream datastream = falkonry.createDatastream(ds);
+Datastream datastream = falkonry.createDatastream(ds);
 ```
 
 ```python
@@ -732,7 +693,7 @@ from falkonryclient import client as Falkonry
 from falkonryclient import schemas as Schemas
 
 #instantiate Falkonry
-falkonry   = Falkonry('https://jumpstart.falkonry.ai', 'auth-token')
+falkonry   = Falkonry('https://example.falkonry.ai', 'auth-token')
 datastream = Schemas.Datastream()
 datasource = Schemas.Datasource()
 field = Schemas.Field()
@@ -828,9 +789,16 @@ Sample JSONFile:
 }
 
 Usage :
-falkonry>> datastream_create --path=/Users/user/WideSingleEntity.json
+falkonry>> datastream_create --path=WideSingleEntity.json
 Datastream successfully created : anb109d1h7h1po
 falkonry>>
+```
+
+> Input data could be of the following format:
+
+```json
+{"time":1467729675422, "signal1":41.11, "signal2":82.34, "signal3":74.63, "signal4":4.8}
+{"time":1467729668919, "signal1":78.11, "signal2":2.33, "signal3":4.6, "signal4":9.8}
 ```
 
 Wide and narrow (sometimes un-stacked and stacked) are terms used to describe two different presentations for tabular data.
@@ -838,23 +806,15 @@ Here, we create a datastream and set it up with wide style data for a single ent
 
 **Sample format for wide style**
 
-Person  | Age | Weight
-------- |---- | -------
-Bob     | 32  | 128
-Alice   | 24  | 86
-Steve   | 64  | 95
+time                    | signal1 | signal2 | signal3 | signal4
+------------------------|---------|---------|---------|--------
+2016-03-01 01:01:01     | 1.2     | 3.4     | 4.5     | 5.6
+2016-03-01 01:01:02     | 4.5     | 9.3     | 5.5     | 6.2
 
 
 <aside class="warning">
 If you have many value variables, it is difficult to summarize wide-form datasets at a glance
 </aside>
-
-> Input data could be of the following format:
-
-```json
-{"time":1467729675422, "entities": "entity1", "signal1":41.11, "signal2":82.34, "signal3":74.63, "signal4":4.8}
-{"time":1467729668919, "entities": "entity2", "signal1":78.11, "signal2":2.33, "signal3":4.6, "signal4":9.8}
-```
 
 
 ## Setup Sliding datastream for wide style data from multiple entities
@@ -866,8 +826,8 @@ If you have many value variables, it is difficult to summarize wide-form dataset
   using FalkonryClient;
   using FalkonryClient.Helper.Models;
   
-  string token="Add your token here";   
-  Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
+  string token="api-token";   
+  Falkonry falkonry = new Falkonry("http://example.falkonry.ai", token);
     
 	var time = new Time();
 	time.Zone = "GMT";
@@ -879,20 +839,7 @@ If you have many value variables, it is difficult to summarize wide-form dataset
 	var ds = new DatastreamRequest();
 	var Field = new Field();
 	var Signal = new Signal();
-	using FalkonryClient;
-  using FalkonryClient.Helper.Models;
-  
-  string token="Add your token here";   
-  Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
-    
-	var time = new Time();
-	time.Zone = "GMT";
-	time.Identifier = "time";
-	time.Format = "iso_8601";
-
-	var datasource = new Datasource();
-	datasource.Type = "PI";
-	var ds = new DatastreamRequest();
+	
 	// Input List
   var inputList = new List<Input>();
   var currents = new Input();
@@ -921,7 +868,7 @@ If you have many value variables, it is difficult to summarize wide-form dataset
 
   ds.InputList = inputList;
 	var Field = new Field();
-	Field.EntityIdentifier = "Unit";
+	Field.EntityIdentifier = "entity";
 	var Signal = new Signal();
 	Field.Signal = Signal;
 	Field.Time = time;
@@ -944,7 +891,7 @@ If you have many value variables, it is difficult to summarize wide-form dataset
     import com.falkonry.helper.models.Signal;
 
     //instantiate Falkonry
-    Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", "auth-token");
+    Falkonry falkonry = new Falkonry("http://example.falkonry.ai", "api-token");
 
     Datastream ds = new Datastream();
     ds.setName("Test-DS-" + Math.random());
@@ -966,7 +913,7 @@ If you have many value variables, it is difficult to summarize wide-form dataset
     Field field = new Field();
     field.setSignal(signal);
     field.setTime(time);
-    field.setEntityIdentifier("entities");
+    field.setEntityIdentifier("entity");
 
     ds.setDatasource(dataSource);
     ds.setField(field);
@@ -975,7 +922,7 @@ If you have many value variables, it is difficult to summarize wide-form dataset
 
 
     //Add data to datastream
-    String data = "time,entities,signal1,signal2,signal3,signal4" + "\n"
+    String data = "time,entity,signal1,signal2,signal3,signal4" + "\n"
         + "1467729675422,entity1,41.11,62.34,77.63,4.8" + "\n"
         + "1467729675445,entity1,43.91,82.64,73.63,3.8";
     Map<String, String> options = new HashMap<String, String>();
@@ -990,7 +937,7 @@ from falkonryclient import client as Falkonry
 from falkonryclient import schemas as Schemas
 
 #instantiate Falkonry
-falkonry   = Falkonry('https://jumpstart.falkonry.ai', 'auth-token')
+falkonry   = Falkonry('https://example.falkonry.ai', 'api-token')
 datastream = Schemas.Datastream()
 datasource = Schemas.Datasource()
 field = Schemas.Field()
@@ -1021,7 +968,7 @@ time.set_identifier("time")                                 # set time identifie
 time.set_format("iso_8601")                                 # set time format of the datastream
 field.set_time(time)            
 field.set_signal(signal)                                    # set signal in field
-field.set_entityIdentifier("thing")                         # set entity identifier as "thing"
+field.set_entityIdentifier("entity")                        # set entity identifier
 datasource.set_type("STANDALONE")                           # set datastource type in datastream
 datastream.set_datasource(datasource)
 datastream.set_field(field)
@@ -1088,29 +1035,27 @@ Sample JSONFile:
 
 Usage :
 
-falkonry>> datastream_create --path=/Users/user/WideMultipleEntity.json
+falkonry>> datastream_create --path=WideMultipleEntity.json
 Datastream successfully created : anb109d1h7h1po
 falkonry>>
+```
+> Input data could be of the following format:
+
+```json
+  {"time":1467729675422, "entity": "machine1", "signal1":1.2, "signal2":3.4, "signal3":4.5, "signal4":5.6},
+  {"time":1467729668919, "entity": "machine2", "signal1":4.5, "signal2":9.3, "signal3":5.5, "signal4":6.2}
 ```
 
 **Sample format for wide style**
 
-Person  | Age | Weight
-------- |---- | -------
-Bob     | 32  | 128
-Alice   | 24  | 86
-Steve   | 64  | 95
+time                    | entity   | signal1 | signal2 | signal3 | signal4
+------------------------|----------|---------|---------|---------|---------
+2016-03-01 01:01:01     | machine1 | 1.2     | 3.4     | 4.5     | 5.6
+2016-03-01 01:01:02     | machine2 | 4.5     | 9.3     | 5.5     | 6.2
 
 <aside class="warning">
 If you have many value variables, it is difficult to summarize wide-form datasets at a glance
 </aside>
-
-> Input data could be of the following format:
-
-```json
-  {"time":1467729675422, "entities": "entity1", "signal1":41.11, "signal2":82.34, "signal3":74.63, "signal4":4.8}
-  {"time":1467729668919, "entities": "entity2", "signal1":78.11, "signal2":2.33, "signal3":4.6, "signal4":9.8}
-```
 
 
 ## Create Datastream with microseconds precision
@@ -1118,74 +1063,71 @@ If you have many value variables, it is difficult to summarize wide-form dataset
 > To create datastream with microseconds precision, use the following code:
 
 ```csharp
-    using FalkonryClient;
-    using FalkonryClient.Helper.Models;
-    
-    string token="Add your token here";   
-    Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
-    
-    var time = new Time();
-    time.Zone = "GMT";
-    time.Identifier = "time";
-    time.Format = "iso_8601";
+using FalkonryClient;
+using FalkonryClient.Helper.Models;
 
-    var datasource = new Datasource();
-    datasource.Type = "PI";
-    var ds = new DatastreamRequest();
-    var Field = new Field();
-    var Signal = new Signal();
-    Signal.ValueIdentifier = "value";
-    Signal.TagIdentifier = "tag";
-    Signal.IsSignalPrefix = true;
-    Field.Signal = Signal;
-    Field.Time = time;
-    ds.Field = Field;
-    ds.DataSource = datasource;
-    var rnd = new System.Random();
-    var randomNumber = System.Convert.ToString(rnd.Next(1, 10000));
-    ds.Name = "TestDS" + randomNumber;
-    ds.TimePrecision = "micro"; # this is use to store your data in different date time format. If input data precision is in micorseconds then set "micro" else "millis". If not sent then it will be "millis"
-    ds.Field.Time = time;
-    ds.DataSource = datasource;
-    var datastream = _falkonry.CreateDatastream(ds);
+string token="Add your token here";   
+Falkonry falkonry = new Falkonry("http://example.falkonry.ai", token);
+
+var time = new Time();
+time.Zone = "GMT";
+time.Identifier = "time";
+time.Format = "iso_8601";
+
+var datasource = new Datasource();
+datasource.Type = "PI";
+var ds = new DatastreamRequest();
+var Field = new Field();
+var Signal = new Signal();
+Signal.ValueIdentifier = "value";
+Signal.SignalIdentifier = "signal";
+Field.Signal = Signal;
+Field.Time = time;
+ds.Field = Field;
+ds.DataSource = datasource;
+var rnd = new System.Random();
+var randomNumber = System.Convert.ToString(rnd.Next(1, 10000));
+ds.Name = "TestDS" + randomNumber;
+ds.TimePrecision = "micro"; # this is use to store your data in different date time format. If input data precision is in micorseconds then set "micro" else "millis". If not sent then it will be "millis"
+ds.Field.Time = time;
+ds.DataSource = datasource;
+var datastream = _falkonry.CreateDatastream(ds);
 
 ```
 
 ```java
-    import com.falkonry.client.Falkonry;
-    import com.falkonry.helper.models.Datasource;
-    import com.falkonry.helper.models.Datastream;
-    import com.falkonry.helper.models.Field;
-    import com.falkonry.helper.models.TimeObject;
-    import com.falkonry.helper.models.Signal;
+import com.falkonry.client.Falkonry;
+import com.falkonry.helper.models.Datasource;
+import com.falkonry.helper.models.Datastream;
+import com.falkonry.helper.models.Field;
+import com.falkonry.helper.models.TimeObject;
+import com.falkonry.helper.models.Signal;
 
-    //instantiate Falkonry
-    Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", "auth-token");
-    Datastream ds = new Datastream();
-	ds.setName("Test-DS-" + Math.random());
-	ds.setTimePrecision("micro"); // "timePrecision" is use to store your data in different date time format. You can store your data in milliseconds("millis") or microseconds("micro"). Default will be "millis"
+//instantiate Falkonry
+Falkonry falkonry = new Falkonry("http://example.falkonry.ai", "auth-token");
+Datastream ds = new Datastream();
+ds.setName("Test-DS-" + Math.random());
+ds.setTimePrecision("micro"); // "timePrecision" is use to store your data in different date time format. You can store your data in milliseconds("millis") or microseconds("micro"). Default will be "millis"
 
-	TimeObject time = new TimeObject();
-	time.setIdentifier("time");
-	time.setFormat("iso_8601");
-	time.setZone("GMT");
+TimeObject time = new TimeObject();
+time.setIdentifier("time");
+time.setFormat("iso_8601");
+time.setZone("GMT");
 
-	Signal signal = new Signal();
-	
-	signal.setValueIdentifier("value");
-	
+Signal signal = new Signal();
+signal.setValueIdentifier("value");
 
-	Datasource dataSource = new Datasource();
-	dataSource.setType("STANDALONE");
+Datasource dataSource = new Datasource();
+dataSource.setType("STANDALONE");
 
-	Field field = new Field();
-	field.setSignal(signal);
-	field.setTime(time);
+Field field = new Field();
+field.setSignal(signal);
+field.setTime(time);
 
-	ds.setDatasource(dataSource);
-	ds.setField(field);
+ds.setDatasource(dataSource);
+ds.setField(field);
 
-	Datastream datastream = falkonry.createDatastream(ds);
+Datastream datastream = falkonry.createDatastream(ds);
 ```
 
 ```python
@@ -1193,7 +1135,7 @@ from falkonryclient import client as Falkonry
 from falkonryclient import schemas as Schemas
 
 #instantiate Falkonry
-falkonry   = Falkonry('http://jumpstart.falkonry.ai', 'auth-token')
+falkonry   = Falkonry('http://example.falkonry.ai', 'auth-token')
 datastream = Schemas.Datastream()
 datasource = Schemas.Datasource()
 field = Schemas.Field()
@@ -1241,14 +1183,14 @@ Sample JSON File:
 
 Usage:
 
-falkonry>> datastream_create --path=/Users/user/Micro.json
+falkonry>> datastream_create --path=Micro.json
 Datastream successfully created : wp7lgnw6mr7nnt
 falkonry>>
 ```
 > Data could be of the following format:
 
 ```json
-{"time" :"2016-03-01 01:01:01", "signal" : "signal1", "value" : 3.4}
+{"time" :"2016-03-01 01:01:01", "signal" : "signal1", "value" : 3.4},
 {"time" :"2016-03-01 01:01:02", "signal" : "signal2", "value" : 9.3}
 ```
 
@@ -1269,17 +1211,16 @@ This is used to store your data in different date time format. If input data pre
 using FalkonryClient;
 using FalkonryClient.Helper.Models;
 
-string token="Add your token here";   
-Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
-  List<Datastream> datastreams = _falkonry.GetDatastreams();
+string token="api-token";   
+Falkonry falkonry = new Falkonry("http://example.falkonry.ai", token);
+List<Datastream> datastreams = _falkonry.GetDatastreams();
 ```
 
 ```java
-  import com.falkonry.client.Falkonry;
-  
-  Falkonry falkonry = new Falkonry("https://jumpstart.falkonry.ai", "auth-token");
+import com.falkonry.client.Falkonry;
 
-  datastream = falkonry.getDatastreams();
+Falkonry falkonry = new Falkonry("https://example.falkonry.ai", "api-token");
+datastream = falkonry.getDatastreams();
 ```
 
 ```python
@@ -1287,7 +1228,7 @@ from falkonryclient import client as Falkonry
 from falkonryclient import schemas as Schemas
 
 #instantiate Falkonry
-falkonry   = Falkonry('https://jumpstart.falkonry.ai', 'auth-token')
+falkonry   = Falkonry('https://example.falkonry.ai', 'api-token')
         
 #return list of Datastreams
 datastreams = falkonry.get_datastreams()
@@ -1316,18 +1257,17 @@ falkonry>>
 using FalkonryClient;
 using FalkonryClient.Helper.Models;
 
-string token="Add your token here";   
-Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
-  Datastream datastream = _falkonry.GetDatastream('datastreamId')
+string token="api-token";   
+Falkonry falkonry = new Falkonry("http://example.falkonry.ai", token);
+Datastream datastream = _falkonry.GetDatastream('datastreamId')
 
 ```
 
 ```java
-  import com.falkonry.client.Falkonry;
+import com.falkonry.client.Falkonry;
 
-  Falkonry falkonry = new Falkonry("https://jumpstart.falkonry.ai", "auth-token");
-
-  datastream = falkonry.getDatastream("datastream_id"); //datastream's id
+Falkonry falkonry = new Falkonry("https://example.falkonry.ai", "api-token");
+datastream = falkonry.getDatastream("datastream_id"); //datastream's id
 ```
 
 ```python
@@ -1335,8 +1275,7 @@ from falkonryclient import client as Falkonry
 from falkonryclient import schemas as Schemas
 
 #instantiate Falkonry
-falkonry   = Falkonry('https://jumpstart.falkonry.ai', 'auth-token')
-
+falkonry   = Falkonry('https://example.falkonry.ai', 'api-token')
 datastreamId = 'id of the datastream'
         
 #return sigle datastream
@@ -1367,41 +1306,41 @@ falkonry>>
 
 ```json
 [
-{
-  "id": "string",
-  "name": "string",
-  "tenant": "string",
-  "sourceId": "string",
-  "createdBy": "string",
-  "updatedBy": "string",
-  "createTime": 0,
-  "updateTime": 0,
-  "inputList": [
-    {
-      "key": "string",
-      "name": "string",
-      "valueType": {},
-      "eventType": {},
-      "inputType": {}
-    }
-  ],
-  "dataSource": {
-    "type": "STANDALONE"
-  },
-  "field": {
-    "entityIdentifier": "string",
-    "entityName": "string",
-    "signal": {
-      "signalIdentifier": "string",
-      "valueIdentifier": "string"
+  {
+    "id": "string",
+    "name": "string",
+    "tenant": "string",
+    "sourceId": "string",
+    "createdBy": "string",
+    "updatedBy": "string",
+    "createTime": 0,
+    "updateTime": 0,
+    "inputList": [
+      {
+        "key": "string",
+        "name": "string",
+        "valueType": {},
+        "eventType": {},
+        "inputType": {}
+      }
+    ],
+    "dataSource": {
+      "type": "STANDALONE"
     },
-    "time": {
-      "format": "string",
-      "identifier": "string",
-      "zone": "string"
+    "field": {
+      "entityIdentifier": "string",
+      "entityName": "string",
+      "signal": {
+        "signalIdentifier": "string",
+        "valueIdentifier": "string"
+      },
+      "time": {
+        "format": "string",
+        "identifier": "string",
+        "zone": "string"
+      }
     }
   }
-}
 ]
 ```
 
@@ -1420,65 +1359,58 @@ Falkonry needs historical time series data to build pattern recognition models.
 > To add historical narrow input data (json format) to single entity batch datastream, use the following code:
 
 ```csharp
-    using FalkonryClient;
-    using FalkonryClient.Helper.Models;
+using FalkonryClient;
+using FalkonryClient.Helper.Models;
 
-    string token="Add your token here";   
-    Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
+string token="Add your token here";   
+Falkonry falkonry = new Falkonry("http://example.falkonry.ai", token);
 
-    var data = "{\"time\" :\"2016-03-01 01:01:01\", \"signal\":\"current\",\"value\" : 12.4,\"batch\" : \"batch1\"}";
-    var options = new SortedDictionary<string, string>();
-    options.Add("streaming", "false");
-    options.Add("hasMoreData", "false");
-    options.Add("timeIdentifier", "time");
-    options.Add("timeZone", "GMT");
-    options.Add("timeFormat", "YYYY-MM-DD HH:mm:ss");
-    options.Add("signalIdentifier", "signal");
-    options.Add("valueIdentifier", "value");
-	  options.Add("batchIdentifier", "batch");
-    var inputstatus = _falkonry.AddInput(datastream.Id, data, options);
+var data = "{\"time\" :\"2016-03-01 01:01:01\", \"signal\":\"current\",\"value\" : 12.4,\"batch\" : \"batch1\"}";
+var options = new SortedDictionary<string, string>();
+options.Add("streaming", "false");
+options.Add("hasMoreData", "false");
+options.Add("timeIdentifier", "time");
+options.Add("timeZone", "GMT");
+options.Add("timeFormat", "YYYY-MM-DD HH:mm:ss");
+options.Add("signalIdentifier", "signal");
+options.Add("valueIdentifier", "value");
+options.Add("batchIdentifier", "batch");
+var inputstatus = _falkonry.AddInput(datastream.Id, data, options);
 ```
 
 ```java
-Data:
+import com.falkonry.client.Falkonry;
+import com.falkonry.helper.models.Datasource;
+import com.falkonry.helper.models.Datastream;
+import com.falkonry.helper.models.Field;
+import com.falkonry.helper.models.TimeObject;
+import com.falkonry.helper.models.Signal;
 
-    {"time" :"2016-03-01 01:01:01", "batch": "batch-1", "signal" : "current", "value" : 12.4}
-    {"time" :"2016-03-01 01:01:01", "batch": "batch-1", "signal" : "vibration", "value" : 3.4}
-Usage:
-    import com.falkonry.client.Falkonry;
-    import com.falkonry.helper.models.Datasource;
-    import com.falkonry.helper.models.Datastream;
-    import com.falkonry.helper.models.Field;
-    import com.falkonry.helper.models.TimeObject;
-    import com.falkonry.helper.models.Signal;
+//instantiate Falkonry
+Falkonry falkonry = new Falkonry("http://example.falkonry.ai", "auth-token");
+//Add data to datastream
+String data = "{\"time\" :\"2016-03-01T01:01:01.000Z\", \"batch\" : \"batch-1\", \"signal\" : \"current\", \"value\" : 12.5}";
 
-    //instantiate Falkonry
-    Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", "auth-token");
-    //Add data to datastream
-    String data = "{\"time\" :\"2016-03-01T01:01:01.000Z\", \"batch\" : \"batch-1\", \"signal\" : \"current\", \"value\" : 12.5}\n" +
-					"{\"time\" :\"2016-03-01T01:01:01.000Z\", \"batch\" : \"batch-1\", \"signal\" : \"vibration\", \"value\" : 3.4}";
-
-		Map<String, String> options = new HashMap<String, String>();
-		options.put("timeIdentifier", "time");
-		options.put("timeFormat", "iso_8601");
-		options.put("timeZone", time.getZone());
-		options.put("signalIdentifier", "signal");
-		options.put("valueIdentifier", "value");
-		options.put("batchIdentifier", "batch");
-		options.put("fileFormat", "json");
-		options.put("streaming", "false");
-		options.put("hasMoreData", "false");
-    falkonry.addInput('datastream-Id', data, options);
+Map<String, String> options = new HashMap<String, String>();
+options.put("timeIdentifier", "time");
+options.put("timeFormat", "iso_8601");
+options.put("timeZone", time.getZone());
+options.put("signalIdentifier", "signal");
+options.put("valueIdentifier", "value");
+options.put("batchIdentifier", "batch");
+options.put("fileFormat", "json");
+options.put("streaming", "false");
+options.put("hasMoreData", "false");
+falkonry.addInput('datastream-Id', data, options);
 ```
 
 ```python
-Usage :
 
 from falkonryclient import client as Falkonry
 from falkonryclient import schemas as Schemas
 
 #instantiate Falkonry
-falkonry   = Falkonry('http://jumpstart.falkonry.ai', 'auth-token')
+falkonry   = Falkonry('http://example.falkonry.ai', 'auth-token')
 
 datastreamId = 'id of the datastream'
 
@@ -1513,11 +1445,8 @@ falkonry>>
 > Input data could be of the following format:
 
 ```json
-{"time": 1467729675010,"batchId": "batch_1","signal": "signal1","value": 9.95}
-{"time": 1467729675020,"batchId": "batch_1","signal": "signal1","value": 4.45}
+{"time": 1467729675010,"batchId": "batch_1","signal": "signal1","value": 9.95},
 {"time": 1467729675030,"batchId": "batch_2","signal": "signal1","value": 1.45}
-{"time": 1467729675040,"batchId": "batch_2","signal": "signal1","value": 8.45}
-{"time": 1467729675050,"batchId": "batch_2","signal": "signal1","value": 2.45}
 ```
 
 json data from a historian or time series data store can be imported into a Falkonry datastream
@@ -1525,50 +1454,49 @@ json data from a historian or time series data store can be imported into a Falk
 > To add historical narrow input data (csv format) to multi entity batch Datastream, use the following code:
 
 ```csharp
-	using FalkonryClient;
-  using FalkonryClient.Helper.Models;
+using FalkonryClient;
+using FalkonryClient.Helper.Models;
 
-    string token="Add your token here";   
-    Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
+string token="Add your token here";   
+Falkonry falkonry = new Falkonry("http://example.falkonry.ai", token);
 
-    var data = "time,signal,value,Unit,Batch\n" + "2016-05-05 12:00:00,current,12.4,uni1,batch1\n2016-03-01 01:01:01,vibration,20.4,unit2,batch2";
-    var options = new SortedDictionary<string, string>();
-                
-    options.Add("streaming", "false");
-    options.Add("hasMoreData", "false");
-    options.Add("timeIdentifier", "time");
-    options.Add("timeZone", "GMT");
-    options.Add("timeFormat", "YYYY-MM-DD HH:mm:ss");
-    options.Add("signalIdentifier", "signal");
-    options.Add("valueIdentifier", "value");
-	options.Add("entityIdentifier", "Unit");
-	options.Add("batchIdentifier", "Batch");
-                
-    var inputstatus = _falkonry.AddInput(datastream.Id, data, options);
+var data = "time,signal,value,Unit,Batch\n" + "2016-05-05 12:00:00,current,12.4,uni1,batch1\n2016-03-01 01:01:01,vibration,20.4,unit2,batch2";
+var options = new SortedDictionary<string, string>();
+            
+options.Add("streaming", "false");
+options.Add("hasMoreData", "false");
+options.Add("timeIdentifier", "time");
+options.Add("timeZone", "GMT");
+options.Add("timeFormat", "YYYY-MM-DD HH:mm:ss");
+options.Add("signalIdentifier", "signal");
+options.Add("valueIdentifier", "value");
+options.Add("entityIdentifier", "Unit");
+options.Add("batchIdentifier", "Batch");
+            
+var inputstatus = _falkonry.AddInput(datastream.Id, data, options);
                
 ```
 
 ```java
-  import com.falkonry.client.Falkonry;
-  import com.falkonry.helper.models.Datasource;
-  import com.falkonry.helper.models.Datastream;
-  import com.falkonry.helper.models.Field;
-  import com.falkonry.helper.models.TimeObject;
-  import com.falkonry.helper.models.Signal;
+import com.falkonry.client.Falkonry;
+import com.falkonry.helper.models.Datasource;
+import com.falkonry.helper.models.Datastream;
+import com.falkonry.helper.models.Field;
+import com.falkonry.helper.models.TimeObject;
+import com.falkonry.helper.models.Signal;
 
-    //instantiate Falkonry
-    Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", "auth-token");
-	//Add data to datastream
-    String data = "time,signal,value,unit,batch\n" + 
-					"2012-01-03T18:16:00.000Z,L1DynVert,9.95,unit1,batch1\n" + 
-					"2012-01-03T18:16:00.000Z,L1VertAvg,12.95,unit2,batch2\n" + 
-					"2012-01-03T18:16:00.000Z,L1VertPk,19.95,unit3,batch3";
+//instantiate Falkonry
+Falkonry falkonry = new Falkonry("http://example.falkonry.ai", "auth-token");
+//Add data to datastream
+String data = "time,signal,value,unit,batch\n" + 
+			"2012-01-03T18:16:00.000Z,L1DynVert,9.95,unit1,batch1\n" + 
+			"2012-01-03T18:16:00.000Z,L1VertAvg,12.95,unit2,batch2";
 
-	Map<String, String> options = new HashMap<String, String>();
-	options.put("fileFormat", "csv");
-	options.put("streaming", "false");
-	options.put("hasMoreData", "false");
-    falkonry.addInput('datastream-Id', data, options);
+Map<String, String> options = new HashMap<String, String>();
+options.put("fileFormat", "csv");
+options.put("streaming", "false");
+options.put("hasMoreData", "false");
+falkonry.addInput('datastream-Id', data, options);
 ```
 
 ```python
@@ -1576,27 +1504,13 @@ from falkonryclient import client as Falkonry
 from falkonryclient import schemas as Schemas
 
 #instantiate Falkonry
-falkonry   = Falkonry('http://jumpstart.falkonry.ai', 'auth-token')
+falkonry   = Falkonry('http://example.falkonry.ai', 'auth-token')
 
 datastreamId = 'id of the datastream'
 
 #add data to Datastream
 String data = 'time,batchId,unit,signal,value\n'
-    +'1467729675010,batch_1,unit1,signal1,9.95\n'
-    +'1467729675020,batch_1,unit1,signal1,4.45\n'
-    +'1467729675030,batch_2,unit1,signal1,1.45\n'
-    +'1467729675040,batch_2,unit1,signal1,8.45\n'
-    +'1467729675050,batch_2,unit1,signal1,2.45\n'
-    +'1467729675010,batch_1,unit1,signal2,19.95\n'
-    +'1467729675020,batch_1,unit1,signal2,14.45\n'
-    +'1467729675030,batch_2,unit1,signal2,10.45\n'
-    +'1467729675040,batch_2,unit1,signal2,18.45\n'
-    +'1467729675050,batch_2,unit1,signal2,12.45\n'
-    +'1467729675010,batch_1,unit1,signal3,39.95\n'
-    +'1467729675020,batch_1,unit1,signal3,34.45\n'
-    +'1467729675030,batch_2,unit1,signal3,30.45\n'
-    +'1467729675040,batch_2,unit1,signal3,38.45\n'
-    +'1467729675050,batch_2,unit1,signal3,32.45\n'
+    +'1467729675010,batch_1,unit1,signal1,9.95'
         
 options = {
     'streaming': False,
@@ -1611,19 +1525,6 @@ Sample data:
 time,batchId,unit,signal,value
 1467729675010,batch_1,unit1,signal1,9.95
 1467729675020,batch_1,unit1,signal1,4.45
-1467729675030,batch_2,unit1,signal1,1.45
-1467729675040,batch_2,unit1,signal1,8.45
-1467729675050,batch_2,unit1,signal1,2.45
-1467729675010,batch_1,unit1,signal2,19.95
-1467729675020,batch_1,unit1,signal2,14.45
-1467729675030,batch_2,unit1,signal2,10.45
-1467729675040,batch_2,unit1,signal2,18.45
-1467729675050,batch_2,unit1,signal2,12.45
-1467729675010,batch_1,unit1,signal3,39.95
-1467729675020,batch_1,unit1,signal3,34.45
-1467729675030,batch_2,unit1,signal3,30.45
-1467729675040,batch_2,unit1,signal3,38.45
-1467729675050,batch_2,unit1,signal3,32.45
 
 Usage:
 falkonry>> datastream_add_historical_data --path=/Users/user/InputNarrowBatchMultiEntity.csv --timeIdentifier="time" --timeFormat="Unix Time Milliseconds" --timeZone="GMT" --entityIdentifier="unit" --signalIdentifier="signal" --batchIdentifier="batchId" --valueIdentifier="value"
@@ -1642,52 +1543,51 @@ falkonry>>
 > To add historical wide input data (csv format) to single entity batch datastream, use the following code:
 
 ```csharp
-  using FalkonryClient;
-  using FalkonryClient.Helper.Models;
+using FalkonryClient;
+using FalkonryClient.Helper.Models;
 
-  string token="Add your token here";   
-  Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
+string token="Add your token here";   
+Falkonry falkonry = new Falkonry("http://example.falkonry.ai", token);
 
-  var data = "time,Batch,current,vibration,state\n 2016-05-05T12:00:00.000Z,batch1,12.4,3.4,On";
-	var options = new SortedDictionary<string, string>();
-	options.Add("timeIdentifier", "time");
-	options.Add("timeFormat", "iso_8601");
-	options.Add("timeZone", "GMT");
-	options.Add("streaming", "false");
-	options.Add("hasMoreData", "false");
-	options.Add("batchIdentifier", "Batch");
-  var inputstatus = _falkonry.AddInput(datastream.Id, data, options);
+var data = "time,Batch,current,vibration,state\n 2016-05-05T12:00:00.000Z,batch1,12.4,3.4,On";
+var options = new SortedDictionary<string, string>();
+options.Add("timeIdentifier", "time");
+options.Add("timeFormat", "iso_8601");
+options.Add("timeZone", "GMT");
+options.Add("streaming", "false");
+options.Add("hasMoreData", "false");
+options.Add("batchIdentifier", "Batch");
+var inputstatus = _falkonry.AddInput(datastream.Id, data, options);
                
 ```
 
 ```java
-  import com.falkonry.client.Falkonry;
-  import com.falkonry.helper.models.Datasource;
-  import com.falkonry.helper.models.Datastream;
-  import com.falkonry.helper.models.Field;
-  import com.falkonry.helper.models.TimeObject;
-  import com.falkonry.helper.models.Signal;
+import com.falkonry.client.Falkonry;
+import com.falkonry.helper.models.Datasource;
+import com.falkonry.helper.models.Datastream;
+import com.falkonry.helper.models.Field;
+import com.falkonry.helper.models.TimeObject;
+import com.falkonry.helper.models.Signal;
 
-  //instantiate Falkonry
-  Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", "auth-token");
-	//Add data to datastream
-    
-	String data = "time,L1DynVert,L1VertAvg,L1VertPk,batch\n" + 
-    "2012-01-03T18:16:00.000Z,4.6,9.95,89.95,batch1\n" + 
-    "2012-01-03T18:16:00.000Z,5.2,12.95,5.85,batch2\n" + 
-    "2012-01-03T18:16:00.000Z,74.3,19.95,9.0,batch3";
+//instantiate Falkonry
+Falkonry falkonry = new Falkonry("http://example.falkonry.ai", "auth-token");
+//Add data to datastream
+  
+String data = "time,L1DynVert,L1VertAvg,L1VertPk,batch\n" + 
+  "2012-01-03T18:16:00.000Z,4.6,9.95,89.95,batch1\n" + 
+  "2012-01-03T18:16:00.000Z,5.2,12.95,5.85,batch2";
 
-	Map<String, String> options = new HashMap<String, String>();
-	options.put("timeIdentifier", "time");
-	options.put("timeFormat", "iso_8601");
-	options.put("timeZone", "GMT");
-	options.put("fileFormat", "csv");
-	options.put("streaming", "false");
-	options.put("hasMoreData", "false");
-	options.put("entityIdentifier", "unit");
-	options.put("batchIdentifier", "batch");
+Map<String, String> options = new HashMap<String, String>();
+options.put("timeIdentifier", "time");
+options.put("timeFormat", "iso_8601");
+options.put("timeZone", "GMT");
+options.put("fileFormat", "csv");
+options.put("streaming", "false");
+options.put("hasMoreData", "false");
+options.put("entityIdentifier", "unit");
+options.put("batchIdentifier", "batch");
 
-    falkonry.addInput('datastream-Id', data, options);
+falkonry.addInput('datastream-Id', data, options);
 ```
 
 ```python
@@ -1695,16 +1595,14 @@ from falkonryclient import client as Falkonry
 from falkonryclient import schemas as Schemas
 
 #instantiate Falkonry
-falkonry   = Falkonry('http://jumpstart.falkonry.ai', 'auth-token')
+falkonry   = Falkonry('http://example.falkonry.ai', 'auth-token')
 
 datastreamId = 'id of the datastream'
 
 #add data to Datastream
 String data = '{"time": 1467729675010,"batchId": "batch_1","signal1": 9.95,"signal2": 19.95,"signal3": 39.95}\n'
     +'{"time": 1467729675020,"batchId": "batch_1","signal1": 4.45,"signal2": 14.45,"signal3": 34.45}\n'
-    +'{"time": 1467729675030,"batchId": "batch_2","signal1": 1.45,"signal2": 10.45,"signal3": 30.45}\n'
-    +'{"time": 1467729675040,"batchId": "batch_2","signal1": 8.45,"signal2": 18.45,"signal3": 38.45}\n'
-    +'{"time": 1467729675050,"batchId": "batch_2","signal1": 2.45,"signal2": 12.45,"signal3": 32.45}'
+    +'{"time": 1467729675030,"batchId": "batch_2","signal1": 1.45,"signal2": 10.45,"signal3": 30.45}'
         
 options = {
     'streaming': False,
@@ -1726,80 +1624,77 @@ falkonry>>
 > The data could be of the following format
 
 ```json
-{"time": 1467729675010,"batchId": "batch_1","signal1": 9.95,"signal2": 19.95,"signal3": 39.95}
-{"time": 1467729675020,"batchId": "batch_1","signal1": 4.45,"signal2": 14.45,"signal3": 34.45}
+{"time": 1467729675010,"batchId": "batch_1","signal1": 9.95,"signal2": 19.95,"signal3": 39.95},
 {"time": 1467729675030,"batchId": "batch_2","signal1": 1.45,"signal2": 10.45,"signal3": 30.45}
-{"time": 1467729675040,"batchId": "batch_2","signal1": 8.45,"signal2": 18.45,"signal3": 38.45}
-{"time": 1467729675050,"batchId": "batch_2","signal1": 2.45,"signal2": 12.45,"signal3": 32.45}
 ```
 
 > To add historical wide input data (json format) to multi entity batch datastream, use the following code:
 
 ```csharp
-		using FalkonryClient;
-    using FalkonryClient.Helper.Models;
+using FalkonryClient;
+using FalkonryClient.Helper.Models;
 
-    string token="Add your token here";   
-    Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
+string token="Add your token here";   
+Falkonry falkonry = new Falkonry("http://example.falkonry.ai", token);
 
-    var data = "{\"time\" :\"2016-03-01 01:01:01\", \"current\" : 12.4, \"vibration\" : 3.4, \"state\" : \"On\", \"car\" : \"car1\", \"batch\" : \"batch1\"}";
-    var options = new SortedDictionary<string, string>();
-    options.Add("streaming", "false");
-    options.Add("hasMoreData", "false");
-    options.Add("timeIdentifier", "time");
-    options.Add("timeZone", "GMT");
-    options.Add("timeFormat", "YYYY-MM-DD HH:mm:ss");
-	  options.Add("entityIdentifier", "car");
-	  options.Add("batchIdentifier", "batch");
-    var inputstatus = _falkonry.AddInput(datastream.Id, data, options);
+var data = "{\"time\" :\"2016-03-01 01:01:01\", \"current\" : 12.4, \"vibration\" : 3.4, \"state\" : \"On\", \"car\" : \"car1\", \"batch\" : \"batch1\"}";
+var options = new SortedDictionary<string, string>();
+options.Add("streaming", "false");
+options.Add("hasMoreData", "false");
+options.Add("timeIdentifier", "time");
+options.Add("timeZone", "GMT");
+options.Add("timeFormat", "YYYY-MM-DD HH:mm:ss");
+options.Add("entityIdentifier", "car");
+options.Add("batchIdentifier", "batch");
+var inputstatus = _falkonry.AddInput(datastream.Id, data, options);
 ```
 
 ```java
-    import com.falkonry.client.Falkonry;
-    import com.falkonry.helper.models.Datasource;
-    import com.falkonry.helper.models.Datastream;
-    import com.falkonry.helper.models.Field;
-    import com.falkonry.helper.models.TimeObject;
-    import com.falkonry.helper.models.Signal;
+import com.falkonry.client.Falkonry;
+import com.falkonry.helper.models.Datasource;
+import com.falkonry.helper.models.Datastream;
+import com.falkonry.helper.models.Field;
+import com.falkonry.helper.models.TimeObject;
+import com.falkonry.helper.models.Signal;
 
-    //instantiate Falkonry
-    Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", "auth-token");
+//instantiate Falkonry
+Falkonry falkonry = new Falkonry("http://example.falkonry.ai", "auth-token");
 
-    Datastream ds = new Datastream();
-    ds.setName("Test-DS-" + Math.random());
+Datastream ds = new Datastream();
+ds.setName("Test-DS-" + Math.random());
 
-    TimeObject time = new TimeObject();
-    time.setIdentifier("time");
-    time.setFormat("millis");
-    time.setZone("GMT");
+TimeObject time = new TimeObject();
+time.setIdentifier("time");
+time.setFormat("millis");
+time.setZone("GMT");
 
-    Signal signal = new Signal();
-    
-    signal.setValueIdentifier("value");
+Signal signal = new Signal();
 
-    Datasource dataSource = new Datasource();
-    dataSource.setType("STANDALONE");
+signal.setValueIdentifier("value");
 
-    Field field = new Field();
-    field.setSignal(signal);
-    field.setTime(time);
-    field.setEntityIdentifier("unit");
-    field.setBatchIdentifier("batch");
+Datasource dataSource = new Datasource();
+dataSource.setType("STANDALONE");
 
-    ds.setDatasource(dataSource);
-    ds.setField(field);
+Field field = new Field();
+field.setSignal(signal);
+field.setTime(time);
+field.setEntityIdentifier("unit");
+field.setBatchIdentifier("batch");
 
-    Datastream datastream = falkonry.createDatastream(ds);
+ds.setDatasource(dataSource);
+ds.setField(field);
+
+Datastream datastream = falkonry.createDatastream(ds);
 
 
-    //Add data to datastream
-    String data = "{\"time\" :\"2016-03-01 01:01:01\", \"current\" : 12.4, \"vibration\" : 3.4, \"state\" : \"On\", \"batch\" : \"batch1\", \"unit\" : \"unit1\"}";
+//Add data to datastream
+String data = "{\"time\" :\"2016-03-01 01:01:01\", \"current\" : 12.4, \"vibration\" : 3.4, \"state\" : \"On\", \"batch\" : \"batch1\", \"unit\" : \"unit1\"}";
 
-	  Map<String, String> options = new HashMap<String, String>();
-	  options.put("fileFormat", "json");
-	  options.put("streaming", "false");
-	  options.put("hasMoreData", "false");
-    falkonry.addInput(datastream.getId(), data, options);
+Map<String, String> options = new HashMap<String, String>();
+options.put("fileFormat", "json");
+options.put("streaming", "false");
+options.put("hasMoreData", "false");
+falkonry.addInput(datastream.getId(), data, options);
 ```
 
 ```python
@@ -1807,17 +1702,14 @@ from falkonryclient import client as Falkonry
 from falkonryclient import schemas as Schemas
 
 #instantiate Falkonry
-falkonry   = Falkonry('http://jumpstart.falkonry.ai', 'auth-token')
+falkonry   = Falkonry('http://example.falkonry.ai', 'auth-token')
 
 datastreamId = 'id of the datastream'
 
 #add data to Datastream
 String data = 'time,batchId,unit,signal1,signal2,signal3\n'+
     '1467729675010,batch_1,unit1,9.95,19.95,39.95\n'+
-    '1467729675020,batch_1,unit1,4.45,14.45,34.45\n'+
-    '1467729675030,batch_2,unit1,1.45,10.45,30.45\n'+
-    '1467729675040,batch_2,unit1,8.45,18.45,38.45\n'+
-    '1467729675050,batch_2,unit1,2.45,12.45,32.45'
+    '1467729675020,batch_1,unit1,4.45,14.45,34.45'
         
 options = {
     'streaming': False,
@@ -1838,9 +1730,6 @@ falkonry>>
 time,batchId,unit,signal1,signal2,signal3
 1467729675010,batch_1,unit1,9.95,19.95,39.95
 1467729675020,batch_1,unit1,4.45,14.45,34.45
-1467729675030,batch_2,unit1,1.45,10.45,30.45
-1467729675040,batch_2,unit1,8.45,18.45,38.45
-1467729675050,batch_2,unit1,2.45,12.45,32.45
 ```
 
 ## Add historical input data to sliding datastream
@@ -1850,63 +1739,49 @@ time,batchId,unit,signal1,signal2,signal3
 > To add historical narrow input data (csv format) to single entity sliding datastream
 
 ```csharp
-    using FalkonryClient;
-    using FalkonryClient.Helper.Models;
+using FalkonryClient;
+using FalkonryClient.Helper.Models;
 
-    string token="Add your token here";   
-    Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
+string token="Add your token here";   
+Falkonry falkonry = new Falkonry("http://example.falkonry.ai", token);
 
-    var data = "time,signal,value\n" + "2016-05-05 12:00:00,current,12.4\n2016-03-01 01:01:01,vibration,20.4";
-    var options = new SortedDictionary<string, string>();
-                
-    options.Add("streaming", "false");
-    options.Add("hasMoreData", "false");
-                
-    var inputstatus = _falkonry.AddInput(datastream.Id, data, options);
+var data = "time,signal,value\n" + "2016-05-05 12:00:00,current,12.4\n2016-03-01 01:01:01,vibration,20.4";
+var options = new SortedDictionary<string, string>();
+            
+options.Add("streaming", "false");
+options.Add("hasMoreData", "false");
+            
+var inputstatus = _falkonry.AddInput(datastream.Id, data, options);
 ```
 
 ```java
-Data:
-   time,signal,value
-    2016-03-01 01:01:01,L1DynVert,3.4
-    2016-03-01 01:01:01,L1VertAvg,1.4
+import com.falkonry.client.Falkonry;
+import com.falkonry.helper.models.Datasource;
+import com.falkonry.helper.models.Datastream;
+import com.falkonry.helper.models.Field;
+import com.falkonry.helper.models.TimeObject;
+import com.falkonry.helper.models.Signal;
 
-Code:
-  import com.falkonry.client.Falkonry;
-  import com.falkonry.helper.models.Datasource;
-  import com.falkonry.helper.models.Datastream;
-  import com.falkonry.helper.models.Field;
-  import com.falkonry.helper.models.TimeObject;
-  import com.falkonry.helper.models.Signal;
-
-  //instantiate Falkonry
-  Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", "auth-token");
+//instantiate Falkonry
+Falkonry falkonry = new Falkonry("http://example.falkonry.ai", "auth-token");
 //Add data to datastream
-  String data = "time,signal,value\n" + 
-        "2012-01-03T18:16:00.000Z,L1DynVert,9.95\n" + 
-        "2012-01-03T18:16:00.000Z,L1VertAvg,12.95\n" + 
-        "2012-01-03T18:16:00.000Z,L1VertPk,19.95";
+String data = "time,signal,value\n" + 
+    "2012-01-03T18:16:00.000Z,L1DynVert,9.95\n" + 
+    "2012-01-03T18:16:00.000Z,L1VertAvg,12.95";
 
-	Map<String, String> options = new HashMap<String, String>();
-	options.put("fileFormat", "csv");
-	options.put("streaming", "false");
-	options.put("hasMoreData", "false");
-    falkonry.addInput('datastream-Id', data, options);
+Map<String, String> options = new HashMap<String, String>();
+options.put("fileFormat", "csv");
+options.put("streaming", "false");
+options.put("hasMoreData", "false");
+falkonry.addInput('datastream-Id', data, options);
 ```
 
 ```python
-Data :
-    time, signal, value
-    2016-03-01 01:01:01, current, 3.4
-    2016-03-01 01:01:01, vibration, 1.4
-
-Usage :
-
 from falkonryclient import client as Falkonry
 from falkonryclient import schemas as Schemas
 
 #instantiate Falkonry
-falkonry   = Falkonry('http://jumpstart.falkonry.ai', 'auth-token')
+falkonry   = Falkonry('http://example.falkonry.ai', 'auth-token')
 
 datastreamId = 'id of the datastream'
 
@@ -1925,14 +1800,6 @@ inputResponse = falkonry.add_input_data(datastreamId, 'csv', options, data)
 ```
 
 ```shell
-Data :
-
-time,signal,value
-2011-01-03T18:16:00.000Z,current,32.96
-2011-01-03T21:57:00.000Z,vibration,3.4
-
-Usage :
-
 falkonry>> datastream_add_historical_data --path=/Users/user/InputNarrow.csv --timeIdentifier=time --timeFormat=iso_8601 --timeZone=GMT --signalIdentifier=signal --valueIdentifier=value
 
 Default datastream set : oii0djojxc2lxt Name : New Ds -1
@@ -1941,60 +1808,61 @@ falkonry>>
 ```
 > Data could be of following format:
 ```json
-{"time" :"2016-03-01 01:01:01", "signal" : "current", "value" : 12.4, "car" : "car1"}
-{"time" :"2016-03-01 01:01:01", "signal" : "vibration", "value" : 3.4, "car" : "car1"}
-{"time" :"2016-03-01 01:01:01", "signal" : "state", "value" : on, "car" : "car1"}
-{"time" :"2016-03-01 01:01:01", "signal" : "current", "value" : 31.4, "car" : "car2"}
-{"time" :"2016-03-01 01:01:01", "signal" : "vibration", "value" : 2.4, "car" : "car2"}
-{"time" :"2016-03-01 01:01:01", "signal" : "state", "value" : off, "car" : "car2"}
+{"time" :"2016-03-01 01:01:01", "signal" : "current", "value" : 12.4},
+{"time" :"2016-03-01 01:01:01", "signal" : "vibration", "value" : 3.4},
+{"time" :"2016-03-01 01:01:01", "signal" : "state", "value" : on},
+{"time" :"2016-03-01 01:01:01", "signal" : "current", "value" : 31.4},
+{"time" :"2016-03-01 01:01:01", "signal" : "vibration", "value" : 2.4},
+{"time" :"2016-03-01 01:01:01", "signal" : "state", "value" : off}
 ```
 
 > To add historical narrow input data (json format) to multi entity sliding datastream
 
 ```csharp
-    using FalkonryClient;
-    using FalkonryClient.Helper.Models;
+using FalkonryClient;
+using FalkonryClient.Helper.Models;
 
-    string token="Add your token here";   
-    Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
+string token="Add your token here";   
+Falkonry falkonry = new Falkonry("http://example.falkonry.ai", token);
 
-    var data = "{\"time\" :\"2016-03-01 01:01:01\", \"signal\":\"current\",\"value\" : 12.4,\"car\" : \"car1\"}";
-    var options = new SortedDictionary<string, string>();
-    options.Add("streaming", "false");
-    options.Add("hasMoreData", "false");
-    options.Add("timeIdentifier", "time");
-    options.Add("timeZone", "GMT");
-    options.Add("timeFormat", "YYYY-MM-DD HH:mm:ss");
-    options.Add("signalIdentifier", "signal");
-    options.Add("valueIdentifier", "value");
-    var inputstatus = _falkonry.AddInput(datastream.Id, data, options);
+var data = "{\"time\" :\"2016-03-01 01:01:01\", \"signal\":\"current\",\"value\" : 12.4,\"car\" : \"car1\"}";
+var options = new SortedDictionary<string, string>();
+options.Add("streaming", "false");
+options.Add("hasMoreData", "false");
+options.Add("timeIdentifier", "time");
+options.Add("timeZone", "GMT");
+options.Add("timeFormat", "YYYY-MM-DD HH:mm:ss");
+options.Add("entityIdentifier", "car");
+options.Add("signalIdentifier", "signal");
+options.Add("valueIdentifier", "value");
+var inputstatus = _falkonry.AddInput(datastream.Id, data, options);
 ```
 
 ```java
-    import com.falkonry.client.Falkonry;
-    import com.falkonry.helper.models.Datasource;
-    import com.falkonry.helper.models.Datastream;
-    import com.falkonry.helper.models.Field;
-    import com.falkonry.helper.models.TimeObject;
-    import com.falkonry.helper.models.Signal;
+import com.falkonry.client.Falkonry;
+import com.falkonry.helper.models.Datasource;
+import com.falkonry.helper.models.Datastream;
+import com.falkonry.helper.models.Field;
+import com.falkonry.helper.models.TimeObject;
+import com.falkonry.helper.models.Signal;
 
-    //instantiate Falkonry
-    Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", "auth-token");
-    //Add data to datastream
-    String data = "{\"time\" :\"2016-03-01T01:01:01.000Z\",\"unit\":\"Unit1\", \"signal\" : \"current\", \"value\" : 12.5}\n" +
-					"{\"time\" :\"2016-03-01T01:01:01.000Z\",\"unit\":\"Unit2\", \"signal\" : \"vibration\", \"value\" : 3.4}";
+//instantiate Falkonry
+Falkonry falkonry = new Falkonry("http://example.falkonry.ai", "auth-token");
+//Add data to datastream
+String data = "{\"time\" :\"2016-03-01T01:01:01.000Z\",\"unit\":\"Unit1\", \"signal\" : \"current\", \"value\" : 12.5}\n" +
+			"{\"time\" :\"2016-03-01T01:01:01.000Z\",\"unit\":\"Unit2\", \"signal\" : \"vibration\", \"value\" : 3.4}";
 
-		Map<String, String> options = new HashMap<String, String>();
-		options.put("timeIdentifier", "time");
-		options.put("timeFormat", "iso_8601");
-		options.put("timeZone", time.getZone());
-		options.put("signalIdentifier", "signal");
-		options.put("entityIdentifier", "unit");
-		options.put("valueIdentifier", "value");
-		options.put("fileFormat", "json");
-		options.put("streaming", "false");
-		options.put("hasMoreData", "false");
-    falkonry.addInput('datastream-Id', data, options);
+Map<String, String> options = new HashMap<String, String>();
+options.put("timeIdentifier", "time");
+options.put("timeFormat", "iso_8601");
+options.put("timeZone", time.getZone());
+options.put("signalIdentifier", "signal");
+options.put("entityIdentifier", "unit");
+options.put("valueIdentifier", "value");
+options.put("fileFormat", "json");
+options.put("streaming", "false");
+options.put("hasMoreData", "false");
+falkonry.addInput('datastream-Id', data, options);
 ```
 
 ```python
@@ -2002,28 +1870,25 @@ from falkonryclient import client as Falkonry
 from falkonryclient import schemas as Schemas
 
 #instantiate Falkonry
-falkonry   = Falkonry('http://jumpstart.falkonry.ai', 'auth-token')
+falkonry   = Falkonry('http://example.falkonry.ai', 'auth-token')
 
 datastreamId = 'id of the datastream'
 
 #add data to Datastream
 String data = "{\"time\" :\"2016-03-01 01:01:01\", \"signal\" : \"current\", \"value\" : 12.4, \"car\" : \"car1\"} + "\n"
         + "{\"time\" :\"2016-03-01 01:01:01\", \"signal\" : \"vibration\", \"value\" : 2.4, \"car\" : \"car1\"} + "\n"
-        + "{\"time\" :\"2016-03-01 01:01:01\", \"signal\" : \"state\", \"value\" : on, \"car\" : \"car1\"} + "\n"
-        + "{\"time\" :\"2016-03-01 01:01:01\", \"signal\" : \"current\", \"value\" : 22.4, \"car\" : \"car2\"} + "\n"
-        + "{\"time\" :\"2016-03-01 01:01:01\", \"signal\" : \"vibration\", \"value\" : 3.4, \"car\" : \"car2\"} + "\n"
-        + "{\"time\" :\"2016-03-01 01:01:01\", \"signal\" : \"state\", \"value\" : off, \"car\" : \"car2\"}";
+        + "{\"time\" :\"2016-03-01 01:01:01\", \"signal\" : \"state\", \"value\" : on, \"car\" : \"car1\"}";
 
         
 # set hasMoreData to True if data is sent in batches. When the last batch is getting sent then set  'hasMoreData' to False. For single batch upload it shpuld always be set to False
 options = {'streaming': False,
-           'hasMoreData': False,
-           'timeFormat': "YYYY-MM-DD HH:mm:ss",
-           'timeZone': "GMT",
-           'timeIdentifier': "time",
-           'signalIdentifier': 'signal',
-           'valueIdentifier': 'value',
-           'entityIdentifier': 'car'}
+   'hasMoreData': False,
+   'timeFormat': "YYYY-MM-DD HH:mm:ss",
+   'timeZone': "GMT",
+   'timeIdentifier': "time",
+   'signalIdentifier': 'signal',
+   'valueIdentifier': 'value',
+   'entityIdentifier': 'car'}
 inputResponse = falkonry.add_input_data(datastreamId, 'json', options, data)
 ```
 
@@ -2038,12 +1903,8 @@ falkonry>>
 > Data could be of following format:
 
 ```json
-{"time" :"2016-03-01 01:01:01", "signal" : "current", "value" : 12.4, "car" : "car1"}
+{"time" :"2016-03-01 01:01:01", "signal" : "current", "value" : 12.4, "car" : "car1"},
 {"time" :"2016-03-01 01:01:01", "signal" : "vibration", "value" : 3.4, "car" : "car1"}
-{"time" :"2016-03-01 01:01:01", "signal" : "state", "value" : on, "car" : "car1"}
-{"time" :"2016-03-01 01:01:01", "signal" : "current", "value" : 31.4, "car" : "car2"}
-{"time" :"2016-03-01 01:01:01", "signal" : "vibration", "value" : 2.4, "car" : "car2"}
-{"time" :"2016-03-01 01:01:01", "signal" : "state", "value" : off, "car" : "car2"}
 ```
 
 ### Add historical wide input data (csv/json format) to single/multiple entity sliding datastream
@@ -2051,66 +1912,62 @@ falkonry>>
 > To add wide data (json format) to single entity sliding datastream
 
 ```csharp
-	  using FalkonryClient;
-    using FalkonryClient.Helper.Models;
+using FalkonryClient;
+using FalkonryClient.Helper.Models;
 
-    string token="Add your token here";   
-    Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
+string token="Add your token here";   
+Falkonry falkonry = new Falkonry("http://example.falkonry.ai", token);
 
-    var data = "{\"time\" :\"2016-03-01 01:01:01\", \"current\" : 12.4, \"vibration\" : 3.4, \"state\" : \"On\"}";
-    var options = new SortedDictionary<string, string>();
-    options.Add("streaming", "false");
-    options.Add("hasMoreData", "false");
-    var inputstatus = _falkonry.AddInput(datastream.Id, data, options);
+var data = "{\"time\" :\"2016-03-01 01:01:01\", \"current\" : 12.4, \"vibration\" : 3.4, \"state\" : \"On\"}";
+var options = new SortedDictionary<string, string>();
+options.Add("streaming", "false");
+options.Add("hasMoreData", "false");
+var inputstatus = _falkonry.AddInput(datastream.Id, data, options);
 ```
 
 ```java
-    import com.falkonry.client.Falkonry;
-    import com.falkonry.helper.models.Datasource;
-    import com.falkonry.helper.models.Datastream;
-    import com.falkonry.helper.models.Field;
-    import com.falkonry.helper.models.TimeObject;
-    import com.falkonry.helper.models.Signal;
+import com.falkonry.client.Falkonry;
+import com.falkonry.helper.models.Datasource;
+import com.falkonry.helper.models.Datastream;
+import com.falkonry.helper.models.Field;
+import com.falkonry.helper.models.TimeObject;
+import com.falkonry.helper.models.Signal;
 
-    //instantiate Falkonry
-    Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", "auth-token");
+//instantiate Falkonry
+Falkonry falkonry = new Falkonry("http://example.falkonry.ai", "auth-token");
 
-    Datastream ds = new Datastream();
-    ds.setName("Test-DS-" + Math.random());
+Datastream ds = new Datastream();
+ds.setName("Test-DS-" + Math.random());
 
-    TimeObject time = new TimeObject();
-    time.setIdentifier("time");
-    time.setFormat("millis");
-    time.setZone("GMT");
+TimeObject time = new TimeObject();
+time.setIdentifier("time");
+time.setFormat("millis");
+time.setZone("GMT");
 
-    Signal signal = new Signal();
-    
-    signal.setValueIdentifier("value");
-    
-    
+Signal signal = new Signal();
+signal.setValueIdentifier("value");
 
-    Datasource dataSource = new Datasource();
-    dataSource.setType("STANDALONE");
+Datasource dataSource = new Datasource();
+dataSource.setType("STANDALONE");
 
-    Field field = new Field();
-    field.setSignal(signal);
-    field.setTime(time);
-    field.setEntityIdentifier("entities");
+Field field = new Field();
+field.setSignal(signal);
+field.setTime(time);
+field.setEntityIdentifier("entities");
 
-    ds.setDatasource(dataSource);
-    ds.setField(field);
+ds.setDatasource(dataSource);
+ds.setField(field);
 
-    Datastream datastream = falkonry.createDatastream(ds);
+Datastream datastream = falkonry.createDatastream(ds);
 
+//Add data to datastream
+String data = "{\"time\" :\"2016-03-01 01:01:01\", \"current\" : 12.4, \"vibration\" : 3.4, \"state\" : \"On\"}";
 
-    //Add data to datastream
-    String data = "{\"time\" :\"2016-03-01 01:01:01\", \"current\" : 12.4, \"vibration\" : 3.4, \"state\" : \"On\"}";
-
-    Map<String, String> options = new HashMap<String, String>();
-    options.put("fileFormat", "json");
-    options.put("streaming", "false");
-    options.put("hasMoreData", "false");
-    falkonry.addInput(datastream.getId(), data, options);
+Map<String, String> options = new HashMap<String, String>();
+options.put("fileFormat", "json");
+options.put("streaming", "false");
+options.put("hasMoreData", "false");
+falkonry.addInput(datastream.getId(), data, options);
 ```
 
 ```python
@@ -2118,7 +1975,7 @@ from falkonryclient import client as Falkonry
 from falkonryclient import schemas as Schemas
 
 #instantiate Falkonry
-falkonry   = Falkonry('http://jumpstart.falkonry.ai', 'auth-token')
+falkonry   = Falkonry('http://example.falkonry.ai', 'auth-token')
 
 datastreamId = 'id of the datastream'
 
@@ -2128,10 +1985,11 @@ stream   = io.open('./data.json')
 # set hasMoreData to True if data is sent in batches. When the last batch is getting sent then set  'hasMoreData' to False. For single batch upload it shpuld always be set to False
 
 options = {'streaming': False,
-           'hasMoreData': False,
-           'timeFormat': "YYYY-MM-DD HH:mm:ss",
-           'timeZone': "GMT",
-           'timeIdentifier': "time"}
+   'hasMoreData': False,
+   'timeFormat': "YYYY-MM-DD HH:mm:ss",
+   'timeZone': "GMT",
+   'timeIdentifier': "time"
+}
 inputResponse = falkonry.add_input_data(datastreamId, 'json', options, stream)
 ```
 
@@ -2146,89 +2004,69 @@ falkonry>>
 > Data could be of following format
 
 ```json
-{"time" :"2016-03-01 01:01:01", "current" : 12.4, "vibration" : 3.4, "state" : "On"}
-{"time" :"2016-03-01 01:01:02", "current" : 11.3, "vibration" : 2.2, "state" : "On"}
-{"time" :"2016-03-01 01:01:03", "current" : 10.5, "vibration" : 3.8, "state" : "On"}
-{"time" :"2016-03-01 01:02:03", "current" : 19.2, "vibration" : 3.8, "state" : "On"}
-{"time" :"2016-03-01 01:02:03", "current" : 1.2, "vibration" : 0.8, "state" : "Off"}
+{"time" :"2016-03-01 01:01:01", "current" : 12.4, "vibration" : 3.4, "state" : "On"},
+{"time" :"2016-03-01 01:01:02", "current" : 11.3, "vibration" : 2.2, "state" : "On"},
+{"time" :"2016-03-01 01:01:03", "current" : 10.5, "vibration" : 3.8, "state" : "On"},
+{"time" :"2016-03-01 01:02:03", "current" : 19.2, "vibration" : 3.8, "state" : "On"},
+{"time" :"2016-03-01 01:02:03", "current" : 1.2, "vibration" : 0.8, "state" : "Off"},
 {"time" :"2016-03-01 01:02:05", "current" : 0.2, "vibration" : 0.3, "state" : "Off"}
 ```
 
 > To add wide input data (csv format) to multi entity sliding datastream
 
 ```csharp
-	using FalkonryClient;
-  using FalkonryClient.Helper.Models;
+using FalkonryClient;
+using FalkonryClient.Helper.Models;
 
-  string token="Add your token here";   
-  Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
+string token="Add your token here";   
+Falkonry falkonry = new Falkonry("http://example.falkonry.ai", token);
 
-  var data = "time,Unit,current,vibration,state\n 2016-05-05T12:00:00.000Z,Unit1,12.4,3.4,On";
-	var options = new SortedDictionary<string, string>();
-	options.Add("timeIdentifier", "time");
-	options.Add("timeFormat", "iso_8601");
-	options.Add("timeZone", "GMT");
-	options.Add("streaming", "false");
-	options.Add("hasMoreData", "false");
-	options.Add("entityIdentifier", "Unit");
-    var inputstatus = _falkonry.AddInput(datastream.Id, data, options);
+var data = "time,Unit,current,vibration,state\n 2016-05-05T12:00:00.000Z,Unit1,12.4,3.4,On";
+var options = new SortedDictionary<string, string>();
+options.Add("timeIdentifier", "time");
+options.Add("timeFormat", "iso_8601");
+options.Add("timeZone", "GMT");
+options.Add("streaming", "false");
+options.Add("hasMoreData", "false");
+options.Add("entityIdentifier", "Unit");
+var inputstatus = _falkonry.AddInput(datastream.Id, data, options);
             
 ```
 
 ```java
-Data:
+import com.falkonry.client.Falkonry;
+import com.falkonry.helper.models.Datasource;
+import com.falkonry.helper.models.Datastream;
+import com.falkonry.helper.models.Field;
+import com.falkonry.helper.models.TimeObject;
+import com.falkonry.helper.models.Signal;
 
-  time,unit,L1DynVert,L1VertAvg,L1VertPk 
-    2012-01-03T18:16:00.000Z,unit1,4.6,9.95,89.95 
-    2012-01-03T18:16:00.000Z,unit1,5.2,12.95,5.85 
-    2012-01-03T18:16:00.000Z,unit2,74.3,19.95,9.0
-Usage:
+//instantiate Falkonry
+Falkonry falkonry = new Falkonry("http://example.falkonry.ai", "auth-token");
+//Add data to datastream
 
-  import com.falkonry.client.Falkonry;
-  import com.falkonry.helper.models.Datasource;
-  import com.falkonry.helper.models.Datastream;
-  import com.falkonry.helper.models.Field;
-  import com.falkonry.helper.models.TimeObject;
-  import com.falkonry.helper.models.Signal;
+String data = "time,unit,L1DynVert,L1VertAvg,L1VertPk\n" + 
+  "2012-01-03T18:16:00.000Z,unit1,4.6,9.95,89.95\n" + 
+  "2012-01-03T18:16:00.000Z,unit1,5.2,12.95,5.85";
 
-  //instantiate Falkonry
-  Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", "auth-token");
-	//Add data to datastream
-    
-	String data = "time,unit,L1DynVert,L1VertAvg,L1VertPk\n" + 
-    "2012-01-03T18:16:00.000Z,unit1,4.6,9.95,89.95\n" + 
-    "2012-01-03T18:16:00.000Z,unit1,5.2,12.95,5.85\n" + 
-    "2012-01-03T18:16:00.000Z,unit2,74.3,19.95,9.0";
+Map<String, String> options = new HashMap<String, String>();
+options.put("timeIdentifier", "time");
+options.put("timeFormat", "iso_8601");
+options.put("timeZone", "GMT");
+options.put("fileFormat", "csv");
+options.put("streaming", "false");
+options.put("hasMoreData", "false");
+options.put("entityIdentifier", "unit");
 
-	Map<String, String> options = new HashMap<String, String>();
-	options.put("timeIdentifier", "time");
-	options.put("timeFormat", "iso_8601");
-	options.put("timeZone", "GMT");
-	options.put("fileFormat", "csv");
-	options.put("streaming", "false");
-	options.put("hasMoreData", "false");
-	options.put("entityIdentifier", "unit");
-
-    falkonry.addInput('datastream-Id', data, options);
+falkonry.addInput('datastream-Id', data, options);
 ```
 
 ```python
-Data :
-
-    time,signal,value,car
-    2016-03-01 01:01:01,current,3.4,car1
-    2016-03-01 01:01:02,current,2.2,car1
-    2016-03-01 01:01:03,vibration,3.8,car1
-    2016-03-01 01:02:03,vibration,3.8,car1
-    2016-03-01 01:02:03,state,on,car2
-    2016-03-01 01:02:05,state,off,car2
-Usage :
-
 from falkonryclient import client as Falkonry
 from falkonryclient import schemas as Schemas
 
 #instantiate Falkonry
-falkonry   = Falkonry('http://jumpstart.falkonry.ai', 'auth-token')
+falkonry   = Falkonry('http://example.falkonry.ai', 'auth-token')
 
 datastreamId = 'id of the datastream'
 
@@ -2238,22 +2076,15 @@ stream   = io.open('./dataMultientity.csv')
 # set hasMoreData to True if data is sent in batches. When the last batch is getting sent then set  'hasMoreData' to False. For single batch upload it shpuld always be set to False
 
 options = {'streaming': False,
-           'hasMoreData': False,
-           'timeFormat': "YYYY-MM-DD HH:mm:ss",
-           'timeZone': "GMT",
-           'timeIdentifier': "time"}
+            'hasMoreData': False,
+            'timeFormat': "YYYY-MM-DD HH:mm:ss",
+            'timeZone': "GMT",
+            'timeIdentifier': "time",
+            'entityIdentifier': "device"}
 inputResponse = falkonry.add_input_data(datastreamId, 'csv', options, stream)
 ```
 
 ```shell
-Data :
-
-time,device,Signal1,Signal2,Signal3
-2011-01-03T18:16:00.000Z,Device1,9.95,32.96,42.91
-2011-01-03T21:57:00,000Z,Device1,9.95,32.96,42.91
-
-Usage :
-
 falkonry>> datastream_add_historical_data --path=/Users/user/InputNarrow.csv --timeIdentifier=time --timeFormat=iso_8601 --timeZone=GMT --signalIdentifier=signal --valueIdentifier=value --entityIdentifier=device
 
 Default datastream set : oii0djojxc2lxt Name : New Ds -1
@@ -2264,9 +2095,9 @@ falkonry>>
 > Input data could be of the following format:
 
 ```csv
-  time, tag, value
-  2016-03-01 01:01:01, signal1_thing1, 3.4
-  2016-03-01 01:01:01, signal2_thing1, 1.4
+  time, entity, signal, value
+  2016-03-01 01:01:01, thing1, signal1, 3.4
+  2016-03-01 01:01:01, thing1, signal2, 1.4
 ```
 
 csv data from a historian or time series data store can be imported into a Falkonry datastream
@@ -2285,7 +2116,7 @@ using FalkonryClient;
 using FalkonryClient.Helper.Models;
 
 string token="Add your token here";   
-Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
+Falkonry falkonry = new Falkonry("http://example.falkonry.ai", token);
 
 /*This particular example will read data from a AddData.json file in debug folder in bin*/
 
@@ -2311,7 +2142,7 @@ InputStatus inputstatus = falkonry.addInputStream('datastream-id', bytes, option
 import com.falkonry.client.Falkonry
 import org.apache.commons.io.FileUtils;
 
-  Falkonry falkonry   = new Falkonry("https://jumpstart.falkonry.ai", "auth-token");
+  Falkonry falkonry   = new Falkonry("https://example.falkonry.ai", "auth-token");
   Map<String, String> options = new HashMap<String, String>();
     options.put("timeIdentifier", "time");
     options.put("timeFormat", "millis");
@@ -2330,7 +2161,7 @@ from falkonryclient import client as Falkonry
 from falkonryclient import schemas as Schemas
 
 #instantiate Falkonry
-falkonry   = Falkonry('https://jumpstart.falkonry.ai', 'auth-token')
+falkonry   = Falkonry('https://example.falkonry.ai', 'auth-token')
 
 datastreamId = 'id of the datastream'
 
@@ -2349,10 +2180,10 @@ inputResponse = falkonry.add_input_data(datastreamId, 'json', options, stream)
 > Input data could be of the following format:
 
 ```json
-  {"time" :"2016-03-01 01:01:01", "tag" : "signal1_thing1", "value" : 3.4}
-  {"time" :"2016-03-01 01:01:01", "tag" : "signal2_thing1", "value" : 1.4}
-  {"time" :"2016-03-01 01:01:02", "tag" : "signal1_thing2", "value" : 9.3}
-  {"time" :"2016-03-01 01:01:02", "tag" : "signal2_thing2", "value" : 4.3}
+  {"time" :"2016-03-01 01:01:01", "entity": "thing1", "signal" : "signal1", "value" : 3.4},
+  {"time" :"2016-03-01 01:01:01", "entity": "thing1", "signal" : "signal2", "value" : 1.4},
+  {"time" :"2016-03-01 01:01:02", "entity": "thing2", "signal" : "signal1", "value" : 9.3},
+  {"time" :"2016-03-01 01:01:02", "entity": "thing2", "signal" : "signal2", "value" : 4.3}
 ```
 
 json data from a historian or time series data store can be imported into a Falkonry datastream
@@ -2371,7 +2202,7 @@ using FalkonryClient;
 using FalkonryClient.Helper.Models;
 
 string token="Add your token here";   
-Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
+Falkonry falkonry = new Falkonry("http://example.falkonry.ai", token);
 
 /*This particular example will read data from a AddData.json file in debug folder in bin*/
 
@@ -2397,7 +2228,7 @@ InputStatus inputstatus = falkonry.addInputStream('datastream-id', bytes, option
 import com.falkonry.client.Falkonry
 import org.apache.commons.io.FileUtils;
 
-  Falkonry falkonry   = new Falkonry("https://jumpstart.falkonry.ai", "auth-token");
+  Falkonry falkonry   = new Falkonry("https://example.falkonry.ai", "auth-token");
   Map<String, String> options = new HashMap<String, String>();
   Map<String, String> options = new HashMap<String, String>();
     options.put("timeIdentifier", "time");
@@ -2417,7 +2248,7 @@ from falkonryclient import client as Falkonry
 from falkonryclient import schemas as Schemas
 
 #instantiate Falkonry
-falkonry   = Falkonry('https://jumpstart.falkonry.ai', 'auth-token')
+falkonry   = Falkonry('https://example.falkonry.ai', 'auth-token')
 
 datastreamId = 'id of the datastream'
 
@@ -2436,9 +2267,9 @@ inputResponse = falkonry.add_input_data(datastreamId, 'csv', options, stream)
 > Input data could be of the following format:
 
 ```csv
-  time, tag, value
-  2016-03-01 01:01:01, signal1_thing1, 3.4
-  2016-03-01 01:01:01, signal2_thing1, 1.4
+  time, entity, signal, value
+  2016-03-01 01:01:01, thing1, signal1, 3.4
+  2016-03-01 01:01:01, thing1, signal2, 1.4
 ```
 
 csv data from a historian or time series data store can be imported into a Falkonry datastream
@@ -2460,7 +2291,7 @@ using FalkonryClient;
 using FalkonryClient.Helper.Models;
 
 string token="Add your token here";   
-Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
+Falkonry falkonry = new Falkonry("http://example.falkonry.ai", token);
 
 //Creating a datastream to add data to later
   string name="data stream name here";
@@ -2503,6 +2334,21 @@ Datastream datastream = falkonry.createDatastream(ds);
 ```
 
 ```java
+import com.falkonry.client.Falkonry
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.File;
+import java.io.IOException;
+
+Falkonry falkonry   = new Falkonry("https://example.falkonry.ai", "auth-token");
+List<Assessment> datastreams = falkonry.getAssessments();
+  
+ObjectMapper mapper = new ObjectMapper();
+
+//Exporting the data to an external file
+File file = new File("data.json"); //Specify the file name
+mapper.writevalue(file,datastreams);
+
+//We can use the exported file to add Data to other datastream or to create a new one with the same data
 
 ```
 
@@ -2514,7 +2360,7 @@ from falkonryclient import schemas as Schemas
 
 falkonry  = Falkonry('http://jumpstart.falkonry.ai', 'auth-token')
 
-#Id of the datastream of which the data is to be extracted
+#Id of the datastream from which the data is to be extracted
 datastreamId = 'id of the datastream'
 
 #setting the format(CSV or JSON) of the data
@@ -2535,24 +2381,22 @@ with open(file_name, 'w') as file:
 ```
 
 ```shell
-Usage:
 
-Fetching input data
 falkonry>> datastream_get_data --format=application/json
 Default datastream set : 1scyeeoxbdh7if Name : New Standalone
 Input Data : 
 ============================================================================
-{"time":1294078560000,"tag":"Device1:device","value":"Device1"}
-{"time":1294091820000,"tag":"Device1:device","value":"Device1"}
-{"time":1294099380000,"tag":"Device1:device","value":"Device1"}
-{"time":1294078560000,"tag":"Device2:device","value":"Device2"}
-{"time":1294091820000,"tag":"Device2:device","value":"Device2"}
-{"time":1294099380000,"tag":"Device2:device","value":"Device2"}
-{"time":1294078560000,"tag":"Device3:device","value":"Device3"}
-{"time":1294091820000,"tag":"Device3:device","value":"Device3"}
-{"time":1294099380000,"tag":"Device3:device","value":"Device3"}
-{"time":1294078560000,"tag":"Device1:device","value":"Device1"}
-{"time":1294091820000,"tag":"Device1:device","value":"Device1"}
+{"time":1294078560000,"signal":"signal1","value":1.4}
+{"time":1294091820000,"signal":"signal2","value":13.4}
+{"time":1294099380000,"signal":"signal1","value":5.4}
+{"time":1294078560000,"signal":"signal1","value":7.49}
+{"time":1294091820000,"signal":"signal2","value":1.34}
+{"time":1294099380000,"signal":"signal1","value":3.4}
+{"time":1294078560000,"signal":"signal2","value":1.5}
+{"time":1294091820000,"signal":"signal1","value":7.4}
+{"time":1294099380000,"signal":"signal2","value":8.2}
+{"time":1294078560000,"signal":"signal1","value":9.4}
+{"time":1294091820000,"signal":"signal2","value":10.7}
 ============================================================================
 
 falkonry>>
@@ -2572,7 +2416,7 @@ using FalkonryClient;
 using FalkonryClient.Helper.Models;
 
 string token="Add your token here";   
-Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
+Falkonry falkonry = new Falkonry("http://example.falkonry.ai", token);
 falkonry.DeleteAssessment('assessment-id');
 ```
 
@@ -2580,7 +2424,7 @@ falkonry.DeleteAssessment('assessment-id');
 ```java
   import com.falkonry.client.Falkonry;
 
-  Falkonry falkonry = new Falkonry("https://jumpstart.falkonry.ai", "auth-token");
+  Falkonry falkonry = new Falkonry("https://example.falkonry.ai", "auth-token");
 
   Assessment assesssment = falkonry.deleteAssessment('assessment_id');
 ```
@@ -2590,7 +2434,7 @@ from falkonryclient import client as Falkonry
 from falkonryclient import schemas as Schemas
 
 #instantiate Falkonry
-falkonry   = Falkonry('https://jumpstart.falkonry.ai', 'auth-token')
+falkonry   = Falkonry('https://example.falkonry.ai', 'auth-token')
 
 datastreamId = 'id of the datastream'
         
@@ -2617,7 +2461,7 @@ using FalkonryClient;
 using FalkonryClient.Helper.Models;
 
 string token="Add your token here";   
-Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
+Falkonry falkonry = new Falkonry("http://example.falkonry.ai", token);
 
 // Create Datastream
 datastream = falkonry.getDatastream(datastream.id);
@@ -2645,7 +2489,7 @@ List<EntityMeta> entityMetaResponseList = falkonry.postEntityMeta(entityMetaRequ
 ```java
   import com.falkonry.client.Falkonry;
     
-  Falkonry falkonry   = new Falkonry("https://jumpstart.falkonry.ai", "auth-token");
+  Falkonry falkonry   = new Falkonry("https://example.falkonry.ai", "auth-token");
     String datastreamId = "hk7cgt56r3yln0";
     datastream = falkonry.getDatastream(datastreamId);
       EntityMetaRequest entityMetaRequest = new EntityMetaRequest();
@@ -2662,7 +2506,7 @@ from falkonryclient import client as Falkonry
 from falkonryclient import schemas as Schemas
 
 #instantiate Falkonry
-falkonry = Falkonry('https://jumpstart.falkonry.ai', 'auth-token')
+falkonry = Falkonry('https://example.falkonry.ai', 'auth-token')
 data = [{"sourceId": "testId","label": "testName","path": "root/path"}]
 datastreamId = 'id of the datastream'
 
@@ -2693,7 +2537,7 @@ using FalkonryClient;
 using FalkonryClient.Helper.Models;
 
 string token="Add your token here";   
-Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
+Falkonry falkonry = new Falkonry("http://example.falkonry.ai", token);
   // Get entitymeta
   entityMetaResponseList = falkonry.getEntityMeta('datastream-id');
 ```
@@ -2702,7 +2546,7 @@ Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
 ```java
 import com.falkonry.client.Falkonry;
     
-  Falkonry falkonry   = new Falkonry("https://jumpstart.falkonry.ai", "auth-token");
+  Falkonry falkonry   = new Falkonry("https://example.falkonry.ai", "auth-token");
     List<EntityMeta> entityMetas = falkonry.getEntityMeta("datastream_id"); //datastream's id
 ```
 
@@ -2712,7 +2556,7 @@ from falkonryclient import client as Falkonry
 from falkonryclient import schemas as Schemas
 
 #instantiate Falkonry
-falkonry = Falkonry('https://jumpstart.falkonry.ai', 'auth-token')
+falkonry = Falkonry('https://example.falkonry.ai', 'auth-token')
 datastreamId = 'id of the datastream'
 
 entityMetaResponse = fclient.get_entity_meta(datastreamId)
@@ -2751,7 +2595,7 @@ using FalkonryClient;
 using FalkonryClient.Helper.Models;
 
 string token="Add your token here";   
-Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
+Falkonry falkonry = new Falkonry("http://example.falkonry.ai", token);
 
 AssessmentRequest asmt = new AssessmentRequest();
   asmt.name = "assessment name here";
@@ -2765,7 +2609,7 @@ AssessmentRequest asmt = new AssessmentRequest();
   import com.falkonry.helper.models.*;
 
   //instantiate Falkonry
-  Falkonry falkonry = new Falkonry("https://jumpstart.falkonry.ai", "auth-token");
+  Falkonry falkonry = new Falkonry("https://example.falkonry.ai", "auth-token");
 
   Datastream ds = new Datastream();
   ds.setName("Test-DS-" + Math.random());
@@ -2827,7 +2671,7 @@ from falkonryclient import client as Falkonry
 from falkonryclient import schemas as Schemas
 
 #instantiate Falkonry
-falkonry   = Falkonry('https://jumpstart.falkonry.ai', 'auth-token')
+falkonry   = Falkonry('https://example.falkonry.ai', 'auth-token')
 
 datastreamId = 'id of the datastream'
 
@@ -2895,7 +2739,7 @@ using FalkonryClient;
 using FalkonryClient.Helper.Models;
 
 string token="Add your token here";   
-Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
+Falkonry falkonry = new Falkonry("http://example.falkonry.ai", token);
   List<Assessment> assessmentList = falkonry.getAssessments();
 ```
 
@@ -2903,7 +2747,7 @@ Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
 ```java
   import com.falkonry.client.Falkonry;
 
-  Falkonry falkonry = new Falkonry("https://jumpstart.falkonry.ai", "auth-token");
+  Falkonry falkonry = new Falkonry("https://example.falkonry.ai", "auth-token");
 
   List<Assessment> datastreams = falkonry.getAssessments();
 
@@ -2914,7 +2758,7 @@ from falkonryclient import client as Falkonry
 from falkonryclient import schemas as Schemas
 
 #instantiate Falkonry
-falkonry   = Falkonry('https://jumpstart.falkonry.ai', 'auth-token')
+falkonry   = Falkonry('https://example.falkonry.ai', 'auth-token')
 
 assessmentResponse = fclient.get_assessments()
 ```
@@ -2969,7 +2813,7 @@ using FalkonryClient;
 using FalkonryClient.Helper.Models;
 
 string token="Add your token here";   
-Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
+Falkonry falkonry = new Falkonry("http://example.falkonry.ai", token);
   Assessment assessment = falkonry.getAssessment('assessment-id');
 ```
 
@@ -2977,7 +2821,7 @@ Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
 ```java
   import com.falkonry.client.Falkonry;
 
-  Falkonry falkonry = new Falkonry("https://jumpstart.falkonry.ai", "auth-token");
+  Falkonry falkonry = new Falkonry("https://example.falkonry.ai", "auth-token");
 
   Assessment assesssment = falkonry.getAssessment('assessment_id');
 ```
@@ -2987,7 +2831,7 @@ from falkonryclient import client as Falkonry
 from falkonryclient import schemas as Schemas
 
 #instantiate Falkonry
-falkonry   = Falkonry('https://jumpstart.falkonry.ai', 'auth-token')
+falkonry   = Falkonry('https://example.falkonry.ai', 'auth-token')
 
 assessmentId = 'id of the datastream'
 assessmentResponse = fclient.get_assessment(assessmentId)
@@ -3045,7 +2889,7 @@ using FalkonryClient;
 using FalkonryClient.Helper.Models;
 
 string token="Add your token here";   
-Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
+Falkonry falkonry = new Falkonry("http://example.falkonry.ai", token);
 falkonry.DeleteAssessment('assessment-id');
 ```
 
@@ -3053,7 +2897,7 @@ falkonry.DeleteAssessment('assessment-id');
 ```java
   import com.falkonry.client.Falkonry;
 
-  Falkonry falkonry = new Falkonry("https://jumpstart.falkonry.ai", "auth-token");
+  Falkonry falkonry = new Falkonry("https://example.falkonry.ai", "auth-token");
 
   Assessment assesssment = falkonry.deleteAssessment('assessment_id');
 ```
@@ -3063,7 +2907,7 @@ from falkonryclient import client as Falkonry
 from falkonryclient import schemas as Schemas
 
 #instantiate Falkonry
-falkonry   = Falkonry('https://jumpstart.falkonry.ai', 'auth-token')
+falkonry   = Falkonry('https://example.falkonry.ai', 'auth-token')
 
 assessmentId = 'id of the datastream'
 assessmentResponse = fclient.delete_assessment(assessmentId)
@@ -3086,7 +2930,7 @@ using FalkonryClient;
 using FalkonryClient.Helper.Models;
 
 string token="Add your token here";   
-Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
+Falkonry falkonry = new Falkonry("http://example.falkonry.ai", token);
 
 // Create Datastream
 
@@ -3146,7 +2990,7 @@ import os, sys
 from falkonryclient import client as Falkonry
 from falkonryclient import schemas as Schemas
 
-falkonry  = Falkonry('https://jumpstart.falkonry.ai', 'auth-token')
+falkonry  = Falkonry('https://example.falkonry.ai', 'auth-token')
 assessmentId = 'id of the datastream'
 
 options = {'startTime':'2011-01-01T01:00:00.000Z','endTime':'2011-06-01T01:00:00.000Z','responseFormat':'application/json'}
@@ -3254,36 +3098,36 @@ Facts can be added from inspection logs, failure reports, user/ expert observati
 > To add more facts to your assessment, use this code:
 
 ```csharp
-    using FalkonryClient;
-    using FalkonryClient.Helper.Models;
+using FalkonryClient;
+using FalkonryClient.Helper.Models;
 
-    SortedDictionary<string, string> options = new SortedDictionary<string, string>();
-    options.Add("startTimeIdentifier", "time");
-    options.Add("endTimeIdentifier", "end");
-    options.Add("timeFormat", "iso_8601");
-    options.Add("timeZone", "GMT");
-    options.Add("valueIdentifier", "Health");
+SortedDictionary<string, string> options = new SortedDictionary<string, string>();
+options.Add("startTimeIdentifier", "time");
+options.Add("endTimeIdentifier", "end");
+options.Add("timeFormat", "iso_8601");
+options.Add("timeZone", "GMT");
+options.Add("valueIdentifier", "Health");
 
-    string token = "Add your token here";   
-    SortedDictionary<string, string> options = new SortedDictionary<string, string>();
-    Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
-    String data = "{\"time\" : \"2011-03-26T12:00:00Z\", \"end\" : \"2012-06-01T00:00:00Z\", \"Health\" : \"Normal\"}";
-    string response = falkonry.addFacts('assessment-id',data, options);
+string token = "Add your token here";   
+SortedDictionary<string, string> options = new SortedDictionary<string, string>();
+Falkonry falkonry = new Falkonry("http://example.falkonry.ai", token);
+String data = "{\"time\" : \"2011-03-26T12:00:00Z\", \"end\" : \"2012-06-01T00:00:00Z\", \"Health\" : \"Normal\"}";
+string response = falkonry.addFacts('assessment-id',data, options);
 ```
 
 
 ```java
-  import com.falkonry.client.Falkonry;
+import com.falkonry.client.Falkonry;
 
-  Falkonry falkonry = new Falkonry("https://jumpstart.falkonry.ai", "auth-token");
-  Map<String, String> options = new HashMap<String, String>();
-  options.put("startTimeIdentifier", "time");
-  options.put("endTimeIdentifier", "end");
-  options.put("timeFormat", "iso_8601");
-  options.put("timeZone", "GMT");
-  options.put("valueIdentifier", "Health"); 
-  String data = "{\"time\" : \"2011-03-26T12:00:00.000Z\", \"end\" : \"2012-06-01T00:00:00.000Z\", \"Health\" : \"Normal\"}";
-  String response = falkonry.addfacts(assessment.getId(),data, options);
+Falkonry falkonry = new Falkonry("https://example.falkonry.ai", "auth-token");
+Map<String, String> options = new HashMap<String, String>();
+options.put("startTimeIdentifier", "time");
+options.put("endTimeIdentifier", "end");
+options.put("timeFormat", "iso_8601");
+options.put("timeZone", "GMT");
+options.put("valueIdentifier", "Health"); 
+String data = "{\"time\" : \"2011-03-26T12:00:00.000Z\", \"end\" : \"2012-06-01T00:00:00.000Z\", \"Health\" : \"Normal\"}";
+String response = falkonry.addfacts(assessment.getId(),data, options);
 ```
 
 ```python
@@ -3291,17 +3135,17 @@ from falkonryclient import client as Falkonry
 from falkonryclient import schemas as Schemas
 
 #instantiate Falkonry
-falkonry      = Falkonry('http://jumpstart.falkonry.ai', 'auth-token')
+falkonry      = Falkonry('http://example.falkonry.ai', 'auth-token')
 assessmentId = 'id of the assessment'
 data          = '{"time" : "2011-03-26T12:00:00.000Z", "end" : "2012-06-01T00:00:00.000Z", "Health" : "Normal"}'
 
 options = {
-        'startTimeIdentifier': "time",
-        'endTimeIdentifier': "end",
-        'timeFormat': "iso_8601",
-        'timeZone': time.get_zone(),
-        'valueIdentifier': "Health"
-    }
+  'startTimeIdentifier': "time",
+  'endTimeIdentifier': "end",
+  'timeFormat': "iso_8601",
+  'timeZone': time.get_zone(),
+  'valueIdentifier': "Health"
+}
 inputResponse = falkonry.add_facts(assessmentId, 'json', options, data)
 ```
 
@@ -3320,64 +3164,45 @@ Default assessment set : hv987ptckdc6n7 Name : New Test Assessment
 falkonry>> 
 
 ```
-> The above command returns JSON structured like this:
-
-```json
-{
-  "schema": [
-    {
-      "id": "string",
-      "name": "string",
-      "valueType": "string",
-      "dimensionList": [
-        "string"
-      ],
-      "tags": [
-        "string"
-      ]
-    }
-  ]
-}
-```
 
 
-## Add facts data (json format) with addition tag to Assessment of multi entity datastream
+## Add facts data (json format) with addition keyword to Assessment of multi entity datastream
 
 ```csharp
-    using FalkonryClient;
-    using FalkonryClient.Helper.Models;
+using FalkonryClient;
+using FalkonryClient.Helper.Models;
 
-    SortedDictionary<string, string> options = new SortedDictionary<string, string>();
-    options.Add("startTimeIdentifier", "time");
-    options.Add("endTimeIdentifier", "end");
-    options.Add("timeFormat", "iso_8601");
-    options.Add("timeZone", "GMT");
-    options.Add("entityIdentifier", "entities");
-    options.Add("valueIdentifier", "Health");
-    options.Add("additionalTag", "testTag");
+SortedDictionary<string, string> options = new SortedDictionary<string, string>();
+options.Add("startTimeIdentifier", "time");
+options.Add("endTimeIdentifier", "end");
+options.Add("timeFormat", "iso_8601");
+options.Add("timeZone", "GMT");
+options.Add("entityIdentifier", "entities");
+options.Add("valueIdentifier", "Health");
+options.Add("additionalKeyword", "testTag");
 
-    string token = "Add your token here";   
-    SortedDictionary<string, string> options = new SortedDictionary<string, string>();
-    Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
-    String data = "{\"time\" : \"2011-03-26T12:00:00Z\", \"entities\" : \"entity1\", \"end\" : \"2012-06-01T00:00:00Z\", \"Health\" : \"Normal\"}";
-    string response = falkonry.addFacts('assessment-id',data, options);
+string token = "Add your token here";   
+SortedDictionary<string, string> options = new SortedDictionary<string, string>();
+Falkonry falkonry = new Falkonry("http://example.falkonry.ai", token);
+String data = "{\"time\" : \"2011-03-26T12:00:00Z\", \"entities\" : \"entity1\", \"end\" : \"2012-06-01T00:00:00Z\", \"Health\" : \"Normal\"}";
+string response = falkonry.addFacts('assessment-id',data, options);
 ```
 
 ```java
-  import com.falkonry.client.Falkonry;
+import com.falkonry.client.Falkonry;
 
-  Falkonry falkonry = new Falkonry("https://jumpstart.falkonry.ai", "auth-token");
-  Map<String, String> options = new HashMap<String, String>();
-  options.put("startTimeIdentifier", "time");
-  options.put("endTimeIdentifier", "end");
-  options.put("timeFormat", "iso_8601");
-  options.put("timeZone", "GMT");
-  options.put("valueIdentifier", "Health"); 
-  options.put("entityIdentifier", "entities");
-  options.put("additionalTag", "testTag");
+Falkonry falkonry = new Falkonry("https://example.falkonry.ai", "auth-token");
+Map<String, String> options = new HashMap<String, String>();
+options.put("startTimeIdentifier", "time");
+options.put("endTimeIdentifier", "end");
+options.put("timeFormat", "iso_8601");
+options.put("timeZone", "GMT");
+options.put("valueIdentifier", "Health"); 
+options.put("entityIdentifier", "entities");
+options.put("additionalKeyword", "testTag");
 
-  String data = "{\"time\" : \"2011-03-26T12:00:00.000Z\", \"entities\" : \"entity1\", \"end\" : \"2012-06-01T00:00:00.000Z\", \"Health\" : \"Normal\"}";
-  String response = falkonry.addfacts(assessment.getId(),data, options);
+String data = "{\"time\" : \"2011-03-26T12:00:00.000Z\", \"entities\" : \"entity1\", \"end\" : \"2012-06-01T00:00:00.000Z\", \"Health\" : \"Normal\"}";
+String response = falkonry.addfacts(assessment.getId(),data, options);
 ```
 
 ```python
@@ -3385,19 +3210,19 @@ from falkonryclient import client as Falkonry
 from falkonryclient import schemas as Schemas
 
 #instantiate Falkonry
-falkonry      = Falkonry('http://jumpstart.falkonry.ai', 'auth-token')
+falkonry      = Falkonry('http://example.falkonry.ai', 'auth-token')
 assessmentId = 'id of the assessment'
 data          = '{"time" : "2011-03-26T12:00:00.000Z", "end" : "2012-06-01T00:00:00.000Z", "entities": "entity1", "Health" : "Normal"}'
 
 options = {
-        'startTimeIdentifier': "time",
-        'endTimeIdentifier': "end",
-        'timeFormat': "iso_8601",
-        'timeZone': time.get_zone(),
-        'valueIdentifier': "Health",
-        'entityIdentifier': 'entities',
-        'additionalTag': 'testTag'
-    }
+  'startTimeIdentifier': "time",
+  'endTimeIdentifier': "end",
+  'timeFormat': "iso_8601",
+  'timeZone': time.get_zone(),
+  'valueIdentifier': "Health",
+  'entityIdentifier': 'entities',
+  'additionalKeyword': 'testTag'
+}
 inputResponse = falkonry.add_facts(assessmentId, 'json', options, data)
 ```
 
@@ -3409,7 +3234,7 @@ Sample JSONFile / Facts Data:
 {"time":1456774261715,"end":1456774261767,"value":"label2"}
 
 Usage:
-falkonry>> assessment_add_facts --path=/Users/user/MoreFacts.json --startTimeIdentifier=time --endTimeIdentifier=end --timeFormat=millis --timeZone=GMT --valueIdentifier=value --additionalTag=testTag
+falkonry>> assessment_add_facts --path=/Users/user/MoreFacts.json --startTimeIdentifier=time --endTimeIdentifier=end --timeFormat=millis --timeZone=GMT --valueIdentifier=value --additionalKeyword=testTag
 Default assessment set : hv987ptckdc6n7 Name : New Test Assessment
 {u'status': u'PENDING', u'datastream': u'cr77vk6mkwqwqq', u'__$createTime': 1516087411723, u'__$id': u'4l8bgmd6rv2qj77j', u'action': u'ADD_FACT_DATA', u'__$tenant': u'iqn80x6e2ku9id', u'assessment': u'hv987ptckdc6n7'}
 falkonry>>
@@ -3420,36 +3245,36 @@ falkonry>>
 ## Add facts data (csv format) to Assessment of single entity datastream
 
 ```csharp
-    using FalkonryClient;
-    using FalkonryClient.Helper.Models;
+using FalkonryClient;
+using FalkonryClient.Helper.Models;
 
-    SortedDictionary<string, string> options = new SortedDictionary<string, string>();
-    options.Add("startTimeIdentifier", "time");
-    options.Add("endTimeIdentifier", "end");
-    options.Add("timeFormat", "iso_8601");
-    options.Add("timeZone", "GMT");
-    options.Add("valueIdentifier", "Health");
+SortedDictionary<string, string> options = new SortedDictionary<string, string>();
+options.Add("startTimeIdentifier", "time");
+options.Add("endTimeIdentifier", "end");
+options.Add("timeFormat", "iso_8601");
+options.Add("timeZone", "GMT");
+options.Add("valueIdentifier", "Health");
 
-    string token = "Add your token here";   
-    SortedDictionary<string, string> options = new SortedDictionary<string, string>();
-    Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
-    string data = "time,end,Health\n2011-03-31T00:00:00Z,2011-04-01T00:00:00Z,Normal\n2011-03-31T00:00:00Z,2011-04-01T00:00:00Z,Normal";
-    string response = falkonry.addFacts('assessment-id',data, options);
+string token = "Add your token here";   
+SortedDictionary<string, string> options = new SortedDictionary<string, string>();
+Falkonry falkonry = new Falkonry("http://example.falkonry.ai", token);
+string data = "time,end,Health\n2011-03-31T00:00:00Z,2011-04-01T00:00:00Z,Normal\n2011-03-31T00:00:00Z,2011-04-01T00:00:00Z,Normal";
+string response = falkonry.addFacts('assessment-id',data, options);
 
 ```
 
 ```java
-  import com.falkonry.client.Falkonry;
+import com.falkonry.client.Falkonry;
 
-  Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", "auth-token");
-  Map<String, String> options = new HashMap<String, String>();
-  options.put("startTimeIdentifier", "time");
-  options.put("endTimeIdentifier", "end");
-  options.put("timeFormat", "iso_8601");
-  options.put("timeZone", "GMT");
-  options.put("valueIdentifier", "Health");
-  String data = "time,end,Health\n2011-03-31T00:00:00.000Z,2011-04-01T00:00:00.000Z,Normal\n2011-03-31T00:00:00.000Z,2011-04-01T00:00:00.000Z,Normal";
-  String response = falkonry.addFacts(assessment.getId(),data, options);
+Falkonry falkonry = new Falkonry("http://example.falkonry.ai", "auth-token");
+Map<String, String> options = new HashMap<String, String>();
+options.put("startTimeIdentifier", "time");
+options.put("endTimeIdentifier", "end");
+options.put("timeFormat", "iso_8601");
+options.put("timeZone", "GMT");
+options.put("valueIdentifier", "Health");
+String data = "time,end,Health\n2011-03-31T00:00:00.000Z,2011-04-01T00:00:00.000Z,Normal\n2011-03-31T00:00:00.000Z,2011-04-01T00:00:00.000Z,Normal";
+String response = falkonry.addFacts(assessment.getId(),data, options);
 ```
 
 ```python
@@ -3457,19 +3282,19 @@ from falkonryclient import client as Falkonry
 from falkonryclient import schemas as Schemas
 
 #instantiate Falkonry
-falkonry      = Falkonry('http://jumpstart.falkonry.ai', 'auth-token')
+falkonry     = Falkonry('http://example.falkonry.ai', 'auth-token')
 assessmentId = 'id of the assessment'
-data          = 'time,end,Health' + "\n"
-                 + '2011-03-26T12:00:00.000Z,2012-06-01T00:00:00.000Z,Normal' + "\n"
-                 + '2014-02-10T23:00:00.000Z,2014-03-20T12:00:00.000Z,Spalling';
+data         = 'time,end,Health' + "\n"
+     + '2011-03-26T12:00:00.000Z,2012-06-01T00:00:00.000Z,Normal' + "\n"
+     + '2014-02-10T23:00:00.000Z,2014-03-20T12:00:00.000Z,Spalling';
 
 options = {
-        'startTimeIdentifier': "time",
-        'endTimeIdentifier': "end",
-        'timeFormat': "iso_8601",
-        'timeZone': time.get_zone(),
-        'valueIdentifier': "Health"
-    }
+  'startTimeIdentifier': "time",
+  'endTimeIdentifier': "end",
+  'timeFormat': "iso_8601",
+  'timeZone': time.get_zone(),
+  'valueIdentifier': "Health"
+}
 
 inputResponse = falkonry.add_facts(assessmentId, 'csv', options, data)
 ```
@@ -3492,44 +3317,44 @@ falkonry>>
 ```
 
 
-## Add facts data (csv format) with tags Assessment of multi entity datastream
+## Add facts data (csv format) with keywords Assessment of multi entity datastream
 
 ```csharp
-    using FalkonryClient;
-    using FalkonryClient.Helper.Models;
+using FalkonryClient;
+using FalkonryClient.Helper.Models;
 
-    SortedDictionary<string, string> options = new SortedDictionary<string, string>();
-    options.Add("startTimeIdentifier", "time");
-    options.Add("endTimeIdentifier", "end");
-    options.Add("timeFormat", "iso_8601");
-    options.Add("timeZone", "GMT");
-    options.Add("entityIdentifier", "car");
-    options.Add("valueIdentifier", "Health");
-    options.Add("tagIdentifier", "Tag");
+SortedDictionary<string, string> options = new SortedDictionary<string, string>();
+options.Add("startTimeIdentifier", "time");
+options.Add("endTimeIdentifier", "end");
+options.Add("timeFormat", "iso_8601");
+options.Add("timeZone", "GMT");
+options.Add("entityIdentifier", "car");
+options.Add("valueIdentifier", "Health");
+options.Add("keywordIdentifier", "Tag");
 
-    string token = "Add your token here";   
-    SortedDictionary<string, string> options = new SortedDictionary<string, string>();
-    Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
-    string data = "time,end,car,Health,Tag\n2011-03-31T00:00:00Z,2011-04-01T00:00:00Z,IL9753,Normal\n2011-03-31T00:00:00Z,2011-04-01T00:00:00Z,HI3821,Normal,testTag1";
-    string response = falkonry.addFacts('assessment-id',data, options);
+string token = "Add your token here";   
+SortedDictionary<string, string> options = new SortedDictionary<string, string>();
+Falkonry falkonry = new Falkonry("http://example.falkonry.ai", token);
+string data = "time,end,car,Health,Tag\n2011-03-31T00:00:00Z,2011-04-01T00:00:00Z,IL9753,Normal\n2011-03-31T00:00:00Z,2011-04-01T00:00:00Z,HI3821,Normal,testTag1";
+string response = falkonry.addFacts('assessment-id',data, options);
 
 ```
 
 ```java
-  import com.falkonry.client.Falkonry;
+import com.falkonry.client.Falkonry;
 
-  Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", "auth-token");
-  Map<String, String> options = new HashMap<String, String>();
-  options.put("startTimeIdentifier", "time");
-  options.put("endTimeIdentifier", "end");
-  options.put("timeFormat", "iso_8601");
-  options.put("timeZone", "GMT");
-  options.put("entityIdentifier", "car");
-  options.put("valueIdentifier", "Health");
-  options.put("tagIdentifier", "Tag");
+Falkonry falkonry = new Falkonry("http://example.falkonry.ai", "auth-token");
+Map<String, String> options = new HashMap<String, String>();
+options.put("startTimeIdentifier", "time");
+options.put("endTimeIdentifier", "end");
+options.put("timeFormat", "iso_8601");
+options.put("timeZone", "GMT");
+options.put("entityIdentifier", "car");
+options.put("valueIdentifier", "Health");
+options.put("keywordIdentifier", "Tag");
 
-  String data = "time,end,car,Health,Tag\n2011-03-31T00:00:00.000Z,2011-04-01T00:00:00.000Z,IL9753,Normal,testTag1\n2011-03-31T00:00:00.000Z,2011-04-01T00:00:00.000Z,HI3821,Normal,testTag2";
-  String response = falkonry.addFacts(assessment.getId(),data, options);
+String data = "time,end,car,Health,Tag\n2011-03-31T00:00:00.000Z,2011-04-01T00:00:00.000Z,IL9753,Normal,testTag1\n2011-03-31T00:00:00.000Z,2011-04-01T00:00:00.000Z,HI3821,Normal,testTag2";
+String response = falkonry.addFacts(assessment.getId(),data, options);
 ```
 
 ```python
@@ -3537,21 +3362,21 @@ from falkonryclient import client as Falkonry
 from falkonryclient import schemas as Schemas
 
 #instantiate Falkonry
-falkonry      = Falkonry('http://jumpstart.falkonry.ai', 'auth-token')
+falkonry     = Falkonry('http://example.falkonry.ai', 'auth-token')
 assessmentId = 'id of the assessment'
-data          = 'time,car,end,Health,Tag' + "\n"
-                 + '2011-03-26T12:00:00.000Z,HI3821,2012-06-01T00:00:00.000Z,Normal,testTag1' + "\n"
-                 + '2014-02-10T23:00:00.000Z,HI3821,2014-03-20T12:00:00.000Z,Spalling,testTag2';
+data         = 'time,car,end,Health,Tag' + "\n"
+     + '2011-03-26T12:00:00.000Z,HI3821,2012-06-01T00:00:00.000Z,Normal,testTag1' + "\n"
+     + '2014-02-10T23:00:00.000Z,HI3821,2014-03-20T12:00:00.000Z,Spalling,testTag2';
 
 options = {
-        'startTimeIdentifier': "time",
-        'endTimeIdentifier': "end",
-        'timeFormat': "iso_8601",
-        'timeZone': time.get_zone(),
-        'entityIdentifier': "car",
-        'valueIdentifier': "Health",
-        'tagIdentifier': 'Tag'
-    }
+  'startTimeIdentifier': "time",
+  'endTimeIdentifier': "end",
+  'timeFormat': "iso_8601",
+  'timeZone': time.get_zone(),
+  'entityIdentifier': "car",
+  'valueIdentifier': "Health",
+  'keywordIdentifier': 'Tag'
+}
 
 inputResponse = falkonry.add_facts(assessmentId, 'csv', options, data)
 ```
@@ -3566,31 +3391,10 @@ time,end,value,tagId
 "1456774261723","1456774261754","label2","tag2"
 Usage:
 
-falkonry>> assessment_add_facts --path=/Users/user/TagFacts.csv --startTimeIdentifier=time --endTimeIdentifier=end --timeFormat=millis --timeZone=GMT --valueIdentifier=value --tagIdentifier=tagId
+falkonry>> assessment_add_facts --path=/Users/user/TagFacts.csv --startTimeIdentifier=time --endTimeIdentifier=end --timeFormat=millis --timeZone=GMT --valueIdentifier=value --keywordIdentifier=tagId
 Default assessment set : 4rrp97lk9gcvwc Name : test new
 {u'status': u'PENDING', u'datastream': u'cr77vk6mkwqwqq', u'__$createTime': 1516090649022, u'__$id': u'hly8b4727wm9prq8', u'action': u'ADD_FACT_DATA', u'__$tenant': u'iqn80x6e2ku9id', u'assessment': u'4rrp97lk9gcvwc'}
 falkonry>>
-```
-
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "schema": [
-    {
-      "id": "string",
-      "name": "string",
-      "valueType": "string",
-      "dimensionList": [
-        "string"
-      ],
-      "tags": [
-        "string"
-      ]
-    }
-  ]
-}
 ```
 
 Often, facts and machine/ asset state are captured in spreadsheets. 
@@ -3613,84 +3417,65 @@ Sample JSONFile:
 > To add facts in json format from an input stream, use this code:
 
 ```csharp
-    using FalkonryClient;
-    using FalkonryClient.Helper.Models;
+using FalkonryClient;
+using FalkonryClient.Helper.Models;
 
-    SortedDictionary<string, string> options = new SortedDictionary<string, string>();
-    options.Add("startTimeIdentifier", "time");
-    options.Add("endTimeIdentifier", "end");
-    options.Add("timeFormat", "iso_8601");
-    options.Add("timeZone", "GMT");
-    options.Add("entityIdentifier", "car");
-    options.Add("valueIdentifier", "Health");
+SortedDictionary<string, string> options = new SortedDictionary<string, string>();
+options.Add("startTimeIdentifier", "time");
+options.Add("endTimeIdentifier", "end");
+options.Add("timeFormat", "iso_8601");
+options.Add("timeZone", "GMT");
+options.Add("entityIdentifier", "car");
+options.Add("valueIdentifier", "Health");
 
-    string token="Add your token here";   
-    Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
-    string path = "Insert the path to your file here";
-    byte[] bytes = System.IO.File.ReadAllBytes(path);
-    string response = falkonry.AddFactsStream('assessment-id',bytes, options);
+string token="Add your token here";   
+Falkonry falkonry = new Falkonry("http://example.falkonry.ai", token);
+string path = "Insert the path to your file here";
+byte[] bytes = System.IO.File.ReadAllBytes(path);
+string response = falkonry.AddFactsStream('assessment-id',bytes, options);
 ```
 
 
 ```java
-    import com.falkonry.client.Falkonry;
-    import org.apache.commons.io.FileUtils;
+import com.falkonry.client.Falkonry;
+import org.apache.commons.io.FileUtils;
 
-    Falkonry falkonry   = new Falkonry("http://jumpstart.falkonry.ai", "auth-token");
-    File file = new File("res/factsData.json"); 
-    Map<String, String> options = new HashMap<String, String>();
-    options.put("startTimeIdentifier", "time");
-    options.put("endTimeIdentifier", "end");
-    options.put("timeFormat", "iso_8601");
-    options.put("timeZone", "GMT");
-    options.put("entityIdentifier", "car");
-    options.put("valueIdentifier", "Health");       
-    ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(FileUtils.readFileToByteArray(file));
-    String response = falkonry.addFactsStream(assessment.getId(),byteArrayInputStream, options)
+Falkonry falkonry   = new Falkonry("http://example.falkonry.ai", "auth-token");
+File file = new File("res/factsData.json"); 
+Map<String, String> options = new HashMap<String, String>();
+options.put("startTimeIdentifier", "time");
+options.put("endTimeIdentifier", "end");
+options.put("timeFormat", "iso_8601");
+options.put("timeZone", "GMT");
+options.put("entityIdentifier", "car");
+options.put("valueIdentifier", "Health");       
+ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(FileUtils.readFileToByteArray(file));
+String response = falkonry.addFactsStream(assessment.getId(),byteArrayInputStream, options)
 ```
 
 ```python
-    import os, sys
-    from falkonryclient import client as Falkonry
-    from falkonryclient import schemas as Schemas
+import os, sys
+from falkonryclient import client as Falkonry
+from falkonryclient import schemas as Schemas
 
-    falkonry = Falkonry('http://jumpstart.falkonry.ai', 'auth-token')
-    assessmentId = 'id of the assessment'
-    stream   = io.open('./factsData.json')
+falkonry = Falkonry('http://example.falkonry.ai', 'auth-token')
+assessmentId = 'id of the assessment'
+stream   = io.open('./factsData.json')
 
-    options = {
-            'startTimeIdentifier': "time",
-            'endTimeIdentifier': "end",
-            'timeFormat': "iso_8601",
-            'timeZone': time.get_zone(),
-            'entityIdentifier': "car",
-            'valueIdentifier': "Health"
-        }
+options = {
+  'startTimeIdentifier': "time",
+  'endTimeIdentifier': "end",
+  'timeFormat': "iso_8601",
+  'timeZone': time.get_zone(),
+  'entityIdentifier': "car",
+  'valueIdentifier': "Health"
+}
 
-    response = falkonry.add_facts_stream(assessmentId, 'json', options, stream)
+response = falkonry.add_facts_stream(assessmentId, 'json', options, stream)
 ```
 
 ```shell
 
-```
-> The above command returns JSON structured like this:
-
-```json
-{
-  "schema": [
-    {
-      "id": "string",
-      "name": "string",
-      "valueType": "string",
-      "dimensionList": [
-        "string"
-      ],
-      "tags": [
-        "string"
-      ]
-    }
-  ]
-}
 ```
 
 If facts are created from another application, they are often exported in json format.
@@ -3716,7 +3501,7 @@ options.Add("entityIdentifier", "car");
 options.Add("valueIdentifier", "Health");
 
 string token="Add your token here";   
-Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
+Falkonry falkonry = new Falkonry("http://example.falkonry.ai", token);
 string path = "Insert the path to your file here";
 byte[] bytes = System.IO.File.ReadAllBytes(path);
 string response = falkonry.AddFactsStream('assessment-id',bytes, options);
@@ -3724,20 +3509,20 @@ string response = falkonry.AddFactsStream('assessment-id',bytes, options);
 
 
 ```java
-  import com.falkonry.client.Falkonry;
-  import org.apache.commons.io.FileUtils;
+import com.falkonry.client.Falkonry;
+import org.apache.commons.io.FileUtils;
 
-  Falkonry falkonry   = new Falkonry("http://jumpstart.falkonry.ai", "auth-token");
-  File file = new File("res/factsData.csv"); 
-  Map<String, String> options = new HashMap<String, String>();
-  options.put("startTimeIdentifier", "time");
-  options.put("endTimeIdentifier", "end");
-  options.put("timeFormat", "iso_8601");
-  options.put("timeZone", "GMT");
-  options.put("entityIdentifier", "entity");
-  options.put("valueIdentifier", "Health");     
-  ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(FileUtils.readFileToByteArray(file));
-  String response = falkonry.addFactsStream(assessment.getId(),byteArrayInputStream, options);
+Falkonry falkonry   = new Falkonry("http://example.falkonry.ai", "auth-token");
+File file = new File("res/factsData.csv"); 
+Map<String, String> options = new HashMap<String, String>();
+options.put("startTimeIdentifier", "time");
+options.put("endTimeIdentifier", "end");
+options.put("timeFormat", "iso_8601");
+options.put("timeZone", "GMT");
+options.put("entityIdentifier", "entity");
+options.put("valueIdentifier", "Health");     
+ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(FileUtils.readFileToByteArray(file));
+String response = falkonry.addFactsStream(assessment.getId(),byteArrayInputStream, options);
 ```
 
 ```python
@@ -3746,18 +3531,18 @@ from falkonryclient import client as Falkonry
 from falkonryclient import schemas as Schemas
 from falkonryclient import schemas as Schemas
 
-falkonry = Falkonry('http://jumpstart.falkonry.ai', 'auth-token')
+falkonry = Falkonry('http://example.falkonry.ai', 'auth-token')
 assessmentId = 'id of the assessment'
 stream   = io.open('./factsData.csv')
 
 options = {
-        'startTimeIdentifier': "time",
-        'endTimeIdentifier': "end",
-        'timeFormat': "iso_8601",
-        'timeZone': time.get_zone(),
-        'entityIdentifier': "car",
-        'valueIdentifier': "Health"
-    }
+  'startTimeIdentifier': "time",
+  'endTimeIdentifier': "end",
+  'timeFormat': "iso_8601",
+  'timeZone': time.get_zone(),
+  'entityIdentifier': "car",
+  'valueIdentifier': "Health"
+}
 
 response = falkonry.add_facts_stream(assessmentId, 'csv', options, stream)
 
@@ -3765,26 +3550,6 @@ response = falkonry.add_facts_stream(assessmentId, 'csv', options, stream)
 
 ```shell
 
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "schema": [
-    {
-      "id": "string",
-      "name": "string",
-      "valueType": "string",
-      "dimensionList": [
-        "string"
-      ],
-      "tags": [
-        "string"
-      ]
-    }
-  ]
-}
 ```
 
 Often, facts and machine/ asset state are captured in spreadsheets. 
@@ -3855,17 +3620,17 @@ using FalkonryClient;
 using FalkonryClient.Helper.Models;
 
 string token="Add your token here";   
-Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
-  string datastream_id = "Your datastream id";
-  falkonry.onDatastream(datastream_id);
+Falkonry falkonry = new Falkonry("http://example.falkonry.ai", token);
+string datastream_id = "Your datastream id";
+falkonry.onDatastream(datastream_id);
 ```
 
 ```java
-  import com.falkonry.client.Falkonry;
+import com.falkonry.client.Falkonry;
 
-  Falkonry falkonry   = new Falkonry("https://jumpstart.falkonry.ai", "auth-token");
-  String datastreamId = "hk7cgt56r3yln0";
-  List<Assessment> liveAssessments = falkonry.onDatastream(datastreamId);
+Falkonry falkonry   = new Falkonry("https://example.falkonry.ai", "auth-token");
+String datastreamId = "hk7cgt56r3yln0";
+List<Assessment> liveAssessments = falkonry.onDatastream(datastreamId);
 ```
 
 ```python
@@ -3873,7 +3638,7 @@ import os, sys
 from falkonryclient import client as Falkonry
 from falkonryclient import schemas as Schemas
 
-falkonry  = Falkonry('https://jumpstart.falkonry.ai', 'auth-token')
+falkonry  = Falkonry('https://example.falkonry.ai', 'auth-token')
 datastreamId = 'id of the datastream'
 
 # Starts live monitoring of datastream. For live monitoring datastream must have atleast one assessment with active model. 
@@ -3905,18 +3670,18 @@ using FalkonryClient;
 using FalkonryClient.Helper.Models;
 
 string token="Add your token here";   
-Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
-  string datastream_id = "Your datastream id";
-  falkonry.offDatastream(datastream_id);
+Falkonry falkonry = new Falkonry("http://example.falkonry.ai", token);
+string datastream_id = "Your datastream id";
+falkonry.offDatastream(datastream_id);
 ```
 
 
 ```java
-  import com.falkonry.client.Falkonry;
+import com.falkonry.client.Falkonry;
 
-  Falkonry falkonry   = new Falkonry("https://jumpstart.falkonry.ai", "auth-token");
-  String datastreamId = "hk7cgt56r3yln0";
-  List<Assessment> assessments = falkonry.offDatastream(datastreamId);
+Falkonry falkonry   = new Falkonry("https://example.falkonry.ai", "auth-token");
+String datastreamId = "hk7cgt56r3yln0";
+List<Assessment> assessments = falkonry.offDatastream(datastreamId);
 ```
 
 ```python
@@ -3924,7 +3689,7 @@ import os, sys
 from falkonryclient import client as Falkonry
 from falkonryclient import schemas as Schemas
 
-falkonry  = Falkonry('https://jumpstart.falkonry.ai', 'auth-token')
+falkonry  = Falkonry('https://example.falkonry.ai', 'auth-token')
 datastreamId = 'id of the datastream'
 
 # Stops live monitoring of datastream.
@@ -3954,7 +3719,7 @@ using FalkonryClient;
 using FalkonryClient.Helper.Models;
 
 string token="Add your token here";   
-Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
+Falkonry falkonry = new Falkonry("http://example.falkonry.ai", token);
 
 string data = "{\"time\" :\"2016-03-01 01:01:01\", \"current\" : 12.4, \"vibration\" : 3.4, \"state\" : \"On\"}";
 
@@ -3964,7 +3729,7 @@ SortedDictionary<string, string> options = new SortedDictionary<string, string>(
   options.Add("fileFormat", "json");
   options.Add("streaming", "true");
   options.Add("hasMoreData", "false");
-  InputStatus inputstatus = falkonry.addInput('datastream-id', data, options);
+InputStatus inputstatus = falkonry.addInput('datastream-id', data, options);
 ```
 
 
@@ -3976,19 +3741,20 @@ import com.falkonry.helper.models.Field;
 import com.falkonry.helper.models.TimeObject;
 import com.falkonry.helper.models.Signal;
 
-  //instantiate Falkonry
-  Falkonry falkonry = new Falkonry("https://jumpstart.falkonry.ai", "auth-token");
-  //Add data to datastream
-  String data = "{\"time\" : \"2016-03-01 01:01:01\", \"tag\" : \"signal1\", \"value\" : 3.4}" + "\n"
-      + "{\"time\" : \"2016-03-01 01:01:02\", \"tag\" : \"signal2\", \"value\" : 9.3}";
+//instantiate Falkonry
+Falkonry falkonry = new Falkonry("https://example.falkonry.ai", "auth-token");
+//Add data to datastream
+String data = "{\"time\" : \"2016-03-01 01:01:01\", \"signal\" : \"signal1\", \"value\" : 3.4}" + "\n"
+    + "{\"time\" : \"2016-03-01 01:01:02\", \"signal\" : \"signal2\", \"value\" : 9.3}";
 
-  Map<String, String> options = new HashMap<String, String>();
-    options.put("timeIdentifier", "time");
-    options.put("timeFormat", "iso_8601");
-    options.put("fileFormat", "csv");
-    options.put("streaming", "true");
-    options.put("hasMoreData", "false");
-    falkonry.addInput('datastream-Id', data, options);
+Map<String, String> options = new HashMap<String, String>();
+  options.put("timeIdentifier", "time");
+  options.put("signalIdentifier", "time");
+  options.put("valueIdentifier", "time");
+  options.put("timeFormat", "iso_8601");
+  options.put("fileFormat", "csv");
+  options.put("streaming", "true");
+falkonry.addInput('datastream-Id', data, options);
 ```
 
 ```python
@@ -3996,17 +3762,24 @@ from falkonryclient import client as Falkonry
 from falkonryclient import schemas as Schemas
 
 #instantiate Falkonry
-falkonry   = Falkonry('https://jumpstart.falkonry.ai', 'auth-token')
+falkonry   = Falkonry('https://example.falkonry.ai', 'auth-token')
 
 datastreamId = 'id of the datastream'
 
 #add data to Datastream
-String data = "{\"time\" : \"2016-03-01 01:01:01\", \"tag\" : \"signal1_thing1\", \"value\" : 3.4}" + "\n"
-        + "{\"time\" : \"2016-03-01 01:01:01\", \"tag\" : \"signal2_thing1\", \"value\" : 1.4}" + "\n"
-        + "{\"time\" : \"2016-03-01 01:01:02\", \"tag\" : \"signal1_thing1\", \"value\" : 9.3}" + "\n"
-        + "{\"time\" : \"2016-03-01 01:01:02\", \"tag\" : \"signal2_thing2\", \"value\" : 4.3}";
+String data = "{\"time\" : \"2016-03-01 01:01:01\", \"signal\" : \"signal1\", \"value\" : 3.4}" + "\n"
+        + "{\"time\" : \"2016-03-01 01:01:01\", \"signal\" : \"signal2\", \"value\" : 1.4}" + "\n"
+        + "{\"time\" : \"2016-03-01 01:01:02\", \"signal\" : \"signal1\", \"value\" : 9.3}" + "\n"
+        + "{\"time\" : \"2016-03-01 01:01:02\", \"signal\" : \"signal2\", \"value\" : 4.3}";
         
-options = {'streaming': True}   
+options = {
+  'timeIdentifier': 'time',
+  'signalIdentifier': 'signal',
+  'valueIdentifier': 'value',
+  'fileFormat': 'csv',
+  'timeFormat': 'millis',
+  'streaming': True
+}
 inputResponse = falkonry.add_input_data(datastreamId, 'json', options, data)
 ```
 
@@ -4042,18 +3815,18 @@ using FalkonryClient;
 using FalkonryClient.Helper.Models;
 
 string token="Add your token here";   
-Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
+Falkonry falkonry = new Falkonry("http://example.falkonry.ai", token);
 
-string data = "time, entities, signal1, signal2, signal3, signal4" + "\n"
+string data = "time, entity, signal1, signal2, signal3, signal4" + "\n"
       + "1467729675422, entity1, 41.11, 62.34, 77.63, 4.8" + "\n"
       + "1467729675445, entity1, 43.91, 82.64, 73.63, 3.8";
 
 SortedDictionary<string, string> options = new SortedDictionary<string, string>();
   options.Add("timeIdentifier", "time");
+  options.Add("entityIdentifier", "entity");
   options.Add("timeFormat", "iso_8601");
   options.Add("fileFormat", "csv");
   options.Add("streaming", "true");
-  options.Add("hasMoreData", "false");
   InputStatus inputstatus = falkonry.addInput('datastream-id', data, options);
 ```
 
@@ -4067,17 +3840,17 @@ import com.falkonry.helper.models.TimeObject;
 import com.falkonry.helper.models.Signal;
 
 //instantiate Falkonry
-Falkonry falkonry = new Falkonry("https://jumpstart.falkonry.ai", "auth-token");
+Falkonry falkonry = new Falkonry("https://example.falkonry.ai", "auth-token");
 //Add data to datastream
-  String data = "time, entities, signal1, signal2, signal3, signal4" + "\n"
+  String data = "time, entity, signal1, signal2, signal3, signal4" + "\n"
       + "1467729675422, entity1, 41.11, 62.34, 77.63, 4.8" + "\n"
       + "1467729675445, entity1, 43.91, 82.64, 73.63, 3.8";
   Map<String, String> options = new HashMap<String, String>();
     options.put("timeIdentifier", "time");
+    options.Add("entityIdentifier", "entity");
     options.put("timeFormat", "millis");
     options.put("fileFormat", "csv");
     options.put("streaming", "true");
-    options.put("hasMoreData", "false");
     falkonry.addInput('datastream-Id', data, options);
 ```
 
@@ -4086,16 +3859,22 @@ from falkonryclient import client as Falkonry
 from falkonryclient import schemas as Schemas
 
 #instantiate Falkonry
-falkonry   = Falkonry('https://jumpstart.falkonry.ai', 'auth-token')
+falkonry   = Falkonry('https://example.falkonry.ai', 'auth-token')
 
 datastreamId = 'id of the datastream'
 
 #add data to Datastream
-String data = "time, tag, value " + "\n"
-        + "2016-03-01 01:01:01, signal1_thing1, 3.4" + "\n"
-        + "2016-03-01 01:01:01, signal2_thing1, 1.4";
+String data = "time, entity, signal1, signal2, signal3, signal4" + "\n"
+      + "1467729675422, entity1, 41.11, 62.34, 77.63, 4.8" + "\n"
+      + "1467729675445, entity1, 43.91, 82.64, 73.63, 3.8"
         
-options = {'streaming': True}   
+options = {
+  'timeIdentifier': 'time',
+  'entityIdentifier': 'entity',
+  'fileFormat': 'csv',
+  'timeFormat': 'millis',
+  'streaming': True
+}
 inputResponse = falkonry.add_input_data(datastreamId, 'csv', options, data)
 ```
 
@@ -4105,11 +3884,6 @@ Data:
 time,activity,person,end
 1447882550000,walking,p1,1447882565000
 1447882565000,sitting,p1,1447882570000
-1447882575000,cycling,p1,1447882580000
-1447882580000,sitting,p1,1447882585000
-1447882590000,sitting,p1,1447882595000
-1447882595000,walking,p1,1447882600000
-1447882600000,cycling,p1,1447882605000
 
 Usage :
 
@@ -4134,7 +3908,7 @@ using FalkonryClient;
 using FalkonryClient.Helper.Models;
 
 string token="Add your token here";   
-Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
+Falkonry falkonry = new Falkonry("http://example.falkonry.ai", token);
 
 /*This particular example will read data from a AddData.json file in debug folder in bin*/
 
@@ -4161,7 +3935,7 @@ InputStatus inputstatus = falkonry.addInputStream('datastream-id', bytes, option
 import com.falkonry.client.Falkonry
 import org.apache.commons.io.FileUtils;
 
-  Falkonry falkonry   = new Falkonry("https://jumpstart.falkonry.ai", "auth-token");
+  Falkonry falkonry   = new Falkonry("https://example.falkonry.ai", "auth-token");
   Map<String, String> options = new HashMap<String, String>();
     options.put("timeIdentifier", "time");
     options.put("timeFormat", "millis");
@@ -4180,7 +3954,7 @@ from falkonryclient import client as Falkonry
 from falkonryclient import schemas as Schemas
 
 #instantiate Falkonry
-falkonry   = Falkonry('https://jumpstart.falkonry.ai', 'auth-token')
+falkonry   = Falkonry('https://example.falkonry.ai', 'auth-token')
 
 datastreamId = 'id of the datastream'
 
@@ -4211,7 +3985,7 @@ using FalkonryClient;
 using FalkonryClient.Helper.Models;
 
 string token="Add your token here";   
-Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
+Falkonry falkonry = new Falkonry("http://example.falkonry.ai", token);
 
 /*This particular example will read data from a AddData.json file in debug folder in bin*/
 
@@ -4237,19 +4011,19 @@ InputStatus inputstatus = falkonry.addInputStream('datastream-id', bytes, option
 import com.falkonry.client.Falkonry
 import org.apache.commons.io.FileUtils;
 
-  Falkonry falkonry   = new Falkonry("https://jumpstart.falkonry.ai", "auth-token");
-  Map<String, String> options = new HashMap<String, String>();
-  Map<String, String> options = new HashMap<String, String>();
-    options.put("timeIdentifier", "time");
-    options.put("timeFormat", "millis");
-    options.put("fileFormat", "csv");
-    options.put("streaming", "true");
-    options.put("hasMoreData", "false");
+Falkonry falkonry   = new Falkonry("https://example.falkonry.ai", "auth-token");
+Map<String, String> options = new HashMap<String, String>();
+Map<String, String> options = new HashMap<String, String>();
+  options.put("timeIdentifier", "time");
+  options.put("timeFormat", "millis");
+  options.put("fileFormat", "csv");
+  options.put("streaming", "true");
+  options.put("hasMoreData", "false");
 
-    File file = new File("tmp/data.csv");     
-      ByteArrayInputStream istream = new ByteArrayInputStream(FileUtils.readFileToByteArray(file));
+File file = new File("tmp/data.csv");     
+ByteArrayInputStream istream = new ByteArrayInputStream(FileUtils.readFileToByteArray(file));
 
-      InputStatus inputStatus = falkonry.addInputStream('datastream-Id',byteArrayInputStream,options);
+InputStatus inputStatus = falkonry.addInputStream('datastream-Id',byteArrayInputStream,options);
 ```
 
 ```python
@@ -4257,7 +4031,7 @@ from falkonryclient import client as Falkonry
 from falkonryclient import schemas as Schemas
 
 #instantiate Falkonry
-falkonry   = Falkonry('https://jumpstart.falkonry.ai', 'auth-token')
+falkonry   = Falkonry('https://example.falkonry.ai', 'auth-token')
 
 datastreamId = 'id of the datastream'
 
@@ -4286,53 +4060,41 @@ When working from within the Falkonry Professional UI, make sure "Accepting Data
 using FalkonryClient;
 using FalkonryClient.Helper.Models;
 
-  string token="Add your token here";   
-  Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
+string token="Add your token here";   
+Falkonry falkonry = new Falkonry("http://example.falkonry.ai", token);
 
-	string assessment_id ="assessment ID here";
+string assessment_id ="assessment ID here";
 
-	internal class FalkonryEvent
-    {
-        public string entity { get; set; }
-        public string time { get; set; }
-        public string value { get; set; }
-        public string batch { get; set; }
+
+//On successfull live streaming output EventSource_Message will be triggered
+private void EventSource_Message(object sender, EventSource.ServerSentEventArgs e)
+{
+    try { var falkonryEvent = JsonConvert.DeserializeObject<FalkonryEvent>(e.Data); }
+    catch(System.Exception exception) 
+    { //log error in case of error parsing the output event }
         
-        public override string ToString()
-        {
-            return $"{{time: '{time}', entity: '{entity}', value: '{value}', batch: '{batch}'}}";
-        }
-    }
+}
 
-	//On successfull live streaming output EventSource_Message will be triggered
-	private void EventSource_Message(object sender, EventSource.ServerSentEventArgs e)
-    {
-        try { var falkonryEvent = JsonConvert.DeserializeObject<FalkonryEvent>(e.Data); }
-        catch(System.Exception exception) 
-        { //log error in case of error parsing the output event }
-            
-    }
+//On any error while getting live streaming output, EventSource_Error will be triggered
+private void EventSource_Error(object sender, EventSource.ServerSentErrorEventArgs e)
+{ // Error handling }
 
-	//On any error while getting live streaming output, EventSource_Error will be triggered
-    private void EventSource_Error(object sender, EventSource.ServerSentErrorEventArgs e)
-    { // Error handling }
-	
-	EventSource eventSource = falkonry.GetOutput(assessment,null,null);
-	eventSource.Message += EventSource_Message;
-  eventSource.Error += EventSource_Error;
+EventSource eventSource = falkonry.GetOutput(assessment,null,null);
+eventSource.Message += EventSource_Message;
+eventSource.Error += EventSource_Error;
 
-	// NOTE: To stop listening to output
-	eventSource.Dispose();
+// NOTE: To stop listening to output
+eventSource.Dispose();
 ```
 
 
 ```java
 import com.falkonry.client.Falkonry;
 
-  Falkonry falkonry   = new Falkonry("https://jumpstart.falkonry.ai", "auth-token");
-  String assessment = "wpyred1glh6c5r";
-  BufferedReader outputBuffer;
-  outputBuffer = falkonry.getOutput(assessment);
+Falkonry falkonry   = new Falkonry("https://example.falkonry.ai", "auth-token");
+String assessment = "wpyred1glh6c5r";
+BufferedReader outputBuffer;
+outputBuffer = falkonry.getOutput(assessment);
 ```
 
 ```python
@@ -4340,7 +4102,7 @@ import os, sys
 from falkonryclient import client as Falkonry
 from falkonryclient import schemas as Schemas
 
-falkonry  = Falkonry('https://jumpstart.falkonry.ai', 'auth-token')
+falkonry  = Falkonry('https://example.falkonry.ai', 'auth-token')
 assessmentId = 'id of the datastream'
 stream    = falkonry.get_output(assessmentId)
 for event in stream.events():
