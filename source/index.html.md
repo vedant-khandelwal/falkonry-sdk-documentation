@@ -2358,7 +2358,7 @@ from pprint import pprint
 from falkonryclient import client as Falkonry
 from falkonryclient import schemas as Schemas
 
-falkonry  = Falkonry('http://jumpstart.falkonry.ai', 'auth-token')
+falkonry  = Falkonry('http://example.falkonry.ai', 'auth-token')
 
 #Id of the datastream from which the data is to be extracted
 datastreamId = 'id of the datastream'
@@ -3576,7 +3576,7 @@ using FalkonryClient;
 using FalkonryClient.Helper.Models;
 
 string token="Add your token here";   
-Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
+Falkonry falkonry = new Falkonry("http://example.falkonry.ai", token);
   string datastream_id = "Your datastream id";
   Datastream ds = falkonry.GetDatastream("datastream_id");
   var status = ds.Live; //live status will be "ON" or "OFF".
@@ -3586,7 +3586,7 @@ Falkonry falkonry = new Falkonry("http://jumpstart.falkonry.ai", token);
 ```java
   import com.falkonry.client.Falkonry;
 
-  Falkonry falkonry   = new Falkonry("https://jumpstart.falkonry.ai", "auth-token");
+  Falkonry falkonry   = new Falkonry("https://example.falkonry.ai", "auth-token");
   String datastreamId = "hk7cgt56r3yln0";
   Datastream datastream = falkonry.getDatastream(datastreamId);
   String status = datastream.Live; //live status will be "ON" or "OFF".
@@ -3597,7 +3597,7 @@ import os, sys
 from falkonryclient import client as Falkonry
 from falkonryclient import schemas as Schemas
 
-falkonry  = Falkonry('https://jumpstart.falkonry.ai', 'auth-token')
+falkonry  = Falkonry('https://example.falkonry.ai', 'auth-token')
 datastreamId = 'id of the datastream'
 datastream = falkonry.get_datastream(datastreamId)
 status = datastream.get_live()//live status will be "ON" or "OFF".

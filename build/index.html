@@ -2437,7 +2437,7 @@ Falkonry needs historical time series data to build pattern recognition models.
 <span class="kn">from</span> <span class="nn">falkonryclient</span> <span class="kn">import</span> <span class="n">client</span> <span class="k">as</span> <span class="n">Falkonry</span>
 <span class="kn">from</span> <span class="nn">falkonryclient</span> <span class="kn">import</span> <span class="n">schemas</span> <span class="k">as</span> <span class="n">Schemas</span>
 
-<span class="n">falkonry</span>  <span class="o">=</span> <span class="n">Falkonry</span><span class="p">(</span><span class="s">'http://jumpstart.falkonry.ai'</span><span class="p">,</span> <span class="s">'auth-token'</span><span class="p">)</span>
+<span class="n">falkonry</span>  <span class="o">=</span> <span class="n">Falkonry</span><span class="p">(</span><span class="s">'http://example.falkonry.ai'</span><span class="p">,</span> <span class="s">'auth-token'</span><span class="p">)</span>
 
 <span class="c">#Id of the datastream from which the data is to be extracted</span>
 <span class="n">datastreamId</span> <span class="o">=</span> <span class="s">'id of the datastream'</span>
@@ -3479,14 +3479,14 @@ Adding more facts (ground truths) helps improve model accuracy and hence the use
 <span class="k">using</span> <span class="nn">FalkonryClient.Helper.Models</span><span class="p">;</span>
 
 <span class="kt">string</span> <span class="n">token</span><span class="p">=</span><span class="s">"Add your token here"</span><span class="p">;</span>   
-<span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Falkonry</span><span class="p">(</span><span class="s">"http://jumpstart.falkonry.ai"</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
+<span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Falkonry</span><span class="p">(</span><span class="s">"http://example.falkonry.ai"</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
   <span class="kt">string</span> <span class="n">datastream_id</span> <span class="p">=</span> <span class="s">"Your datastream id"</span><span class="p">;</span>
   <span class="n">Datastream</span> <span class="n">ds</span> <span class="p">=</span> <span class="n">falkonry</span><span class="p">.</span><span class="nf">GetDatastream</span><span class="p">(</span><span class="s">"datastream_id"</span><span class="p">);</span>
   <span class="kt">var</span> <span class="n">status</span> <span class="p">=</span> <span class="n">ds</span><span class="p">.</span><span class="n">Live</span><span class="p">;</span> <span class="c1">//live status will be "ON" or "OFF".</span>
 
 </code></pre><pre class="highlight java tab-java"><code>  <span class="kn">import</span> <span class="nn">com.falkonry.client.Falkonry</span><span class="o">;</span>
 
-  <span class="n">Falkonry</span> <span class="n">falkonry</span>   <span class="o">=</span> <span class="k">new</span> <span class="n">Falkonry</span><span class="o">(</span><span class="s">"https://jumpstart.falkonry.ai"</span><span class="o">,</span> <span class="s">"auth-token"</span><span class="o">);</span>
+  <span class="n">Falkonry</span> <span class="n">falkonry</span>   <span class="o">=</span> <span class="k">new</span> <span class="n">Falkonry</span><span class="o">(</span><span class="s">"https://example.falkonry.ai"</span><span class="o">,</span> <span class="s">"auth-token"</span><span class="o">);</span>
   <span class="n">String</span> <span class="n">datastreamId</span> <span class="o">=</span> <span class="s">"hk7cgt56r3yln0"</span><span class="o">;</span>
   <span class="n">Datastream</span> <span class="n">datastream</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="na">getDatastream</span><span class="o">(</span><span class="n">datastreamId</span><span class="o">);</span>
   <span class="n">String</span> <span class="n">status</span> <span class="o">=</span> <span class="n">datastream</span><span class="o">.</span><span class="na">Live</span><span class="o">;</span> <span class="c1">//live status will be "ON" or "OFF".</span>
@@ -3494,7 +3494,7 @@ Adding more facts (ground truths) helps improve model accuracy and hence the use
 <span class="kn">from</span> <span class="nn">falkonryclient</span> <span class="kn">import</span> <span class="n">client</span> <span class="k">as</span> <span class="n">Falkonry</span>
 <span class="kn">from</span> <span class="nn">falkonryclient</span> <span class="kn">import</span> <span class="n">schemas</span> <span class="k">as</span> <span class="n">Schemas</span>
 
-<span class="n">falkonry</span>  <span class="o">=</span> <span class="n">Falkonry</span><span class="p">(</span><span class="s">'https://jumpstart.falkonry.ai'</span><span class="p">,</span> <span class="s">'auth-token'</span><span class="p">)</span>
+<span class="n">falkonry</span>  <span class="o">=</span> <span class="n">Falkonry</span><span class="p">(</span><span class="s">'https://example.falkonry.ai'</span><span class="p">,</span> <span class="s">'auth-token'</span><span class="p">)</span>
 <span class="n">datastreamId</span> <span class="o">=</span> <span class="s">'id of the datastream'</span>
 <span class="n">datastream</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="n">get_datastream</span><span class="p">(</span><span class="n">datastreamId</span><span class="p">)</span>
 <span class="n">status</span> <span class="o">=</span> <span class="n">datastream</span><span class="o">.</span><span class="n">get_live</span><span class="p">()</span><span class="o">//</span><span class="n">live</span> <span class="n">status</span> <span class="n">will</span> <span class="n">be</span> <span class="s">"ON"</span> <span class="ow">or</span> <span class="s">"OFF"</span><span class="o">.</span>
