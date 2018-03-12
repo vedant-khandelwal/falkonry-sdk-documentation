@@ -474,10 +474,10 @@ Structuring data as key-value pairs — as is done in narrow-form datasets — f
     <span class="kt">var</span> <span class="n">Field</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Field</span><span class="p">();</span>
     <span class="kt">var</span> <span class="n">Signal</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Signal</span><span class="p">();</span>
     <span class="n">Signal</span><span class="p">.</span><span class="n">ValueIdentifier</span> <span class="p">=</span> <span class="s">"value"</span><span class="p">;</span>
-  <span class="n">Signal</span><span class="p">.</span><span class="n">SignalIdentifier</span> <span class="p">=</span> <span class="s">"signal"</span><span class="p">;</span>
+    <span class="n">Signal</span><span class="p">.</span><span class="n">SignalIdentifier</span> <span class="p">=</span> <span class="s">"signal"</span><span class="p">;</span>
     <span class="n">Field</span><span class="p">.</span><span class="n">Signal</span> <span class="p">=</span> <span class="n">Signal</span><span class="p">;</span>
     <span class="n">Field</span><span class="p">.</span><span class="n">Time</span> <span class="p">=</span> <span class="n">time</span><span class="p">;</span>
-  <span class="n">Field</span><span class="p">.</span><span class="n">BatchIdentifier</span> <span class="p">=</span> <span class="s">"batch"</span><span class="p">;</span>
+    <span class="n">Field</span><span class="p">.</span><span class="n">BatchIdentifier</span> <span class="p">=</span> <span class="s">"batch"</span><span class="p">;</span>
     <span class="n">ds</span><span class="p">.</span><span class="n">Field</span> <span class="p">=</span> <span class="n">Field</span><span class="p">;</span>
     <span class="n">ds</span><span class="p">.</span><span class="n">DataSource</span> <span class="p">=</span> <span class="n">datasource</span><span class="p">;</span>
     <span class="kt">var</span> <span class="n">rnd</span> <span class="p">=</span> <span class="k">new</span> <span class="n">System</span><span class="p">.</span><span class="nf">Random</span><span class="p">();</span>
@@ -1625,7 +1625,7 @@ Falkonry needs historical time series data to build pattern recognition models.
 </code></pre><pre class="highlight shell tab-shell"><code>Usage:
 <span class="gp">falkonry&gt;&gt; </span>datastream_add_historical_data --path<span class="o">=</span>/Users/user/InputNarrowBatchSingleEntity.json --timeIdentifier<span class="o">=</span><span class="s2">"time"</span> --timeFormat<span class="o">=</span><span class="s2">"Unix Time Milliseconds"</span> --timeZone<span class="o">=</span><span class="s2">"GMT"</span> --signalIdentifier<span class="o">=</span><span class="s2">"signal"</span> --batchIdentifier<span class="o">=</span><span class="s2">"batchId"</span> --valueIdentifier<span class="o">=</span><span class="s2">"value"</span>
 Default datastream <span class="nb">set</span> : wlybjb4tq776n9 Name : Narrow Single Entity Batch Test DS
-<span class="o">{</span>u<span class="s1">'status'</span>: u<span class="s1">'PENDING'</span>, u<span class="s1">'datastream'</span>: u<span class="s1">'wlybjb4tq776n9'</span>, u<span class="s1">'__$createTime'</span>: 1516013313895, u<span class="s1">'__$id'</span>: u<span class="s1">'kpgly6d2tg9v27b6'</span>, u<span class="s1">'user'</span>: u<span class="s1">'e6q8ienqs9celz'</span>, u<span class="s1">'action'</span>: u<span class="s1">'ADD_DATA_DATASTREAM'</span>, u<span class="s1">'__$tenant'</span>: u<span class="s1">'iqn80x6e2ku9id'</span>, u<span class="s1">'dataSource'</span>: u<span class="s1">'y8ibr9co7hqkkd'</span><span class="o">}</span>
+<span class="o">{</span><span class="s1">'status'</span>: <span class="s1">'PENDING'</span>, <span class="s1">'datastream'</span>: <span class="s1">'wlybjb4tq776n9'</span>, <span class="s1">'__$createTime'</span>: 1516013313895, <span class="s1">'__$id'</span>: <span class="s1">'kpgly6d2tg9v27b6'</span>, <span class="s1">'user'</span>: <span class="s1">'e6q8ienqs9celz'</span>, <span class="s1">'action'</span>: <span class="s1">'ADD_DATA_DATASTREAM'</span>, <span class="s1">'__$tenant'</span>: <span class="s1">'iqn80x6e2ku9id'</span>, <span class="s1">'dataSource'</span>: <span class="s1">'y8ibr9co7hqkkd'</span><span class="o">}</span>
 falkonry&gt;&gt;
 </code></pre>
 <blockquote>
@@ -1705,7 +1705,7 @@ falkonry&gt;&gt;
 Usage:
 <span class="gp">falkonry&gt;&gt; </span>datastream_add_historical_data --path<span class="o">=</span>/Users/user/InputNarrowBatchMultiEntity.csv --timeIdentifier<span class="o">=</span><span class="s2">"time"</span> --timeFormat<span class="o">=</span><span class="s2">"Unix Time Milliseconds"</span> --timeZone<span class="o">=</span><span class="s2">"GMT"</span> --entityIdentifier<span class="o">=</span><span class="s2">"unit"</span> --signalIdentifier<span class="o">=</span><span class="s2">"signal"</span> --batchIdentifier<span class="o">=</span><span class="s2">"batchId"</span> --valueIdentifier<span class="o">=</span><span class="s2">"value"</span>
 Default datastream <span class="nb">set</span> : hn6cq2lpcwg49c Name : Narrow Multiple Entity Batch Test DS
-<span class="o">{</span>u<span class="s1">'status'</span>: u<span class="s1">'PENDING'</span>, u<span class="s1">'datastream'</span>: u<span class="s1">'hn6cq2lpcwg49c'</span>, u<span class="s1">'__$createTime'</span>: 1516013971506, u<span class="s1">'__$id'</span>: u<span class="s1">'4hqpj9hw2vmcjqwh'</span>, u<span class="s1">'user'</span>: u<span class="s1">'e6q8ienqs9celz'</span>, u<span class="s1">'action'</span>: u<span class="s1">'ADD_DATA_DATASTREAM'</span>, u<span class="s1">'__$tenant'</span>: u<span class="s1">'iqn80x6e2ku9id'</span>, u<span class="s1">'dataSource'</span>: u<span class="s1">'Rp8euhiyg3ctt4'</span><span class="o">}</span>
+<span class="o">{</span><span class="s1">'status'</span>: <span class="s1">'PENDING'</span>, <span class="s1">'datastream'</span>: <span class="s1">'hn6cq2lpcwg49c'</span>, <span class="s1">'__$createTime'</span>: 1516013971506, <span class="s1">'__$id'</span>: <span class="s1">'4hqpj9hw2vmcjqwh'</span>, <span class="s1">'user'</span>: <span class="s1">'e6q8ienqs9celz'</span>, <span class="s1">'action'</span>: <span class="s1">'ADD_DATA_DATASTREAM'</span>, <span class="s1">'__$tenant'</span>: <span class="s1">'iqn80x6e2ku9id'</span>, <span class="s1">'dataSource'</span>: <span class="s1">'Rp8euhiyg3ctt4'</span><span class="o">}</span>
 <span class="gp">falkonry&gt;&gt; </span>
 </code></pre>
 <blockquote>
@@ -1784,7 +1784,7 @@ Default datastream <span class="nb">set</span> : hn6cq2lpcwg49c Name : Narrow Mu
 <span class="n">inputResponse</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="n">add_input_data</span><span class="p">(</span><span class="n">datastreamId</span><span class="p">,</span> <span class="s">'json'</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
 </code></pre><pre class="highlight shell tab-shell"><code><span class="gp">falkonry&gt;&gt; </span>datastream_add_historical_data --path<span class="o">=</span>/Users/user/InputWideBatchSingleEntity.json --timeIdentifier<span class="o">=</span><span class="s2">"time"</span> --timeFormat<span class="o">=</span><span class="s2">"Unix Time Milliseconds"</span> --timeZone<span class="o">=</span><span class="s2">"GMT"</span> --batchIdentifier<span class="o">=</span><span class="s2">"batchId"</span>
 Default datastream <span class="nb">set</span> : cm492hm4j74wrn Name : Wide Single Entity Batch Test DS
-<span class="o">{</span>u<span class="s1">'status'</span>: u<span class="s1">'PENDING'</span>, u<span class="s1">'datastream'</span>: u<span class="s1">'cm492hm4j74wrn'</span>, u<span class="s1">'__$createTime'</span>: 1516015544894, u<span class="s1">'__$id'</span>: u<span class="s1">'wmgllwgjwwjtp7w4'</span>, u<span class="s1">'user'</span>: u<span class="s1">'e6q8ienqs9celz'</span>, u<span class="s1">'action'</span>: u<span class="s1">'ADD_DATA_DATASTREAM'</span>, u<span class="s1">'__$tenant'</span>: u<span class="s1">'iqn80x6e2ku9id'</span>, u<span class="s1">'dataSource'</span>: u<span class="s1">'Teqm2nwjpbhbs3'</span><span class="o">}</span>
+<span class="o">{</span><span class="s1">'status'</span>: <span class="s1">'PENDING'</span>, <span class="s1">'datastream'</span>: <span class="s1">'cm492hm4j74wrn'</span>, <span class="s1">'__$createTime'</span>: 1516015544894, <span class="s1">'__$id'</span>: <span class="s1">'wmgllwgjwwjtp7w4'</span>, <span class="s1">'user'</span>: <span class="s1">'e6q8ienqs9celz'</span>, <span class="s1">'action'</span>: <span class="s1">'ADD_DATA_DATASTREAM'</span>, <span class="s1">'__$tenant'</span>: <span class="s1">'iqn80x6e2ku9id'</span>, <span class="s1">'dataSource'</span>: <span class="s1">'Teqm2nwjpbhbs3'</span><span class="o">}</span>
 <span class="gp">falkonry&gt;&gt; </span>
 </code></pre>
 <blockquote>
@@ -1877,7 +1877,7 @@ Default datastream <span class="nb">set</span> : cm492hm4j74wrn Name : Wide Sing
 <span class="n">inputResponse</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="n">add_input_data</span><span class="p">(</span><span class="n">datastreamId</span><span class="p">,</span> <span class="s">'csv'</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
 </code></pre><pre class="highlight shell tab-shell"><code><span class="gp">falkonry&gt;&gt; </span>datastream_add_historical_data --path<span class="o">=</span>/Users/user/InputWideBatchMultiEntity.csv --timeIdentifier<span class="o">=</span><span class="s2">"time"</span> --timeFormat<span class="o">=</span><span class="s2">"Unix Time Milliseconds"</span> --timeZone<span class="o">=</span><span class="s2">"GMT"</span> --entityIdentifier<span class="o">=</span><span class="s2">"unit"</span> --batchIdentifier<span class="o">=</span><span class="s2">"batchId"</span>
 Default datastream <span class="nb">set</span> : 7wgwm68b9p24n4 Name : Wide Multiple Entity Batch Test DS
-<span class="o">{</span>u<span class="s1">'status'</span>: u<span class="s1">'PENDING'</span>, u<span class="s1">'datastream'</span>: u<span class="s1">'7wgwm68b9p24n4'</span>, u<span class="s1">'__$createTime'</span>: 1516016064677, u<span class="s1">'__$id'</span>: u<span class="s1">'mlc2pt7y87jhwlw2'</span>, u<span class="s1">'user'</span>: u<span class="s1">'e6q8ienqs9celz'</span>, u<span class="s1">'action'</span>: u<span class="s1">'ADD_DATA_DATASTREAM'</span>, u<span class="s1">'__$tenant'</span>: u<span class="s1">'iqn80x6e2ku9id'</span>, u<span class="s1">'dataSource'</span>: u<span class="s1">'Lita7m408qq9j9'</span><span class="o">}</span>
+<span class="o">{</span><span class="s1">'status'</span>: <span class="s1">'PENDING'</span>, <span class="s1">'datastream'</span>: <span class="s1">'7wgwm68b9p24n4'</span>, <span class="s1">'__$createTime'</span>: 1516016064677, <span class="s1">'__$id'</span>: <span class="s1">'mlc2pt7y87jhwlw2'</span>, <span class="s1">'user'</span>: <span class="s1">'e6q8ienqs9celz'</span>, <span class="s1">'action'</span>: <span class="s1">'ADD_DATA_DATASTREAM'</span>, <span class="s1">'__$tenant'</span>: <span class="s1">'iqn80x6e2ku9id'</span>, <span class="s1">'dataSource'</span>: <span class="s1">'Lita7m408qq9j9'</span><span class="o">}</span>
 falkonry&gt;&gt;
 </code></pre>
 <blockquote>
@@ -1949,7 +1949,7 @@ falkonry&gt;&gt;
 </code></pre><pre class="highlight shell tab-shell"><code><span class="gp">falkonry&gt;&gt; </span>datastream_add_historical_data --path<span class="o">=</span>/Users/user/InputNarrow.csv --timeIdentifier<span class="o">=</span><span class="nb">time</span> --timeFormat<span class="o">=</span>iso_8601 --timeZone<span class="o">=</span>GMT --signalIdentifier<span class="o">=</span>signal --valueIdentifier<span class="o">=</span>value
 
 Default datastream <span class="nb">set</span> : oii0djojxc2lxt Name : New Ds -1
-<span class="o">{</span>u<span class="s1">'status'</span>: u<span class="s1">'PENDING'</span>, u<span class="s1">'datastream'</span>: u<span class="s1">'oii0djojxc2lxt'</span>, u<span class="s1">'__$createTime'</span>: 1500538975912, u<span class="s1">'__$id'</span>: u<span class="s1">'q68cho8foyml3gv4'</span>, u<span class="s1">'user'</span>: u<span class="s1">'Tza1q4g0kw5epo'</span>, u<span class="s1">'action'</span>: u<span class="s1">'ADD_DATA_DATASTREAM'</span>, u<span class="s1">'__$tenant'</span>: u<span class="s1">'el7rvvqx2xr6v5'</span>, u<span class="s1">'dataSource'</span>: u<span class="s1">'Lp1nfea7z5lrtk'</span><span class="o">}</span>
+<span class="o">{</span><span class="s1">'status'</span>: <span class="s1">'PENDING'</span>, <span class="s1">'datastream'</span>: <span class="s1">'oii0djojxc2lxt'</span>, <span class="s1">'__$createTime'</span>: 1500538975912, <span class="s1">'__$id'</span>: <span class="s1">'q68cho8foyml3gv4'</span>, <span class="s1">'user'</span>: <span class="s1">'Tza1q4g0kw5epo'</span>, <span class="s1">'action'</span>: <span class="s1">'ADD_DATA_DATASTREAM'</span>, <span class="s1">'__$tenant'</span>: <span class="s1">'el7rvvqx2xr6v5'</span>, <span class="s1">'dataSource'</span>: <span class="s1">'Lp1nfea7z5lrtk'</span><span class="o">}</span>
 falkonry&gt;&gt;
 </code></pre>
 <blockquote>
@@ -2033,7 +2033,7 @@ falkonry&gt;&gt;
 </code></pre><pre class="highlight shell tab-shell"><code><span class="gp">falkonry&gt;&gt; </span>datastream_add_historical_data --path<span class="o">=</span>/Users/user/Input.json --timeIdentifier<span class="o">=</span><span class="nb">time</span> --entityIdentifier<span class="o">=</span>car --timeFormat<span class="o">=</span>iso_8601 --timeZone<span class="o">=</span>GMT --signalIdentifier<span class="o">=</span>signal --valueIdentifier<span class="o">=</span>value
 
 Default datastream <span class="nb">set</span> : oii0djojxc2lxt Name : New Ds -1
-<span class="o">{</span>u<span class="s1">'status'</span>: u<span class="s1">'PENDING'</span>, u<span class="s1">'datastream'</span>: u<span class="s1">'oii0djojxc2lxt'</span>, u<span class="s1">'__$createTime'</span>: 1500538975912, u<span class="s1">'__$id'</span>: u<span class="s1">'q68cho8foyml3gv4'</span>, u<span class="s1">'user'</span>: u<span class="s1">'Tza1q4g0kw5epo'</span>, u<span class="s1">'action'</span>: u<span class="s1">'ADD_DATA_DATASTREAM'</span>, u<span class="s1">'__$tenant'</span>: u<span class="s1">'el7rvvqx2xr6v5'</span>, u<span class="s1">'dataSource'</span>: u<span class="s1">'Lp1nfea7z5lrtk'</span><span class="o">}</span>
+<span class="o">{</span><span class="s1">'status'</span>: <span class="s1">'PENDING'</span>, <span class="s1">'datastream'</span>: <span class="s1">'oii0djojxc2lxt'</span>, <span class="s1">'__$createTime'</span>: 1500538975912, <span class="s1">'__$id'</span>: <span class="s1">'q68cho8foyml3gv4'</span>, <span class="s1">'user'</span>: <span class="s1">'Tza1q4g0kw5epo'</span>, <span class="s1">'action'</span>: <span class="s1">'ADD_DATA_DATASTREAM'</span>, <span class="s1">'__$tenant'</span>: <span class="s1">'el7rvvqx2xr6v5'</span>, <span class="s1">'dataSource'</span>: <span class="s1">'Lp1nfea7z5lrtk'</span><span class="o">}</span>
 falkonry&gt;&gt;
 </code></pre>
 <blockquote>
@@ -2123,7 +2123,7 @@ falkonry&gt;&gt;
 </code></pre><pre class="highlight shell tab-shell"><code><span class="gp">falkonry&gt;&gt; </span>datastream_add_historical_data --path<span class="o">=</span>/Users/user/InputWideSingleEntity.csv --timeIdentifier<span class="o">=</span><span class="nb">time</span> --timeFormat<span class="o">=</span>iso_8601 --timeZone<span class="o">=</span>GMT --signalIdentifier<span class="o">=</span>signal --valueIdentifier<span class="o">=</span>value
 
 Default datastream <span class="nb">set</span> : oii0djojxc2lxt Name : New Ds -1
-<span class="o">{</span>u<span class="s1">'status'</span>: u<span class="s1">'PENDING'</span>, u<span class="s1">'datastream'</span>: u<span class="s1">'oii0djojxc2lxt'</span>, u<span class="s1">'__$createTime'</span>: 1500538975912, u<span class="s1">'__$id'</span>: u<span class="s1">'q68cho8foyml3gv4'</span>, u<span class="s1">'user'</span>: u<span class="s1">'Tza1q4g0kw5epo'</span>, u<span class="s1">'action'</span>: u<span class="s1">'ADD_DATA_DATASTREAM'</span>, u<span class="s1">'__$tenant'</span>: u<span class="s1">'el7rvvqx2xr6v5'</span>, u<span class="s1">'dataSource'</span>: u<span class="s1">'Lp1nfea7z5lrtk'</span><span class="o">}</span>
+<span class="o">{</span><span class="s1">'status'</span>: <span class="s1">'PENDING'</span>, <span class="s1">'datastream'</span>: <span class="s1">'oii0djojxc2lxt'</span>, <span class="s1">'__$createTime'</span>: 1500538975912, <span class="s1">'__$id'</span>: <span class="s1">'q68cho8foyml3gv4'</span>, <span class="s1">'user'</span>: <span class="s1">'Tza1q4g0kw5epo'</span>, <span class="s1">'action'</span>: <span class="s1">'ADD_DATA_DATASTREAM'</span>, <span class="s1">'__$tenant'</span>: <span class="s1">'el7rvvqx2xr6v5'</span>, <span class="s1">'dataSource'</span>: <span class="s1">'Lp1nfea7z5lrtk'</span><span class="o">}</span>
 falkonry&gt;&gt;
 </code></pre>
 <blockquote>
@@ -2416,11 +2416,48 @@ Falkonry needs historical time series data to build pattern recognition models.
 
 <span class="c1">//The updated datastream</span>
   <span class="n">datastream</span> <span class="p">=</span> <span class="n">falkonry</span><span class="p">.</span><span class="nf">getDatastream</span><span class="p">(</span><span class="n">datastream</span><span class="p">.</span><span class="n">id</span><span class="p">);</span>
-</code></pre><pre class="highlight java tab-java"><code>
-</code></pre><pre class="highlight python tab-python"><code>
-</code></pre><pre class="highlight shell tab-shell"><code>Usage:
+</code></pre><pre class="highlight java tab-java"><code><span class="kn">import</span> <span class="nn">com.falkonry.client.Falkonry</span>
+<span class="kn">import</span> <span class="nn">com.fasterxml.jackson.databind.ObjectMapper</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.File</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
 
-Fetching input data
+<span class="n">Falkonry</span> <span class="n">falkonry</span>   <span class="o">=</span> <span class="k">new</span> <span class="n">Falkonry</span><span class="o">(</span><span class="s">"https://example.falkonry.ai"</span><span class="o">,</span> <span class="s">"auth-token"</span><span class="o">);</span>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">Assessment</span><span class="o">&gt;</span> <span class="n">datastreams</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="na">getAssessments</span><span class="o">();</span>
+
+<span class="n">ObjectMapper</span> <span class="n">mapper</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ObjectMapper</span><span class="o">();</span>
+
+<span class="c1">//Exporting the data to an external file</span>
+<span class="n">File</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">"data.json"</span><span class="o">);</span> <span class="c1">//Specify the file name</span>
+<span class="n">mapper</span><span class="o">.</span><span class="na">writevalue</span><span class="o">(</span><span class="n">file</span><span class="o">,</span><span class="n">datastreams</span><span class="o">);</span>
+
+<span class="c1">//We can use the exported file to add Data to other datastream or to create a new one with the same data</span>
+
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">os</span><span class="p">,</span> <span class="n">sys</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+<span class="kn">from</span> <span class="nn">falkonryclient</span> <span class="kn">import</span> <span class="n">client</span> <span class="k">as</span> <span class="n">Falkonry</span>
+<span class="kn">from</span> <span class="nn">falkonryclient</span> <span class="kn">import</span> <span class="n">schemas</span> <span class="k">as</span> <span class="n">Schemas</span>
+
+<span class="n">falkonry</span>  <span class="o">=</span> <span class="n">Falkonry</span><span class="p">(</span><span class="s">'http://jumpstart.falkonry.ai'</span><span class="p">,</span> <span class="s">'auth-token'</span><span class="p">)</span>
+
+<span class="c">#Id of the datastream from which the data is to be extracted</span>
+<span class="n">datastreamId</span> <span class="o">=</span> <span class="s">'id of the datastream'</span>
+
+<span class="c">#setting the format(CSV or JSON) of the data</span>
+<span class="n">options</span> <span class="o">=</span> <span class="p">{</span><span class="s">'format'</span><span class="p">:</span><span class="s">"text/csv"</span><span class="p">}</span> <span class="c">#For Json format use {'format':"application/json"}</span>
+
+<span class="n">datastream_data</span> <span class="o">=</span> <span class="n">fclient</span><span class="o">.</span><span class="n">get_datastream_data</span><span class="p">(</span><span class="n">datastreamId</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>
+
+<span class="c">#printing datastream's data </span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">datastream_data</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+
+<span class="c">#Exporting the data to an external file</span>
+<span class="n">file_name</span> <span class="o">=</span> <span class="s">'input.json'</span> <span class="c">#Name of the file with path</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="s">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="nb">file</span><span class="p">:</span>
+    <span class="nb">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">datastream_data</span><span class="p">))</span>
+
+<span class="c">#We can use the exported file to add Data to other datastream or to create a new one with the same data    </span>
+
+</code></pre><pre class="highlight shell tab-shell"><code>
 <span class="gp">falkonry&gt;&gt; </span>datastream_get_data --format<span class="o">=</span>application/json
 Default datastream <span class="nb">set</span> : 1scyeeoxbdh7if Name : New Standalone
 Input Data : 
@@ -2437,6 +2474,7 @@ Input Data :
 <span class="o">{</span><span class="s2">"time"</span>:1294078560000,<span class="s2">"signal"</span>:<span class="s2">"signal1"</span>,<span class="s2">"value"</span>:9.4<span class="o">}</span>
 <span class="o">{</span><span class="s2">"time"</span>:1294091820000,<span class="s2">"signal"</span>:<span class="s2">"signal2"</span>,<span class="s2">"value"</span>:10.7<span class="o">}</span>
 <span class="o">============================================================================</span>
+
 falkonry&gt;&gt;
 Writing input Data to file
 <span class="gp">falkonry&gt;&gt; </span>datastream_get_data --format<span class="o">=</span>application/json --path<span class="o">=</span>input.json
@@ -3432,6 +3470,40 @@ Adding more facts (ground truths) helps improve model accuracy and hence the use
 
 <p>Any model revision can be selected to be the basis of live monitoring. Falkonry will assign conditions to multi-variate patterns based on the signals that were used to create the model revision.</p>
 
+<h2 id="check-live-monitoring-status-of-datastream">Check live monitoring Status of datastream</h2>
+
+<blockquote>
+<p>To check whether live monitoring is on for a datastream, use this code:</p>
+</blockquote>
+<pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">FalkonryClient</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">FalkonryClient.Helper.Models</span><span class="p">;</span>
+
+<span class="kt">string</span> <span class="n">token</span><span class="p">=</span><span class="s">"Add your token here"</span><span class="p">;</span>   
+<span class="n">Falkonry</span> <span class="n">falkonry</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Falkonry</span><span class="p">(</span><span class="s">"http://jumpstart.falkonry.ai"</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
+  <span class="kt">string</span> <span class="n">datastream_id</span> <span class="p">=</span> <span class="s">"Your datastream id"</span><span class="p">;</span>
+  <span class="n">Datastream</span> <span class="n">ds</span> <span class="p">=</span> <span class="n">falkonry</span><span class="p">.</span><span class="nf">GetDatastream</span><span class="p">(</span><span class="s">"datastream_id"</span><span class="p">);</span>
+  <span class="kt">var</span> <span class="n">status</span> <span class="p">=</span> <span class="n">ds</span><span class="p">.</span><span class="n">Live</span><span class="p">;</span> <span class="c1">//live status will be "ON" or "OFF".</span>
+
+</code></pre><pre class="highlight java tab-java"><code>  <span class="kn">import</span> <span class="nn">com.falkonry.client.Falkonry</span><span class="o">;</span>
+
+  <span class="n">Falkonry</span> <span class="n">falkonry</span>   <span class="o">=</span> <span class="k">new</span> <span class="n">Falkonry</span><span class="o">(</span><span class="s">"https://jumpstart.falkonry.ai"</span><span class="o">,</span> <span class="s">"auth-token"</span><span class="o">);</span>
+  <span class="n">String</span> <span class="n">datastreamId</span> <span class="o">=</span> <span class="s">"hk7cgt56r3yln0"</span><span class="o">;</span>
+  <span class="n">Datastream</span> <span class="n">datastream</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="na">getDatastream</span><span class="o">(</span><span class="n">datastreamId</span><span class="o">);</span>
+  <span class="n">String</span> <span class="n">status</span> <span class="o">=</span> <span class="n">datastream</span><span class="o">.</span><span class="na">Live</span><span class="o">;</span> <span class="c1">//live status will be "ON" or "OFF".</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">os</span><span class="p">,</span> <span class="n">sys</span>
+<span class="kn">from</span> <span class="nn">falkonryclient</span> <span class="kn">import</span> <span class="n">client</span> <span class="k">as</span> <span class="n">Falkonry</span>
+<span class="kn">from</span> <span class="nn">falkonryclient</span> <span class="kn">import</span> <span class="n">schemas</span> <span class="k">as</span> <span class="n">Schemas</span>
+
+<span class="n">falkonry</span>  <span class="o">=</span> <span class="n">Falkonry</span><span class="p">(</span><span class="s">'https://jumpstart.falkonry.ai'</span><span class="p">,</span> <span class="s">'auth-token'</span><span class="p">)</span>
+<span class="n">datastreamId</span> <span class="o">=</span> <span class="s">'id of the datastream'</span>
+<span class="n">datastream</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="n">get_datastream</span><span class="p">(</span><span class="n">datastreamId</span><span class="p">)</span>
+<span class="n">status</span> <span class="o">=</span> <span class="n">datastream</span><span class="o">.</span><span class="n">get_live</span><span class="p">()</span><span class="o">//</span><span class="n">live</span> <span class="n">status</span> <span class="n">will</span> <span class="n">be</span> <span class="s">"ON"</span> <span class="ow">or</span> <span class="s">"OFF"</span><span class="o">.</span>
+</code></pre><pre class="highlight shell tab-shell"><code><span class="gp">falkonry&gt;&gt; </span>datastream_get_live_status
+Default datastream <span class="nb">set</span>: 5kzugwm1natt0l Name: Robo Arm Test 1
+Fetching Live monitoring status <span class="k">for </span>datastream : 5kzugwm1natt0l
+Live Monitoring : ON //live status will be <span class="s2">"ON"</span> or <span class="s2">"OFF"</span>. 
+falkonry&gt;&gt;
+</code></pre>
 <h2 id="start-live-monitoring-of-datastream">Start live monitoring of datastream</h2>
 
 <blockquote>
