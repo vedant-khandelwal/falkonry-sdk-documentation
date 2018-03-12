@@ -406,7 +406,7 @@ Structuring data as key-value pairs — as is done in narrow-form datasets — f
 > Input data could be of the following format:
 
 ```json
- {"batchId" :"batch1", "entity": "machine1", "signal" : "signal1", "value" : 3.4},
+ {"batchId" :"batch1", "entity": "machine1", "signal" : "signal1", "value" : 3.4}
  {"batchId" :"batch2", "entity": "machine1", "signal" : "signal2", "value" : 9.3}
  ```
 
@@ -1042,7 +1042,7 @@ falkonry>>
 > Input data could be of the following format:
 
 ```json
-  {"time":1467729675422, "entity": "machine1", "signal1":1.2, "signal2":3.4, "signal3":4.5, "signal4":5.6},
+  {"time":1467729675422, "entity": "machine1", "signal1":1.2, "signal2":3.4, "signal3":4.5, "signal4":5.6}
   {"time":1467729668919, "entity": "machine2", "signal1":4.5, "signal2":9.3, "signal3":5.5, "signal4":6.2}
 ```
 
@@ -1190,7 +1190,7 @@ falkonry>>
 > Data could be of the following format:
 
 ```json
-{"time" :"2016-03-01 01:01:01", "signal" : "signal1", "value" : 3.4},
+{"time" :"2016-03-01 01:01:01", "signal" : "signal1", "value" : 3.4}
 {"time" :"2016-03-01 01:01:02", "signal" : "signal2", "value" : 9.3}
 ```
 
@@ -1445,7 +1445,7 @@ falkonry>>
 > Input data could be of the following format:
 
 ```json
-{"time": 1467729675010,"batchId": "batch_1","signal": "signal1","value": 9.95},
+{"time": 1467729675010,"batchId": "batch_1","signal": "signal1","value": 9.95}
 {"time": 1467729675030,"batchId": "batch_2","signal": "signal1","value": 1.45}
 ```
 
@@ -1624,7 +1624,7 @@ falkonry>>
 > The data could be of the following format
 
 ```json
-{"time": 1467729675010,"batchId": "batch_1","signal1": 9.95,"signal2": 19.95,"signal3": 39.95},
+{"time": 1467729675010,"batchId": "batch_1","signal1": 9.95,"signal2": 19.95,"signal3": 39.95}
 {"time": 1467729675030,"batchId": "batch_2","signal1": 1.45,"signal2": 10.45,"signal3": 30.45}
 ```
 
@@ -1808,11 +1808,11 @@ falkonry>>
 ```
 > Data could be of following format:
 ```json
-{"time" :"2016-03-01 01:01:01", "signal" : "current", "value" : 12.4},
-{"time" :"2016-03-01 01:01:01", "signal" : "vibration", "value" : 3.4},
-{"time" :"2016-03-01 01:01:01", "signal" : "state", "value" : on},
-{"time" :"2016-03-01 01:01:01", "signal" : "current", "value" : 31.4},
-{"time" :"2016-03-01 01:01:01", "signal" : "vibration", "value" : 2.4},
+{"time" :"2016-03-01 01:01:01", "signal" : "current", "value" : 12.4}
+{"time" :"2016-03-01 01:01:01", "signal" : "vibration", "value" : 3.4}
+{"time" :"2016-03-01 01:01:01", "signal" : "state", "value" : on}
+{"time" :"2016-03-01 01:01:01", "signal" : "current", "value" : 31.4}
+{"time" :"2016-03-01 01:01:01", "signal" : "vibration", "value" : 2.4}
 {"time" :"2016-03-01 01:01:01", "signal" : "state", "value" : off}
 ```
 
@@ -1903,7 +1903,7 @@ falkonry>>
 > Data could be of following format:
 
 ```json
-{"time" :"2016-03-01 01:01:01", "signal" : "current", "value" : 12.4, "car" : "car1"},
+{"time" :"2016-03-01 01:01:01", "signal" : "current", "value" : 12.4, "car" : "car1"}
 {"time" :"2016-03-01 01:01:01", "signal" : "vibration", "value" : 3.4, "car" : "car1"}
 ```
 
@@ -2004,11 +2004,11 @@ falkonry>>
 > Data could be of following format
 
 ```json
-{"time" :"2016-03-01 01:01:01", "current" : 12.4, "vibration" : 3.4, "state" : "On"},
-{"time" :"2016-03-01 01:01:02", "current" : 11.3, "vibration" : 2.2, "state" : "On"},
-{"time" :"2016-03-01 01:01:03", "current" : 10.5, "vibration" : 3.8, "state" : "On"},
-{"time" :"2016-03-01 01:02:03", "current" : 19.2, "vibration" : 3.8, "state" : "On"},
-{"time" :"2016-03-01 01:02:03", "current" : 1.2, "vibration" : 0.8, "state" : "Off"},
+{"time" :"2016-03-01 01:01:01", "current" : 12.4, "vibration" : 3.4, "state" : "On"}
+{"time" :"2016-03-01 01:01:02", "current" : 11.3, "vibration" : 2.2, "state" : "On"}
+{"time" :"2016-03-01 01:01:03", "current" : 10.5, "vibration" : 3.8, "state" : "On"}
+{"time" :"2016-03-01 01:02:03", "current" : 19.2, "vibration" : 3.8, "state" : "On"}
+{"time" :"2016-03-01 01:02:03", "current" : 1.2, "vibration" : 0.8, "state" : "Off"}
 {"time" :"2016-03-01 01:02:05", "current" : 0.2, "vibration" : 0.3, "state" : "Off"}
 ```
 
@@ -2180,9 +2180,9 @@ inputResponse = falkonry.add_input_data(datastreamId, 'json', options, stream)
 > Input data could be of the following format:
 
 ```json
-  {"time" :"2016-03-01 01:01:01", "entity": "thing1", "signal" : "signal1", "value" : 3.4},
-  {"time" :"2016-03-01 01:01:01", "entity": "thing1", "signal" : "signal2", "value" : 1.4},
-  {"time" :"2016-03-01 01:01:02", "entity": "thing2", "signal" : "signal1", "value" : 9.3},
+  {"time" :"2016-03-01 01:01:01", "entity": "thing1", "signal" : "signal1", "value" : 3.4}
+  {"time" :"2016-03-01 01:01:01", "entity": "thing1", "signal" : "signal2", "value" : 1.4}
+  {"time" :"2016-03-01 01:01:02", "entity": "thing2", "signal" : "signal1", "value" : 9.3}
   {"time" :"2016-03-01 01:01:02", "entity": "thing2", "signal" : "signal2", "value" : 4.3}
 ```
 
