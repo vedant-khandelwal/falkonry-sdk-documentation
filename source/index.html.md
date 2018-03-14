@@ -2293,44 +2293,21 @@ using FalkonryClient.Helper.Models;
 string token="Add your token here";   
 Falkonry falkonry = new Falkonry("http://example.falkonry.ai", token);
 
-//Creating a datastream to add data to later
-  string name="data stream name here";
-  var time = new Time();
-  time.Zone = "GMT";
-  time.Identifier = "time";
-  time.Format = "iso_8601";
-  Field field = new Field();
-  Field.EntityIdentifier = "Unit";
-  
-Datasource datasource = new Datasource();
-  datasource.type = "STANDALONE"; 
+//ID of datastream from which data is to be extracted
+string datastreamId = 'id of the datastream';
 
-DatastreamRequest ds = new DatastreamRequest();
-  ds.name = "datastream name here";
-  field.Time = time;
-  ds.Field = field;
-    
-ds.dataSource = datasource;
-Datastream datastream = falkonry.createDatastream(ds);
-    
-/*This particular example will read data from a AddData.json file in debug folder in bin*/
-    
-  SortedDictionary<string, string> options = new SortedDictionary<string, string>();
-    options.Add("timeIdentifier", "time");
-    options.Add("timeFormat", "iso_8601");
-    
-    string folder_path = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+//setting the format(CSV or JSON) of the data
+var options = new SortedDictionary<string, string>();
+options.Add("responseFormat", "application/json"); //For CSV format use ("responseFormat","text/csv")
 
-    string path = folder_path + "/AddData.json";
+var datastream_data = falkonry.GetDatastreamData(datastreamId, options)
 
-//Alternatively, you can directly specify the folder path in the "folder_path" variable
+//Exporting the data to an external file(for Json)
+string file_name = 'input.json' #Name of the file with path
+System.IO.File.WriteAllText("test.json", datastream_data.Response);
 
-    byte[] bytes = System.IO.File.ReadAllBytes(path);
+#We can use the exported file to add Data to other datastream or to create a new one with the same data    
 
-    InputStatus inputstatus = falkonry.addInputStream(datastream.id, bytes, options);
-
-//The updated datastream
-  datastream = falkonry.getDatastream(datastream.id);
 ```
 
 ```java
