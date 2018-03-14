@@ -2399,13 +2399,11 @@ Falkonry needs historical time series data to build pattern recognition models.
 <span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
 
 <span class="n">Falkonry</span> <span class="n">falkonry</span>   <span class="o">=</span> <span class="k">new</span> <span class="n">Falkonry</span><span class="o">(</span><span class="s">"https://example.falkonry.ai"</span><span class="o">,</span> <span class="s">"auth-token"</span><span class="o">);</span>
-<span class="n">List</span><span class="o">&lt;</span><span class="n">Assessment</span><span class="o">&gt;</span> <span class="n">datastreams</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="na">getAssessments</span><span class="o">();</span>
-
-<span class="n">ObjectMapper</span> <span class="n">mapper</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ObjectMapper</span><span class="o">();</span>
-
-<span class="c1">//Exporting the data to an external file</span>
-<span class="n">File</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">"data.json"</span><span class="o">);</span> <span class="c1">//Specify the file name</span>
-<span class="n">mapper</span><span class="o">.</span><span class="na">writevalue</span><span class="o">(</span><span class="n">file</span><span class="o">,</span><span class="n">datastreams</span><span class="o">);</span>
+<span class="n">String</span> <span class="n">datastream</span> <span class="o">=</span> <span class="s">"datastream-id"</span><span class="o">;</span>
+<span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">options</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;();</span>
+<span class="n">options</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"responseFormat"</span><span class="o">,</span> <span class="s">"text/csv"</span><span class="o">);</span>
+<span class="n">HttpResponseFormat</span> <span class="n">response</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="na">getInputData</span><span class="o">(</span><span class="n">datastream</span><span class="o">,</span> <span class="n">options</span><span class="o">);</span>
+<span class="n">String</span> <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="na">getResponse</span><span class="o">();</span>
 
 <span class="c1">//We can use the exported file to add Data to other datastream or to create a new one with the same data</span>
 
