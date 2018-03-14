@@ -2317,13 +2317,11 @@ import java.io.File;
 import java.io.IOException;
 
 Falkonry falkonry   = new Falkonry("https://example.falkonry.ai", "auth-token");
-List<Assessment> datastreams = falkonry.getAssessments();
-  
-ObjectMapper mapper = new ObjectMapper();
-
-//Exporting the data to an external file
-File file = new File("data.json"); //Specify the file name
-mapper.writevalue(file,datastreams);
+String datastream = "datastream-id";
+Map<String, String> options = new HashMap<String, String>();
+options.put("responseFormat", "text/csv");
+HttpResponseFormat response = falkonry.getInputData(datastream, options);
+String data = response.getResponse();
 
 //We can use the exported file to add Data to other datastream or to create a new one with the same data
 
