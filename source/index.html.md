@@ -2298,7 +2298,7 @@ string datastreamId = 'id of the datastream';
 
 //setting the format(CSV or JSON) of the data
 var options = new SortedDictionary<string, string>();
-options.Add("responseFormat", "application/json"); //For Json format use ("responseFormat","text/csv")
+options.Add("responseFormat", "application/json"); //For CSV format use ("responseFormat","text/csv")
 
 var datastream_data = falkonry.GetDatastreamData(datastreamId, options)
 
