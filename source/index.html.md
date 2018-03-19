@@ -181,7 +181,7 @@ datastream.set_datasource(datasource)
 datastream.set_field(field)
         
 #create Datastream
-createdDatastream = fclient.create_datastream(datastream)
+createdDatastream = falkonry.create_datastream(datastream)
 ```
 
 ```shell
@@ -343,7 +343,7 @@ datastream.set_datasource(datasource)
 datastream.set_field(field)
         
 #create Datastream
-createdDatastream = fclient.create_datastream(datastream)
+createdDatastream = falkonry.create_datastream(datastream)
 ```
 
 ```shell
@@ -506,7 +506,7 @@ datastream.set_datasource(datasource)
 datastream.set_field(field)
         
 #create Datastream
-createdDatastream = fclient.create_datastream(datastream)
+createdDatastream = falkonry.create_datastream(datastream)
 ```
 
 ```shell
@@ -1156,7 +1156,7 @@ datastream.set_datasource(datasource)
 datastream.set_field(field)
         
 #create Datastream
-createdDatastream = fclient.create_datastream(datastream)
+createdDatastream = falkonry.create_datastream(datastream)
 
 ```
 
@@ -2341,7 +2341,7 @@ datastreamId = 'id of the datastream'
 #setting the format(CSV or JSON) of the data
 options = {'format':"text/csv"} #For Json format use {'format':"application/json"}
 
-datastream_data = fclient.get_datastream_data(datastreamId, options)
+datastream_data = falkonry.get_datastream_data(datastreamId, options)
 
 #printing datastream's data 
 pprint(datastream_data.text)
@@ -2349,7 +2349,7 @@ pprint(datastream_data.text)
 #Exporting the data to an external file
 file_name = 'input.json' #Name of the file with path
 with open(file_name, 'w') as file:
-    file.write(str(datastream_data))
+    file.write(str(datastream_data.text))
 
 #We can use the exported file to add Data to other datastream or to create a new one with the same data    
     
@@ -2485,7 +2485,7 @@ falkonry = Falkonry('https://example.falkonry.ai', 'auth-token')
 data = [{"sourceId": "testId","label": "testName","path": "root/path"}]
 datastreamId = 'id of the datastream'
 
-entityMetaResponse = fclient.add_entity_meta(datastreamId, {}, data)
+entityMetaResponse = falkonry.add_entity_meta(datastreamId, {}, data)
 ```
 
 ```shell
@@ -2534,7 +2534,7 @@ from falkonryclient import schemas as Schemas
 falkonry = Falkonry('https://example.falkonry.ai', 'auth-token')
 datastreamId = 'id of the datastream'
 
-entityMetaResponse = fclient.get_entity_meta(datastreamId)
+entityMetaResponse = falkonry.get_entity_meta(datastreamId)
 ```
 
 ```shell
@@ -2656,7 +2656,7 @@ asmtRequest.set_datastream(response.get_id())    # Set datatsream id
 asmtRequest.set_rate('PT0S')                     # Set assessment rate
 
 # create new assessment
-assessmentResponse = fclient.create_assessment(asmtRequest)
+assessmentResponse = falkonry.create_assessment(asmtRequest)
 ```
 
 ```shell
@@ -2735,7 +2735,7 @@ from falkonryclient import schemas as Schemas
 #instantiate Falkonry
 falkonry   = Falkonry('https://example.falkonry.ai', 'auth-token')
 
-assessmentResponse = fclient.get_assessments()
+assessmentResponse = falkonry.get_assessments()
 ```
 
 ```shell
@@ -2809,7 +2809,7 @@ from falkonryclient import schemas as Schemas
 falkonry   = Falkonry('https://example.falkonry.ai', 'auth-token')
 
 assessmentId = 'id of the datastream'
-assessmentResponse = fclient.get_assessment(assessmentId)
+assessmentResponse = falkonry.get_assessment(assessmentId)
 ```
 
 ```shell
@@ -2885,7 +2885,7 @@ from falkonryclient import schemas as Schemas
 falkonry   = Falkonry('https://example.falkonry.ai', 'auth-token')
 
 assessmentId = 'id of the datastream'
-assessmentResponse = fclient.delete_assessment(assessmentId)
+assessmentResponse = falkonry.delete_assessment(assessmentId)
 ```
 
 ```shell
@@ -2970,7 +2970,7 @@ assessmentId = 'id of the datastream'
 
 options = {'startTime':'2011-01-01T01:00:00.000Z','endTime':'2011-06-01T01:00:00.000Z','responseFormat':'application/json'}
 
-response = fclient.get_historical_output(assessment, options)
+response = falkonry.get_historical_output(assessment, options)
 
 '''If data is not readily available then, a tracker id will be sent with 202 status code. While falkonry will genrate ouptut data
  Client should do timely pooling on the using same method, sending tracker id (__id) in the query params
@@ -2982,7 +2982,7 @@ if response.status_code is 202:
     trackerId = trackerResponse.get_id()
     #use this tracker for checking the status of the process.
     options = {"tarckerId": trackerId, "responseFormat":"application/json"}
-    newResponse = fclient.get_historical_output(assessment, options)
+    newResponse = falkonry.get_historical_output(assessment, options)
     '''if status is 202 call the same request again
     if status is 200, output data will be present in httpResponse.response field'''
 ```
