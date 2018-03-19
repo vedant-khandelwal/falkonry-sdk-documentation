@@ -377,7 +377,7 @@ Remember — a datastream is your basic building block!
 <span class="n">datastream</span><span class="o">.</span><span class="n">set_field</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
 
 <span class="c">#create Datastream</span>
-<span class="n">createdDatastream</span> <span class="o">=</span> <span class="n">fclient</span><span class="o">.</span><span class="n">create_datastream</span><span class="p">(</span><span class="n">datastream</span><span class="p">)</span>
+<span class="n">createdDatastream</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="n">create_datastream</span><span class="p">(</span><span class="n">datastream</span><span class="p">)</span>
 </code></pre><pre class="highlight shell tab-shell"><code>To create any Datastream, you need to provide a config file <span class="k">for </span>the datastream <span class="k">in </span>JSON format.
 
 Sample JSONFile:
@@ -541,7 +541,7 @@ Structuring data as key-value pairs — as is done in narrow-form datasets — f
 <span class="n">datastream</span><span class="o">.</span><span class="n">set_field</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
 
 <span class="c">#create Datastream</span>
-<span class="n">createdDatastream</span> <span class="o">=</span> <span class="n">fclient</span><span class="o">.</span><span class="n">create_datastream</span><span class="p">(</span><span class="n">datastream</span><span class="p">)</span>
+<span class="n">createdDatastream</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="n">create_datastream</span><span class="p">(</span><span class="n">datastream</span><span class="p">)</span>
 </code></pre><pre class="highlight shell tab-shell"><code>To create any Datastream, you need to provide a config file <span class="k">for </span>the datastream <span class="k">in </span>JSON format.
 
 Sample JSONFile:
@@ -709,7 +709,7 @@ Structuring data as key-value pairs — as is done in narrow-form datasets — f
 <span class="n">datastream</span><span class="o">.</span><span class="n">set_field</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
 
 <span class="c">#create Datastream</span>
-<span class="n">createdDatastream</span> <span class="o">=</span> <span class="n">fclient</span><span class="o">.</span><span class="n">create_datastream</span><span class="p">(</span><span class="n">datastream</span><span class="p">)</span>
+<span class="n">createdDatastream</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="n">create_datastream</span><span class="p">(</span><span class="n">datastream</span><span class="p">)</span>
 </code></pre><pre class="highlight shell tab-shell"><code>Sample JSONFile:
 <span class="o">{</span>
   <span class="s2">"name"</span>: <span class="s2">"Narrow Multiple Entity Test DS"</span>,
@@ -1382,7 +1382,7 @@ If you have many value variables, it is difficult to summarize wide-form dataset
 <span class="n">datastream</span><span class="o">.</span><span class="n">set_field</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
 
 <span class="c">#create Datastream</span>
-<span class="n">createdDatastream</span> <span class="o">=</span> <span class="n">fclient</span><span class="o">.</span><span class="n">create_datastream</span><span class="p">(</span><span class="n">datastream</span><span class="p">)</span>
+<span class="n">createdDatastream</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="n">create_datastream</span><span class="p">(</span><span class="n">datastream</span><span class="p">)</span>
 
 </code></pre><pre class="highlight shell tab-shell"><code>Sample JSON File:
 <span class="o">{</span>
@@ -2420,7 +2420,7 @@ Falkonry needs historical time series data to build pattern recognition models.
 <span class="c">#setting the format(CSV or JSON) of the data</span>
 <span class="n">options</span> <span class="o">=</span> <span class="p">{</span><span class="s">'format'</span><span class="p">:</span><span class="s">"text/csv"</span><span class="p">}</span> <span class="c">#For Json format use {'format':"application/json"}</span>
 
-<span class="n">datastream_data</span> <span class="o">=</span> <span class="n">fclient</span><span class="o">.</span><span class="n">get_datastream_data</span><span class="p">(</span><span class="n">datastreamId</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>
+<span class="n">datastream_data</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="n">get_datastream_data</span><span class="p">(</span><span class="n">datastreamId</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>
 
 <span class="c">#printing datastream's data </span>
 <span class="n">pprint</span><span class="p">(</span><span class="n">datastream_data</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
@@ -2428,7 +2428,7 @@ Falkonry needs historical time series data to build pattern recognition models.
 <span class="c">#Exporting the data to an external file</span>
 <span class="n">file_name</span> <span class="o">=</span> <span class="s">'input.json'</span> <span class="c">#Name of the file with path</span>
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="s">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="nb">file</span><span class="p">:</span>
-    <span class="nb">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">datastream_data</span><span class="p">))</span>
+    <span class="nb">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">datastream_data</span><span class="o">.</span><span class="n">text</span><span class="p">))</span>
 
 <span class="c">#We can use the exported file to add Data to other datastream or to create a new one with the same data    </span>
 
@@ -2541,7 +2541,7 @@ Sometimes good things come to an end as well :(!
 <span class="n">data</span> <span class="o">=</span> <span class="p">[{</span><span class="s">"sourceId"</span><span class="p">:</span> <span class="s">"testId"</span><span class="p">,</span><span class="s">"label"</span><span class="p">:</span> <span class="s">"testName"</span><span class="p">,</span><span class="s">"path"</span><span class="p">:</span> <span class="s">"root/path"</span><span class="p">}]</span>
 <span class="n">datastreamId</span> <span class="o">=</span> <span class="s">'id of the datastream'</span>
 
-<span class="n">entityMetaResponse</span> <span class="o">=</span> <span class="n">fclient</span><span class="o">.</span><span class="n">add_entity_meta</span><span class="p">(</span><span class="n">datastreamId</span><span class="p">,</span> <span class="p">{},</span> <span class="n">data</span><span class="p">)</span>
+<span class="n">entityMetaResponse</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="n">add_entity_meta</span><span class="p">(</span><span class="n">datastreamId</span><span class="p">,</span> <span class="p">{},</span> <span class="n">data</span><span class="p">)</span>
 </code></pre><pre class="highlight shell tab-shell"><code><span class="gp">falkonry&gt;&gt; </span>datastream_add_entity_meta --path<span class="o">=</span>/Users/user/EntityMetaRequest.json
 Entity Meta successfully added to datastream: oii0djojxc2lxt
 falkonry&gt;&gt;
@@ -2577,7 +2577,7 @@ falkonry&gt;&gt;
 <span class="n">falkonry</span> <span class="o">=</span> <span class="n">Falkonry</span><span class="p">(</span><span class="s">'https://example.falkonry.ai'</span><span class="p">,</span> <span class="s">'auth-token'</span><span class="p">)</span>
 <span class="n">datastreamId</span> <span class="o">=</span> <span class="s">'id of the datastream'</span>
 
-<span class="n">entityMetaResponse</span> <span class="o">=</span> <span class="n">fclient</span><span class="o">.</span><span class="n">get_entity_meta</span><span class="p">(</span><span class="n">datastreamId</span><span class="p">)</span>
+<span class="n">entityMetaResponse</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="n">get_entity_meta</span><span class="p">(</span><span class="n">datastreamId</span><span class="p">)</span>
 </code></pre><pre class="highlight shell tab-shell"><code><span class="gp">falkonry&gt;&gt; </span>datastream_get_entity_meta
 Entity Meta of datastream: oii0djojxc2lxt
 Entity Label : testName. Entity Id : testId
@@ -2686,7 +2686,7 @@ Assessments can be re-introduced into a data store as attributes to subsequently
 <span class="n">asmtRequest</span><span class="o">.</span><span class="n">set_rate</span><span class="p">(</span><span class="s">'PT0S'</span><span class="p">)</span>                     <span class="c"># Set assessment rate</span>
 
 <span class="c"># create new assessment</span>
-<span class="n">assessmentResponse</span> <span class="o">=</span> <span class="n">fclient</span><span class="o">.</span><span class="n">create_assessment</span><span class="p">(</span><span class="n">asmtRequest</span><span class="p">)</span>
+<span class="n">assessmentResponse</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="n">create_assessment</span><span class="p">(</span><span class="n">asmtRequest</span><span class="p">)</span>
 </code></pre><pre class="highlight shell tab-shell"><code>Sample JSONFile:
 
 <span class="o">{</span>
@@ -2752,7 +2752,7 @@ If you would like to request more assessments, reach out to your Falkonry Admin.
 <span class="c">#instantiate Falkonry</span>
 <span class="n">falkonry</span>   <span class="o">=</span> <span class="n">Falkonry</span><span class="p">(</span><span class="s">'https://example.falkonry.ai'</span><span class="p">,</span> <span class="s">'auth-token'</span><span class="p">)</span>
 
-<span class="n">assessmentResponse</span> <span class="o">=</span> <span class="n">fclient</span><span class="o">.</span><span class="n">get_assessments</span><span class="p">()</span>
+<span class="n">assessmentResponse</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="n">get_assessments</span><span class="p">()</span>
 </code></pre><pre class="highlight shell tab-shell"><code>Usage :
 
 <span class="gp">falkonry&gt;&gt; </span>assessment_get_list 
@@ -2815,7 +2815,7 @@ Fetching assessment list of datastream : 7wgwm68b9p24n4...
 <span class="n">falkonry</span>   <span class="o">=</span> <span class="n">Falkonry</span><span class="p">(</span><span class="s">'https://example.falkonry.ai'</span><span class="p">,</span> <span class="s">'auth-token'</span><span class="p">)</span>
 
 <span class="n">assessmentId</span> <span class="o">=</span> <span class="s">'id of the datastream'</span>
-<span class="n">assessmentResponse</span> <span class="o">=</span> <span class="n">fclient</span><span class="o">.</span><span class="n">get_assessment</span><span class="p">(</span><span class="n">assessmentId</span><span class="p">)</span>
+<span class="n">assessmentResponse</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="n">get_assessment</span><span class="p">(</span><span class="n">assessmentId</span><span class="p">)</span>
 </code></pre><pre class="highlight shell tab-shell"><code>Usage :
 
 <span class="gp">falkonry&gt;&gt; </span>assessment_get_by_id --id<span class="o">=</span>27cqvmcpq8tqqg
@@ -2877,7 +2877,7 @@ Condition List : N/A
 <span class="n">falkonry</span>   <span class="o">=</span> <span class="n">Falkonry</span><span class="p">(</span><span class="s">'https://example.falkonry.ai'</span><span class="p">,</span> <span class="s">'auth-token'</span><span class="p">)</span>
 
 <span class="n">assessmentId</span> <span class="o">=</span> <span class="s">'id of the datastream'</span>
-<span class="n">assessmentResponse</span> <span class="o">=</span> <span class="n">fclient</span><span class="o">.</span><span class="n">delete_assessment</span><span class="p">(</span><span class="n">assessmentId</span><span class="p">)</span>
+<span class="n">assessmentResponse</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="n">delete_assessment</span><span class="p">(</span><span class="n">assessmentId</span><span class="p">)</span>
 </code></pre><pre class="highlight shell tab-shell"><code>Usage :
 
 <span class="gp">falkonry&gt;&gt; </span>assessment_delete --id<span class="o">=</span>7wgwm68b9p24n4
@@ -2951,7 +2951,7 @@ falkonry&gt;&gt;
 
 <span class="n">options</span> <span class="o">=</span> <span class="p">{</span><span class="s">'startTime'</span><span class="p">:</span><span class="s">'2011-01-01T01:00:00.000Z'</span><span class="p">,</span><span class="s">'endTime'</span><span class="p">:</span><span class="s">'2011-06-01T01:00:00.000Z'</span><span class="p">,</span><span class="s">'responseFormat'</span><span class="p">:</span><span class="s">'application/json'</span><span class="p">}</span>
 
-<span class="n">response</span> <span class="o">=</span> <span class="n">fclient</span><span class="o">.</span><span class="n">get_historical_output</span><span class="p">(</span><span class="n">assessment</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="n">get_historical_output</span><span class="p">(</span><span class="n">assessment</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>
 
 <span class="s">'''If data is not readily available then, a tracker id will be sent with 202 status code. While falkonry will genrate ouptut data
  Client should do timely pooling on the using same method, sending tracker id (__id) in the query params
@@ -2963,7 +2963,7 @@ falkonry&gt;&gt;
     <span class="n">trackerId</span> <span class="o">=</span> <span class="n">trackerResponse</span><span class="o">.</span><span class="n">get_id</span><span class="p">()</span>
     <span class="c">#use this tracker for checking the status of the process.</span>
     <span class="n">options</span> <span class="o">=</span> <span class="p">{</span><span class="s">"tarckerId"</span><span class="p">:</span> <span class="n">trackerId</span><span class="p">,</span> <span class="s">"responseFormat"</span><span class="p">:</span><span class="s">"application/json"</span><span class="p">}</span>
-    <span class="n">newResponse</span> <span class="o">=</span> <span class="n">fclient</span><span class="o">.</span><span class="n">get_historical_output</span><span class="p">(</span><span class="n">assessment</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>
+    <span class="n">newResponse</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="n">get_historical_output</span><span class="p">(</span><span class="n">assessment</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>
     <span class="s">'''if status is 202 call the same request again
     if status is 200, output data will be present in httpResponse.response field'''</span>
 </code></pre><pre class="highlight shell tab-shell"><code>Options:
