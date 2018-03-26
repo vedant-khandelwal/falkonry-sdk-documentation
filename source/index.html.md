@@ -1436,7 +1436,7 @@ inputResponse = falkonry.add_input_data(datastreamId, 'json', options, data)
 
 ```shell
 Usage:
-falkonry>> datastream_add_historical_data --path "/Users/user/InputNarrowBatchSingleEntity.json" --timeIdentifier "time" --timeFormat "Unix Time Milliseconds" --timeZone "GMT" --signalIdentifier "signal" --batchIdentifier "batchId" --valueIdentifier "value"
+falkonry>> datastream_add_historical_data --path "/Users/user/InputNarrowBatchSingleEntity.json" --timeIdentifier "time" --timeFormat "millis" --timeZone "GMT" --signalIdentifier "signal" --batchIdentifier "batchId" --valueIdentifier "value"
 Default datastream set : wlybjb4tq776n9 Name : Narrow Single Entity Batch Test DS
 {'status': 'PENDING', 'datastream': 'wlybjb4tq776n9', '__$createTime': 1516013313895, '__$id': 'kpgly6d2tg9v27b6', 'user': 'e6q8ienqs9celz', 'action': 'ADD_DATA_DATASTREAM', '__$tenant': 'iqn80x6e2ku9id', 'dataSource': 'y8ibr9co7hqkkd'}
 falkonry>>
@@ -1527,7 +1527,7 @@ time,batchId,unit,signal,value
 1467729675020,batch_1,unit1,signal1,4.45
 
 Usage:
-falkonry>> datastream_add_historical_data --path "/Users/user/InputNarrowBatchMultiEntity.csv" --timeIdentifier "time" --timeFormat "Unix Time Milliseconds" --timeZone "GMT" --entityIdentifier "unit" --signalIdentifier "signal" --batchIdentifier "batchId" --valueIdentifier "value"
+falkonry>> datastream_add_historical_data --path "/Users/user/InputNarrowBatchMultiEntity.csv" --timeIdentifier "time" --timeFormat "millis" --timeZone "GMT" --entityIdentifier "unit" --signalIdentifier "signal" --batchIdentifier "batchId" --valueIdentifier "value"
 Default datastream set : hn6cq2lpcwg49c Name : Narrow Multiple Entity Batch Test DS
 {'status': 'PENDING', 'datastream': 'hn6cq2lpcwg49c', '__$createTime': 1516013971506, '__$id': '4hqpj9hw2vmcjqwh', 'user': 'e6q8ienqs9celz', 'action': 'ADD_DATA_DATASTREAM', '__$tenant': 'iqn80x6e2ku9id', 'dataSource': 'Rp8euhiyg3ctt4'}
 falkonry>> 
@@ -1616,7 +1616,7 @@ inputResponse = falkonry.add_input_data(datastreamId, 'json', options, data)
 ```
 
 ```shell
-falkonry>> datastream_add_historical_data --path "/Users/user/InputWideBatchSingleEntity.json" --timeIdentifier "time" --timeFormat "Unix Time Milliseconds" --timeZone "GMT" --batchIdentifier "batchId"
+falkonry>> datastream_add_historical_data --path "/Users/user/InputWideBatchSingleEntity.json" --timeIdentifier "time" --timeFormat "millis" --timeZone "GMT" --batchIdentifier "batchId"
 Default datastream set : cm492hm4j74wrn Name : Wide Single Entity Batch Test DS
 {'status': 'PENDING', 'datastream': 'cm492hm4j74wrn', '__$createTime': 1516015544894, '__$id': 'wmgllwgjwwjtp7w4', 'user': 'e6q8ienqs9celz', 'action': 'ADD_DATA_DATASTREAM', '__$tenant': 'iqn80x6e2ku9id', 'dataSource': 'Teqm2nwjpbhbs3'}
 falkonry>> 
@@ -1719,7 +1719,7 @@ inputResponse = falkonry.add_input_data(datastreamId, 'csv', options, data)
 ```
 
 ```shell
-falkonry>> datastream_add_historical_data --path "/Users/user/InputWideBatchMultiEntity.csv" --timeIdentifier "time" --timeFormat "Unix Time Milliseconds" --timeZone "GMT" --entityIdentifier "unit" --batchIdentifier "batchId"
+falkonry>> datastream_add_historical_data --path "/Users/user/InputWideBatchMultiEntity.csv" --timeIdentifier "time" --timeFormat "millis" --timeZone "GMT" --entityIdentifier "unit" --batchIdentifier "batchId"
 Default datastream set : 7wgwm68b9p24n4 Name : Wide Multiple Entity Batch Test DS
 {'status': 'PENDING', 'datastream': '7wgwm68b9p24n4', '__$createTime': 1516016064677, '__$id': 'mlc2pt7y87jhwlw2', 'user': 'e6q8ienqs9celz', 'action': 'ADD_DATA_DATASTREAM', '__$tenant': 'iqn80x6e2ku9id', 'dataSource': 'Lita7m408qq9j9'}
 falkonry>>
