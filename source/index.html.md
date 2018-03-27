@@ -2933,7 +2933,7 @@ if (httpResponse.statusCode == 202)
 
   // use this tracker for checking the status of the process.
   options = new SortedDictionary<string, string>();
-  options.Add("tarckerId", __id);
+  options.Add("trackerId", __id);
   options.Add("responseFormat", "application/json");
 
   httpResponse = falkonry.getHistoricalOutput(assessment, options);
@@ -2969,7 +2969,7 @@ assessmentId = 'id of the datastream'
 
 options = {'startTime':'2011-01-01T01:00:00.000Z','endTime':'2011-06-01T01:00:00.000Z','responseFormat':'application/json'}
 
-response = falkonry.get_historical_output(assessment, options)
+response = falkonry.get_historical_output(assessmentId, options)
 
 '''If data is not readily available then, a tracker id will be sent with 202 status code. While falkonry will genrate ouptut data
  Client should do timely pooling on the using same method, sending tracker id (__id) in the query params
@@ -2980,7 +2980,7 @@ if response.status_code is 202:
     #get id from the tracker
     trackerId = trackerResponse.get_id()
     #use this tracker for checking the status of the process.
-    options = {"tarckerId": trackerId, "responseFormat":"application/json"}
+    options = {"trackerId": trackerId, "responseFormat":"application/json"}
     newResponse = falkonry.get_historical_output(assessment, options)
     '''if status is 202 call the same request again
     if status is 200, output data will be present in httpResponse.response field'''
