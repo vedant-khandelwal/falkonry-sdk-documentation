@@ -400,14 +400,14 @@ Sample JSONFile:
 <span class="o">}</span>
 
 Usage:
-<span class="gp">falkonry&gt;&gt; </span>datastream_create --path<span class="o">=</span>/Users/user/NarrowSingleEntity.json
+<span class="gp">falkonry&gt;&gt; </span>datastream_create --path <span class="s2">"/Users/user/NarrowSingleEntity.json"</span>
 Datastream successfully created : anbsivd1h7h1sd
 falkonry&gt;&gt;
 
 Set default Datastream:
 You need to <span class="k">select </span>default datastream <span class="k">for </span>using features like adding data to datastream, adding entity meta to datastream and all assessment related features.
 
-<span class="gp">falkonry&gt;&gt; </span>datastream_default_set --id<span class="o">=</span>anbsivd1h7h1sd
+<span class="gp">falkonry&gt;&gt; </span>datastream_default_set --id <span class="s2">"anbsivd1h7h1sd"</span>
 Default datastream <span class="nb">set</span>: anbsivd1h7h1sd
 falkonry&gt;&gt;
 
@@ -565,14 +565,14 @@ Sample JSONFile:
 <span class="o">}</span>
 
 Usage:
-<span class="gp">falkonry&gt;&gt; </span>datastream_create --path<span class="o">=</span>/Users/user/NarrowSingleEntity.json
+<span class="gp">falkonry&gt;&gt; </span>datastream_create --path <span class="s2">"/Users/user/NarrowSingleEntity.json"</span>
 Datastream successfully created : anbsivd1h7h1sd
 falkonry&gt;&gt;
 
 Set default Datastream:
 You need to <span class="k">select </span>default datastream <span class="k">for </span>using features like adding data to datastream, adding entity meta to datastream and all assessment related features.
 
-<span class="gp">falkonry&gt;&gt; </span>datastream_default_set --id<span class="o">=</span>anbsivd1h7h1sd
+<span class="gp">falkonry&gt;&gt; </span>datastream_default_set --id <span class="s2">"anbsivd1h7h1sd"</span>
 Default datastream <span class="nb">set</span>: anbsivd1h7h1sd
 falkonry&gt;&gt;
 
@@ -731,7 +731,7 @@ Structuring data as key-value pairs — as is done in narrow-form datasets — f
 <span class="o">}</span>
 
 Usage :
-<span class="gp">falkonry&gt;&gt; </span>datastream_create --path<span class="o">=</span>NarrowMultipleEntity.json
+<span class="gp">falkonry&gt;&gt; </span>datastream_create --path <span class="s2">"NarrowMultipleEntity.json"</span>
 Datastream successfully created : anbsivd1h7h1sd
 falkonry&gt;&gt;
 </code></pre>
@@ -994,7 +994,7 @@ Structuring data as key-value pairs — as is done in narrow-form datasets — f
 <span class="o">}</span>
 
 Usage :
-<span class="gp">falkonry&gt;&gt; </span>datastream_create --path<span class="o">=</span>WideSingleEntity.json
+<span class="gp">falkonry&gt;&gt; </span>datastream_create --path <span class="s2">"WideSingleEntity.json"</span>
 Datastream successfully created : anb109d1h7h1po
 falkonry&gt;&gt;
 </code></pre>
@@ -1246,7 +1246,7 @@ If you have many value variables, it is difficult to summarize wide-form dataset
 
 Usage :
 
-<span class="gp">falkonry&gt;&gt; </span>datastream_create --path<span class="o">=</span>WideMultipleEntity.json
+<span class="gp">falkonry&gt;&gt; </span>datastream_create --path <span class="s2">"WideMultipleEntity.json"</span>
 Datastream successfully created : anb109d1h7h1po
 falkonry&gt;&gt;
 </code></pre>
@@ -1406,7 +1406,7 @@ If you have many value variables, it is difficult to summarize wide-form dataset
 
 Usage:
 
-<span class="gp">falkonry&gt;&gt; </span>datastream_create --path<span class="o">=</span>Micro.json
+<span class="gp">falkonry&gt;&gt; </span>datastream_create --path <span class="s2">"Micro.json"</span>
 Datastream successfully created : wp7lgnw6mr7nnt
 falkonry&gt;&gt;
 </code></pre>
@@ -1481,7 +1481,7 @@ falkonry&gt;&gt;
 
 <span class="c">#return sigle datastream</span>
 <span class="n">datastreams</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="n">get_datastream</span><span class="p">(</span><span class="n">datastreamId</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code><span class="gp">falkonry&gt;&gt; </span>datastream_get_by_id --id<span class="o">=</span>tkhv69dwjmdydp
+</code></pre><pre class="highlight shell tab-shell"><code><span class="gp">falkonry&gt;&gt; </span>datastream_get_by_id --id <span class="s2">"tkhv69dwjmdydp"</span>
 Fetching Datastreams
 <span class="o">=====================================================</span>
 Id : tkhv69dwjmdydp
@@ -1623,7 +1623,7 @@ Falkonry needs historical time series data to build pattern recognition models.
 <span class="p">}</span>
 <span class="n">inputResponse</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="n">add_input_data</span><span class="p">(</span><span class="n">datastreamId</span><span class="p">,</span> <span class="s">'json'</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
 </code></pre><pre class="highlight shell tab-shell"><code>Usage:
-<span class="gp">falkonry&gt;&gt; </span>datastream_add_historical_data --path<span class="o">=</span>/Users/user/InputNarrowBatchSingleEntity.json --timeIdentifier<span class="o">=</span><span class="s2">"time"</span> --timeFormat<span class="o">=</span><span class="s2">"Unix Time Milliseconds"</span> --timeZone<span class="o">=</span><span class="s2">"GMT"</span> --signalIdentifier<span class="o">=</span><span class="s2">"signal"</span> --batchIdentifier<span class="o">=</span><span class="s2">"batchId"</span> --valueIdentifier<span class="o">=</span><span class="s2">"value"</span>
+<span class="gp">falkonry&gt;&gt; </span>datastream_add_historical_data --path <span class="s2">"/Users/user/InputNarrowBatchSingleEntity.json"</span> --timeIdentifier <span class="s2">"time"</span> --timeFormat <span class="s2">"millis"</span> --timeZone <span class="s2">"GMT"</span> --signalIdentifier <span class="s2">"signal"</span> --batchIdentifier <span class="s2">"batchId"</span> --valueIdentifier <span class="s2">"value"</span>
 Default datastream <span class="nb">set</span> : wlybjb4tq776n9 Name : Narrow Single Entity Batch Test DS
 <span class="o">{</span><span class="s1">'status'</span>: <span class="s1">'PENDING'</span>, <span class="s1">'datastream'</span>: <span class="s1">'wlybjb4tq776n9'</span>, <span class="s1">'__$createTime'</span>: 1516013313895, <span class="s1">'__$id'</span>: <span class="s1">'kpgly6d2tg9v27b6'</span>, <span class="s1">'user'</span>: <span class="s1">'e6q8ienqs9celz'</span>, <span class="s1">'action'</span>: <span class="s1">'ADD_DATA_DATASTREAM'</span>, <span class="s1">'__$tenant'</span>: <span class="s1">'iqn80x6e2ku9id'</span>, <span class="s1">'dataSource'</span>: <span class="s1">'y8ibr9co7hqkkd'</span><span class="o">}</span>
 falkonry&gt;&gt;
@@ -1703,7 +1703,7 @@ falkonry&gt;&gt;
 1467729675020,batch_1,unit1,signal1,4.45
 
 Usage:
-<span class="gp">falkonry&gt;&gt; </span>datastream_add_historical_data --path<span class="o">=</span>/Users/user/InputNarrowBatchMultiEntity.csv --timeIdentifier<span class="o">=</span><span class="s2">"time"</span> --timeFormat<span class="o">=</span><span class="s2">"Unix Time Milliseconds"</span> --timeZone<span class="o">=</span><span class="s2">"GMT"</span> --entityIdentifier<span class="o">=</span><span class="s2">"unit"</span> --signalIdentifier<span class="o">=</span><span class="s2">"signal"</span> --batchIdentifier<span class="o">=</span><span class="s2">"batchId"</span> --valueIdentifier<span class="o">=</span><span class="s2">"value"</span>
+<span class="gp">falkonry&gt;&gt; </span>datastream_add_historical_data --path <span class="s2">"/Users/user/InputNarrowBatchMultiEntity.csv"</span> --timeIdentifier <span class="s2">"time"</span> --timeFormat <span class="s2">"millis"</span> --timeZone <span class="s2">"GMT"</span> --entityIdentifier <span class="s2">"unit"</span> --signalIdentifier <span class="s2">"signal"</span> --batchIdentifier <span class="s2">"batchId"</span> --valueIdentifier <span class="s2">"value"</span>
 Default datastream <span class="nb">set</span> : hn6cq2lpcwg49c Name : Narrow Multiple Entity Batch Test DS
 <span class="o">{</span><span class="s1">'status'</span>: <span class="s1">'PENDING'</span>, <span class="s1">'datastream'</span>: <span class="s1">'hn6cq2lpcwg49c'</span>, <span class="s1">'__$createTime'</span>: 1516013971506, <span class="s1">'__$id'</span>: <span class="s1">'4hqpj9hw2vmcjqwh'</span>, <span class="s1">'user'</span>: <span class="s1">'e6q8ienqs9celz'</span>, <span class="s1">'action'</span>: <span class="s1">'ADD_DATA_DATASTREAM'</span>, <span class="s1">'__$tenant'</span>: <span class="s1">'iqn80x6e2ku9id'</span>, <span class="s1">'dataSource'</span>: <span class="s1">'Rp8euhiyg3ctt4'</span><span class="o">}</span>
 <span class="gp">falkonry&gt;&gt; </span>
@@ -1782,7 +1782,7 @@ Default datastream <span class="nb">set</span> : hn6cq2lpcwg49c Name : Narrow Mu
     <span class="s">'batchIdentifier'</span><span class="p">:</span> <span class="s">'batchId'</span>
 <span class="p">}</span>
 <span class="n">inputResponse</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="n">add_input_data</span><span class="p">(</span><span class="n">datastreamId</span><span class="p">,</span> <span class="s">'json'</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code><span class="gp">falkonry&gt;&gt; </span>datastream_add_historical_data --path<span class="o">=</span>/Users/user/InputWideBatchSingleEntity.json --timeIdentifier<span class="o">=</span><span class="s2">"time"</span> --timeFormat<span class="o">=</span><span class="s2">"Unix Time Milliseconds"</span> --timeZone<span class="o">=</span><span class="s2">"GMT"</span> --batchIdentifier<span class="o">=</span><span class="s2">"batchId"</span>
+</code></pre><pre class="highlight shell tab-shell"><code><span class="gp">falkonry&gt;&gt; </span>datastream_add_historical_data --path <span class="s2">"/Users/user/InputWideBatchSingleEntity.json"</span> --timeIdentifier <span class="s2">"time"</span> --timeFormat <span class="s2">"millis"</span> --timeZone <span class="s2">"GMT"</span> --batchIdentifier <span class="s2">"batchId"</span>
 Default datastream <span class="nb">set</span> : cm492hm4j74wrn Name : Wide Single Entity Batch Test DS
 <span class="o">{</span><span class="s1">'status'</span>: <span class="s1">'PENDING'</span>, <span class="s1">'datastream'</span>: <span class="s1">'cm492hm4j74wrn'</span>, <span class="s1">'__$createTime'</span>: 1516015544894, <span class="s1">'__$id'</span>: <span class="s1">'wmgllwgjwwjtp7w4'</span>, <span class="s1">'user'</span>: <span class="s1">'e6q8ienqs9celz'</span>, <span class="s1">'action'</span>: <span class="s1">'ADD_DATA_DATASTREAM'</span>, <span class="s1">'__$tenant'</span>: <span class="s1">'iqn80x6e2ku9id'</span>, <span class="s1">'dataSource'</span>: <span class="s1">'Teqm2nwjpbhbs3'</span><span class="o">}</span>
 <span class="gp">falkonry&gt;&gt; </span>
@@ -1875,7 +1875,7 @@ Default datastream <span class="nb">set</span> : cm492hm4j74wrn Name : Wide Sing
     <span class="s">'hasMoreData'</span><span class="p">:</span> <span class="bp">False</span>
 <span class="p">}</span>
 <span class="n">inputResponse</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="n">add_input_data</span><span class="p">(</span><span class="n">datastreamId</span><span class="p">,</span> <span class="s">'csv'</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code><span class="gp">falkonry&gt;&gt; </span>datastream_add_historical_data --path<span class="o">=</span>/Users/user/InputWideBatchMultiEntity.csv --timeIdentifier<span class="o">=</span><span class="s2">"time"</span> --timeFormat<span class="o">=</span><span class="s2">"Unix Time Milliseconds"</span> --timeZone<span class="o">=</span><span class="s2">"GMT"</span> --entityIdentifier<span class="o">=</span><span class="s2">"unit"</span> --batchIdentifier<span class="o">=</span><span class="s2">"batchId"</span>
+</code></pre><pre class="highlight shell tab-shell"><code><span class="gp">falkonry&gt;&gt; </span>datastream_add_historical_data --path <span class="s2">"/Users/user/InputWideBatchMultiEntity.csv"</span> --timeIdentifier <span class="s2">"time"</span> --timeFormat <span class="s2">"millis"</span> --timeZone <span class="s2">"GMT"</span> --entityIdentifier <span class="s2">"unit"</span> --batchIdentifier <span class="s2">"batchId"</span>
 Default datastream <span class="nb">set</span> : 7wgwm68b9p24n4 Name : Wide Multiple Entity Batch Test DS
 <span class="o">{</span><span class="s1">'status'</span>: <span class="s1">'PENDING'</span>, <span class="s1">'datastream'</span>: <span class="s1">'7wgwm68b9p24n4'</span>, <span class="s1">'__$createTime'</span>: 1516016064677, <span class="s1">'__$id'</span>: <span class="s1">'mlc2pt7y87jhwlw2'</span>, <span class="s1">'user'</span>: <span class="s1">'e6q8ienqs9celz'</span>, <span class="s1">'action'</span>: <span class="s1">'ADD_DATA_DATASTREAM'</span>, <span class="s1">'__$tenant'</span>: <span class="s1">'iqn80x6e2ku9id'</span>, <span class="s1">'dataSource'</span>: <span class="s1">'Lita7m408qq9j9'</span><span class="o">}</span>
 falkonry&gt;&gt;
@@ -1946,8 +1946,7 @@ falkonry&gt;&gt;
            <span class="s">'timeZone'</span><span class="p">:</span> <span class="s">"GMT"</span><span class="p">,</span>
            <span class="s">'timeIdentifier'</span><span class="p">:</span> <span class="s">"time"</span><span class="p">}</span>
 <span class="n">inputResponse</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="n">add_input_data</span><span class="p">(</span><span class="n">datastreamId</span><span class="p">,</span> <span class="s">'csv'</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code><span class="gp">falkonry&gt;&gt; </span>datastream_add_historical_data --path<span class="o">=</span>/Users/user/InputNarrow.csv --timeIdentifier<span class="o">=</span><span class="nb">time</span> --timeFormat<span class="o">=</span>iso_8601 --timeZone<span class="o">=</span>GMT --signalIdentifier<span class="o">=</span>signal --valueIdentifier<span class="o">=</span>value
-
+</code></pre><pre class="highlight shell tab-shell"><code><span class="gp">falkonry&gt;&gt; </span>datastream_add_historical_data --path <span class="s2">"/Users/user/InputNarrow.csv"</span> --timeIdentifier <span class="s2">"time"</span> --timeFormat <span class="s2">"iso_8601"</span> --timeZone <span class="s2">"GMT"</span> --signalIdentifier <span class="s2">"signal"</span> --valueIdentifier <span class="s2">"value"</span>
 Default datastream <span class="nb">set</span> : oii0djojxc2lxt Name : New Ds -1
 <span class="o">{</span><span class="s1">'status'</span>: <span class="s1">'PENDING'</span>, <span class="s1">'datastream'</span>: <span class="s1">'oii0djojxc2lxt'</span>, <span class="s1">'__$createTime'</span>: 1500538975912, <span class="s1">'__$id'</span>: <span class="s1">'q68cho8foyml3gv4'</span>, <span class="s1">'user'</span>: <span class="s1">'Tza1q4g0kw5epo'</span>, <span class="s1">'action'</span>: <span class="s1">'ADD_DATA_DATASTREAM'</span>, <span class="s1">'__$tenant'</span>: <span class="s1">'el7rvvqx2xr6v5'</span>, <span class="s1">'dataSource'</span>: <span class="s1">'Lp1nfea7z5lrtk'</span><span class="o">}</span>
 falkonry&gt;&gt;
@@ -2030,7 +2029,7 @@ falkonry&gt;&gt;
    <span class="s">'valueIdentifier'</span><span class="p">:</span> <span class="s">'value'</span><span class="p">,</span>
    <span class="s">'entityIdentifier'</span><span class="p">:</span> <span class="s">'car'</span><span class="p">}</span>
 <span class="n">inputResponse</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="n">add_input_data</span><span class="p">(</span><span class="n">datastreamId</span><span class="p">,</span> <span class="s">'json'</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code><span class="gp">falkonry&gt;&gt; </span>datastream_add_historical_data --path<span class="o">=</span>/Users/user/Input.json --timeIdentifier<span class="o">=</span><span class="nb">time</span> --entityIdentifier<span class="o">=</span>car --timeFormat<span class="o">=</span>iso_8601 --timeZone<span class="o">=</span>GMT --signalIdentifier<span class="o">=</span>signal --valueIdentifier<span class="o">=</span>value
+</code></pre><pre class="highlight shell tab-shell"><code><span class="gp">falkonry&gt;&gt; </span>datastream_add_historical_data --path <span class="s2">"/Users/user/Input.json"</span> --timeIdentifier <span class="s2">"time"</span> --entityIdentifier <span class="s2">"car"</span> --timeFormat <span class="s2">"iso_8601"</span> --timeZone <span class="s2">"GMT"</span> --signalIdentifier <span class="s2">"signal"</span> --valueIdentifier <span class="s2">"value"</span>
 
 Default datastream <span class="nb">set</span> : oii0djojxc2lxt Name : New Ds -1
 <span class="o">{</span><span class="s1">'status'</span>: <span class="s1">'PENDING'</span>, <span class="s1">'datastream'</span>: <span class="s1">'oii0djojxc2lxt'</span>, <span class="s1">'__$createTime'</span>: 1500538975912, <span class="s1">'__$id'</span>: <span class="s1">'q68cho8foyml3gv4'</span>, <span class="s1">'user'</span>: <span class="s1">'Tza1q4g0kw5epo'</span>, <span class="s1">'action'</span>: <span class="s1">'ADD_DATA_DATASTREAM'</span>, <span class="s1">'__$tenant'</span>: <span class="s1">'el7rvvqx2xr6v5'</span>, <span class="s1">'dataSource'</span>: <span class="s1">'Lp1nfea7z5lrtk'</span><span class="o">}</span>
@@ -2120,7 +2119,7 @@ falkonry&gt;&gt;
    <span class="s">'timeIdentifier'</span><span class="p">:</span> <span class="s">"time"</span>
 <span class="p">}</span>
 <span class="n">inputResponse</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="n">add_input_data</span><span class="p">(</span><span class="n">datastreamId</span><span class="p">,</span> <span class="s">'json'</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="n">stream</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code><span class="gp">falkonry&gt;&gt; </span>datastream_add_historical_data --path<span class="o">=</span>/Users/user/InputWideSingleEntity.csv --timeIdentifier<span class="o">=</span><span class="nb">time</span> --timeFormat<span class="o">=</span>iso_8601 --timeZone<span class="o">=</span>GMT --signalIdentifier<span class="o">=</span>signal --valueIdentifier<span class="o">=</span>value
+</code></pre><pre class="highlight shell tab-shell"><code><span class="gp">falkonry&gt;&gt; </span>datastream_add_historical_data --path <span class="s2">"/Users/user/InputWideSingleEntity.csv"</span> --timeIdentifier <span class="s2">"time"</span> --timeFormat <span class="s2">"iso_8601"</span> --timeZone <span class="s2">"GMT"</span> --signalIdentifier <span class="s2">"signal"</span> --valueIdentifier <span class="s2">"value"</span>
 
 Default datastream <span class="nb">set</span> : oii0djojxc2lxt Name : New Ds -1
 <span class="o">{</span><span class="s1">'status'</span>: <span class="s1">'PENDING'</span>, <span class="s1">'datastream'</span>: <span class="s1">'oii0djojxc2lxt'</span>, <span class="s1">'__$createTime'</span>: 1500538975912, <span class="s1">'__$id'</span>: <span class="s1">'q68cho8foyml3gv4'</span>, <span class="s1">'user'</span>: <span class="s1">'Tza1q4g0kw5epo'</span>, <span class="s1">'action'</span>: <span class="s1">'ADD_DATA_DATASTREAM'</span>, <span class="s1">'__$tenant'</span>: <span class="s1">'el7rvvqx2xr6v5'</span>, <span class="s1">'dataSource'</span>: <span class="s1">'Lp1nfea7z5lrtk'</span><span class="o">}</span>
@@ -2200,10 +2199,10 @@ falkonry&gt;&gt;
             <span class="s">'timeIdentifier'</span><span class="p">:</span> <span class="s">"time"</span><span class="p">,</span>
             <span class="s">'entityIdentifier'</span><span class="p">:</span> <span class="s">"device"</span><span class="p">}</span>
 <span class="n">inputResponse</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="n">add_input_data</span><span class="p">(</span><span class="n">datastreamId</span><span class="p">,</span> <span class="s">'csv'</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="n">stream</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code><span class="gp">falkonry&gt;&gt; </span>datastream_add_historical_data --path<span class="o">=</span>/Users/user/InputNarrow.csv --timeIdentifier<span class="o">=</span><span class="nb">time</span> --timeFormat<span class="o">=</span>iso_8601 --timeZone<span class="o">=</span>GMT --signalIdentifier<span class="o">=</span>signal --valueIdentifier<span class="o">=</span>value --entityIdentifier<span class="o">=</span>device
+</code></pre><pre class="highlight shell tab-shell"><code><span class="gp">falkonry&gt;&gt; </span>datastream_add_historical_data --path <span class="s2">"/Users/user/InputNarrow.csv"</span> --timeIdentifier <span class="s2">"time"</span> --timeFormat <span class="s2">"iso_8601"</span> --timeZone <span class="s2">"GMT"</span> --signalIdentifier <span class="s2">"signal"</span> --valueIdentifier <span class="s2">"value"</span> --entityIdentifier <span class="s2">"device"</span>
 
 Default datastream <span class="nb">set</span> : oii0djojxc2lxt Name : New Ds -1
-<span class="o">{</span>u<span class="s1">'status'</span>: u<span class="s1">'PENDING'</span>, u<span class="s1">'datastream'</span>: u<span class="s1">'oii0djojxc2lxt'</span>, u<span class="s1">'__$createTime'</span>: 1500538975912, u<span class="s1">'__$id'</span>: u<span class="s1">'q68cho8foyml3gv4'</span>, u<span class="s1">'user'</span>: u<span class="s1">'Tza1q4g0kw5epo'</span>, u<span class="s1">'action'</span>: u<span class="s1">'ADD_DATA_DATASTREAM'</span>, u<span class="s1">'__$tenant'</span>: u<span class="s1">'el7rvvqx2xr6v5'</span>, u<span class="s1">'dataSource'</span>: u<span class="s1">'Lp1nfea7z5lrtk'</span><span class="o">}</span>
+<span class="o">{</span><span class="s1">'status'</span>: <span class="s1">'PENDING'</span>, <span class="s1">'datastream'</span>: <span class="s1">'oii0djojxc2lxt'</span>, <span class="s1">'__$createTime'</span>: 1500538975912, <span class="s1">'__$id'</span>: <span class="s1">'q68cho8foyml3gv4'</span>, <span class="s1">'user'</span>: <span class="s1">'Tza1q4g0kw5epo'</span>, <span class="s1">'action'</span>: <span class="s1">'ADD_DATA_DATASTREAM'</span>, <span class="s1">'__$tenant'</span>: <span class="s1">'el7rvvqx2xr6v5'</span>, <span class="s1">'dataSource'</span>: <span class="s1">'Lp1nfea7z5lrtk'</span><span class="o">}</span>
 falkonry&gt;&gt;
 </code></pre>
 <blockquote>
@@ -2452,7 +2451,7 @@ Input Data :
 
 falkonry&gt;&gt;
 Writing input Data to file
-<span class="gp">falkonry&gt;&gt; </span>datastream_get_data --format<span class="o">=</span>application/json --path<span class="o">=</span>input.json
+<span class="gp">falkonry&gt;&gt; </span>datastream_get_data --format <span class="s2">"application/json"</span> --path <span class="s2">"input.json"</span>
 Default datastream <span class="nb">set</span> : 1scyeeoxbdh7if Name : New Standalone
 Input data is written to the file : input.json
 <span class="gp">falkonry&gt;&gt; </span>
@@ -2482,7 +2481,7 @@ Input data is written to the file : input.json
 <span class="n">datastreamId</span> <span class="o">=</span> <span class="s">'id of the datastream'</span>
 
 <span class="n">falkonry</span><span class="o">.</span><span class="n">delete_datastream</span><span class="p">(</span><span class="n">datastreamId</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code><span class="gp">falkonry&gt;&gt; </span>datastream_delete --id<span class="o">=</span>oii0djojxc2lxt
+</code></pre><pre class="highlight shell tab-shell"><code><span class="gp">falkonry&gt;&gt; </span>datastream_delete --id <span class="s2">"oii0djojxc2lxt"</span>
 Datastream successfully deleted : oii0djojxc2lxt
 falkonry&gt;&gt;
 </code></pre>
@@ -2542,7 +2541,7 @@ Sometimes good things come to an end as well :(!
 <span class="n">datastreamId</span> <span class="o">=</span> <span class="s">'id of the datastream'</span>
 
 <span class="n">entityMetaResponse</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="n">add_entity_meta</span><span class="p">(</span><span class="n">datastreamId</span><span class="p">,</span> <span class="p">{},</span> <span class="n">data</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code><span class="gp">falkonry&gt;&gt; </span>datastream_add_entity_meta --path<span class="o">=</span>/Users/user/EntityMetaRequest.json
+</code></pre><pre class="highlight shell tab-shell"><code><span class="gp">falkonry&gt;&gt; </span>datastream_add_entity_meta --path <span class="s2">"/Users/user/EntityMetaRequest.json"</span>
 Entity Meta successfully added to datastream: oii0djojxc2lxt
 falkonry&gt;&gt;
 </code></pre>
@@ -2697,7 +2696,7 @@ Assessments can be re-introduced into a data store as attributes to subsequently
 
 Usage :
 
-<span class="gp">falkonry&gt;&gt; </span>assessment_create --path<span class="o">=</span>/Users/user/samples/CreateAssessment.json
+<span class="gp">falkonry&gt;&gt; </span>assessment_create --path <span class="s2">"/Users/user/samples/CreateAssessment.json"</span>
 Default datastream <span class="nb">set</span> : 7wgwm68b9p24n4 Name : Wide Multiple Entity Batch Test DS
 Assessment successfully created : rrk2jl9ylvcthy
 falkonry&gt;&gt;
@@ -2706,7 +2705,7 @@ Set default Assessment
 
 You need to <span class="k">select </span>default assessment <span class="k">for </span>using features like adding facts to assessment, retrieving output data.
 
-<span class="gp">falkonry&gt;&gt; </span>assessment_default_set --id<span class="o">=</span>mhai7bxygkawq8
+<span class="gp">falkonry&gt;&gt; </span>assessment_default_set --id <span class="s2">"mhai7bxygkawq8"</span>
 Default datastream <span class="nb">set</span>: 5kzugwm1natt0l Name: Robo Arm Test 1
 Default assessment <span class="nb">set</span>: mhai7bxygkawq8
 falkonry&gt;&gt;
@@ -2818,7 +2817,7 @@ Fetching assessment list of datastream : 7wgwm68b9p24n4...
 <span class="n">assessmentResponse</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="n">get_assessment</span><span class="p">(</span><span class="n">assessmentId</span><span class="p">)</span>
 </code></pre><pre class="highlight shell tab-shell"><code>Usage :
 
-<span class="gp">falkonry&gt;&gt; </span>assessment_get_by_id --id<span class="o">=</span>27cqvmcpq8tqqg
+<span class="gp">falkonry&gt;&gt; </span>assessment_get_by_id --id <span class="s2">"27cqvmcpq8tqqg"</span>
 <span class="o">======================================================</span>
 Id : 27cqvmcpq8tqqg
 Name : Wide Multiple Entity Batch Test DS
@@ -2880,7 +2879,7 @@ Condition List : N/A
 <span class="n">assessmentResponse</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="n">delete_assessment</span><span class="p">(</span><span class="n">assessmentId</span><span class="p">)</span>
 </code></pre><pre class="highlight shell tab-shell"><code>Usage :
 
-<span class="gp">falkonry&gt;&gt; </span>assessment_delete --id<span class="o">=</span>7wgwm68b9p24n4
+<span class="gp">falkonry&gt;&gt; </span>assessment_delete --id <span class="s2">"7wgwm68b9p24n4"</span>
 Assessment deleted successfully: 7wgwm68b9p24n4
 falkonry&gt;&gt;
 </code></pre>
@@ -2922,7 +2921,7 @@ falkonry&gt;&gt;
 
   <span class="c1">// use this tracker for checking the status of the process.</span>
   <span class="n">options</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SortedDictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;();</span>
-  <span class="n">options</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"tarckerId"</span><span class="p">,</span> <span class="n">__id</span><span class="p">);</span>
+  <span class="n">options</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"trackerId"</span><span class="p">,</span> <span class="n">__id</span><span class="p">);</span>
   <span class="n">options</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="s">"responseFormat"</span><span class="p">,</span> <span class="s">"application/json"</span><span class="p">);</span>
 
   <span class="n">httpResponse</span> <span class="p">=</span> <span class="n">falkonry</span><span class="p">.</span><span class="nf">getHistoricalOutput</span><span class="p">(</span><span class="n">assessment</span><span class="p">,</span> <span class="n">options</span><span class="p">);</span>
@@ -2951,7 +2950,7 @@ falkonry&gt;&gt;
 
 <span class="n">options</span> <span class="o">=</span> <span class="p">{</span><span class="s">'startTime'</span><span class="p">:</span><span class="s">'2011-01-01T01:00:00.000Z'</span><span class="p">,</span><span class="s">'endTime'</span><span class="p">:</span><span class="s">'2011-06-01T01:00:00.000Z'</span><span class="p">,</span><span class="s">'responseFormat'</span><span class="p">:</span><span class="s">'application/json'</span><span class="p">}</span>
 
-<span class="n">response</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="n">get_historical_output</span><span class="p">(</span><span class="n">assessment</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="n">get_historical_output</span><span class="p">(</span><span class="n">assessmentId</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>
 
 <span class="s">'''If data is not readily available then, a tracker id will be sent with 202 status code. While falkonry will genrate ouptut data
  Client should do timely pooling on the using same method, sending tracker id (__id) in the query params
@@ -2962,7 +2961,7 @@ falkonry&gt;&gt;
     <span class="c">#get id from the tracker</span>
     <span class="n">trackerId</span> <span class="o">=</span> <span class="n">trackerResponse</span><span class="o">.</span><span class="n">get_id</span><span class="p">()</span>
     <span class="c">#use this tracker for checking the status of the process.</span>
-    <span class="n">options</span> <span class="o">=</span> <span class="p">{</span><span class="s">"tarckerId"</span><span class="p">:</span> <span class="n">trackerId</span><span class="p">,</span> <span class="s">"responseFormat"</span><span class="p">:</span><span class="s">"application/json"</span><span class="p">}</span>
+    <span class="n">options</span> <span class="o">=</span> <span class="p">{</span><span class="s">"trackerId"</span><span class="p">:</span> <span class="n">trackerId</span><span class="p">,</span> <span class="s">"responseFormat"</span><span class="p">:</span><span class="s">"application/json"</span><span class="p">}</span>
     <span class="n">newResponse</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="n">get_historical_output</span><span class="p">(</span><span class="n">assessment</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>
     <span class="s">'''if status is 202 call the same request again
     if status is 200, output data will be present in httpResponse.response field'''</span>
@@ -2981,7 +2980,7 @@ output pass application/json
 Usage:
 
 Fetching data which is already processed
-<span class="gp">falkonry&gt;&gt; </span>assessment_get_historical_output --startTime<span class="o">=</span>2017-07-19T14:04:06+05:30 --format<span class="o">=</span>text/csv
+<span class="gp">falkonry&gt;&gt; </span>assessment_get_historical_output --startTime <span class="s2">"2017-07-19T14:04:06+05:30"</span> --format <span class="s2">"text/csv"</span>
 Default assessment <span class="nb">set</span> : 743cveg32hkwl2 Name : Standalone DS
 <span class="o">==================================================================================================================</span>
 <span class="nb">time</span>,entity,value
@@ -3006,12 +3005,12 @@ If data is not readily available <span class="k">then</span>, a tracker id will 
 Client should <span class="k">do </span>timely pooling on the using same method, sending tracker id <span class="o">(</span>__id<span class="o">)</span> <span class="k">in </span>the query params
 Once data is available server will response with 200 status code and data <span class="k">in </span>json/csv format.
 
-<span class="gp">falkonry&gt;&gt; </span>assessment_get_historical_output --startTime<span class="o">=</span>2016-07-19T14:04:06+05:30 --format<span class="o">=</span>text/csv
+<span class="gp">falkonry&gt;&gt; </span>assessment_get_historical_output --startTime <span class="s2">"2016-07-19T14:04:06+05:30"</span> --format <span class="s2">"text/csv"</span>
 Default assessment <span class="nb">set</span> : 743cveg32hkwl2 Name : Standalone DS
 <span class="o">{</span><span class="s2">"status"</span>:<span class="s2">"WAITING"</span>,<span class="s2">"assessment"</span>:<span class="s2">"743cveg32hkwl2"</span>,<span class="s2">"datastream"</span>:<span class="s2">"qh6rg4ce5g3p5j"</span>,<span class="s2">"outputSummary"</span>:<span class="s2">"c8cr9bedv4y2jg"</span>,<span class="s2">"model"</span>:<span class="s2">"r1ao169d3icdl3"</span>,<span class="s2">"pid"</span>:<span class="s2">"A8vkl6bxn86qh0_umm1j0j08f1pbd"</span>,<span class="s2">"mode"</span>:<span class="s2">"ANALYSIS"</span>,<span class="s2">"userEmail"</span>:<span class="s2">"aniket.amrutkar@falkonry.com"</span>,<span class="s2">"userId"</span>:<span class="s2">"c8s6wwrfczrwos"</span>,<span class="s2">"entities"</span>:null,<span class="s2">"__</span><span class="nv">$id</span><span class="s2">"</span>:<span class="s2">"nphnmcc81vqkgpvo"</span>,<span class="s2">"__</span><span class="nv">$tenant</span><span class="s2">"</span>:<span class="s2">"A8vkl6bxn86qh0"</span>,<span class="s2">"__</span><span class="nv">$createTime</span><span class="s2">"</span>:1500544370048,<span class="s2">"__id"</span>:<span class="s2">"nphnmcc81vqkgpvo"</span><span class="o">}</span>
 Falkonry is generating your output. Please try following <span class="nb">command </span><span class="k">in </span>some time.
 assessment_get_historical_output --trackerId<span class="o">=</span>nphnmcc81vqkgpvo
-<span class="gp">falkonry&gt;&gt; </span>assessment_get_historical_output --trackerId<span class="o">=</span>nphnmcc81vqkgpvo --format<span class="o">=</span>application/json
+<span class="gp">falkonry&gt;&gt; </span>assessment_get_historical_output --trackerId <span class="s2">"nphnmcc81vqkgpvo"</span> --format <span class="s2">"application/json"</span>
 Default assessment <span class="nb">set</span> : 743cveg32hkwl2 Name : Standalone DS
 <span class="o">==================================================================================================================</span>
 <span class="o">{</span><span class="s2">"time"</span>:1500453241749,<span class="s2">"entity"</span>:<span class="s2">"UNIT-1"</span>,<span class="s2">"value"</span>:<span class="s2">"unlabeled3"</span><span class="o">}</span>
@@ -3032,7 +3031,7 @@ Default assessment <span class="nb">set</span> : 743cveg32hkwl2 Name : Standalon
 <span class="o">==================================================================================================================</span>
 falkonry&gt;&gt;
 Writing output Data to file
-<span class="gp">falkonry&gt;&gt; </span>assessment_get_historical_output --trackerId<span class="o">=</span>nphnmcc81vqkgpvo --format<span class="o">=</span>application/json --path<span class="o">=</span>/Users/user/Output.json
+<span class="gp">falkonry&gt;&gt; </span>assessment_get_historical_output --trackerId <span class="s2">"nphnmcc81vqkgpvo"</span> --format <span class="s2">"application/json"</span> --path <span class="s2">"/Users/user/Output.json"</span>
 Default assessment <span class="nb">set</span> : 743cveg32hkwl2 Name : Standalone DS
 Output data is written to the file : /Users/user/Output.json
 falkonry&gt;&gt;
@@ -3100,9 +3099,9 @@ falkonry&gt;&gt;
 
 Usage:
 
-<span class="gp">falkonry&gt;&gt; </span>assessment_add_facts --path<span class="o">=</span>/Users/user/NarrowFacts.json --startTimeIdentifier<span class="o">=</span><span class="nb">time</span> --endTimeIdentifier<span class="o">=</span>end --timeFormat<span class="o">=</span>millis --timeZone<span class="o">=</span>GMT --valueIdentifier<span class="o">=</span>value
+<span class="gp">falkonry&gt;&gt; </span>assessment_add_facts --path <span class="s2">"/Users/user/NarrowFacts.json"</span> --startTimeIdentifier <span class="s2">"time"</span> --endTimeIdentifier <span class="s2">"end"</span> --timeFormat <span class="s2">"millis"</span> --timeZone <span class="s2">"GMT"</span> --valueIdentifier <span class="s2">"value"</span>
 Default assessment <span class="nb">set</span> : hv987ptckdc6n7 Name : New Test Assessment
-<span class="o">{</span>u<span class="s1">'status'</span>: u<span class="s1">'PENDING'</span>, u<span class="s1">'datastream'</span>: u<span class="s1">'cr77vk6mkwqwqq'</span>, u<span class="s1">'__$createTime'</span>: 1516022010240, u<span class="s1">'__$id'</span>: u<span class="s1">'lcq4pp9jcvwgcgmp'</span>, u<span class="s1">'action'</span>: u<span class="s1">'ADD_FACT_DATA'</span>, u<span class="s1">'__$tenant'</span>: u<span class="s1">'iqn80x6e2ku9id'</span>, u<span class="s1">'assessment'</span>: u<span class="s1">'hv987ptckdc6n7'</span><span class="o">}</span>
+<span class="o">{</span><span class="s1">'status'</span>: <span class="s1">'PENDING'</span>, <span class="s1">'datastream'</span>: <span class="s1">'cr77vk6mkwqwqq'</span>, <span class="s1">'__$createTime'</span>: 1516022010240, <span class="s1">'__$id'</span>: <span class="s1">'lcq4pp9jcvwgcgmp'</span>, <span class="s1">'action'</span>: <span class="s1">'ADD_FACT_DATA'</span>, <span class="s1">'__$tenant'</span>: <span class="s1">'iqn80x6e2ku9id'</span>, <span class="s1">'assessment'</span>: <span class="s1">'hv987ptckdc6n7'</span><span class="o">}</span>
 <span class="gp">falkonry&gt;&gt; </span>
 
 </code></pre>
@@ -3163,9 +3162,9 @@ Default assessment <span class="nb">set</span> : hv987ptckdc6n7 Name : New Test 
 <span class="o">{</span><span class="s2">"time"</span>:1456774261715,<span class="s2">"end"</span>:1456774261767,<span class="s2">"value"</span>:<span class="s2">"label2"</span><span class="o">}</span>
 
 Usage:
-<span class="gp">falkonry&gt;&gt; </span>assessment_add_facts --path<span class="o">=</span>/Users/user/MoreFacts.json --startTimeIdentifier<span class="o">=</span><span class="nb">time</span> --endTimeIdentifier<span class="o">=</span>end --timeFormat<span class="o">=</span>millis --timeZone<span class="o">=</span>GMT --valueIdentifier<span class="o">=</span>value --additionalKeyword<span class="o">=</span>testTag
+<span class="gp">falkonry&gt;&gt; </span>assessment_add_facts --path <span class="s2">"/Users/user/MoreFacts.json"</span> --startTimeIdentifier <span class="s2">"time"</span> --endTimeIdentifier <span class="s2">"end"</span> --timeFormat <span class="s2">"millis"</span> --timeZone <span class="s2">"GMT"</span> --valueIdentifier <span class="s2">"value"</span> --additionalKeyword <span class="s2">"testTag"</span>
 Default assessment <span class="nb">set</span> : hv987ptckdc6n7 Name : New Test Assessment
-<span class="o">{</span>u<span class="s1">'status'</span>: u<span class="s1">'PENDING'</span>, u<span class="s1">'datastream'</span>: u<span class="s1">'cr77vk6mkwqwqq'</span>, u<span class="s1">'__$createTime'</span>: 1516087411723, u<span class="s1">'__$id'</span>: u<span class="s1">'4l8bgmd6rv2qj77j'</span>, u<span class="s1">'action'</span>: u<span class="s1">'ADD_FACT_DATA'</span>, u<span class="s1">'__$tenant'</span>: u<span class="s1">'iqn80x6e2ku9id'</span>, u<span class="s1">'assessment'</span>: u<span class="s1">'hv987ptckdc6n7'</span><span class="o">}</span>
+<span class="o">{</span><span class="s1">'status'</span>: <span class="s1">'PENDING'</span>, <span class="s1">'datastream'</span>: <span class="s1">'cr77vk6mkwqwqq'</span>, <span class="s1">'__$createTime'</span>: 1516087411723, <span class="s1">'__$id'</span>: <span class="s1">'4l8bgmd6rv2qj77j'</span>, <span class="s1">'action'</span>: <span class="s1">'ADD_FACT_DATA'</span>, <span class="s1">'__$tenant'</span>: <span class="s1">'iqn80x6e2ku9id'</span>, <span class="s1">'assessment'</span>: <span class="s1">'hv987ptckdc6n7'</span><span class="o">}</span>
 falkonry&gt;&gt;
 
 </code></pre>
@@ -3226,9 +3225,9 @@ falkonry&gt;&gt;
 
 Usage:
 
-<span class="gp">falkonry&gt;&gt; </span>assessment_add_facts --path<span class="o">=</span>/Users/user/NarrowFacts.csv --startTimeIdentifier<span class="o">=</span><span class="nb">time</span> --endTimeIdentifier<span class="o">=</span>end --timeFormat<span class="o">=</span>millis --timeZone<span class="o">=</span>GMT --valueIdentifier<span class="o">=</span>value
+<span class="gp">falkonry&gt;&gt; </span>assessment_add_facts --path <span class="s2">"/Users/user/NarrowFacts.csv"</span> --startTimeIdentifier <span class="s2">"time"</span> --endTimeIdentifier <span class="s2">"end"</span> --timeFormat <span class="s2">"millis"</span> --timeZone <span class="s2">"GMT"</span> --valueIdentifier <span class="s2">"value"</span>
 Default assessment <span class="nb">set</span> : bqn8vjdb7yr9km Name : new <span class="nb">test</span>
-<span class="o">{</span>u<span class="s1">'status'</span>: u<span class="s1">'PENDING'</span>, u<span class="s1">'datastream'</span>: u<span class="s1">'cr77vk6mkwqwqq'</span>, u<span class="s1">'__$createTime'</span>: 1516089750789, u<span class="s1">'__$id'</span>: u<span class="s1">'m7b2l694wcptccmk'</span>, u<span class="s1">'action'</span>: u<span class="s1">'ADD_FACT_DATA'</span>, u<span class="s1">'__$tenant'</span>: u<span class="s1">'iqn80x6e2ku9id'</span>, u<span class="s1">'assessment'</span>: u<span class="s1">'bqn8vjdb7yr9km'</span><span class="o">}</span>
+<span class="o">{</span><span class="s1">'status'</span>: <span class="s1">'PENDING'</span>, <span class="s1">'datastream'</span>: <span class="s1">'cr77vk6mkwqwqq'</span>, <span class="s1">'__$createTime'</span>: 1516089750789, <span class="s1">'__$id'</span>: <span class="s1">'m7b2l694wcptccmk'</span>, <span class="s1">'action'</span>: <span class="s1">'ADD_FACT_DATA'</span>, <span class="s1">'__$tenant'</span>: <span class="s1">'iqn80x6e2ku9id'</span>, <span class="s1">'assessment'</span>: <span class="s1">'bqn8vjdb7yr9km'</span><span class="o">}</span>
 falkonry&gt;&gt;
 </code></pre>
 <h2 id="add-facts-data-csv-format-with-keywords-assessment-of-multi-entity-datastream">Add facts data (csv format) with keywords Assessment of multi entity datastream</h2>
@@ -3294,9 +3293,9 @@ falkonry&gt;&gt;
 <span class="s2">"1456774261723"</span>,<span class="s2">"1456774261754"</span>,<span class="s2">"label2"</span>,<span class="s2">"tag2"</span>
 Usage:
 
-<span class="gp">falkonry&gt;&gt; </span>assessment_add_facts --path<span class="o">=</span>/Users/user/TagFacts.csv --startTimeIdentifier<span class="o">=</span><span class="nb">time</span> --endTimeIdentifier<span class="o">=</span>end --timeFormat<span class="o">=</span>millis --timeZone<span class="o">=</span>GMT --valueIdentifier<span class="o">=</span>value --keywordIdentifier<span class="o">=</span>tagId
+<span class="gp">falkonry&gt;&gt; </span>assessment_add_facts --path <span class="s2">"/Users/user/TagFacts.csv"</span> --startTimeIdentifier <span class="s2">"time"</span> --endTimeIdentifier <span class="s2">"end"</span> --timeFormat <span class="s2">"millis"</span> --timeZone <span class="s2">"GMT"</span> --valueIdentifier <span class="s2">"value"</span> --keywordIdentifier <span class="s2">"tagId"</span>
 Default assessment <span class="nb">set</span> : 4rrp97lk9gcvwc Name : <span class="nb">test </span>new
-<span class="o">{</span>u<span class="s1">'status'</span>: u<span class="s1">'PENDING'</span>, u<span class="s1">'datastream'</span>: u<span class="s1">'cr77vk6mkwqwqq'</span>, u<span class="s1">'__$createTime'</span>: 1516090649022, u<span class="s1">'__$id'</span>: u<span class="s1">'hly8b4727wm9prq8'</span>, u<span class="s1">'action'</span>: u<span class="s1">'ADD_FACT_DATA'</span>, u<span class="s1">'__$tenant'</span>: u<span class="s1">'iqn80x6e2ku9id'</span>, u<span class="s1">'assessment'</span>: u<span class="s1">'4rrp97lk9gcvwc'</span><span class="o">}</span>
+<span class="o">{</span><span class="s1">'status'</span>: <span class="s1">'PENDING'</span>, <span class="s1">'datastream'</span>: <span class="s1">'cr77vk6mkwqwqq'</span>, <span class="s1">'__$createTime'</span>: 1516090649022, <span class="s1">'__$id'</span>: <span class="s1">'hly8b4727wm9prq8'</span>, <span class="s1">'action'</span>: <span class="s1">'ADD_FACT_DATA'</span>, <span class="s1">'__$tenant'</span>: <span class="s1">'iqn80x6e2ku9id'</span>, <span class="s1">'assessment'</span>: <span class="s1">'4rrp97lk9gcvwc'</span><span class="o">}</span>
 falkonry&gt;&gt;
 </code></pre>
 <p>Often, facts and machine/ asset state are captured in spreadsheets. </p>
@@ -3631,9 +3630,9 @@ Live monitoring can be turned &ldquo;on&rdquo; from the Falkonry Professional UI
 
 Usage :
 
-datastream_add_live_data --path<span class="o">=</span>/Users/user/Input.csv
+datastream_add_live_data --path <span class="s2">"/Users/user/Input.csv"</span>
 Default datastream <span class="nb">set</span> : lg7k1a5jor1nvh Name : Human Activity
-<span class="o">{</span>u<span class="s1">'message'</span>: u<span class="s1">'Data submitted successfully'</span><span class="o">}</span>
+<span class="o">{</span><span class="s1">'message'</span>: <span class="s1">'Data submitted successfully'</span><span class="o">}</span>
 </code></pre>
 <p>When in live monitoring, the assessment is being computed based on live data that is streaming in, but based on the model that was built using historical data.</p>
 
@@ -3712,9 +3711,9 @@ When working from within the Falkonry Professional UI, make sure &ldquo;Acceptin
 
 Usage :
 
-datastream_add_live_data --path<span class="o">=</span>/Users/user/Input.json
+datastream_add_live_data --path <span class="s2">"/Users/user/Input.json"</span>
 Default datastream <span class="nb">set</span> : lg7k1a5jor1nvh Name : Human Activity
-<span class="o">{</span>u<span class="s1">'message'</span>: u<span class="s1">'Data submitted successfully'</span><span class="o">}</span>
+<span class="o">{</span><span class="s1">'message'</span>: <span class="s1">'Data submitted successfully'</span><span class="o">}</span>
 </code></pre>
 <p>When in live monitoring, the assessment is being computed based on live data that is streaming in, but based on the model that was built using historical data.</p>
 
@@ -3900,7 +3899,7 @@ When working from within the Falkonry Professional UI, make sure &ldquo;Acceptin
 <span class="n">stream</span>    <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="n">get_output</span><span class="p">(</span><span class="n">assessmentId</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">stream</span><span class="o">.</span><span class="n">events</span><span class="p">():</span>
     <span class="k">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">data</span><span class="p">)))</span>
-</code></pre><pre class="highlight shell tab-shell"><code>falkonry&gt;&gt;assessment_output_listen --format<span class="o">=</span>application/json
+</code></pre><pre class="highlight shell tab-shell"><code>falkonry&gt;&gt;assessment_output_listen --format <span class="s2">"application/json"</span>
 Fetching live assessments :
 <span class="o">{</span><span class="s2">"time"</span>:1500453241749,<span class="s2">"entity"</span>:<span class="s2">"UNIT-1"</span>,<span class="s2">"value"</span>:<span class="s2">"unlabeled3"</span><span class="o">}</span>
 <span class="o">{</span><span class="s2">"time"</span>:1500453246798,<span class="s2">"entity"</span>:<span class="s2">"UNIT-1"</span>,<span class="s2">"value"</span>:<span class="s2">"unlabeled5"</span><span class="o">}</span>
