@@ -1394,7 +1394,7 @@ String data = "{\"time\" :\"2016-03-01T01:01:01.000Z\", \"batch\" : \"batch-1\",
 Map<String, String> options = new HashMap<String, String>();
 options.put("timeIdentifier", "time");
 options.put("timeFormat", "iso_8601");
-options.put("timeZone", time.getZone());
+options.put("timeZone", "GMT");
 options.put("signalIdentifier", "signal");
 options.put("valueIdentifier", "value");
 options.put("batchIdentifier", "batch");
@@ -1424,9 +1424,9 @@ String data = '{"time": 1467729675010,"batchId": "batch_1","signal": "signal1","
 options = {
     'streaming': False,
     'hasMoreData': False,
-    'timeFormat': time.get_format(),
-    'timeZone': time.get_zone(),
-    'timeIdentifier': time.get_identifier(),
+    'timeFormat': 'millis',
+    'timeZone': 'GMT',
+    'timeIdentifier': 'time',
     'signalIdentifier': 'signal',
     'valueIdentifier': 'value',
     'batchIdentifier': 'batchId'
@@ -1607,9 +1607,9 @@ String data = '{"time": 1467729675010,"batchId": "batch_1","signal1": 9.95,"sign
 options = {
     'streaming': False,
     'hasMoreData': False,
-    'timeFormat': time.get_format(),
-    'timeZone': time.get_zone(),
-    'timeIdentifier': time.get_identifier(),
+    'timeFormat': 'millis',
+    'timeZone': 'GMT',
+    'timeIdentifier': 'time',
     'batchIdentifier': 'batchId'
 }
 inputResponse = falkonry.add_input_data(datastreamId, 'json', options, data)
@@ -1854,7 +1854,7 @@ String data = "{\"time\" :\"2016-03-01T01:01:01.000Z\",\"unit\":\"Unit1\", \"sig
 Map<String, String> options = new HashMap<String, String>();
 options.put("timeIdentifier", "time");
 options.put("timeFormat", "iso_8601");
-options.put("timeZone", time.getZone());
+options.put("timeZone", "GMT");
 options.put("signalIdentifier", "signal");
 options.put("entityIdentifier", "unit");
 options.put("valueIdentifier", "value");
@@ -3117,7 +3117,7 @@ options = {
   'startTimeIdentifier': "time",
   'endTimeIdentifier': "end",
   'timeFormat': "iso_8601",
-  'timeZone': time.get_zone(),
+  'timeZone': "GMT",
   'valueIdentifier': "Health"
 }
 inputResponse = falkonry.add_facts(assessmentId, 'json', options, data)
@@ -3192,7 +3192,7 @@ options = {
   'startTimeIdentifier': "time",
   'endTimeIdentifier': "end",
   'timeFormat': "iso_8601",
-  'timeZone': time.get_zone(),
+  'timeZone': "GMT",
   'valueIdentifier': "Health",
   'entityIdentifier': 'entities',
   'additionalKeyword': 'testTag'
@@ -3266,7 +3266,7 @@ options = {
   'startTimeIdentifier': "time",
   'endTimeIdentifier': "end",
   'timeFormat': "iso_8601",
-  'timeZone': time.get_zone(),
+  'timeZone': "GMT",
   'valueIdentifier': "Health"
 }
 
@@ -3346,7 +3346,7 @@ options = {
   'startTimeIdentifier': "time",
   'endTimeIdentifier': "end",
   'timeFormat': "iso_8601",
-  'timeZone': time.get_zone(),
+  'timeZone': "GMT",
   'entityIdentifier': "car",
   'valueIdentifier': "Health",
   'keywordIdentifier': 'Tag'
@@ -3440,7 +3440,7 @@ options = {
   'startTimeIdentifier': "time",
   'endTimeIdentifier': "end",
   'timeFormat': "iso_8601",
-  'timeZone': time.get_zone(),
+  'timeZone': "GMT",
   'entityIdentifier': "car",
   'valueIdentifier': "Health"
 }
@@ -3513,7 +3513,7 @@ options = {
   'startTimeIdentifier': "time",
   'endTimeIdentifier': "end",
   'timeFormat': "iso_8601",
-  'timeZone': time.get_zone(),
+  'timeZone': "GMT",
   'entityIdentifier': "car",
   'valueIdentifier': "Health"
 }
