@@ -1587,7 +1587,7 @@ Falkonry needs historical time series data to build pattern recognition models.
 <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">options</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;();</span>
 <span class="n">options</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"timeIdentifier"</span><span class="o">,</span> <span class="s">"time"</span><span class="o">);</span>
 <span class="n">options</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"timeFormat"</span><span class="o">,</span> <span class="s">"iso_8601"</span><span class="o">);</span>
-<span class="n">options</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"timeZone"</span><span class="o">,</span> <span class="n">time</span><span class="o">.</span><span class="na">getZone</span><span class="o">());</span>
+<span class="n">options</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"timeZone"</span><span class="o">,</span> <span class="s">"GMT"</span><span class="o">);</span>
 <span class="n">options</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"signalIdentifier"</span><span class="o">,</span> <span class="s">"signal"</span><span class="o">);</span>
 <span class="n">options</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"valueIdentifier"</span><span class="o">,</span> <span class="s">"value"</span><span class="o">);</span>
 <span class="n">options</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"batchIdentifier"</span><span class="o">,</span> <span class="s">"batch"</span><span class="o">);</span>
@@ -1614,9 +1614,9 @@ Falkonry needs historical time series data to build pattern recognition models.
 <span class="n">options</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s">'streaming'</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
     <span class="s">'hasMoreData'</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
-    <span class="s">'timeFormat'</span><span class="p">:</span> <span class="n">time</span><span class="o">.</span><span class="n">get_format</span><span class="p">(),</span>
-    <span class="s">'timeZone'</span><span class="p">:</span> <span class="n">time</span><span class="o">.</span><span class="n">get_zone</span><span class="p">(),</span>
-    <span class="s">'timeIdentifier'</span><span class="p">:</span> <span class="n">time</span><span class="o">.</span><span class="n">get_identifier</span><span class="p">(),</span>
+    <span class="s">'timeFormat'</span><span class="p">:</span> <span class="s">'millis'</span><span class="p">,</span>
+    <span class="s">'timeZone'</span><span class="p">:</span> <span class="s">'GMT'</span><span class="p">,</span>
+    <span class="s">'timeIdentifier'</span><span class="p">:</span> <span class="s">'time'</span><span class="p">,</span>
     <span class="s">'signalIdentifier'</span><span class="p">:</span> <span class="s">'signal'</span><span class="p">,</span>
     <span class="s">'valueIdentifier'</span><span class="p">:</span> <span class="s">'value'</span><span class="p">,</span>
     <span class="s">'batchIdentifier'</span><span class="p">:</span> <span class="s">'batchId'</span>
@@ -1776,9 +1776,9 @@ Default datastream <span class="nb">set</span> : hn6cq2lpcwg49c Name : Narrow Mu
 <span class="n">options</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s">'streaming'</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
     <span class="s">'hasMoreData'</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
-    <span class="s">'timeFormat'</span><span class="p">:</span> <span class="n">time</span><span class="o">.</span><span class="n">get_format</span><span class="p">(),</span>
-    <span class="s">'timeZone'</span><span class="p">:</span> <span class="n">time</span><span class="o">.</span><span class="n">get_zone</span><span class="p">(),</span>
-    <span class="s">'timeIdentifier'</span><span class="p">:</span> <span class="n">time</span><span class="o">.</span><span class="n">get_identifier</span><span class="p">(),</span>
+    <span class="s">'timeFormat'</span><span class="p">:</span> <span class="s">'millis'</span><span class="p">,</span>
+    <span class="s">'timeZone'</span><span class="p">:</span> <span class="s">'GMT'</span><span class="p">,</span>
+    <span class="s">'timeIdentifier'</span><span class="p">:</span> <span class="s">'time'</span><span class="p">,</span>
     <span class="s">'batchIdentifier'</span><span class="p">:</span> <span class="s">'batchId'</span>
 <span class="p">}</span>
 <span class="n">inputResponse</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="n">add_input_data</span><span class="p">(</span><span class="n">datastreamId</span><span class="p">,</span> <span class="s">'json'</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
@@ -1997,7 +1997,7 @@ falkonry&gt;&gt;
 <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">options</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;();</span>
 <span class="n">options</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"timeIdentifier"</span><span class="o">,</span> <span class="s">"time"</span><span class="o">);</span>
 <span class="n">options</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"timeFormat"</span><span class="o">,</span> <span class="s">"iso_8601"</span><span class="o">);</span>
-<span class="n">options</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"timeZone"</span><span class="o">,</span> <span class="n">time</span><span class="o">.</span><span class="na">getZone</span><span class="o">());</span>
+<span class="n">options</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"timeZone"</span><span class="o">,</span> <span class="s">"GMT"</span><span class="o">);</span>
 <span class="n">options</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"signalIdentifier"</span><span class="o">,</span> <span class="s">"signal"</span><span class="o">);</span>
 <span class="n">options</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"entityIdentifier"</span><span class="o">,</span> <span class="s">"unit"</span><span class="o">);</span>
 <span class="n">options</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"valueIdentifier"</span><span class="o">,</span> <span class="s">"value"</span><span class="o">);</span>
@@ -3087,7 +3087,7 @@ falkonry&gt;&gt;
   <span class="s">'startTimeIdentifier'</span><span class="p">:</span> <span class="s">"time"</span><span class="p">,</span>
   <span class="s">'endTimeIdentifier'</span><span class="p">:</span> <span class="s">"end"</span><span class="p">,</span>
   <span class="s">'timeFormat'</span><span class="p">:</span> <span class="s">"iso_8601"</span><span class="p">,</span>
-  <span class="s">'timeZone'</span><span class="p">:</span> <span class="n">time</span><span class="o">.</span><span class="n">get_zone</span><span class="p">(),</span>
+  <span class="s">'timeZone'</span><span class="p">:</span> <span class="s">"GMT"</span><span class="p">,</span>
   <span class="s">'valueIdentifier'</span><span class="p">:</span> <span class="s">"Health"</span>
 <span class="p">}</span>
 <span class="n">inputResponse</span> <span class="o">=</span> <span class="n">falkonry</span><span class="o">.</span><span class="n">add_facts</span><span class="p">(</span><span class="n">assessmentId</span><span class="p">,</span> <span class="s">'json'</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
@@ -3149,7 +3149,7 @@ Default assessment <span class="nb">set</span> : hv987ptckdc6n7 Name : New Test 
   <span class="s">'startTimeIdentifier'</span><span class="p">:</span> <span class="s">"time"</span><span class="p">,</span>
   <span class="s">'endTimeIdentifier'</span><span class="p">:</span> <span class="s">"end"</span><span class="p">,</span>
   <span class="s">'timeFormat'</span><span class="p">:</span> <span class="s">"iso_8601"</span><span class="p">,</span>
-  <span class="s">'timeZone'</span><span class="p">:</span> <span class="n">time</span><span class="o">.</span><span class="n">get_zone</span><span class="p">(),</span>
+  <span class="s">'timeZone'</span><span class="p">:</span> <span class="s">"GMT"</span><span class="p">,</span>
   <span class="s">'valueIdentifier'</span><span class="p">:</span> <span class="s">"Health"</span><span class="p">,</span>
   <span class="s">'entityIdentifier'</span><span class="p">:</span> <span class="s">'entities'</span><span class="p">,</span>
   <span class="s">'additionalKeyword'</span><span class="p">:</span> <span class="s">'testTag'</span>
@@ -3210,7 +3210,7 @@ falkonry&gt;&gt;
   <span class="s">'startTimeIdentifier'</span><span class="p">:</span> <span class="s">"time"</span><span class="p">,</span>
   <span class="s">'endTimeIdentifier'</span><span class="p">:</span> <span class="s">"end"</span><span class="p">,</span>
   <span class="s">'timeFormat'</span><span class="p">:</span> <span class="s">"iso_8601"</span><span class="p">,</span>
-  <span class="s">'timeZone'</span><span class="p">:</span> <span class="n">time</span><span class="o">.</span><span class="n">get_zone</span><span class="p">(),</span>
+  <span class="s">'timeZone'</span><span class="p">:</span> <span class="s">"GMT"</span><span class="p">,</span>
   <span class="s">'valueIdentifier'</span><span class="p">:</span> <span class="s">"Health"</span>
 <span class="p">}</span>
 
@@ -3277,7 +3277,7 @@ falkonry&gt;&gt;
   <span class="s">'startTimeIdentifier'</span><span class="p">:</span> <span class="s">"time"</span><span class="p">,</span>
   <span class="s">'endTimeIdentifier'</span><span class="p">:</span> <span class="s">"end"</span><span class="p">,</span>
   <span class="s">'timeFormat'</span><span class="p">:</span> <span class="s">"iso_8601"</span><span class="p">,</span>
-  <span class="s">'timeZone'</span><span class="p">:</span> <span class="n">time</span><span class="o">.</span><span class="n">get_zone</span><span class="p">(),</span>
+  <span class="s">'timeZone'</span><span class="p">:</span> <span class="s">"GMT"</span><span class="p">,</span>
   <span class="s">'entityIdentifier'</span><span class="p">:</span> <span class="s">"car"</span><span class="p">,</span>
   <span class="s">'valueIdentifier'</span><span class="p">:</span> <span class="s">"Health"</span><span class="p">,</span>
   <span class="s">'keywordIdentifier'</span><span class="p">:</span> <span class="s">'Tag'</span>
@@ -3359,7 +3359,7 @@ Adding more facts (ground truths) helps improve model accuracy and hence the use
   <span class="s">'startTimeIdentifier'</span><span class="p">:</span> <span class="s">"time"</span><span class="p">,</span>
   <span class="s">'endTimeIdentifier'</span><span class="p">:</span> <span class="s">"end"</span><span class="p">,</span>
   <span class="s">'timeFormat'</span><span class="p">:</span> <span class="s">"iso_8601"</span><span class="p">,</span>
-  <span class="s">'timeZone'</span><span class="p">:</span> <span class="n">time</span><span class="o">.</span><span class="n">get_zone</span><span class="p">(),</span>
+  <span class="s">'timeZone'</span><span class="p">:</span> <span class="s">"GMT"</span><span class="p">,</span>
   <span class="s">'entityIdentifier'</span><span class="p">:</span> <span class="s">"car"</span><span class="p">,</span>
   <span class="s">'valueIdentifier'</span><span class="p">:</span> <span class="s">"Health"</span>
 <span class="p">}</span>
@@ -3421,7 +3421,7 @@ Adding more facts (ground truths) helps improve model accuracy and hence the use
   <span class="s">'startTimeIdentifier'</span><span class="p">:</span> <span class="s">"time"</span><span class="p">,</span>
   <span class="s">'endTimeIdentifier'</span><span class="p">:</span> <span class="s">"end"</span><span class="p">,</span>
   <span class="s">'timeFormat'</span><span class="p">:</span> <span class="s">"iso_8601"</span><span class="p">,</span>
-  <span class="s">'timeZone'</span><span class="p">:</span> <span class="n">time</span><span class="o">.</span><span class="n">get_zone</span><span class="p">(),</span>
+  <span class="s">'timeZone'</span><span class="p">:</span> <span class="s">"GMT"</span><span class="p">,</span>
   <span class="s">'entityIdentifier'</span><span class="p">:</span> <span class="s">"car"</span><span class="p">,</span>
   <span class="s">'valueIdentifier'</span><span class="p">:</span> <span class="s">"Health"</span>
 <span class="p">}</span>
