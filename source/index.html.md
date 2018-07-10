@@ -3552,7 +3552,7 @@ using FalkonryClient.Helper.Models;
 string token="Add your token here";   
 Falkonry falkonry = new Falkonry("http://example.falkonry.ai", token);
   string datastream_id = "Your datastream id";
-  Datastream ds = falkonry.GetDatastream("datastream_id");
+  Datastream ds = falkonry.GetDatastream(datastream_id);
   var status = ds.Live; //live status will be "ON" or "OFF".
 
 ```
@@ -3563,7 +3563,7 @@ Falkonry falkonry = new Falkonry("http://example.falkonry.ai", token);
   Falkonry falkonry   = new Falkonry("https://example.falkonry.ai", "auth-token");
   String datastreamId = "hk7cgt56r3yln0";
   Datastream datastream = falkonry.getDatastream(datastreamId);
-  String status = datastream.Live; //live status will be "ON" or "OFF".
+  String status = datastream.getLive(); //live status will be "ON" or "OFF".
 ```
 
 ```python
@@ -3679,7 +3679,150 @@ falkonry>>
 ```
 
 <aside class="notice">
+Live monitoring can be turned "off" from the Falkonry Professional UI but you can do the same from any of these development kits.
+</aside>
+
+
+
+## Check live monitoring Status of assessment
+
+> To check whether live monitoring is on for an assessment, use this code:
+
+```csharp
+using FalkonryClient;
+using FalkonryClient.Helper.Models;
+
+string token="Add your token here";   
+Falkonry falkonry = new Falkonry("http://example.falkonry.ai", token);
+  string assessment_id = "Your assessment id";
+  Assessment assessment = falkonry.GetAssessment(assessment_id);
+  var status = assessment.Live; //live status will be "ON" or "OFF".
+
+```
+
+```java
+  import com.falkonry.client.Falkonry;
+
+  Falkonry falkonry   = new Falkonry("https://example.falkonry.ai", "auth-token");
+  String assessmentId = "hk7cgt56r3yln0";
+  Assessment assessment = falkonry.getAssessment(assessmentId);
+  String status = assessment.getLive(); //live status will be "ON" or "OFF".
+```
+
+```python
+import os, sys
+from falkonryclient import client as Falkonry
+from falkonryclient import schemas as Schemas
+
+falkonry  = Falkonry('https://example.falkonry.ai', 'auth-token')
+assessmentId = 'id of the assessment'
+assessment = falkonry.get_assessment(assessmentId)
+status = assessment.get_live()//live status will be "ON" or "OFF".
+```
+
+```shell
+falkonry>> assessment_get_live_status
+Default assessment set: 5kzugwm1natt0l Name: Robo Arm Test 1
+Fetching Live monitoring status for assessment : 5kzugwm1natt0l
+Live Monitoring : ON //live status will be "ON" or "OFF". 
+falkonry>>
+```
+
+## Start live monitoring of assessment
+
+> To turn live monitoring on for an assessment, use this code:
+
+```csharp
+using FalkonryClient;
+using FalkonryClient.Helper.Models;
+
+string token="Add your token here";   
+Falkonry falkonry = new Falkonry("http://example.falkonry.ai", token);
+string assessment_id = "Your assessment id";
+falkonry.onAssessment(assessment_id);
+```
+
+```java
+import com.falkonry.client.Falkonry;
+
+Falkonry falkonry   = new Falkonry("https://example.falkonry.ai", "auth-token");
+String assessmentId = "hk7cgt56r3yln0";
+Assessment assessment = falkonry.onAssessment(assessmentId);
+```
+
+```python
+import os, sys
+from falkonryclient import client as Falkonry
+from falkonryclient import schemas as Schemas
+
+falkonry  = Falkonry('https://example.falkonry.ai', 'auth-token')
+assessmentId = 'id of the assessment'
+
+# Starts live monitoring of assessment. For live monitoring assessment must have an active model. 
+response = falkonry.on_assessment(assessmentId)
+```
+
+```shell
+falkonry>> assessment_start_live
+Default assessment set: 5kzugwm1natt0l Name: Robo Arm Test 1
+Turning on Live monitoring for assessment : 5kzugwm1natt0l
+Assessment is ON for live monitoring
+falkonry>>
+```
+
+At this point assessment goes into live monitoring.
+
+Assessment has an "active" model associated with it.
+
+<aside class="notice">
 Live monitoring can be turned "on" from the Falkonry Professional UI but you can do the same from any of these development kits.
+</aside>
+
+## Stop live monitoring of assessment
+
+> To turn live monitoring off for an assessment, use this code:
+
+```csharp
+using FalkonryClient;
+using FalkonryClient.Helper.Models;
+
+string token="Add your token here";   
+Falkonry falkonry = new Falkonry("http://example.falkonry.ai", token);
+string assessment_id = "Your assessment id";
+falkonry.offAssessment(assessment_id);
+```
+
+
+```java
+import com.falkonry.client.Falkonry;
+
+Falkonry falkonry   = new Falkonry("https://example.falkonry.ai", "auth-token");
+String assessmentId = "hk7cgt56r3yln0";
+Assessment assessment = falkonry.offAssessment(assessmentId);
+```
+
+```python
+import os, sys
+from falkonryclient import client as Falkonry
+from falkonryclient import schemas as Schemas
+
+falkonry  = Falkonry('https://example.falkonry.ai', 'auth-token')
+assessmentId = 'id of the assessment'
+
+# Stops live monitoring of assessment.
+response = falkonry.off_assessment(assessmentId)
+```
+
+```shell
+falkonry>> assessment_stop_live
+Default assessment set: 5kzugwm1natt0l Name : Robo Arm Test 1
+Turning off Live monitoring for assessment : 5kzugwm1natt0l
+Assessment is OFF for live monitoring
+falkonry>>
+```
+
+<aside class="notice">
+Live monitoring can be turned "off" from the Falkonry Professional UI but you can do the same from any of these development kits.
 </aside>
 
 
