@@ -159,6 +159,7 @@ Remember — a datastream is your basic building block!
 ```python
 from falkonryclient import client as Falkonry
 from falkonryclient import schemas as Schemas
+import random
 
 #instantiate Falkonry
 falkonry   = Falkonry('https://example.falkonry.ai', 'auth-token')
@@ -319,6 +320,7 @@ Structuring data as key-value pairs — as is done in narrow-form datasets — f
 ```python
 from falkonryclient import client as Falkonry
 from falkonryclient import schemas as Schemas
+import random
 
 #instantiate Falkonry
 falkonry   = Falkonry("http://example.falkonry.ai", "auth-token")
@@ -483,6 +485,7 @@ Datastream datastream = falkonry.createDatastream(ds);
 ```python
 from falkonryclient import client as Falkonry
 from falkonryclient import schemas as Schemas
+import random
 
 #instantiate Falkonry
 falkonry   = Falkonry('https://example.falkonry.ai', 'auth-token')
@@ -691,6 +694,7 @@ Datastream datastream = falkonry.createDatastream(ds);
 ```python
 from falkonryclient import client as Falkonry
 from falkonryclient import schemas as Schemas
+import random
 
 #instantiate Falkonry
 falkonry   = Falkonry('https://example.falkonry.ai', 'auth-token')
@@ -935,6 +939,7 @@ If you have many value variables, it is difficult to summarize wide-form dataset
 ```python
 from falkonryclient import client as Falkonry
 from falkonryclient import schemas as Schemas
+import random
 
 #instantiate Falkonry
 falkonry   = Falkonry('https://example.falkonry.ai', 'api-token')
@@ -1133,6 +1138,7 @@ Datastream datastream = falkonry.createDatastream(ds);
 ```python
 from falkonryclient import client as Falkonry
 from falkonryclient import schemas as Schemas
+import random
 
 #instantiate Falkonry
 falkonry   = Falkonry('http://example.falkonry.ai', 'auth-token')
@@ -1415,7 +1421,7 @@ falkonry   = Falkonry('http://example.falkonry.ai', 'auth-token')
 datastreamId = 'id of the datastream'
 
 #add data to Datastream
-String data = '{"time": 1467729675010,"batchId": "batch_1","signal": "signal1","value": 9.95}\n'
+data = '{"time": 1467729675010,"batchId": "batch_1","signal": "signal1","value": 9.95}\n'
     +'{"time": 1467729675020,"batchId": "batch_1","signal": "signal1","value": 4.45}\n'
     +'{"time": 1467729675030,"batchId": "batch_2","signal": "signal1","value": 1.45}\n'
     +'{"time": 1467729675040,"batchId": "batch_2","signal": "signal1","value": 8.45}\n'
@@ -1509,7 +1515,7 @@ falkonry   = Falkonry('http://example.falkonry.ai', 'auth-token')
 datastreamId = 'id of the datastream'
 
 #add data to Datastream
-String data = 'time,batchId,unit,signal,value\n'
+data = 'time,batchId,unit,signal,value\n'
     +'1467729675010,batch_1,unit1,signal1,9.95'
         
 options = {
@@ -1600,7 +1606,7 @@ falkonry   = Falkonry('http://example.falkonry.ai', 'auth-token')
 datastreamId = 'id of the datastream'
 
 #add data to Datastream
-String data = '{"time": 1467729675010,"batchId": "batch_1","signal1": 9.95,"signal2": 19.95,"signal3": 39.95}\n'
+data = '{"time": 1467729675010,"batchId": "batch_1","signal1": 9.95,"signal2": 19.95,"signal3": 39.95}\n'
     +'{"time": 1467729675020,"batchId": "batch_1","signal1": 4.45,"signal2": 14.45,"signal3": 34.45}\n'
     +'{"time": 1467729675030,"batchId": "batch_2","signal1": 1.45,"signal2": 10.45,"signal3": 30.45}'
         
@@ -1707,7 +1713,7 @@ falkonry   = Falkonry('http://example.falkonry.ai', 'auth-token')
 datastreamId = 'id of the datastream'
 
 #add data to Datastream
-String data = 'time,batchId,unit,signal1,signal2,signal3\n'+
+data = 'time,batchId,unit,signal1,signal2,signal3\n'+
     '1467729675010,batch_1,unit1,9.95,19.95,39.95\n'+
     '1467729675020,batch_1,unit1,4.45,14.45,34.45'
         
@@ -1786,7 +1792,7 @@ falkonry   = Falkonry('http://example.falkonry.ai', 'auth-token')
 datastreamId = 'id of the datastream'
 
 #add data to Datastream
-String data = "time,signal,value " + "\n"
+data = "time,signal,value " + "\n"
         + "2016-03-01 01:01:01,current,3.4" + "\n"
         + "2016-03-01 01:01:01,vibration,1.4";
         
@@ -1874,7 +1880,7 @@ falkonry   = Falkonry('http://example.falkonry.ai', 'auth-token')
 datastreamId = 'id of the datastream'
 
 #add data to Datastream
-String data = "{\"time\" :\"2016-03-01 01:01:01\", \"signal\" : \"current\", \"value\" : 12.4, \"car\" : \"car1\"} + "\n"
+data = "{\"time\" :\"2016-03-01 01:01:01\", \"signal\" : \"current\", \"value\" : 12.4, \"car\" : \"car1\"} + "\n"
         + "{\"time\" :\"2016-03-01 01:01:01\", \"signal\" : \"vibration\", \"value\" : 2.4, \"car\" : \"car1\"} + "\n"
         + "{\"time\" :\"2016-03-01 01:01:01\", \"signal\" : \"state\", \"value\" : on, \"car\" : \"car1\"}";
 
@@ -1972,7 +1978,7 @@ falkonry.addInput(datastream.getId(), data, options);
 ```python
 from falkonryclient import client as Falkonry
 from falkonryclient import schemas as Schemas
-
+import io
 #instantiate Falkonry
 falkonry   = Falkonry('http://example.falkonry.ai', 'auth-token')
 
@@ -2158,7 +2164,7 @@ import org.apache.commons.io.FileUtils;
 ```python
 from falkonryclient import client as Falkonry
 from falkonryclient import schemas as Schemas
-
+import io
 #instantiate Falkonry
 falkonry   = Falkonry('https://example.falkonry.ai', 'auth-token')
 
@@ -2245,7 +2251,7 @@ import org.apache.commons.io.FileUtils;
 ```python
 from falkonryclient import client as Falkonry
 from falkonryclient import schemas as Schemas
-
+import io
 #instantiate Falkonry
 falkonry   = Falkonry('https://example.falkonry.ai', 'auth-token')
 
@@ -2280,7 +2286,7 @@ Falkonry needs historical time series data to build pattern recognition models.
 
 ## Extract data from a datastream
 
-It may help to extract all the data from an existing datastream for debug, editing, exporting to another datastream.
+It may help to extract all the data from an existing datastream for debugging, editing, exporting to another datastream.
 
 
 > To extract data from a datastream, use this code:
@@ -2940,7 +2946,7 @@ if (httpResponse.statusCode == 202)
 
   // if status is 202 call the same request again
 
-  // if statsu is 200, output data will be present in httpResponse.response field
+  // if status is 200, output data will be present in httpResponse.response field
 }
 if (httpResponse.statusCode > 400)
 {
@@ -2981,7 +2987,7 @@ if response.status_code is 202:
     trackerId = trackerResponse.get_id()
     #use this tracker for checking the status of the process.
     options = {"trackerId": trackerId, "responseFormat":"application/json"}
-    newResponse = falkonry.get_historical_output(assessment, options)
+    newResponse = falkonry.get_historical_output(assessmentId, options)
     '''if status is 202 call the same request again
     if status is 200, output data will be present in httpResponse.response field'''
 ```
@@ -3118,7 +3124,8 @@ options = {
   'endTimeIdentifier': "end",
   'timeFormat': "iso_8601",
   'timeZone': "GMT",
-  'valueIdentifier': "Health"
+  'valueIdentifier': "Health",
+  'keywordIdentifier': 'Tag'
 }
 inputResponse = falkonry.add_facts(assessmentId, 'json', options, data)
 ```
@@ -3195,7 +3202,9 @@ options = {
   'timeZone': "GMT",
   'valueIdentifier': "Health",
   'entityIdentifier': 'entities',
-  'additionalKeyword': 'testTag'
+  'additionalKeyword': 'testTag',
+  'keywordIdentifier': 'Tag',
+
 }
 inputResponse = falkonry.add_facts(assessmentId, 'json', options, data)
 ```
@@ -3267,7 +3276,8 @@ options = {
   'endTimeIdentifier': "end",
   'timeFormat': "iso_8601",
   'timeZone': "GMT",
-  'valueIdentifier': "Health"
+  'valueIdentifier': "Health",
+  'keywordIdentifier': 'Tag'
 }
 
 inputResponse = falkonry.add_facts(assessmentId, 'csv', options, data)
@@ -3428,7 +3438,7 @@ String response = falkonry.addFactsStream(assessment.getId(),byteArrayInputStrea
 ```
 
 ```python
-import os, sys
+import os, sys, io
 from falkonryclient import client as Falkonry
 from falkonryclient import schemas as Schemas
 
@@ -3442,7 +3452,8 @@ options = {
   'timeFormat': "iso_8601",
   'timeZone': "GMT",
   'entityIdentifier': "car",
-  'valueIdentifier': "Health"
+  'valueIdentifier': "Health",
+  'keywordIdentifier': 'Tag'
 }
 
 response = falkonry.add_facts_stream(assessmentId, 'json', options, stream)
@@ -3500,7 +3511,7 @@ String response = falkonry.addFactsStream(assessment.getId(),byteArrayInputStrea
 ```
 
 ```python
-import os, sys
+import os, sys, io
 from falkonryclient import client as Falkonry
 from falkonryclient import schemas as Schemas
 from falkonryclient import schemas as Schemas
@@ -3515,7 +3526,8 @@ options = {
   'timeFormat': "iso_8601",
   'timeZone': "GMT",
   'entityIdentifier': "car",
-  'valueIdentifier': "Health"
+  'valueIdentifier': "Health",
+  'keywordIdentifier': 'Tag'
 }
 
 response = falkonry.add_facts_stream(assessmentId, 'csv', options, stream)
@@ -3627,7 +3639,7 @@ Datastream is ON for live monitoring
 falkonry>>
 ```
 
-Live monitoring is associated with the entire datastream. At this point each assessment assciated with the datastream goes into live monitoring.
+Live monitoring is associated with the entire datastream. At this point, each assessment associated with the datastream goes into live monitoring.
 
 Every assessment has an "active" model associated with it.
 
@@ -3741,7 +3753,7 @@ falkonry   = Falkonry('https://example.falkonry.ai', 'auth-token')
 datastreamId = 'id of the datastream'
 
 #add data to Datastream
-String data = "{\"time\" : \"2016-03-01 01:01:01\", \"signal\" : \"signal1\", \"value\" : 3.4}" + "\n"
+data = "{\"time\" : \"2016-03-01 01:01:01\", \"signal\" : \"signal1\", \"value\" : 3.4}" + "\n"
         + "{\"time\" : \"2016-03-01 01:01:01\", \"signal\" : \"signal2\", \"value\" : 1.4}" + "\n"
         + "{\"time\" : \"2016-03-01 01:01:02\", \"signal\" : \"signal1\", \"value\" : 9.3}" + "\n"
         + "{\"time\" : \"2016-03-01 01:01:02\", \"signal\" : \"signal2\", \"value\" : 4.3}";
@@ -3774,7 +3786,7 @@ datastream_add_live_data --path "/Users/user/Input.csv"
 Default datastream set : lg7k1a5jor1nvh Name : Human Activity
 {'message': 'Data submitted successfully'}
 ```
-When in live monitoring, the assessment is being computed based on live data that is streaming in, but based on the model that was built using historical data.
+When in live monitoring, the assessment is being computed based on live data that is streaming in but based on the model that was built using historical data.
 
 <aside class="warning">
 When working from within the Falkonry Professional UI, make sure "Accepting Data" in turned on before starting "Live Monitoring"
@@ -3838,7 +3850,7 @@ falkonry   = Falkonry('https://example.falkonry.ai', 'auth-token')
 datastreamId = 'id of the datastream'
 
 #add data to Datastream
-String data = "time, entity, signal1, signal2, signal3, signal4" + "\n"
+data = "time, entity, signal1, signal2, signal3, signal4" + "\n"
       + "1467729675422, entity1, 41.11, 62.34, 77.63, 4.8" + "\n"
       + "1467729675445, entity1, 43.91, 82.64, 73.63, 3.8"
         
@@ -3866,7 +3878,7 @@ Default datastream set : lg7k1a5jor1nvh Name : Human Activity
 {'message': 'Data submitted successfully'}
 ```
 
-When in live monitoring, the assessment is being computed based on live data that is streaming in, but based on the model that was built using historical data.
+When in live monitoring, the assessment is being computed based on live data that is streaming in but based on the model that was built using historical data.
 
 <aside class="warning">
 When working from within the Falkonry Professional UI, make sure "Accepting Data" is turned on before starting "Live Monitoring"
@@ -3926,7 +3938,7 @@ import org.apache.commons.io.FileUtils;
 ```python
 from falkonryclient import client as Falkonry
 from falkonryclient import schemas as Schemas
-
+import io
 #instantiate Falkonry
 falkonry   = Falkonry('https://example.falkonry.ai', 'auth-token')
 
@@ -3943,7 +3955,7 @@ inputResponse = falkonry.add_input_data(datastreamId, 'json', options, stream)
 
 ```
 
-When in live monitoring, the assessment is being computed based on live data that is streaming in, but based on the model that was built using historical data.
+When in live monitoring, the assessment is being computed based on live data that is streaming in but based on the model that was built using historical data.
 
 <aside class="warning">
 When working from within the Falkonry Professional UI, make sure "Accepting Data" in turned on before starting "Live Monitoring"
@@ -4003,7 +4015,7 @@ InputStatus inputStatus = falkonry.addInputStream('datastream-Id',byteArrayInput
 ```python
 from falkonryclient import client as Falkonry
 from falkonryclient import schemas as Schemas
-
+import io
 #instantiate Falkonry
 falkonry   = Falkonry('https://example.falkonry.ai', 'auth-token')
 
@@ -4020,7 +4032,7 @@ inputResponse = falkonry.add_input_data(datastreamId, 'csv', options, stream)
 
 ```
 
-When in live monitoring, the assessment is being computed based on live data that is streaming in, but based on the model that was built using historical data.
+When in live monitoring, the assessment is being computed based on live data that is streaming in but based on the model that was built using historical data.
 
 <aside class="warning">
 When working from within the Falkonry Professional UI, make sure "Accepting Data" in turned on before starting "Live Monitoring"
@@ -4072,13 +4084,13 @@ outputBuffer = falkonry.getOutput(assessment);
 ```
 
 ```python
-import os, sys
+import os, sys, json
 from falkonryclient import client as Falkonry
 from falkonryclient import schemas as Schemas
 
 falkonry  = Falkonry('https://example.falkonry.ai', 'auth-token')
 assessmentId = 'id of the datastream'
-stream    = falkonry.get_output(assessmentId)
+stream    = falkonry.get_output(assessmentId, None)
 for event in stream.events():
     print(json.dumps(json.loads(event.data)))
 ```
@@ -4089,7 +4101,7 @@ Fetching live assessments :
 {"time":1500453241749,"entity":"UNIT-1","value":"unlabeled3"}
 {"time":1500453246798,"entity":"UNIT-1","value":"unlabeled5"}
 ```
-Assessments in live monitoring mode can be streamed out to suggest real time machine/ asset condition/ state.
+Assessments in live monitoring mode can be streamed out to suggest a real time machine/ asset condition/ state.
 
 
 
