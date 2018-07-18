@@ -3721,11 +3721,7 @@ status = assessment.get_live()//live status will be "ON" or "OFF".
 ```
 
 ```shell
-falkonry>> assessment_get_live_status
-Default assessment set: 5kzugwm1natt0l Name: Robo Arm Test 1
-Fetching Live monitoring status for assessment : 5kzugwm1natt0l
-Live Monitoring : ON //live status will be "ON" or "OFF". 
-falkonry>>
+Not supported yet
 ```
 
 ## Start live monitoring of assessment
@@ -3763,11 +3759,7 @@ response = falkonry.on_assessment(assessmentId)
 ```
 
 ```shell
-falkonry>> assessment_start_live
-Default assessment set: 5kzugwm1natt0l Name: Robo Arm Test 1
-Turning on Live monitoring for assessment : 5kzugwm1natt0l
-Assessment is ON for live monitoring
-falkonry>>
+Not supported yet
 ```
 
 At this point assessment goes into live monitoring.
@@ -3814,11 +3806,7 @@ response = falkonry.off_assessment(assessmentId)
 ```
 
 ```shell
-falkonry>> assessment_stop_live
-Default assessment set: 5kzugwm1natt0l Name : Robo Arm Test 1
-Turning off Live monitoring for assessment : 5kzugwm1natt0l
-Assessment is OFF for live monitoring
-falkonry>>
+Not supported yet
 ```
 
 <aside class="notice">
